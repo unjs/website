@@ -3,7 +3,7 @@
     <SiteHeader
     title="Discover"
     description="Universal JavaScript Solutions"
-    github="un-contrib"
+    github="unjsio"
     />
     <div>
       <ProjectCard
