@@ -5,12 +5,23 @@
       :description="project.description"
       :github="project.repository"
     />
-    <div>
+    <div class="content">
       <h2><NLink to="/">Discover other projects</NLink></h2>
-      <div v-html="readme" />
+      <div class="readme" v-html="readme" />
     </div>
   </div>
 </template>
+
+<style scoped>
+  .content {
+    max-width: 1024px;
+  }
+  .readme {
+    background: rgba(255, 255, 255, .8);
+    padding: 1em;
+    border-radius: 3px;
+  }
+</style>
 
 <script>
 export default {

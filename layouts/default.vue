@@ -21,5 +21,7 @@ a {
 <style scoped>
 main {
   margin-top: 4rem;
+  display: flex;
+  justify-content: center;
 }
 </style>
