@@ -1,0 +1,10 @@
+name = "unjs"
+type = "javascript"
+account_id = "8ea39dfb7bb411de7fcff5444d7a5dbb"
+workers_dev = true
+route = ""
+zone_id = ""
+
+[site]
+bucket = "./.output/public"
+entry-point = "./.output"
