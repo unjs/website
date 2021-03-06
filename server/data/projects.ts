@@ -55,9 +55,9 @@ export const projects = [
     repository: 'unjsio/scule',
   },
   {
-    name: 'weboackbar',
+    name: 'webpackbar',
     description: 'Elegant ProgressBar and Profiler for Webpack',
-    repository: 'unjsio/weboackbar',
+    repository: 'unjsio/webpackbar',
   },
   {
     name: 'lmify',
