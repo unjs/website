@@ -18,6 +18,12 @@
   }
 </style>
 
+<style>
+  .readme img {
+    max-width: 100%;
+  }
+</style>
+
 <script>
 export default {
   async asyncData({ params }) {
