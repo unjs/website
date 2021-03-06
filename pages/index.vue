@@ -1,25 +1,22 @@
 <template>
   <div>
     <SiteHeader
-    title="Discover"
-    description="Universal JavaScript Solutions"
-    github="unjsio"
+      title="Discover"
+      description="Universal JavaScript Solutions"
+      github="unjsio"
     />
-    <div>
-      <ProjectCard
-        v-for="project in projects"
-        :key="project.name"
-        :project="project"
-      />
-    </div>
+    <ProjectCard
+      v-for="project in projects"
+      :key="project.name"
+      :project="project"
+    />
   </div>
 </template>
 
 <script>
 export default {
   async asyncData() {
-    const { projects } = await $fetch('/api/project/all')
-
+    const { projects } = await $fetch("/api/project/all")
     return {
       projects
     }

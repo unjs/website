@@ -1,12 +1,3 @@
-<template>
-  <div id="app">
-    <main id="main">
-      <nuxt />
-    </main>
-  </div>
-</template>
-
-<style>
 body, #app {
   background: #F0DB4F;
   color: #323330;
@@ -16,12 +7,13 @@ body, #app {
 a {
   color: #323330;
 }
-</style>
 
-<style scoped>
-main {
+.container {
+  max-width: 1024px;
+}
+
+#__layout {
   margin-top: 4rem;
   display: flex;
   justify-content: center;
 }
-</style>

@@ -10,6 +10,9 @@ export default <NuxtConfig> {
     // 'nuxt-vite'
     // '@nuxt/image',
   ],
+  css: [
+    '~/assets/main.css'
+  ],
   manifest: {
     name: 'un',
     description: 'Universal JavaScript Solutions'
