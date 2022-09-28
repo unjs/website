@@ -3,7 +3,7 @@
     <SiteHeader
       title="Discover"
       description="Universal JavaScript Solutions"
-      github="unjsio"
+      github="unjs"
     />
     <ProjectCard
       v-for="project in projects"
