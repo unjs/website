@@ -1,15 +1,14 @@
 
 export default defineNuxtConfig({
   modules: [
-    '@nuxtjs/google-fonts',
-    '@kevinmarrec/nuxt-pwa',
+    '@nuxtjs/google-fonts'
   ],
   css: [
     '~/assets/main.css'
   ],
-  pwa: {
-    meta: {
-      name: 'unjs - Universal JavaScript Solutions',
+  app: {
+    head: {
+      title: 'unjs - Universal JavaScript Solutions',
       description: 'Universal JavaScript Solutions'
     }
   },

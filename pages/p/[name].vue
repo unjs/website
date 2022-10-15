@@ -26,4 +26,9 @@
 const route = useRoute()
 // TODO: Catch 404
 const { data } = await useFetch(`/api/projects/${route.params.name}`)
+
+useHead({
+  title: data.value.project.name,
+  description: data.value.project.description,
+})
 </script>

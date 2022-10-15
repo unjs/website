@@ -6,7 +6,6 @@
     "generate": "nuxi generate"
   },
   "devDependencies": {
-    "@kevinmarrec/nuxt-pwa": "^0.8.0",
     "@nuxtjs/google-fonts": "^1.2.0",
     "nuxt": "3.0.0-rc.11",
     "remark": "^14.0.2",
