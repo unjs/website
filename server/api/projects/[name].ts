@@ -15,8 +15,6 @@ export default defineEventHandler(async (event) => {
     .process(rawReadme)
     .then(f => f.toString())
 
-  console.log(readme)
-
   return {
     project,
     readme
