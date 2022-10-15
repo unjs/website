@@ -1,10 +1,8 @@
 name = "unjs"
-type = "javascript"
+main = "./.output/server/index.mjs"
 account_id = "8ea39dfb7bb411de7fcff5444d7a5dbb"
 workers_dev = true
-route = ""
-zone_id = ""
+compatibility_date = "2022-09-10"
 
 [site]
 bucket = "./.output/public"
-entry-point = "./.output"
