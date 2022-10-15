@@ -1,29 +1,22 @@
-import type { NuxtConfig } from '@nuxt/types'
 
-export default <NuxtConfig> {
-  components: true,
-  buildModules: [
+export default defineNuxtConfig({
+  modules: [
     '@nuxtjs/google-fonts',
-    '@nuxt/typescript-build',
-    '@nuxtjs/pwa',
-    '@nuxt/nitro/compat',
-    // 'nuxt-vite'
-    // '@nuxt/image',
+    '@kevinmarrec/nuxt-pwa',
   ],
   css: [
     '~/assets/main.css'
   ],
-  manifest: {
-    name: 'un',
-    description: 'Universal JavaScript Solutions'
+  pwa: {
+    meta: {
+      name: 'unjs - Universal JavaScript Solutions',
+      description: 'Universal JavaScript Solutions'
+    }
   },
   googleFonts: {
     display: 'swap',
     families: {
       Quicksand: true
     }
-  },
-  typescript: {
-    typeCheck: false
   }
-}
+})

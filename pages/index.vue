@@ -6,20 +6,13 @@
       github="unjs"
     />
     <ProjectCard
-      v-for="project in projects"
+      v-for="project in data.projects"
       :key="project.name"
       :project="project"
     />
   </div>
 </template>
 
-<script>
-export default {
-  async asyncData() {
-    const { projects } = await $fetch("/api/project/all")
-    return {
-      projects
-    }
-  }
-}
+<script setup lang="ts">
+const { data } = await useFetch("/api/projects")
 </script>

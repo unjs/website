@@ -139,4 +139,4 @@ export const projects = [
     description: 'Bare minimum async methods using promises',
     repository: 'unjs/items-promise',
   },
-]
+].sort((a, b) => a.name.localeCompare(b.name))
