@@ -1,23 +1,14 @@
 {
   "private": true,
   "scripts": {
-    "dev": "nuxt dev",
-    "build": "nuxt build"
+    "dev": "nuxi dev",
+    "build": "nuxi build",
+    "generate": "nuxi generate"
   },
   "devDependencies": {
-    "@nuxt/image": "^0.4.1",
-    "@nuxt/nitro": "^0.1.11",
-    "@nuxt/types": "^2.15.2",
-    "@nuxt/typescript-build": "^2.0.6",
     "@nuxtjs/google-fonts": "^1.2.0",
-    "@nuxtjs/pwa": "^3.3.5",
-    "nuxt": "^2.15.2",
-    "nuxt-vite": "^0.0.28",
-    "ohmyfetch": "^0.1.8",
-    "typescript": "^4.2.3",
-    "ufo": "^0.6.9",
-    "h3": "^0.2.5",
-    "remark": "^13.0.0",
-    "remark-html": "^13.0.1"
+    "nuxt": "3.0.0-rc.11",
+    "remark": "^14.0.2",
+    "remark-html": "^15.0.1"
   }
 }

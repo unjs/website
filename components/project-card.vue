@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <h2>
-      <NLink :to="`/p/${project.name}`">{{ project.name }}</NLink>
+      <NuxtLink :to="`/p/${project.name}`">{{ project.name }}</NuxtLink>
     </h2>
     {{ project.description }}
   </div>
