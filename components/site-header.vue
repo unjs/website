@@ -7,7 +7,7 @@
       <h1>{{ title }}</h1>
       <h2>{{ description }}</h2>
       <a v-if="github" :href="`https://github.com/${github}`" target="_blank">
-        <img src="~/assets/github.png" width="32px" height="32px" />
+        <img src="~/assets/github.png" width="32" height="32" />
       </a>
     </div>
   </div>
