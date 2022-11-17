@@ -1,11 +1,11 @@
-# Website for un projects
+# UnJS Website
 
-(WIP)
+(WIP) Contributions welcome!
 
-List of projects: [./server/data/projects.tas]
+https://unjs.io
 
 ## Development
 
 - Clone repository
-- Install dependencies with `yarn install`
-- Start development server with `yarn dev`
+- Install dependencies with `pmpm install`
+- Start development server with `pnpm dev`
