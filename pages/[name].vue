@@ -2,8 +2,8 @@
 import '~/assets/github-light.css'
 
 const route = useRoute()
-const { data: repo } = await useFetch<any>(`https://ungh.unjs.io/repos/unjs/${route.params.name}`)
-const { data: readme } = await useFetch<any>(`https://ungh.unjs.io/repos/unjs/${route.params.name}/readme`)
+const { data: repo } = await useFetch<any>(`https://ungh.pi0.workers.dev/repos/unjs/${route.params.name}`)
+const { data: readme } = await useFetch<any>(`https://ungh.pi0.workers.dev/repos/unjs/${route.params.name}/readme`)
 
 // useHead({
 //   title: repo.value.name,
