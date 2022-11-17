@@ -1,18 +1,18 @@
 <template>
   <div>
     <SiteHeader
-      title="Discover"
-      description="Universal JavaScript Solutions"
+      title="UnJS"
+      description="Unified JavaScript Tools"
       github="unjs"
     />
     <ProjectCard
-      v-for="project in data.projects"
-      :key="project.name"
-      :project="project"
+      v-for="repo in repos"
+      :key="repo.id"
+      :repo="repo"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-const { data } = await useFetch("/api/projects")
+const { data: repos } = await useFetch<any>('/api/repos')
 </script>
