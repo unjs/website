@@ -1,10 +1,11 @@
 <template>
   <NuxtLink :to="`/${repo.name}`" class="card">
-    <h2>
-      <span>{{ repo.name }}</span>
-    </h2>
-    <small class="repo-star"><Star /><span>stars {{ formatStarCount(repo.stars) }}</span></small>
-    <p>{{ repo.description || "..." }}</p>
+    <h2>{{ repo.name }}</h2>
+    <small class="repo-star">
+      <Star />
+      {{ formatStarCount(repo.stars) }}
+    </small>
+    <p>{{ repo.description || '...' }}</p>
   </NuxtLink>
 </template>
 
@@ -16,33 +17,39 @@ export default {
       type: Object,
     },
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>
 .card {
+  --easing: 0.15s ease;
+
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 20px;
-  gap: 8px;
+  padding: 1.25rem;
   background-color: hsl(var(--white) / 0.8);
   color: hsl(var(--black));
   border: 1px dashed hsl(var(--black));
-  transition: background 0.15s ease-in-out, color 0.15s ease-in-out;
+  transition: background var(--easing), color var(--easing);
+
   &:hover {
     color: hsl(var(--yellow));
     background-color: hsl(var(--black));
+
+    p {
+      color: hsl(var(--white));
+    }
   }
+
   h2 {
-    display: flex;
-    flex-direction: column;
-    font-size: 24px;
+    font-size: 1.5rem;
   }
+
   p {
-    font-size: 14px;
+    transition: color var(--easing);
+    margin-top: 0.5rem;
+    color: hsl(var(--black-muted));
   }
+
   .repo-star {
     position: absolute;
     display: flex;
@@ -51,9 +58,8 @@ export default {
     align-items: center;
     gap: 4px;
     font-size: 16px;
-    font-weight: 900;
     padding: 4px;
-    z-index: -1;
+
     svg {
       width: 16px;
       height: 16px;
