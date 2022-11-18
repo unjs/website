@@ -43,6 +43,7 @@ useHead({
 :root {
   --yellow: 52 84% 63%;
   --black: 80 3% 19%;
+  --black-muted: 80 3% 40%;
   --white: 0 0% 100%;
 }
 
@@ -52,7 +53,7 @@ body,
   color: hsl(var(--black));
   font-family: "Inter", sans-serif;
   font-weight: 400;
-  line-height: 1;
+  line-height: 1.5;
   font-variant-numeric: tabular-nums;
 }
 
@@ -95,27 +96,33 @@ a {
   width: 100%;
   background-color: hsl(var(--yellow));
   z-index: 1;
+
   .logo > svg {
-    width: 48px;
-    height: 48px;
+    height: 100%;
+    aspect-ratio: 1;
   }
 
   .site-title {
     display: flex;
     flex-direction: column;
     color: hsl(var(--black));
+
     a {
       text-decoration: none;
     }
+
     h1 {
       font-size: 24px;
+      line-height: 1;
       font-weight: 900;
     }
+
     p {
       display: flex;
       align-items: center;
       gap: 8px;
       font-size: 14px;
+      
       svg {
         width: 18px;
         height: 18px;
@@ -125,16 +132,20 @@ a {
 
   @media (min-width: 767px) {
     gap: 20px;
+
     .logo > svg {
       width: 64px;
       height: 64px;
     }
+
     .site-title {
       h1 {
         font-size: 32px;
       }
+
       p {
         font-size: 16px;
+
         svg {
           width: 20px;
           height: 20px;
@@ -145,16 +156,20 @@ a {
 
   @media (min-width: 1024px) {
     gap: 24px;
+    
     .logo > svg {
       width: 70px;
       height: 70px;
     }
+    
     .site-title {
       h1 {
         font-size: 48px;
       }
+      
       p {
         font-size: 20px;
+
         svg {
           width: 24px;
           height: 24px;
