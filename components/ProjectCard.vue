@@ -1,3 +1,18 @@
+<script setup lang="ts">
+// TODO: replace with ungh type definition
+// Interface is supposed to be transpiled to `Object` type validator
+// Ref: https://vuejs.org/api/sfc-script-setup.html#typescript-only-features
+interface RepoProp {
+  name: string
+  description: string
+  stars: number
+}
+
+defineProps<{
+  repo: RepoProp
+}>()
+</script>
+
 <template>
   <NuxtLink :to="`/${repo.name}`" class="card">
     <h2>{{ repo.name }}</h2>
@@ -8,17 +23,6 @@
     <p>{{ repo.description || '...' }}</p>
   </NuxtLink>
 </template>
-
-<script>
-export default {
-  props: {
-    repo: {
-      required: true,
-      type: Object,
-    },
-  },
-}
-</script>
 
 <style lang="scss" scoped>
 .card {

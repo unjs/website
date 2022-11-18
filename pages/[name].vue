@@ -20,7 +20,7 @@ const { data: readme } = await useFetch<any>(
 <template>
   <div class="project-detail">
     <NuxtLink :href="`https://github.com/${repo.repo.repo}`" class="project-gh" target="_blank">Check out<strong>{{ repo.repo.name }}</strong> on Github
-      <GithubLogo /> &mdash; <Star />stars
+      <GitHubLogo /> &mdash; <Star />stars
       {{ formatStarCount(repo.repo.stars) }}
     </NuxtLink>
     <div class="readme" v-html="readme.html" />
@@ -96,7 +96,7 @@ const { data: readme } = await useFetch<any>(
     a {
       &:hover {
         text-decoration: underline;
-      }   
+      }
     }
   }
 
