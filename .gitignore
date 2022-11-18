@@ -4,3 +4,4 @@ node_modules
 .output
 dist
 static/sw.js
+.DS_Store

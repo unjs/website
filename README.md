@@ -7,5 +7,5 @@ https://unjs.io
 ## Development
 
 - Clone repository
-- Install dependencies with `pmpm install`
+- Install dependencies with `pnpm install`
 - Start development server with `pnpm dev`
