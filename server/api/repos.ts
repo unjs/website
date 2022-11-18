@@ -3,7 +3,7 @@ const hiddenRepos = new Set([
   'nitro-preset-starter',
   'unjs.github.io',
   'unjs.io',
-  'webite',
+  'website',
   'nitro-deploys',
   'template',
   'unkit',
