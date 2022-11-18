@@ -19,8 +19,7 @@ const { data: readme } = await useFetch<any>(
 
 <template>
   <div class="project-detail">
-    <NuxtLink :href="`https://github.com/${repo.repo.repo}`" class="project-gh"
-      >Check out<strong>{{ repo.repo.name }}</strong> on Github
+    <NuxtLink :href="`https://github.com/${repo.repo.repo}`" class="project-gh" target="_blank">Check out<strong>{{ repo.repo.name }}</strong> on Github
       <GithubLogo /> &mdash; <Star />stars
       {{ formatStarCount(repo.repo.stars) }}
     </NuxtLink>
@@ -40,7 +39,7 @@ const { data: readme } = await useFetch<any>(
   align-items: center;
   gap: 8px;
   font-size: 14px;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
   width: fit-content;
   padding: 8px;
   color: hsl(var(--yellow));
@@ -75,7 +74,7 @@ const { data: readme } = await useFetch<any>(
   }
 
   blockquote {
-    border-left: 4px solid hsl(var(--black));
+    border-left: 4px solid hsl(var(--black) / 0.8);
     padding-left: 8px;
     margin: 0 0 16px;
   }
@@ -93,10 +92,11 @@ const { data: readme } = await useFetch<any>(
   ul,
   ol {
     margin-inline-start: 24px;
+    line-height: 1.2;
     a {
-        &:hover {
-            text-decoration: underline;
-        }   
+      &:hover {
+        text-decoration: underline;
+      }   
     }
   }
 
@@ -108,18 +108,18 @@ const { data: readme } = await useFetch<any>(
     overflow: auto;
     border-collapse: collapse;
     tr {
-        border-color: hsl(var(--black) / 0.1);
-        border-top: 1px solid hsl(var(--black) / 0.1);
+      border-color: hsl(var(--black) / 0.1);
+      border-top: 1px solid hsl(var(--black) / 0.1);
     }
     th, td {
-        // not first row
-        border: 1px solid hsl(var(--black) / 0.1);
-        padding: 8px 16px;
-    font-weight: 600;
-        &:not(:first-child) {
-        text-align: center;
-        }
+      border: 1px solid hsl(var(--black) / 0.1);
+      padding: 8px 16px;
+      font-weight: 600;
     }
+  }
+
+  a {
+    text-decoration: underline hsl(var(--black)) 2px;
   }
 
   code {
@@ -128,7 +128,7 @@ const { data: readme } = await useFetch<any>(
     margin: 0;
     font-size: 14px;
     color: hsl(var(--yellow));
-    background-color: hsl(var(--black));
+    background-color: hsl(var(--black)/.9);
   }
 }
 </style>
