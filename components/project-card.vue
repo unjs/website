@@ -42,6 +42,7 @@ export default {
 
   h2 {
     font-size: 1.5rem;
+    line-height: 1.2;
   }
 
   p {
