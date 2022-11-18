@@ -43,6 +43,7 @@ useHead({
 :root {
   --yellow: 52 84% 63%;
   --black: 80 3% 19%;
+  --black-muted: 80 3% 40%;
   --white: 0 0% 100%;
 }
 
@@ -52,7 +53,7 @@ body,
   color: hsl(var(--black));
   font-family: "Inter", sans-serif;
   font-weight: 400;
-  line-height: 1;
+  line-height: 1.5;
   font-variant-numeric: tabular-nums;
 }
 
