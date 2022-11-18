@@ -53,6 +53,7 @@ body,
   font-family: "Inter", sans-serif;
   font-weight: 400;
   line-height: 1;
+  font-variant-numeric: tabular-nums;
 }
 
 a {

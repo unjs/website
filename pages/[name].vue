@@ -54,11 +54,18 @@ const { data: readme } = await useFetch<any>(
 
 <style lang="scss">
 .readme {
+  & > *:first-child {
+    margin-top: 0;
+  }
+
   h1,
   h2 {
     font-weight: 900;
     margin: 16px 0;
+    padding-bottom: 4px;
+    border-bottom: 1px dashed hsl(var(--black) / 0.1);
   }
+
   h3,
   h4,
   h5,
@@ -66,6 +73,7 @@ const { data: readme } = await useFetch<any>(
     font-weight: 600;
     margin: 8px 0;
   }
+
   blockquote {
     border-left: 4px solid hsl(var(--black));
     padding-left: 8px;
@@ -81,6 +89,46 @@ const { data: readme } = await useFetch<any>(
   details {
     margin-top: 0;
     margin-bottom: 16px;
+  }
+  ul,
+  ol {
+    margin-inline-start: 24px;
+    a {
+        &:hover {
+            text-decoration: underline;
+        }   
+    }
+  }
+
+  table {
+    display: block;
+    width: 100%;
+    width: max-content;
+    max-width: 100%;
+    overflow: auto;
+    border-collapse: collapse;
+    tr {
+        border-color: hsl(var(--black) / 0.1);
+        border-top: 1px solid hsl(var(--black) / 0.1);
+    }
+    th, td {
+        // not first row
+        border: 1px solid hsl(var(--black) / 0.1);
+        padding: 8px 16px;
+    font-weight: 600;
+        &:not(:first-child) {
+        text-align: center;
+        }
+    }
+  }
+
+  code {
+    padding: 2px 4px;
+    border-radius: 4px;
+    margin: 0;
+    font-size: 14px;
+    color: hsl(var(--yellow));
+    background-color: hsl(var(--black));
   }
 }
 </style>
