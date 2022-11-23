@@ -9,6 +9,8 @@ const { data: readme } = await useFetch<any>(
   `https://ungh.pi0.workers.dev/repos/unjs/${route.params.name}/readme`
 );
 
+const readmeHTML = buildGitHubReadmeHTML(readme.value.html, repo.value.repo.repo)
+
 // useHead({
 //   title: repo.value.name,
 //   meta: [
@@ -23,7 +25,7 @@ const { data: readme } = await useFetch<any>(
       <GithubLogo /> &mdash; <Star />stars
       {{ formatStarCount(repo.repo.stars) }}
     </NuxtLink>
-    <div class="readme" v-html="readme.html" />
+    <div class="readme" v-html="readmeHTML" />
   </div>
 </template>
 

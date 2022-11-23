@@ -8,5 +8,9 @@
   "devDependencies": {
     "nuxt": "^3.0.0",
     "sass": "^1.56.1"
+  },
+  "dependencies": {
+    "cheerio": "1.0.0-rc.12",
+    "ufo": "^1.0.0"
   }
 }
