@@ -91,7 +91,7 @@ a {
   padding: 8px 0;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 16px;
   width: 100%;
   background-color: hsl(var(--yellow));
@@ -124,6 +124,7 @@ a {
       font-size: 14px;
 
       svg {
+        vertical-align: sub;
         width: 18px;
         height: 18px;
       }
