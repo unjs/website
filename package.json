@@ -12,5 +12,6 @@
   "dependencies": {
     "cheerio": "1.0.0-rc.12",
     "ufo": "^1.0.0"
-  }
+  },
+  "packageManager": "pnpm@7.17.0"
 }
