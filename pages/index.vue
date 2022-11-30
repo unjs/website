@@ -6,6 +6,12 @@
 
 <script setup lang="ts">
 const { data: repos } = await useFetch<any>("/api/repos");
+useHead({
+  title: '',
+  meta: [
+    { name: 'description', content: 'Discover the list of UnJS tools.' }
+  ]
+})
 </script>
 
 <style lang="scss" scoped>

@@ -3,18 +3,20 @@ import "~/assets/github-light.css";
 
 const route = useRoute();
 const { data: repo } = await useFetch<any>(
-  `https://ungh.pi0.workers.dev/repos/unjs/${route.params.name}`
+  `https://ungh.cc/repos/unjs/${route.params.name}`
 );
 const { data: readme } = await useFetch<any>(
-  `https://ungh.pi0.workers.dev/repos/unjs/${route.params.name}/readme`
+  `https://ungh.cc/repos/unjs/${route.params.name}/readme`
 );
 
-// useHead({
-//   title: repo.value.name,
-//   meta: [
-//     { name: 'description', content: repo.value.description }
-//   ]
-// })
+readme.value.html = readme.value.html.replace(/src="\./g, `src="https://raw.githubusercontent.com/${repo.value.repo.repo}/main/.`)
+
+useHead({
+  title: repo.value.repo.name,
+  meta: [
+    { name: 'description', content: repo.value.repo.description }
+  ]
+})
 </script>
 
 <template>
