@@ -7,10 +7,9 @@ const hiddenRepos = new Set([
   'nitro-deploys',
   'template',
   'unkit',
-  'unmeta',
   'rollup-plugin-node-deno',
-  'siroc',
-  'renovate-config'
+  'renovate-config',
+  ".github"
 ])
 
 export default defineEventHandler(async () => {
