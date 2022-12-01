@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="project-input__wrapper">
-      <search-logo class="project-input-logo" />
+      <SearchLogo class="project-input-logo" />
       <input class="project-input" type="text" placeholder="Search" v-model="searchVal" :disabled="(repos.length <= 0)">
     </div>
     <div class="project-list">
