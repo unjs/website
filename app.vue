@@ -1,7 +1,7 @@
 <script setup lang="ts">
 useHead({
   titleTemplate: (title) =>
-    title ? `${title} - UnJS` : "UnJS - Unified JavaScript Solutions",
+    title ? `${title} - UnJS` : "UnJS - Unified JavaScript Tools",
   link: [
     { rel: "preconnect", href: "https://fonts.googleapis.com" },
     {
