@@ -9,8 +9,6 @@ const { data: readme } = await useFetch<any>(
   `https://ungh.cc/repos/unjs/${route.params.name}/readme`
 );
 
-readme.value.html = readme.value.html.replace(/src="\./g, `src="https://raw.githubusercontent.com/${repo.value.repo.repo}/main/.`)
-
 useHead({
   title: repo.value.repo.name,
   meta: [
