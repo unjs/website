@@ -22,7 +22,7 @@ useHead({
         <p>
           <span>Unified JavaScript Tools</span>
           <NuxtLink href="https://github.com/unjs" target="_blank"
-            ><GithubLogo
+            ><GitHubLogo
           /></NuxtLink>
         </p>
       </div>
@@ -122,7 +122,7 @@ a {
       align-items: center;
       gap: 8px;
       font-size: 14px;
-      
+
       svg {
         vertical-align: sub;
         width: 18px;
@@ -157,17 +157,17 @@ a {
 
   @media (min-width: 1024px) {
     gap: 24px;
-    
+
     .logo > svg {
       width: 70px;
       height: 70px;
     }
-    
+
     .site-title {
       h1 {
         font-size: 48px;
       }
-      
+
       p {
         font-size: 20px;
 

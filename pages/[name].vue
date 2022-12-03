@@ -23,7 +23,7 @@ readme.value.html = readme.value.html.replace(/src="\./g, `src="https://raw.gith
   <div class="project-detail">
     <NuxtLink :href="`https://github.com/${repo.repo.repo}`" class="project-gh" target="_blank"><span>Check
         out</span><strong>{{ repo.repo.name }}</strong> on Github
-      <GithubLogo /> &mdash;
+      <GitHubLogo /> &mdash;
       <Star />stars
       {{ formatStarCount(repo.repo.stars) }}
     </NuxtLink>
