@@ -160,6 +160,10 @@ readme.value.html = readme.value.html.replace(/src="\./g, `src="https://raw.gith
     background: rgba(0, 0, 0, .05);
     padding: 1rem;
     margin-bottom: 1rem;
+
+    pre {
+      margin-bottom: 0;
+    }
   }
 
   code {
