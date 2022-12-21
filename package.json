@@ -9,5 +9,8 @@
     "nuxt": "^3.0.0",
     "sass": "^1.56.1"
   },
-  "packageManager": "pnpm@7.17.1"
+  "packageManager": "pnpm@7.17.1",
+  "dependencies": {
+    "fuse.js": "^6.6.2"
+  }
 }
