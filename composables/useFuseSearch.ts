@@ -1,20 +1,22 @@
 import Fuse from 'fuse.js'
-import { Ref } from 'vue'
+import type { Ref, ComputedRef } from 'vue'
 
-interface FuzeOptions {
+interface FuzeOptions<T = any> {
   search: Ref<string>
-  data: Ref<any[]>
-  options?: Fuse.IFuseOptions<any>
+  data: Ref<T[]>
+  options?: Fuse.IFuseOptions<T>
 }
 
-export const useFuseSearch = (params: FuzeOptions): any[] => {
-  const search = params.search.value || ''
-  const data = params.data.value || []
-  const options = params.options || {}
+export function useFuseSearch<T = any>(params: FuzeOptions<T>): ComputedRef<T[]> {
+  return computed(() => {
+    const { search, data, options } = params
 
-  if (search === '') return data
+    if (search.value === '' || !data.value.length) {
+      return data.value
+    }
 
-  const fuse = new Fuse(data, options)
-
-  return fuse.search(search).map((result) => result.item)
+    return new Fuse<T>(data.value, options)
+      .search(search.value)
+      .map((result) => result.item)
+  })
 }
