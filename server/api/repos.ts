@@ -9,6 +9,8 @@ const hiddenRepos = new Set([
   'unkit',
   'rollup-plugin-node-deno',
   'renovate-config',
+  'lmify',
+  'governance',
   ".github"
 ])
 
