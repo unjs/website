@@ -28,6 +28,17 @@ useHead({
       </div>
     </header>
     <NuxtPage />
+    <footer class="main-footer">
+      <NuxtLink href="https://github.com/unjs/governance" class="link">
+        &copy;UnJS Team
+      </NuxtLink>
+      <NuxtLink href="https://twitter.com/unjsio" class="link">
+        Twitter
+      </NuxtLink>
+      <NuxtLink href="https://github.com/unjs/website" class="link">
+        Contribution
+      </NuxtLink>
+    </footer>
   </main>
 </template>
 
@@ -177,6 +188,23 @@ a {
         }
       }
     }
+  }
+}
+
+.main-footer {
+  position: sticky;
+  bottom: 0;
+  padding: 8px 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 16px;
+  width: 100%;
+  background-color: hsl(var(--yellow));
+  z-index: 1;
+
+  .link:hover {
+    text-decoration: underline;
   }
 }
 </style>
