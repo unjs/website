@@ -7,8 +7,8 @@ const repos = useFuseSearch({
   options: {
     useExtendedSearch: true,
     keys: [
-      'name', 
-      'description', 
+      'name',
+      'description',
       'repo'
     ]
   }
@@ -24,9 +24,8 @@ useHead({
 
 <template>
   <div>
-    <SearchInput 
-      v-model:search="search" 
-      :disabled="(repos.length <= 0)" 
+    <SearchInput
+      v-model:search="search"
       placeholder="Search for repo..."
     />
     <div class="project-list">
