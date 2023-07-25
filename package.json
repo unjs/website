@@ -1,6 +1,7 @@
 {
   "private": true,
   "scripts": {
+    "prepare": "nuxt prepare",
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
