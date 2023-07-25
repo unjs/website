@@ -1,7 +1,7 @@
 <template>
   <div>
     <p>Custom Layout</p>
-    <hr/>
+    <hr>
     <slot />
   </div>
 </template>
