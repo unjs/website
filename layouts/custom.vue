@@ -1,6 +1,9 @@
 <template>
   <div>
-    <p>Custom Layout</p>
+    <div i-heroicons-arrow-right />
+    <p text-red>
+      Custom Layout
+    </p>
     <hr>
     <slot />
   </div>

@@ -15,7 +15,13 @@ const source = process.env.NODE_ENV === 'production'
   } satisfies FSStorageOptions & { driver: 'fs' }
 
 export default defineNuxtConfig({
-  modules: ['@nuxt/content'],
+  modules: [
+    '@nuxt/content',
+    '@unocss/nuxt',
+  ],
+  css: [
+    '@unocss/reset/tailwind.css',
+  ],
   content: {
     documentDriven: true,
     sources: {
