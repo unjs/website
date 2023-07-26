@@ -1,10 +1,10 @@
-import { defineConfig, presetAttributify, presetIcons, presetTypography, presetUno, presetWebFonts, transformerVariantGroup } from 'unocss'
+import { defineConfig, presetAttributify, presetIcons, presetTypography, presetUno, presetWebFonts, transformerDirectives, transformerVariantGroup } from 'unocss'
 
 export default defineConfig({
   presets: [
     presetUno(),
     presetTypography(),
-    presetIcons({}),
+    presetIcons(),
     presetAttributify(),
     presetWebFonts({
       fonts: {
@@ -14,5 +14,6 @@ export default defineConfig({
   ],
   transformers: [
     transformerVariantGroup(),
+    transformerDirectives(),
   ],
 })

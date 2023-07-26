@@ -20,8 +20,11 @@ export default defineNuxtConfig({
     '@unocss/nuxt',
   ],
   css: [
-    '@unocss/reset/tailwind.css',
+    '~/assets/app.css',
   ],
+  unocss: {
+    preflight: true,
+  },
   content: {
     documentDriven: true,
     sources: {
