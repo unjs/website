@@ -18,6 +18,8 @@
     "@unocss/reset": "^0.53.6",
     "eslint": "^8.45.0",
     "nuxt": "^3.6.5",
+    "nuxt-simple-robots": "^3.0.3",
+    "nuxt-simple-sitemap": "^3.1.0",
     "unstorage": "^1.8.0"
   },
   "dependencies": {

@@ -34,6 +34,12 @@ devDependencies:
   nuxt:
     specifier: ^3.6.5
     version: 3.6.5(@types/node@18.17.0)(eslint@8.45.0)(typescript@5.1.6)
+  nuxt-simple-robots:
+    specifier: ^3.0.3
+    version: 3.0.3
+  nuxt-simple-sitemap:
+    specifier: ^3.1.0
+    version: 3.1.0(nuxt@3.6.5)(vite@4.3.9)
   unstorage:
     specifier: ^1.8.0
     version: 1.8.0
@@ -1089,6 +1095,22 @@ packages:
 
   /@nuxt/devalue@2.0.2:
     resolution: {integrity: sha512-GBzP8zOc7CGWyFQS6dv1lQz8VVpz5C2yRszbXufwG/9zhStTIH50EtD87NmWbTMwXDvZLNg8GIpb1UFdH93JCA==}
+    dev: true
+
+  /@nuxt/devtools-kit@0.7.1(nuxt@3.6.5)(vite@4.3.9):
+    resolution: {integrity: sha512-g7OgrU0VlW9fibLdHmhad4tEQzkS4g8yxaqDD/Kri/i3mEOeS7w9E8x7kkA/56FmmnXe6F6lCcLqG6u3FYW6WA==}
+    peerDependencies:
+      nuxt: ^3.6.1
+      vite: '*'
+    dependencies:
+      '@nuxt/kit': 3.6.5
+      '@nuxt/schema': 3.6.5
+      execa: 7.1.1
+      nuxt: 3.6.5(@types/node@18.17.0)(eslint@8.45.0)(typescript@5.1.6)
+      vite: 4.3.9(@types/node@18.17.0)
+    transitivePeerDependencies:
+      - rollup
+      - supports-color
     dev: true
 
   /@nuxt/kit@3.6.5:
@@ -5491,6 +5513,72 @@ packages:
       fsevents: 2.3.2
     dev: true
 
+  /nuxt-simple-robots@3.0.3:
+    resolution: {integrity: sha512-+6NTwL94mC54sjd0PBPkCGlavhjb8WpP6SDztfSgzuhCOp50/7qaOgLkJlJBYdXIsXCPZmh6poAOtQ49A8B7fQ==}
+    dependencies:
+      '@nuxt/kit': 3.6.5
+      defu: 6.1.2
+      nuxt-site-config: 1.0.8
+      nuxt-site-config-kit: 1.0.8
+      pathe: 1.1.1
+      ufo: 1.1.2
+    transitivePeerDependencies:
+      - rollup
+      - supports-color
+    dev: true
+
+  /nuxt-simple-sitemap@3.1.0(nuxt@3.6.5)(vite@4.3.9):
+    resolution: {integrity: sha512-zjKcps47hSHgp2EgNrM4ByAPOzirTJPWMyylpepUijP4CfhmdtsRlfyMR6U7y7EfXlGwR3TuSYSF1KBQkutu9Q==}
+    dependencies:
+      '@nuxt/devtools-kit': 0.7.1(nuxt@3.6.5)(vite@4.3.9)
+      '@nuxt/kit': 3.6.5
+      chalk: 5.3.0
+      defu: 6.1.2
+      escape-string-regexp: 5.0.0
+      fast-glob: 3.3.1
+      knitwork: 1.0.0
+      nuxt-site-config: 1.0.8
+      nuxt-site-config-kit: 1.0.8
+      pathe: 1.1.1
+      radix3: 1.0.1
+      semver: 7.5.4
+      site-config-stack: 1.0.8
+      ufo: 1.2.0
+    transitivePeerDependencies:
+      - nuxt
+      - rollup
+      - supports-color
+      - vite
+    dev: true
+
+  /nuxt-site-config-kit@1.0.8:
+    resolution: {integrity: sha512-41ma2lKO26sJ4uLEMO71eKhZ0ZxyfOkSb3fiShRuJskHFhODCBhgMMjayuyMJRI+dFBbXOIKOH2rfdbXo/inFw==}
+    dependencies:
+      '@nuxt/kit': 3.6.5
+      '@nuxt/schema': 3.6.5
+      defu: 6.1.2
+      pkg-types: 1.0.3
+      site-config-stack: 1.0.8
+      ufo: 1.2.0
+    transitivePeerDependencies:
+      - rollup
+      - supports-color
+    dev: true
+
+  /nuxt-site-config@1.0.8:
+    resolution: {integrity: sha512-ZGDmdTwoSW4/pQyH+eKfYK7L0hAtiM1nB+8XUlryKTRjgAP6dF5ipa/bBskSBtCeWWlYA/4SCdo3JLotyZYcyA==}
+    dependencies:
+      '@nuxt/kit': 3.6.5
+      '@nuxt/schema': 3.6.5
+      nuxt-site-config-kit: 1.0.8
+      pathe: 1.1.1
+      site-config-stack: 1.0.8
+      ufo: 1.1.2
+    transitivePeerDependencies:
+      - rollup
+      - supports-color
+    dev: true
+
   /nuxt@3.6.5(@types/node@18.17.0)(eslint@8.45.0)(typescript@5.1.6):
     resolution: {integrity: sha512-0A7V8B1HrIXX9IlqPc2w+5ZPXi+7MYa9QVhtuGYuLvjRKoSFANhCoMPRP6pKdoxigM1MBxhLue2VmHA/VbtJCw==}
     engines: {node: ^14.18.0 || >=16.10.0}
@@ -6651,6 +6739,18 @@ packages:
     resolution: {integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==}
     dev: true
 
+  /site-config-stack@1.0.8:
+    resolution: {integrity: sha512-7ZatKHjbCbQskYpeA8oQ0/GYjDfGE1ZlV6NCr1RqiLHVwXJl6jFzAIZvr4b9NmyhwHHTedXaj4jgJNvekN03UA==}
+    dependencies:
+      '@nuxt/kit': 3.6.5
+      defu: 6.1.2
+      pkg-types: 1.0.3
+      ufo: 1.2.0
+    transitivePeerDependencies:
+      - rollup
+      - supports-color
+    dev: true
+
   /slash@3.0.0:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
     engines: {node: '>=8'}
@@ -7055,6 +7155,10 @@ packages:
 
   /ufo@1.1.2:
     resolution: {integrity: sha512-TrY6DsjTQQgyS3E3dBaOXf0TpPD8u9FVrVYmKVegJuFw51n/YB9XPt+U6ydzFG5ZIN7+DIjPbNmXoBj9esYhgQ==}
+    dev: true
+
+  /ufo@1.2.0:
+    resolution: {integrity: sha512-RsPyTbqORDNDxqAdQPQBpgqhWle1VcTSou/FraClYlHf6TZnQcGslpLcAphNR+sQW4q5lLWLbOsRlh9j24baQg==}
     dev: true
 
   /ultrahtml@1.3.0:
