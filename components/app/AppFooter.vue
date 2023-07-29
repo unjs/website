@@ -3,10 +3,12 @@ const website = useWebsite()
 </script>
 
 <template>
-  <footer rounded-4 px-6 pt-20 pb-30 flex="~ col" gap-6 bg-white border border-light>
+  <footer rounded-4 px-6 pt-20 pb-30 flex="~ col" gap-6 border border-light bg-white>
     <div flex="~ row" gap-25>
       <div flex="~ 1 col" gap-6>
-        <AppLogo />
+        <NuxtLink to="/">
+          <AppLogo />
+        </NuxtLink>
         <p text-gray-600 italic>
           {{ website.footer.quote }}
         </p>

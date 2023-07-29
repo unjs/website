@@ -26,7 +26,13 @@ export default defineNuxtConfig({
     preflight: true,
   },
   content: {
-    documentDriven: true,
+    documentDriven: {
+      navigation: false,
+      surround: false,
+    },
+    navigation: {
+      fields: ['icon'],
+    },
     sources: {
       content: source,
     },

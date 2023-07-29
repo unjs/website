@@ -16,6 +16,9 @@ export default defineConfig({
         'app.config.ts',
       ],
     },
+    filesystem: [
+      '.nuxt/content-cache/**/*',
+    ],
   },
   presets: [
     presetUno(),
