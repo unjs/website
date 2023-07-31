@@ -7,6 +7,7 @@ const source = process.env.NODE_ENV === 'production'
     driver: 'github',
     repo: 'mastering-unjs/content',
     dir: 'content',
+    token: process.env.GITHUB_TOKEN,
     branch: 'main',
   } satisfies GithubOptions & { driver: 'github' }
   : {
