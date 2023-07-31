@@ -2,7 +2,9 @@
 const website = useWebsite()
 const github = website.value.socials.github
 
-const navigation = await fetchContentNavigation(queryContent('/').where({ _path: { $ne: '/' } }))
+const packagesPath = /^\/packages/
+
+const navigation = await fetchContentNavigation(queryContent('/').where({ _path: { $and: [{ $ne: '/' }, { $ne: packagesPath }] } }))
 </script>
 
 <template>

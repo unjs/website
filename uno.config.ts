@@ -6,6 +6,9 @@ export default defineConfig({
       primary: '#ECDC5A',
       light: 'hsla(216, 12%, 84%, 0.1)',
     },
+    fontSize: {
+      '2.5xl': '1.75rem',
+    },
   },
   content: {
     pipeline: {

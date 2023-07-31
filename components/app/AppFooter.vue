@@ -3,7 +3,7 @@ const website = useWebsite()
 </script>
 
 <template>
-  <footer rounded-4 px-6 pt-20 pb-30 flex="~ col" gap-6 border border-light bg-white>
+  <footer rounded-4 px-6 pt-20 pb-30 flex="~ col" gap-12 border border-light bg-white>
     <div flex="~ row" gap-25>
       <div flex="~ 1 col" gap-6>
         <NuxtLink to="/">
@@ -33,8 +33,9 @@ const website = useWebsite()
         </div>
       </nav>
     </div>
-    <div flex="~ justify-center" text="sm gray-400">
-      <span>{{ website.footer.warning }}</span>
+    <div flex="~ col items-center" gap="2" text="sm gray-400">
+      <AppFooterLicense />
+      <p>{{ website.footer.warning }}</p>
     </div>
   </footer>
 </template>

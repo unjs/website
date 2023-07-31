@@ -6,11 +6,12 @@ const source = process.env.NODE_ENV === 'production'
   ? {
     driver: 'github',
     repo: 'mastering-unjs/content',
+    dir: 'content',
     branch: 'main',
   } satisfies GithubOptions & { driver: 'github' }
   : {
     driver: 'fs',
-    base: '../content',
+    base: '../content/content',
     readOnly: true,
   } satisfies FSStorageOptions & { driver: 'fs' }
 
