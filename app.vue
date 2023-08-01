@@ -3,11 +3,9 @@
     <Head>
       <Link rel="icon" href="/favicon.svg" />
     </Head>
-    <Body container mx-auto xl:max-w-7xl px-4 py-8 bg-primary>
+    <Body container mx-auto xl:max-w-7xl p="x-4 y-4 md:y-8" bg="primary">
       <AppHeader />
-      <div>
-        <NuxtPage />
-      </div>
+      <NuxtPage />
       <AppFooter />
     </Body>
   </Html>

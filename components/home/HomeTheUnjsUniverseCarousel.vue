@@ -15,9 +15,9 @@ const imageHeight = 'auto'
 
 <template>
   <div class="slider">
-    <div absolute z-50 left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-primary via-primary to-primary to-opacity-0 />
+    <div absolute z-50 left-0 top-0 bottom-0 w-4 md:w-8 lg:w-16 bg-gradient-to-r from-primary via-primary to-primary to-opacity-0 />
 
-    <div absolute z-50 right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-primary via-primary to-primary to-opacity-0 />
+    <div absolute z-50 right-0 top-0 bottom-0 w-4 md:w-8 lg:w-16 bg-gradient-to-l from-primary via-primary to-primary to-opacity-0 />
 
     <div class="slide-track animation" py-4>
       <template v-for="item in [...parts, ...parts]" :key="item.part">
@@ -58,6 +58,8 @@ const imageHeight = 'auto'
   display: flex;
   justify-items: center;
   width: calc(v-bind(slideWidth) * (v-bind(slidesPerView) * 2));
+
+  --at-apply: space-x--4
 }
 
 .slide-track:hover {

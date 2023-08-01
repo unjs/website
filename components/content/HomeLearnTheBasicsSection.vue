@@ -4,15 +4,15 @@ const { data } = await useAsyncData('learn-last-3', () => queryContent('/learn/'
 
 <template>
   <section flex="~ col" gap-6>
-    <div px-6 py-8>
+    <div py-8>
       <div max-w-3xl flex="~ col" gap-4>
-        <p text-xl text-gray-700 font-semibold tracking-wide>
+        <p text="gray-700 md:xl" font-semibold tracking-wide>
           <ContentSlot :use="$slots.eyebrow" unwrap="p" />
         </p>
-        <h2 text-4xl text-gray-900 font-extrabold tracking-wide>
+        <h2 text="gray-900 2xl md:3xl lg:4xl" font-extrabold tracking-wide>
           <ContentSlot :use="$slots.title" unwrap="p" />
         </h2>
-        <p text-2.5xl leading-tight text-gray-600>
+        <p text="gray-600 lg md:2.5xl" leading-tight>
           <ContentSlot :use="$slots.subtitle" unwrap="p" />
         </p>
       </div>
