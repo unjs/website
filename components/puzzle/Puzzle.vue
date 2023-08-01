@@ -15,7 +15,7 @@ const thirdLine = computed(() => props.parts.slice(6, 9))
   <div relative>
     <div flex="~ col" space-y--1 drop-shadow-md hover="space-y--9 drop-shadow-xl" class="group peer">
       <div class="puzzle-row">
-        <PuzzlePart v-for="(part, index) in firstLine" :key="part.name" :part="part" :class="{ 'relative left--6 rotate--20 group-hover:left-0 group-hover:rotate-0 transition-all ease-in duration-200': index === 0 }" />
+        <PuzzlePart v-for="(part, index) in firstLine" :key="part.name" :part="part" :class="{ 'relative left--6 rotate--20 group-hover:left-0 group-hover:rotate-0': index === 0 }" />
       </div>
       <div class="puzzle-row">
         <PuzzlePart v-for="part in secondLine" :key="part.name" :part="part" />
@@ -25,7 +25,7 @@ const thirdLine = computed(() => props.parts.slice(6, 9))
       </div>
     </div>
     <!-- 27px and 23px are magics numbers -->
-    <PuzzlePart absolute bottom--12 rotate--25 class="left-[calc(4*-136px)] peer-hover:bottom-[calc(1*136px-27px)] peer-hover:left-[calc(0.5*-136px-23px)]" peer-hover:rotate-0 :part="away" />
+    <PuzzlePart opacity-0 lg:opacity-100 absolute bottom--12 rotate--25 class="left-[calc(4*-136px)] peer-hover:bottom-[calc(1*136px-27px)] peer-hover:left-[calc(0.5*-136px-23px)]" peer-hover:rotate-0 :part="away" />
   </div>
 </template>
 
