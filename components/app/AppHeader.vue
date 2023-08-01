@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { Popover, PopoverButton } from '@headlessui/vue'
-
 const website = useWebsite()
 const github = website.value.socials.github
 
@@ -11,7 +9,7 @@ const open = ref(false)
 </script>
 
 <template>
-  <header h-3.75rem px-6 py-3 rounded-4 border="~ light" bg="white" flex="~ row items-center" text-gray-900>
+  <header h-3.75rem p="x-3 md:x-6 y-3" rounded-4 border="~ light" bg="white" flex="~ row items-center" text-gray-900>
     <NuxtLink flex="1" to="/">
       <AppLogo />
     </NuxtLink>
@@ -27,23 +25,21 @@ const open = ref(false)
         </li>
       </ul>
     </nav>
-    <div flex="~ 1 justify-end items-center" gap-3>
+    <div flex="~ md:1 justify-end items-center" gap-3>
       <button type="button" p="x-0.375rem md:x-3 y-0.125rem md:y-0.375rem" rounded="0.375rem" flex="~ items-center" gap-2 hover:bg-primary hover:bg-opacity-30 transition ease-in duration-150>
         <span class="i-heroicons-magnifying-glass-20-solid?mask" h-7 w-7 md:h-5 md:w-5 />
         <span sr-only md:not-sr-only>
           Search
         </span>
       </button>
-      <Popover>
-        <PopoverButton type="button" p="x-0.375rem md:x-3 y-0.125rem md:y-0.375rem" rounded="0.375rem" flex="~ items-center" md:hidden gap-2 hover:bg-primary hover:bg-opacity-30 transition ease-in duration-150 @click="open = true">
-          <span class="i-heroicons:bars-3-bottom-right?mask" h-8 w-8 md:hidden />
-          <span sr-only>
-            Menu
-          </span>
-        </PopoverButton>
-        <AppNavigationPopover v-if="navigation" v-model:open="open" :navigation="navigation" />
-      </Popover>
+      <button type="button" p="x-0.375rem md:x-3 y-0.125rem md:y-0.375rem" rounded="0.375rem" flex="~ items-center" md:hidden gap-2 hover:bg-primary hover:bg-opacity-30 transition ease-in duration-150 @click="open = true">
+        <span class="i-heroicons:bars-3-bottom-right?mask" h-8 w-8 md:hidden />
+        <span sr-only>
+          Menu
+        </span>
+      </button>
       <NuxtLink :title="github.name" :rel="github.rel" :target="github.target" :to="github.url" hidden md:block w-7 h-7 :class="github.icon" />
     </div>
   </header>
+  <AppNavigationDialog v-if="navigation" v-model:open="open" :navigation="navigation" />
 </template>
