@@ -24,7 +24,7 @@ defineProps<{
           <span i-heroicons-chevron-right-20-solid w-5 h-5 />
         </span>
       </NuxtLink>
-      <h1 text="gray-900 4xl md:5xl" font-extrabold tracking-wide leading-normal>
+      <h1 text="gray-900 4xl md:5xl" font-extrabold tracking-wide leading-normal md:leading-normal>
         <ContentSlot :use="$slots.title" unwrap="p" />
       </h1>
       <p text="gray-600 2xl md:2.5xl" leading-normal md:leading-normal>
