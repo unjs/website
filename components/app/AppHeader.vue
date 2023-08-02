@@ -26,12 +26,12 @@ const open = ref(false)
       </ul>
     </nav>
     <div flex="~ md:1 justify-end items-center" gap-3>
-      <button type="button" p="x-0.375rem md:x-3 y-0.125rem md:y-0.375rem" rounded="0.375rem" flex="~ items-center" gap-2 hover:bg-primary hover:bg-opacity-30 transition ease-in duration-150>
+      <!-- <button type="button" p="x-0.375rem md:x-3 y-0.125rem md:y-0.375rem" rounded="0.375rem" flex="~ items-center" gap-2 hover:bg-primary hover:bg-opacity-30 transition ease-in duration-150>
         <span class="i-heroicons-magnifying-glass-20-solid?mask" h-7 w-7 md:h-5 md:w-5 />
         <span sr-only md:not-sr-only>
           Search
         </span>
-      </button>
+      </button> -->
       <button type="button" p="x-0.375rem md:x-3 y-0.125rem md:y-0.375rem" rounded="0.375rem" flex="~ items-center" md:hidden gap-2 hover:bg-primary hover:bg-opacity-30 transition ease-in duration-150 @click="open = true">
         <span class="i-heroicons:bars-3-bottom-right?mask" h-8 w-8 md:hidden />
         <span sr-only>
