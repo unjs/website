@@ -12,12 +12,12 @@ export default defineAppConfig({
               rel: 'noopener',
               target: '_blank',
             },
-            {
-              title: 'FAQ',
-              url: '/faq',
-              rel: null,
-              target: null,
-            },
+            // {
+            //   title: 'FAQ',
+            //   url: '/faq',
+            //   rel: null,
+            //   target: null,
+            // },
             {
               title: 'Contact us',
               url: 'mailto:hi@unjs.io',
@@ -47,12 +47,12 @@ export default defineAppConfig({
               rel: null,
               target: null,
             },
-            {
-              title: 'Search',
-              url: '/search',
-              rel: null,
-              target: null,
-            },
+            // {
+            //   title: 'Search',
+            //   url: '/search',
+            //   rel: null,
+            //   target: null,
+            // },
           ],
         },
         {
