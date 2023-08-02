@@ -1,3 +1,9 @@
+<script lang="ts">
+useHead({
+  titleTemplate: '%s · UnJS',
+})
+</script>
+
 <template>
   <Html lang="en" dir="ltr">
     <Head>
