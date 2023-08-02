@@ -1,21 +1,3 @@
-import process from 'node:process'
-import type { GithubOptions } from 'unstorage/drivers/github'
-import type { FSStorageOptions } from 'unstorage/drivers/fs'
-
-const source = process.env.NODE_ENV === 'production'
-  ? {
-    driver: 'github',
-    repo: 'mastering-unjs/content',
-    dir: 'content',
-    token: process.env.GITHUB_TOKEN,
-    branch: 'main',
-  } satisfies GithubOptions & { driver: 'github' }
-  : {
-    driver: 'fs',
-    base: '../content/content',
-    readOnly: true,
-  } satisfies FSStorageOptions & { driver: 'fs' }
-
 export default defineNuxtConfig({
   modules: [
     '@nuxt/content',
@@ -38,9 +20,6 @@ export default defineNuxtConfig({
     },
     navigation: {
       fields: ['icon'],
-    },
-    sources: {
-      content: source,
     },
   },
   unocss: {

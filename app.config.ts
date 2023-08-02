@@ -2,14 +2,13 @@ export default defineAppConfig({
   website: {
     footer: {
       quote: 'Unlock the potential of your web development journey with UnJS - where innovation meets simplicity, and possibilities become limitless.',
-      warning: 'Unofficial UnJS Website',
       menu: [
         {
           title: 'Community',
           items: [
             {
               title: 'Contribute',
-              url: 'https://github.com/mastering-unjs/content',
+              url: 'https://github.com/unjs/',
               rel: 'noopener',
               target: '_blank',
             },
@@ -21,7 +20,7 @@ export default defineAppConfig({
             },
             {
               title: 'Contact us',
-              url: 'mailto:contact@mastering-unjs.dev',
+              url: 'mailto:hi@unjs.io',
               rel: null,
               target: null,
             },
@@ -77,14 +76,14 @@ export default defineAppConfig({
     },
     socials: {
       github: {
-        url: 'https://github.com/mastering-unjs',
+        url: 'https://github.com/unjs',
         rel: 'noopener',
         target: '_blank',
         icon: 'i-logos-github-icon?mask',
         name: 'GitHub',
       },
       twitter: {
-        url: 'https://twitter.com/mastering_unjs',
+        url: 'https://twitter.com/unjs',
         icon: 'i-logos-twitter?mask',
         rel: 'noopener',
         target: '_blank',

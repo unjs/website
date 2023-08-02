@@ -1,4 +1,5 @@
 {
+  "name": "website",
   "private": true,
   "scripts": {
     "prepare": "nuxt prepare",
@@ -7,7 +8,13 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "lint": "eslint .",
-    "lint:fix": "eslint --fix ."
+    "lint:fix": "eslint --fix .",
+    "lint:md": "markdownlint ./content && case-police content/**/*",
+    "lint:md:fix": "markdownlint --fix ./content && case-police --fix content/**/*"
+  },
+  "dependencies": {
+    "@headlessui/vue": "^1.7.15",
+    "@iconify-json/logos": "^1.1.33"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.39.8",
@@ -17,14 +24,12 @@
     "@types/node": "^18.17.1",
     "@unocss/nuxt": "^0.53.6",
     "@unocss/reset": "^0.53.6",
+    "case-police": "^0.6.1",
     "eslint": "^8.46.0",
+    "markdownlint-cli": "^0.35.0",
     "nuxt": "^3.6.5",
     "nuxt-simple-robots": "^3.0.3",
     "nuxt-simple-sitemap": "^3.1.3",
     "unstorage": "^1.8.0"
-  },
-  "dependencies": {
-    "@headlessui/vue": "^1.7.15",
-    "@iconify-json/logos": "^1.1.33"
   }
 }
