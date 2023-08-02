@@ -26,6 +26,7 @@ const open = ref(false)
       </ul>
     </nav>
     <div flex="~ md:1 justify-end items-center" gap-3>
+      <!-- TODO: add search -->
       <!-- <button type="button" p="x-0.375rem md:x-3 y-0.125rem md:y-0.375rem" rounded="0.375rem" flex="~ items-center" gap-2 hover:bg-primary hover:bg-opacity-30 transition ease-in duration-150>
         <span class="i-heroicons-magnifying-glass-20-solid?mask" h-7 w-7 md:h-5 md:w-5 />
         <span sr-only md:not-sr-only>

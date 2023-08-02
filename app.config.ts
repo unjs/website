@@ -89,13 +89,14 @@ export default defineAppConfig({
         target: '_blank',
         name: 'Twitter',
       },
-      rss: {
-        url: '/feed.xml',
-        icon: 'i-heroicons-rss?mask',
-        name: 'RSS',
-        target: null,
-        rel: null,
-      },
+      // TODO: add RSS
+      // rss: {
+      //   url: '/feed.xml',
+      //   icon: 'i-heroicons-rss?mask',
+      //   name: 'RSS',
+      //   target: null,
+      //   rel: null,
+      // },
     },
   },
 })
