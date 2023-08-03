@@ -25,12 +25,18 @@ export default defineConfig({
   },
   presets: [
     presetUno(),
-    presetTypography(),
+    presetTypography({
+      cssExtend: {
+        a: {
+          'text-decoration': 'none',
+        },
+      },
+    }),
     presetIcons(),
     presetAttributify(),
     presetWebFonts({
       fonts: {
-        sans: 'Nunito:400,500,600,700,800',
+        sans: 'Nunito:300,400,500,600,700,800',
       },
     }),
   ],
