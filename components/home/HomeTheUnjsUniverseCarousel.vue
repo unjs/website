@@ -5,12 +5,12 @@ const props = defineProps<{
   parts: PuzzlePart[]
 }>()
 
-const timing = '40s'
-const slidesPerView = props.parts.length
-const slideWidth = '150px'
-const slideHeight = '136px'
-const imageWidth = 'auto'
-const imageHeight = 'auto'
+const timing = ref('40s')
+const slidesPerView = computed(() => props.parts.length)
+const slideWidth = ref('150px')
+const slideHeight = ref('136px')
+const imageWidth = ref('auto')
+const imageHeight = ref('auto')
 </script>
 
 <template>
@@ -58,8 +58,6 @@ const imageHeight = 'auto'
   display: flex;
   justify-items: center;
   width: calc(v-bind(slideWidth) * (v-bind(slidesPerView) * 2));
-
-  --at-apply: space-x--4
 }
 
 .slide-track:hover {
