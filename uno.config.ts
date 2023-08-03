@@ -30,6 +30,10 @@ export default defineConfig({
         a: {
           'text-decoration': 'none',
         },
+        img: {
+          'border': '1px solid rgb(209, 213, 219)',
+          'border-radius': '0.875rem',
+        },
         pre: {
           margin: 0,
           padding: 0,
