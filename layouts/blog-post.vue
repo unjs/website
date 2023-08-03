@@ -5,8 +5,8 @@ const toDate = (date: string) => new Date(date).toLocaleDateString('en-US', { ye
 </script>
 
 <template>
-  <div m="y-10" p="x-4 md:x-6 t-10 b-20" rounded="4" bg="white" grid="~ cols-1 lg:cols-[1fr_auto_1fr] items-start" gap="8">
-    <div>
+  <div m="y-10" p="x-4 md:x-6 t-10 b-20" rounded="4" bg="white" grid="~ cols-1 xl:cols-[1fr_auto_1fr] items-start" gap="8">
+    <div flex="~ justify-start">
       <NuxtLink to="/blog" flex="~ items-center" gap="1" class="group">
         <span i-heroicons-chevron-left-20-solid block w-4 h-4 text="gray-400 group-hover:gray-600" transition="~ ease-in duration-150" />
         <span text="text-sm gray-600">
@@ -15,7 +15,7 @@ const toDate = (date: string) => new Date(date).toLocaleDateString('en-US', { ye
       </NuxtLink>
     </div>
 
-    <nav hidden lg:block lg:row-start-1 lg:col-start-3 sticky top-4 class="group">
+    <nav hidden xl:block xl:row-start-1 xl:col-start-3 sticky top-4 class="group">
       <p flex="~ items-center" gap="2" text="right">
         <span i-heroicons-list-bullet-20-solid block w-4 h-4 text="gray-400 group-hover:gray-600" transition="~ ease-in duration-150" />
         <span text="text-sm gray-600">Table of Contents</span>
@@ -29,7 +29,7 @@ const toDate = (date: string) => new Date(date).toLocaleDateString('en-US', { ye
       </ul>
     </nav>
 
-    <main lg:row-start-1 lg:col-start-2 max-w-screen-md>
+    <main xl:row-start-1 xl:col-start-2 max-w-screen-md mx-auto>
       <article>
         <header relative p="t-10">
           <h1 text="2xl md:3xl gray-800" font="bold" tracking="wide">
