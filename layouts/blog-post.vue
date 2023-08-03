@@ -29,7 +29,7 @@ const toDate = (date: string) => new Date(date).toLocaleDateString('en-US', { ye
       </ul>
     </nav>
 
-    <main xl:row-start-1 xl:col-start-2 max-w-screen-md mx-auto>
+    <main xl:row-start-1 xl:col-start-2 max-w-screen-md lg:mx-auto>
       <article>
         <header relative p="t-10">
           <h1 text="2xl md:3xl gray-800" font="bold" tracking="wide">
