@@ -34,18 +34,22 @@ export default defineNuxtConfig({
     sitemaps: {
       learn: {
         include: ['/learn/**'],
-        exclude: ['/build/**', '/explore/**'],
+        exclude: ['/build/**', '/explore/**', '/blog/**'],
       },
       build: {
         include: ['/build/**'],
-        exclude: ['/explore/**', '/learn/**'],
+        exclude: ['/explore/**', '/learn/**', '/blog/**'],
       },
       explore: {
         include: ['/explore/**'],
-        exclude: ['/build/**', '/learn/**'],
+        exclude: ['/build/**', '/learn/**', '/blog/**'],
+      },
+      blog: {
+        include: ['/blog/**'],
+        exclude: ['/build/**', '/explore/**', '/learn/**'],
       },
       pages: {
-        exclude: ['/build/**', '/explore/**', '/learn/**'],
+        exclude: ['/build/**', '/explore/**', '/learn/**', '/blog/**'],
       },
     },
   },
