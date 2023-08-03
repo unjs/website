@@ -1,12 +1,3 @@
-<script lang="ts">
-const { page } = useContent()
-
-useHead({
-  title: page.value.title,
-  titleTemplate: '%s · UnJS',
-})
-</script>
-
 <template>
   <Html lang="en" dir="ltr">
     <Head>

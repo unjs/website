@@ -1,4 +1,9 @@
 export default defineNuxtConfig({
+  app: {
+    head: {
+      titleTemplate: '%s · UnJS',
+    },
+  },
   modules: [
     '@nuxt/content',
     '@unocss/nuxt',
