@@ -13,20 +13,35 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background-color: theme("colors.primary");
+  background-color: transparent
+}
+
+pre::-webkit-scrollbar-track {
+  --at-apply: bg-gray-100 rounded-full
 }
 
 ::-webkit-scrollbar-thumb {
-  border-radius: theme("borderRadius.md");
-  background-color: theme("colors.white");
+  --at-apply: rounded-md bg-white
+}
+
+pre::-webkit-scrollbar-thumb {
+  --at-apply: bg-gray-400 bg-op-20
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: theme("colors.gray.100");
+  --at-apply: bg-gray-100
+}
+
+pre::-webkit-scrollbar-thumb:hover {
+  --at-apply: bg-gray-500 bg-op-20
 }
 
 ::-webkit-scrollbar-thumb:active {
-  background-color: theme("colors.gray.200");
+  --at-apply: bg-gray-200
+}
+
+pre::-webkit-scrollbar-thumb:active {
+  --at-apply: bg-gray-600 bg-op-20
 }
 
 :is(h1, h2, h3, h4, h5, h6) {

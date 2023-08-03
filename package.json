@@ -24,6 +24,8 @@
     "@types/node": "^18.17.1",
     "@unocss/nuxt": "^0.53.6",
     "@unocss/reset": "^0.53.6",
+    "@vueuse/core": "^10.3.0",
+    "@vueuse/nuxt": "^10.3.0",
     "case-police": "^0.6.1",
     "eslint": "^8.46.0",
     "markdownlint-cli": "^0.35.0",

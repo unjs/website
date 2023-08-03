@@ -30,6 +30,10 @@ export default defineConfig({
         a: {
           'text-decoration': 'none',
         },
+        pre: {
+          margin: 0,
+          padding: 0,
+        },
       },
     }),
     presetIcons(),

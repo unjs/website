@@ -6,6 +6,7 @@ export default defineNuxtConfig({
   },
   modules: [
     '@nuxt/content',
+    '@vueuse/nuxt',
     '@unocss/nuxt',
     'nuxt-simple-robots',
     'nuxt-simple-sitemap',
@@ -25,6 +26,9 @@ export default defineNuxtConfig({
     },
     navigation: {
       fields: ['icon'],
+    },
+    highlight: {
+      theme: 'github-light',
     },
   },
   unocss: {
