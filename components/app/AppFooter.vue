@@ -3,7 +3,7 @@ const website = useWebsite()
 </script>
 
 <template>
-  <footer rounded-4 px-6 pt-20 pb-20 md:pb-30 flex="~ col" gap-12 border border-light bg-white>
+  <footer rounded-4 px-6 pt-20 pb-20 md:pb-30 flex="~ col" gap-12 md:gap-20 border border-light bg-white>
     <div flex="~ col md:row" gap-12 md:gap-25>
       <div flex="~ 1 col" gap-6>
         <NuxtLink to="/" block>
