@@ -27,14 +27,24 @@ export default defineConfig({
     presetUno(),
     presetTypography({
       cssExtend: {
-        a: {
-          'text-decoration': 'none',
+        'h1 a,h2 a,h3 a,h4 a,h5 a,h6 a': {
+          'text-decoration-line': 'none',
         },
-        img: {
-          'border': '1px solid rgb(209, 213, 219)',
+        'p a': {
+          'text-decoration-line': 'none',
+          'color': 'var(--un-prose-body)',
+          'border-bottom': '1px solid var(--un-prose-body)',
+          'transition': 'border 150ms ease-in',
+        },
+        'p a:hover': {
+          'color': 'var(--un-prose-links)',
+          'border-bottom': '1px solid var(--un-prose-links)',
+        },
+        'img': {
+          'border': '1px solid rgb(209, 213, 219)', // gray-300
           'border-radius': '0.875rem',
         },
-        pre: {
+        'pre': {
           margin: 0,
           padding: 0,
         },
