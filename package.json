@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "lint:md": "markdownlint ./content && case-police content/**/*",
-    "lint:md:fix": "markdownlint --fix ./content && case-police --fix content/**/*"
+    "lint:md:fix": "markdownlint --fix ./content && case-police --fix content/**/*",
+    "verify:packages": "jiti scripts/package-has-puzzle-part.ts && jiti scripts/puzzle-part-has-package.ts"
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.15",
