@@ -43,9 +43,15 @@ devDependencies:
   case-police:
     specifier: ^0.6.1
     version: 0.6.1
+  consola:
+    specifier: ^3.2.3
+    version: 3.2.3
   eslint:
     specifier: ^8.46.0
     version: 8.46.0
+  jiti:
+    specifier: ^1.19.1
+    version: 1.19.1
   markdownlint-cli:
     specifier: ^0.35.0
     version: 0.35.0
