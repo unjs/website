@@ -28,7 +28,7 @@ function main() {
   }
 
   if (unlinked.length === 0)
-    consola.success('Each package has a puzzle part 🎉')
+    consola.success('Each package have a puzzle part 🎉')
   else
     consola.fatal(`${unlinked.length} packages does not have a puzzle part:\n${logs}`)
 }
