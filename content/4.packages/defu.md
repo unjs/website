@@ -1,4 +1,4 @@
 ---
 title: defu
-icon: noto:water-wave
+icon: i-noto-water-wave
 ---

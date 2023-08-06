@@ -19,6 +19,9 @@ devDependencies:
   '@iconify-json/heroicons':
     specifier: ^1.1.11
     version: 1.1.11
+  '@iconify-json/noto':
+    specifier: ^1.1.12
+    version: 1.1.12
   '@nuxt/content':
     specifier: ^2.7.2
     version: 2.7.2
@@ -1000,6 +1003,12 @@ packages:
       '@iconify/types': 2.0.0
     dev: false
 
+  /@iconify-json/noto@1.1.12:
+    resolution: {integrity: sha512-PXEfpWic2yl4wg7VmlF3Kanu7MpaJD2N820SWGTNj5AOa7G8JYkENg2B0NPyuuWzrFiD+NboCjeXZSXu4oqJKg==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
   /@iconify/types@2.0.0:
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
 
@@ -1556,7 +1565,7 @@ packages:
       deepmerge: 4.3.1
       is-builtin-module: 3.2.1
       is-module: 1.0.0
-      resolve: 1.22.2
+      resolve: 1.22.3
       rollup: 3.26.3
     dev: true
 
@@ -3934,7 +3943,7 @@ packages:
     dependencies:
       debug: 3.2.7
       is-core-module: 2.12.1
-      resolve: 1.22.2
+      resolve: 1.22.3
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -6651,7 +6660,7 @@ packages:
     resolution: {integrity: sha512-/5CMN3T0R4XTj4DcGaexo+roZSdSFW/0AOOTROrjxzCG1wrWXEsGbRKevjlIL+ZDE4sZlJr5ED4YW0yqmkK+eA==}
     dependencies:
       hosted-git-info: 2.8.9
-      resolve: 1.22.2
+      resolve: 1.22.3
       semver: 5.7.2
       validate-npm-package-license: 3.0.4
     dev: true
@@ -7394,7 +7403,7 @@ packages:
       postcss: 8.4.27
       postcss-value-parser: 4.2.0
       read-cache: 1.0.0
-      resolve: 1.22.2
+      resolve: 1.22.3
     dev: true
 
   /postcss-merge-longhand@6.0.0(postcss@8.4.27):

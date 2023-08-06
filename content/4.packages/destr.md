@@ -1,4 +1,4 @@
 ---
 title: destr
-icon: noto:rocket
+icon: i-noto-rocket
 ---

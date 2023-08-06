@@ -1,4 +1,4 @@
 ---
 title: unstorage
-icon: noto:floppy-disk
+icon: i-noto-floppy-disk
 ---

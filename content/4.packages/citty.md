@@ -1,4 +1,4 @@
 ---
 title: citty
-icon: noto:cityscape-at-dusk
+icon: i-noto-cityscape-at-dusk
 ---

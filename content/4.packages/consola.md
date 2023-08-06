@@ -1,4 +1,4 @@
 ---
 title: consola
-icon: noto:koala
+icon: i-noto-koala
 ---

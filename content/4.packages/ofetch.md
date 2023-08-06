@@ -1,4 +1,4 @@
 ---
 title: ofetch
-icon: noto:face-screaming-in-fear
+icon: i-noto-face-screaming-in-fear
 ---

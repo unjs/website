@@ -1,4 +1,4 @@
 ---
 title: ufo
-icon: noto:link
+icon: i-noto-link
 ---

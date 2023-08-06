@@ -1,4 +1,4 @@
 ---
 title: Nitro
-logo: /assets/packages
+logo: /assets/logos/nitro.svg
 ---

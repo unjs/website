@@ -2,6 +2,15 @@
 const { toc, page } = useContent()
 
 const toDate = (date: string) => new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+
+const packages = await asyncComputed(() => Promise.all(page.value.packages.map(async (name: string) => {
+  const { data } = await useAsyncData(`package-${name}`, () => queryContent('/packages/').where({ _path: { $icontains: name } }).findOne())
+
+  if (!data.value)
+    return null
+  else
+    return data.value
+})), null)
 </script>
 
 <template>
@@ -32,19 +41,54 @@ const toDate = (date: string) => new Date(date).toLocaleDateString('en-US', { ye
     <main xl:row-start-1 xl:col-start-2 max-w-screen-md lg:mx-auto>
       <article>
         <header relative p="t-10">
-          <h1 text="2xl md:3xl gray-800" font="bold" tracking="wide">
-            {{ page.title }}
-          </h1>
-          <dl absolute top-0 left-0 text="sm gray-700" font="light">
-            <dt sr-only>
-              Published at
-            </dt>
-            <dd>
-              <time pubdate datetime="{{ page.publishedAt }}">
-                {{ toDate(page.publishedAt) }}
-              </time>
-            </dd>
-          </dl>
+          <div flex="~ col" gap-1>
+            <h1 text="2xl md:3xl gray-800" font="bold" tracking="wide">
+              {{ page.title }}
+            </h1>
+            <dl>
+              <dt sr-only>
+                Related packages
+              </dt>
+              <dd>
+                <ul flex="~" gap-3 text="sm gray-900">
+                  <li v-for="package_ in packages" :key="package_._path">
+                    <NuxtLink :to="package_._path" py-1 flex="~ items-center" gap-1>
+                      <img v-if="package_.logo" :src="package_.logo" w-4 h-4>
+                      <span v-else-if="package_.icon" w-4 h-4 :class="package_.icon" />
+                      <span>{{ package_.title }}</span>
+                    </NuxtLink>
+                  </li>
+                </ul>
+              </dd>
+            </dl>
+          </div>
+
+          <div absolute top-0 left-0 text="sm gray-700" font="light">
+            <dl flex="~" gap-1>
+              <dt sr-only>
+                Published at
+              </dt>
+              <dd>
+                <time pubdate datetime="{{ page.publishedAt }}">
+                  {{ toDate(page.publishedAt) }}
+                </time>
+              </dd>
+              <span>-</span>
+              <dt sr-only>
+                Categories
+              </dt>
+              <dd capitalize>
+                <ul flex="~" gap-1 class="categories">
+                  <li v-for="(category, index) in page.categories" :key="category" flex="~">
+                    <NuxtLink :to="`/categories/${category}`">
+                      {{ category }}
+                    </NuxtLink>
+                    <span v-if="index !== page.categories.length - 1">,</span>
+                  </li>
+                </ul>
+              </dd>
+            </dl>
+          </div>
           <ul mt-6>
             <li v-for="author in page.authors" :key="author.name">
               <address flex="~ items-center" gap="2" not-italic>

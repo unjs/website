@@ -1,4 +1,4 @@
 ---
 title: unbuild
-icon: noto:package
+icon: i-noto-package
 ---
