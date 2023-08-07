@@ -69,7 +69,7 @@ const packages = await asyncComputed(() => Promise.all(page.value.packages.map(a
                 Published at
               </dt>
               <dd>
-                <time pubdate :datetime="page.publishedAt">
+                <time pubdate :datetime="page.publishedAt.toISOString()">
                   {{ toDate(page.publishedAt) }}
                 </time>
               </dd>
@@ -89,6 +89,7 @@ const packages = await asyncComputed(() => Promise.all(page.value.packages.map(a
               </dd>
             </dl>
           </div>
+          <!-- TODO: add dl for authors -->
           <ul mt-6>
             <li v-for="author in page.authors" :key="author.name">
               <address flex="~ items-center" gap="2" not-italic>
