@@ -69,7 +69,7 @@ const packages = await asyncComputed(() => Promise.all(page.value.packages.map(a
                 Published at
               </dt>
               <dd>
-                <time pubdate datetime="{{ page.publishedAt }}">
+                <time pubdate :datetime="page.publishedAt">
                   {{ toDate(page.publishedAt) }}
                 </time>
               </dd>
