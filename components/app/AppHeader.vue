@@ -10,9 +10,11 @@ const open = ref(false)
 
 <template>
   <header h-3.75rem p="x-3 md:x-6 y-3" rounded-4 border="~ light" bg="white" flex="~ row items-center" text-gray-900>
-    <NuxtLink flex="1" to="/">
-      <AppLogo />
-    </NuxtLink>
+    <div flex="1 ~">
+      <NuxtLink to="/">
+        <AppLogo />
+      </NuxtLink>
+    </div>
     <nav v-if="navigation" flex="md:~ 1 justify-center" class="hidden">
       <ul flex="~" gap-3 leading-5 class="text-[1.125rem]">
         <li v-for="item in navigation" :key="item._path">
