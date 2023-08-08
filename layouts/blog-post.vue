@@ -2,6 +2,7 @@
 const { toc, page } = useContent()
 
 const toDate = (date: string) => new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+const toISOString = (date: string | Date) => new Date(date).toISOString()
 
 const packages = await asyncComputed(() => Promise.all(page.value.packages.map(async (name: string) => {
   const { data } = await useAsyncData(`package-${name}`, () => queryContent('/packages/').where({ _path: { $icontains: name } }).findOne())
@@ -69,7 +70,7 @@ const packages = await asyncComputed(() => Promise.all(page.value.packages.map(a
                 Published at
               </dt>
               <dd>
-                <time pubdate :datetime="page.publishedAt.toISOString()">
+                <time pubdate :datetime="toISOString(page.publishedAt)">
                   {{ toDate(page.publishedAt) }}
                 </time>
               </dd>
