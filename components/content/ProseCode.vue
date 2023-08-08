@@ -16,25 +16,30 @@ const { copy, copied, isSupported } = useClipboard()
         {{ filename }}
       </span>
       <slot />
-      <button
-        v-if="isSupported" absolute right-3 bottom-2 p="1" op="0 group-hover:100"
-        transition="~ ease-in duration-150"
-        @click="copy(code)"
-      >
-        <transition
-          appear
-          mode="out-in"
-          enter-active-class="duration-150 ease-int"
-          enter-from-class="opacity-0"
-          enter-to-class="opacity-100"
-          leave-active-class="duration-150 ease-out"
-          leave-from-class="opacity-100"
-          leave-to-class="opacity-0"
+      <ClientOnly>
+        <button
+          v-if="isSupported" absolute right-3 bottom-2 p="1" op="0 group-hover:100"
+          transition="~ ease-in duration-150"
+          @click="copy(code)"
         >
-          <div v-if="copied" i-heroicons-check-solid w-4 h-4 />
-          <div v-else i-heroicons-clipboard-document w-4 h-4 />
-        </transition>
-      </button>
+          <span sr-only>
+            Copy to clipboard
+          </span>
+          <transition
+            appear
+            mode="out-in"
+            enter-active-class="duration-150 ease-int"
+            enter-from-class="opacity-0"
+            enter-to-class="opacity-100"
+            leave-active-class="duration-150 ease-out"
+            leave-from-class="opacity-100"
+            leave-to-class="opacity-0"
+          >
+            <div v-if="copied" i-heroicons-check-solid w-4 h-4 />
+            <div v-else i-heroicons-clipboard-document w-4 h-4 />
+          </transition>
+        </button>
+      </ClientOnly>
     </div>
   </div>
 </template>
