@@ -4,14 +4,9 @@ const { toc, page } = useContent()
 const toDate = (date: string) => new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
 const toISOString = (date: string | Date) => new Date(date).toISOString()
 
-const packages = await asyncComputed(() => Promise.all(page.value.packages.map(async (name: string) => {
-  const { data } = await useAsyncData(`package-${name}`, () => queryContent('/packages/').where({ _path: { $icontains: name } }).findOne())
+const pagePackages = computed(() => page.value.packages)
 
-  if (!data.value)
-    return null
-  else
-    return data.value
-})), null)
+const { data: packages } = await useAsyncData('package-nitro', () => queryContent('/packages/').only(['_path', 'title', 'icon', 'logo']).where({ _path: { $containsAny: pagePackages.value } }).find(), { watch: [pagePackages] })
 </script>
 
 <template>
@@ -51,7 +46,7 @@ const packages = await asyncComputed(() => Promise.all(page.value.packages.map(a
                 Related packages
               </dt>
               <dd>
-                <ul flex="~" gap-3 text="sm gray-900">
+                <ul flex="~" gap-3 text="sm gray-900" h-6>
                   <li v-for="package_ in packages" :key="package_._path">
                     <NuxtLink :to="package_._path" py-1 flex="~ items-center" gap-1>
                       <img v-if="package_.logo" :src="package_.logo" w-4 h-4 width="16" height="16">
