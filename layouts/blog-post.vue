@@ -54,7 +54,7 @@ const packages = await asyncComputed(() => Promise.all(page.value.packages.map(a
                 <ul flex="~" gap-3 text="sm gray-900">
                   <li v-for="package_ in packages" :key="package_._path">
                     <NuxtLink :to="package_._path" py-1 flex="~ items-center" gap-1>
-                      <img v-if="package_.logo" :src="package_.logo" w-4 h-4>
+                      <img v-if="package_.logo" :src="package_.logo" w-4 h-4 width="16" height="16">
                       <span v-else-if="package_.icon" w-4 h-4 :class="package_.icon" />
                       <span>{{ package_.title }}</span>
                     </NuxtLink>
@@ -90,24 +90,30 @@ const packages = await asyncComputed(() => Promise.all(page.value.packages.map(a
               </dd>
             </dl>
           </div>
-          <!-- TODO: add dl for authors -->
-          <ul mt-6>
-            <li v-for="author in page.authors" :key="author.name">
-              <address flex="~ items-center" gap="2" not-italic>
-                <img :src="author.picture" :alt="`Profil picture of ${author.name}`" w-9 h-9 rounded="full">
-                <div text="sm">
-                  <div text="gray-900" leading-none font="light">
-                    {{ author.name }}
-                  </div>
-                  <div mt-1>
-                    <NuxtLink rel="author noopener" :to="`https://twitter.com/${author.twitter}`" target="_blank" class="text-gray-700 hover:text-gray-900 leading-none transition ease-in duration-150">
-                      @{{ author.twitter }}
-                    </NuxtLink>
-                  </div>
-                </div>
-              </address>
-            </li>
-          </ul>
+          <dl>
+            <dt sr-only>
+              Authors
+            </dt>
+            <dd>
+              <ul mt-6 flex="~ wrap" gap="4 md:8">
+                <li v-for="author in page.authors" :key="author.name">
+                  <address flex="~ items-center" gap="2" not-italic>
+                    <img :src="author.picture" :alt="`Profil picture of ${author.name}`" w-9 h-9 rounded="full" width="36" height="36">
+                    <div text="sm">
+                      <div text="gray-900" leading-none font="light">
+                        {{ author.name }}
+                      </div>
+                      <div mt-1>
+                        <NuxtLink rel="author noopener" :to="`https://twitter.com/${author.twitter}`" target="_blank" class="text-gray-700 hover:text-gray-900 leading-none transition ease-in duration-150">
+                          @{{ author.twitter }}
+                        </NuxtLink>
+                      </div>
+                    </div>
+                  </address>
+                </li>
+              </ul>
+            </dd>
+          </dl>
         </header>
         <div mt-12 prose max-w-none prose-gray>
           <slot />
