@@ -1,16 +1,11 @@
 <script lang="ts" setup>
 const { toc, page } = useContent()
 
-const toDate = (date: string) => new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
-const toISOString = (date: string | Date) => new Date(date).toISOString()
-
-const pagePackages = computed(() => page.value.packages)
-
-const { data: packages } = await useAsyncData('package-nitro', () => queryContent('/packages/').only(['_path', 'title', 'icon', 'logo']).where({ _path: { $containsAny: pagePackages.value } }).find(), { watch: [pagePackages] })
+const { data: packages } = await useAsyncData('package-nitro', () => queryContent('/packages/').only(['_path', 'title', 'icon', 'logo']).where({ _path: { $containsAny: page.value.packages } }).find(), { watch: [() => page.value.packages] })
 </script>
 
 <template>
-  <div m="y-10" p="x-4 md:x-6 t-10 b-20" rounded="4" bg="white" grid="~ cols-1 xl:cols-[1fr_auto_1fr] items-start" gap="8">
+  <div m="y-6 md:y-10" p="x-4 md:x-6 t-6 md:t-10 b-10 md:b-20" rounded="4" bg="white" grid="~ cols-1 xl:cols-[1fr_auto_1fr] items-start" gap="6 md:8">
     <div flex="~ justify-start">
       <NuxtLink to="/blog" flex="~ items-center" gap="1" class="group">
         <span i-heroicons-chevron-left-20-solid block w-4 h-4 text="gray-400 group-hover:gray-600" transition="~ ease-in duration-150" />
@@ -34,11 +29,11 @@ const { data: packages } = await useAsyncData('package-nitro', () => queryConten
       </ul>
     </nav>
 
-    <main xl:row-start-1 xl:col-start-2 max-w-screen-md lg:mx-auto>
+    <main max-w-screen-md lg="mx-auto w-screen-md" xl="row-start-1 col-start-2">
       <article>
         <header relative p="t-10">
           <div flex="~ col" gap-1>
-            <h1 text="2xl md:3xl gray-800" font="bold" tracking="wide">
+            <h1 text="2xl md:3xl gray-900" font="bold" tracking="wide">
               {{ page.title }}
             </h1>
             <dl>
@@ -65,8 +60,8 @@ const { data: packages } = await useAsyncData('package-nitro', () => queryConten
                 Published at
               </dt>
               <dd>
-                <time pubdate :datetime="toISOString(page.publishedAt)">
-                  {{ toDate(page.publishedAt) }}
+                <time pubdate :datetime="toISODateString(page.publishedAt)">
+                  {{ toLocaleDateString(page.publishedAt) }}
                 </time>
               </dd>
               <span>-</span>
@@ -110,7 +105,7 @@ const { data: packages } = await useAsyncData('package-nitro', () => queryConten
             </dd>
           </dl>
         </header>
-        <div mt-12 prose max-w-none prose-gray>
+        <div mt-6 md:mt-12 prose="~ gray" max-w-none>
           <slot />
         </div>
       </article>

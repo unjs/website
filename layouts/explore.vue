@@ -1,5 +1,5 @@
 <template>
-  <main m="y-10">
+  <main m="my-6 md:y-10">
     <slot />
   </main>
 </template>
