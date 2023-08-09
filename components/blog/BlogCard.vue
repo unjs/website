@@ -4,9 +4,6 @@ import type { BlogPostCard } from 'types/blog'
 defineProps<{
   post: BlogPostCard
 }>()
-
-const toDate = (date: string | Date) => new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
-const toISOString = (date: string | Date) => new Date(date).toISOString()
 </script>
 
 <template>
@@ -28,8 +25,8 @@ const toISOString = (date: string | Date) => new Date(date).toISOString()
             Published at
           </dt>
           <dd>
-            <time pubdate :datetime="toISOString(post.publishedAt)">
-              {{ toDate(post.publishedAt) }}
+            <time pubdate :datetime="toISODateString(post.publishedAt)">
+              {{ toLocaleDateString(post.publishedAt) }}
             </time>
           </dd>
           <dt sr-only>
