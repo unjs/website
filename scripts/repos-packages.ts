@@ -6,57 +6,72 @@ interface GitHubRepo {
   name: string
 }
 
+const internalRepos = new Set([
+  'eslint-config',
+  'nitro-preset-starter',
+  'unjs.github.io',
+  'unjs.io',
+  'website',
+  'nitro-deploys',
+  'template',
+  'unkit',
+  'rollup-plugin-node-deno',
+  'renovate-config',
+  'lmify',
+  'governance',
+  ".github"
+])
+
 async function main() {
   // This script is used to determine if each repo of the unjs org have a package and if each package have stil a repo.
-  const repos = await fetchRepos()
-  const packages = fs.readdirSync('./content/4.packages')
+  const orgRepos = await fetchRepos()
+  const packageDocs = fs.readdirSync('./content/4.packages').filter(p => p.endsWith('.md') && !p.startsWith("."))
 
   // Repos that does not have a package
-  const unlinkedRepos = []
-  for (const repo of repos) {
-    if (!packages.includes(`${repo}.md`))
-      unlinkedRepos.push(repo)
+  const undocumentedRepos: GitHubRepo[] = []
+  for (const repo of orgRepos) {
+    if (!packageDocs.includes(`${repo.name}.md`)) {
+      undocumentedRepos.push(repo)
+    }
   }
 
-  const logsRepos = buildLogs(unlinkedRepos)
-
-  if (unlinkedRepos.length === 0)
+  if (undocumentedRepos.length === 0) {
     consola.success('Each repo have a package 🎉')
-  else
-    consola.fatal(`${unlinkedRepos.length} repos does not have a package:\n${logsRepos}`)
+  } else {
+    consola.fatal(`${undocumentedRepos.length} repos does not have a package:\n${formatTree(undocumentedRepos.map(r => r.name))}`)
+  }
 
   // Package that does not have a repo
-  const unlinkedPackages = []
-  for (const package_ of packages) {
-    if (!repos.includes(package_.replace('.md', '')))
-      unlinkedPackages.push(package_)
+  const docsWithoutRepo: string[] = []
+  for (const name of packageDocs) {
+    if (!orgRepos.find(r => r.name === name.replace('.md', ''))) {
+      docsWithoutRepo.push(name)
+    }
   }
 
-  const logsPackages = buildLogs(unlinkedPackages)
-
-  if (unlinkedPackages.length === 0)
+  if (docsWithoutRepo.length === 0) {
     consola.success('Each package have a repo 🎉')
-  else
-    consola.fatal(`${unlinkedPackages.length} packages does not have a repo:\n${logsPackages}`)
+  }
+  else {
+    consola.fatal(`${docsWithoutRepo.length} packages does not have a repo:\n${formatTree(docsWithoutRepo)}`)
+  }
 }
 
 main().catch(consola.error)
 
-async function fetchRepos(): Promise<string[]> {
+async function fetchRepos(): Promise<GitHubRepo[]> {
   const repos = await ofetch<GitHubRepo[]>('https://api.github.com/orgs/unjs/repos?per_page=100', {
     responseType: 'json',
   })
 
-  return repos.map(repo => repo.name)
+  return repos.filter(repo => !internalRepos.has(repo.name))
 }
 
-function buildLogs(data: string[]): string {
+function formatTree(items: string[]): string {
   let logs = ''
-
-  for (const name of data) {
-    const isLast = data.indexOf(name) === data.length - 1
-    logs += `  ${isLast ? '└─' : '├─'} ${name}\n`
+  for (const item of items) {
+    const isLast = items.indexOf(item) === item.length - 1
+    logs += `  ${isLast ? '└─' : '├─'} ${item}\n`
   }
-
   return logs
 }
