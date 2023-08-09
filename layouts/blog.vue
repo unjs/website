@@ -5,7 +5,7 @@ const { data } = useAsyncData('blog', () => queryContent('/blog/').only(['_path'
 </script>
 
 <template>
-  <main m="my-6 md:y-10">
+  <main m="y-6 md:y-10">
     <slot />
 
     <section v-if="data" m="t-6" grid="~ cols-1 md:cols-2 lg:cols-3" gap-6>
