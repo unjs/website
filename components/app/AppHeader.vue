@@ -2,8 +2,7 @@
 const website = useWebsite()
 const github = website.value.socials.github
 
-const packagesPath = /^\/packages/
-const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation(queryContent('/').where({ _path: { $and: [{ $ne: '/' }, { $ne: packagesPath }] } })))
+const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation(queryContent('/').where({ _path: { $and: [{ $ne: '/' }] } })))
 
 const open = ref(false)
 </script>
@@ -12,7 +11,7 @@ const open = ref(false)
   <header h-3.75rem p="x-3 md:x-6 y-3" rounded-4 border="~ light" bg="white" flex="~ row items-center" text-gray-900>
     <div flex="1 ~">
       <NuxtLink to="/">
-        <AppLogo />
+        <AppLogo content-class="md:hidden lg:block" />
       </NuxtLink>
     </div>
     <nav v-if="navigation" flex="md:~ 1 justify-center" class="hidden">
