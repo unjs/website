@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 const website = useWebsite()
 const github = website.value.socials.github
+const twitter = website.value.socials.twitter
 
 const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation(queryContent('/').where({ _path: { $and: [{ $ne: '/' }] } })))
 
@@ -46,6 +47,7 @@ const open = ref(false)
           Menu
         </span>
       </button>
+      <NuxtLink :title="twitter.name" :rel="twitter.rel" :target="twitter.target" :to="twitter.url" class="hidden" md:block w-7 h-7 :class="twitter.icon" />
       <NuxtLink :title="github.name" :rel="github.rel" :target="github.target" :to="github.url" class="hidden" md:block w-7 h-7 :class="github.icon" />
     </div>
   </header>
