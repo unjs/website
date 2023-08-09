@@ -1,6 +1,6 @@
 ---
 title: magicast
-description: Programmatically modify JavaScript and TypeScript source codes with a simplified, elegant and familiar syntax powered by recast and babel.
+description: Programmatically modify JavaScript and TypeScript source codes.
 icon: i-noto-cheese-wedge
 github:
   owner: unjs
