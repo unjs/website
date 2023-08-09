@@ -2,8 +2,18 @@ import fs from 'node:fs'
 import { consola } from 'consola'
 import { ofetch } from 'ofetch'
 
+// https://github.com/unjs/ungh/tree/main#reposownername
 interface GitHubRepo {
-  name: string
+  "id": number,
+  "name": string,
+  "repo": string,
+  "description": string,
+  "createdAt": string,
+  "updatedAt": string,
+  "pushedAt": string,
+  "stars": number,
+  "watchers": number,
+  "forks": number
 }
 
 const internalRepos = new Set([
@@ -35,11 +45,28 @@ async function main() {
     }
   }
 
+  // Show log
   if (undocumentedRepos.length === 0) {
     consola.success('Each repo have a package 🎉')
   } else {
-    consola.fatal(`${undocumentedRepos.length} repos does not have a package:\n${formatTree(undocumentedRepos.map(r => r.name))}`)
+    consola.warn(`${undocumentedRepos.length} repos does not have a package:\n${formatTree(undocumentedRepos.map(r => r.name))}`)
   }
+
+  // Create markdowns
+  if (process.argv.includes('--create')) {
+    const template = fs.readFileSync('./content/4.packages/.template.md', 'utf-8')
+    for (const repo of undocumentedRepos) {
+      fs.writeFileSync(`./content/4.packages/${repo.name}.md`,
+        template
+          .replace('package_title', repo.name)
+          .replace('package_description', repo.description)
+          .replace('repo_name', repo.name)
+          .replace('npm_name', repo.name)
+          .replace('docs_link', 'https://github.com/unjs/' + repo.name)
+      )
+    }
+  }
+
 
   // Package that does not have a repo
   const docsWithoutRepo: string[] = []
@@ -53,16 +80,14 @@ async function main() {
     consola.success('Each package have a repo 🎉')
   }
   else {
-    consola.fatal(`${docsWithoutRepo.length} packages does not have a repo:\n${formatTree(docsWithoutRepo)}`)
+    consola.warn(`${docsWithoutRepo.length} packages does not have a repo:\n${formatTree(docsWithoutRepo)}`)
   }
 }
 
 main().catch(consola.error)
 
 async function fetchRepos(): Promise<GitHubRepo[]> {
-  const repos = await ofetch<GitHubRepo[]>('https://api.github.com/orgs/unjs/repos?per_page=100', {
-    responseType: 'json',
-  })
+  const repos = await ofetch<{ repos: GitHubRepo[] }>('https://ungh.cc/orgs/unjs/repos').then(r => r.repos)
 
   return repos.filter(repo => !internalRepos.has(repo.name))
 }
