@@ -13,7 +13,7 @@ defineProps<{
       <h3 md:text-xl text-gray-900 font-bold>
         {{ card.title }}
       </h3>
-      <p text-gray-700>
+      <p text-gray-600>
         {{ card.description }}
       </p>
     </div>
