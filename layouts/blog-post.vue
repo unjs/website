@@ -94,7 +94,7 @@ const { data: packages } = await useAsyncData('package-nitro', () => queryConten
                         {{ author.name }}
                       </div>
                       <div mt-1>
-                        <NuxtLink rel="author noopener" :to="`https://twitter.com/${author.twitter}`" target="_blank" class="text-gray-700 hover:text-gray-900 leading-none transition ease-in duration-150">
+                        <NuxtLink rel="author noopener" :to="`https://x.com/${author.twitter}`" target="_blank" class="text-gray-700 hover:text-gray-900 leading-none transition ease-in duration-150">
                           @{{ author.twitter }}
                         </NuxtLink>
                       </div>

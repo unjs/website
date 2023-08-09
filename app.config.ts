@@ -3,12 +3,13 @@ export default defineAppConfig({
     footer: {
       quote: 'Unlock the potential of your web development journey with UnJS - where innovation meets simplicity, and possibilities become limitless.',
       menu: [
+        {},
         {
           title: 'Community',
           items: [
             {
               title: 'Contribute',
-              url: 'https://github.com/unjs/',
+              url: 'https://github.com/unjs/governance',
               rel: 'noopener',
               target: '_blank',
             },
@@ -26,35 +27,35 @@ export default defineAppConfig({
             },
           ],
         },
-        {
-          title: 'Articles',
-          items: [
-            {
-              title: 'Learn',
-              url: '/learn',
-              rel: null,
-              target: null,
-            },
-            {
-              title: 'Build',
-              url: '/build',
-              rel: null,
-              target: null,
-            },
-            {
-              title: 'Explore',
-              url: '/explore',
-              rel: null,
-              target: null,
-            },
-            // {
-            //   title: 'Search',
-            //   url: '/search',
-            //   rel: null,
-            //   target: null,
-            // },
-          ],
-        },
+        // {
+        //   title: 'Articles',
+        //   items: [
+        //     {
+        //       title: 'Learn',
+        //       url: '/learn',
+        //       rel: null,
+        //       target: null,
+        //     },
+        //     {
+        //       title: 'Build',
+        //       url: '/build',
+        //       rel: null,
+        //       target: null,
+        //     },
+        //     {
+        //       title: 'Explore',
+        //       url: '/explore',
+        //       rel: null,
+        //       target: null,
+        //     },
+        //     // {
+        //     //   title: 'Search',
+        //     //   url: '/search',
+        //     //   rel: null,
+        //     //   target: null,
+        //     // },
+        //   ],
+        // },
         {
           title: 'UnJS',
           items: [
@@ -72,6 +73,7 @@ export default defineAppConfig({
             },
           ],
         },
+        {},
       ],
     },
     socials: {
@@ -83,7 +85,7 @@ export default defineAppConfig({
         name: 'GitHub',
       },
       twitter: {
-        url: 'https://twitter.com/unjs',
+        url: 'https://x.com/unjsio',
         icon: 'i-logos-twitter?mask',
         rel: 'noopener',
         target: '_blank',
