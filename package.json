@@ -22,6 +22,7 @@
     "@iconify-json/vscode-icons": "^1.1.28",
     "@nuxt/content": "^2.7.2",
     "@nuxt/devtools": "^0.7.6",
+    "@nuxthq/studio": "^0.13.4",
     "@types/node": "^20.4.9",
     "@unocss/nuxt": "^0.54.3",
     "@unocss/reset": "^0.54.3",
