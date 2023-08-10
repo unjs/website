@@ -68,7 +68,7 @@ const documentation = computed(() => page.value.documentation)
             {{ page.description }}
           </p>
         </header>
-        <div mt-6 xl:mt-12 prose="~ gray" max-w-none>
+        <div mt-6 xl:mt-12 prose prose-gray max-w-none>
           <slot />
         </div>
       </article>

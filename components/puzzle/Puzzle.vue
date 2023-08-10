@@ -25,7 +25,7 @@ const thirdLine = computed(() => props.parts.slice(6, 9))
       </div>
     </div>
     <!-- 27px and 23px are magics numbers -->
-    <PuzzlePart opacity-0 lg:opacity-100 absolute bottom--12 rotate--25 class="left-[calc(4*-136px)] peer-hover:bottom-[calc(1*136px-27px)] peer-hover:left-[calc(0.5*-136px-23px)]" peer-hover:rotate-0 :part="away" />
+    <PuzzlePart opacity-0 lg:opacity-100 absolute bottom--20 xl:bottom--12 rotate--25 class="left-[calc(2*-136px)] xl:left-[calc(4*-136px)] peer-hover:bottom-[calc(1*136px-27px)] peer-hover:left-[calc(0.5*-136px-23px)]" peer-hover:rotate-0 :part="away" />
   </div>
 </template>
 
