@@ -28,9 +28,24 @@ export interface SearchResult extends MSearchResult, SearchSection {
 }
 
 export interface SearchDisplayItem {
+  /**
+   * Id of the item
+   */
   id: string
+  /**
+   * Title of the item
+   */
   title: string
+  /**
+   * Parents items titles
+   */
   titles: string[]
+  /**
+   * Level of the item
+   */
   level: number
+  /**
+   * Children items
+   */
   children: SearchDisplayItem[] | null
 }

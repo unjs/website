@@ -10,7 +10,6 @@ export default defineEventHandler(async (event) => {
       .map(page => splitPageIntoSections(page))))
     .flat()
 
-  // Add an option to enable index
   const miniSearch = new MiniSearch({
     fields: ['title', 'titles', 'text'],
     storeFields: ['title', 'titles', 'text', 'level'],
