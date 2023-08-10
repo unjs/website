@@ -1,6 +1,6 @@
 ---
 title: unenv
-description: Convert javaScript code to be runtime agnostic
+description: Convert JavaScript code to be runtime agnostic
 icon: i-noto-dove
 github:
   owner: unjs

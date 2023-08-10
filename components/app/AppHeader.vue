@@ -28,18 +28,18 @@ useEventListener('keydown', (event) => {
     <nav v-if="navigation" flex="md:~ 1 justify-center" class="hidden">
       <ul flex="~" gap-3 leading-5 class="text-[1.125rem]">
         <li v-for="item in navigation" :key="item._path">
-          <NuxtLink v-if="!item.wip" :to="item._path" class="py-[0.375rem] rounded-[0.375rem]"  px-3 flex="~" gap-2 hover:bg-primary hover:bg-opacity-30 transition ease-in duration-150 active-class="bg-primary bg-opacity-30">
+          <NuxtLink v-if="!item.wip" :to="item._path" class="py-[0.375rem] rounded-[0.375rem]" px-3 flex="~" gap-2 hover:bg-primary hover:bg-opacity-30 transition ease-in duration-150 active-class="bg-primary bg-opacity-30">
             <span :class="item.icon" w-5 h-5 block />
             <span>
               {{ item.title }}
             </span>
           </NuxtLink>
-          <span v-else class="py-[0.375rem] rounded-[0.375rem]"  px-3 flex="~" gap-2 opacity-50 cursor-pointer>
+          <span v-else class="py-[0.375rem] rounded-[0.375rem]" px-3 flex="~" gap-2 opacity-50 cursor-pointer>
             <span :class="item.icon" w-5 h-5 block />
             <span>
               {{ item.title }}
             </span>
-            </span>
+          </span>
         </li>
       </ul>
     </nav>

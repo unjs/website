@@ -9,8 +9,8 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@unocss/nuxt',
     'nuxt-simple-robots',
-    'nuxt-simple-sitemap',,
-    "@nuxthq/studio"
+    'nuxt-simple-sitemap',
+    '@nuxthq/studio',
   ],
   css: [
     '~/assets/app.css',

@@ -1,19 +1,20 @@
+import process from 'node:process'
 import fs from 'node:fs'
 import { consola } from 'consola'
 import { ofetch } from 'ofetch'
 
 // https://github.com/unjs/ungh/tree/main#reposownername
 interface GitHubRepo {
-  "id": number,
-  "name": string,
-  "repo": string,
-  "description": string,
-  "createdAt": string,
-  "updatedAt": string,
-  "pushedAt": string,
-  "stars": number,
-  "watchers": number,
-  "forks": number
+  'id': number
+  'name': string
+  'repo': string
+  'description': string
+  'createdAt': string
+  'updatedAt': string
+  'pushedAt': string
+  'stars': number
+  'watchers': number
+  'forks': number
 }
 
 const internalRepos = new Set([
@@ -29,28 +30,26 @@ const internalRepos = new Set([
   'renovate-config',
   'lmify',
   'governance',
-  ".github"
+  '.github',
 ])
 
 async function main() {
   // This script is used to determine if each repo of the unjs org have a package and if each package have stil a repo.
   const orgRepos = await fetchRepos()
-  const packageDocs = fs.readdirSync('./content/4.packages').filter(p => p.endsWith('.md') && !p.startsWith("."))
+  const packageDocs = fs.readdirSync('./content/4.packages').filter(p => p.endsWith('.md') && !p.startsWith('.'))
 
   // Repos that does not have a package
   const undocumentedRepos: GitHubRepo[] = []
   for (const repo of orgRepos) {
-    if (!packageDocs.includes(`${repo.name}.md`)) {
+    if (!packageDocs.includes(`${repo.name}.md`))
       undocumentedRepos.push(repo)
-    }
   }
 
   // Show log
-  if (undocumentedRepos.length === 0) {
+  if (undocumentedRepos.length === 0)
     consola.success('Each repo have a package 🎉')
-  } else {
+  else
     consola.warn(`${undocumentedRepos.length} repos does not have a package:\n${formatTree(undocumentedRepos.map(r => r.name))}`)
-  }
 
   // Create markdowns
   if (process.argv.includes('--create')) {
@@ -62,26 +61,23 @@ async function main() {
           .replace('package_description', repo.description)
           .replace('repo_name', repo.name)
           .replace('npm_name', repo.name)
-          .replace('docs_link', 'https://github.com/unjs/' + repo.name)
+          .replace('docs_link', `https://github.com/unjs/${repo.name}`),
       )
     }
   }
 
-
   // Package that does not have a repo
   const docsWithoutRepo: string[] = []
   for (const name of packageDocs) {
-    if (!orgRepos.find(r => r.name === name.replace('.md', ''))) {
+    if (!orgRepos.find(r => r.name === name.replace('.md', '')))
       docsWithoutRepo.push(name)
-    }
   }
 
-  if (docsWithoutRepo.length === 0) {
+  if (docsWithoutRepo.length === 0)
     consola.success('Each package have a repo 🎉')
-  }
-  else {
+
+  else
     consola.warn(`${docsWithoutRepo.length} packages does not have a repo:\n${formatTree(docsWithoutRepo)}`)
-  }
 }
 
 main().catch(consola.error)
