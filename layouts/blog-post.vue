@@ -105,7 +105,7 @@ const { data: packages } = await useAsyncData('package-nitro', () => queryConten
             </dd>
           </dl>
         </header>
-        <div mt-6 md:mt-12 prose="~ gray" max-w-none>
+        <div mt-6 md:mt-12 prose prose-gray max-w-none>
           <slot />
         </div>
       </article>
