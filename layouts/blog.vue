@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { BlogPostCard } from 'types/blog'
 
-const { data } = useAsyncData('blog', () => queryContent('/blog/').only(['_path', 'cover', 'title', 'description', 'publishedAt', 'authors']).find() as Promise<BlogPostCard[]>)
+const { data } = await useAsyncData('blog', () => queryContent('/blog/').only(['_path', 'cover', 'title', 'description', 'publishedAt', 'authors']).find() as Promise<BlogPostCard[]>)
 </script>
 
 <template>
