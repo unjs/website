@@ -17,6 +17,13 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       failOnError: false,
+      crawlLinks: true,
+    },
+    routeRules: {
+      '/api/search': {
+        prerender: true,
+        headers: { 'Content-Type': 'text/plain' }, // By default, Nitro will set the content type to text/html
+      },
     },
   },
   content: {

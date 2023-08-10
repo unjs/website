@@ -1,5 +1,17 @@
 export default defineAppConfig({
   website: {
+    search: {
+      groups: [
+        {
+          name: 'Blog',
+          path: '/blog',
+        },
+        {
+          name: 'Packages',
+          path: '/packages',
+        },
+      ],
+    },
     footer: {
       quote: 'Unlock the potential of your web development journey with UnJS - where innovation meets simplicity, and possibilities become limitless.',
       menu: [

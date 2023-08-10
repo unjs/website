@@ -15,7 +15,8 @@
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.15",
-    "@iconify-json/logos": "^1.1.33"
+    "@iconify-json/logos": "^1.1.33",
+    "minisearch": "^6.1.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.39.8",

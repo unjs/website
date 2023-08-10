@@ -4,7 +4,17 @@ const github = website.value.socials.github
 
 const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation(queryContent('/').where({ _path: { $and: [{ $ne: '/' }] } })))
 
-const open = ref(false)
+const openNavigation = ref(false)
+const openSearch = ref(false)
+
+useEventListener('keydown', (event) => {
+  // Windows: Ctrl + K
+  // Mac: Cmd + K
+  if (event.key === 'k' && (event.ctrlKey || event.metaKey)) {
+    event.preventDefault()
+    openSearch.value = true
+  }
+})
 </script>
 
 <template>
@@ -27,14 +37,13 @@ const open = ref(false)
       </ul>
     </nav>
     <div flex="~ md:1 justify-end items-center" gap-3>
-      <!-- TODO: add search -->
-      <!-- <button type="button" p="x-0.375rem md:x-3 y-0.125rem md:y-0.375rem" rounded="0.375rem" flex="~ items-center" gap-2 hover:bg-primary hover:bg-opacity-30 transition ease-in duration-150>
+      <button type="button" p="x-0.375rem md:x-3 y-0.125rem md:y-0.375rem" rounded="0.375rem" flex="~ items-center" gap-2 hover:bg-primary hover:bg-opacity-30 transition ease-in duration-150 @click="openSearch = true">
         <span class="i-heroicons-magnifying-glass-20-solid?mask" h-7 w-7 md:h-5 md:w-5 />
         <span sr-only md:not-sr-only>
           Search
         </span>
-      </button> -->
-      <button type="button" p="x-0.375rem md:x-3 y-0.125rem md:y-0.375rem" rounded="0.375rem" flex="~ items-center" md:hidden gap-2 hover:bg-primary hover:bg-opacity-30 transition ease-in duration-150 @click="open = true">
+      </button>
+      <button type="button" p="x-0.375rem md:x-3 y-0.125rem md:y-0.375rem" rounded="0.375rem" flex="~ items-center" md:hidden gap-2 hover:bg-primary hover:bg-opacity-30 transition ease-in duration-150 @click="openNavigation = true">
         <span class="i-heroicons:bars-3-bottom-right?mask" h-8 w-8 md:hidden />
         <span sr-only>
           Menu
@@ -43,5 +52,6 @@ const open = ref(false)
       <NuxtLink :title="github.name" :rel="github.rel" :target="github.target" :to="github.url" class="hidden" md:block w-7 h-7 :class="github.icon" />
     </div>
   </header>
-  <AppNavigationDialog v-if="navigation" v-model:open="open" :navigation="navigation" />
+  <AppNavigationDialog v-if="navigation" v-model:open="openNavigation" :navigation="navigation" />
+  <AppSearch v-model:open="openSearch" />
 </template>
