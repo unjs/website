@@ -15,7 +15,7 @@ const { data: packages } = await useAsyncData('packages', () => queryContent('/p
             <img v-if="package_.logo" :src="package_.logo" :alt="`Logo of ${package_.title}`" w-5 h-5>
             <span v-if="package_.icon" :class="package_.icon" w-5 h-5 />
             <NuxtLink :to="package_._path">
-              <h3 text="gray-900" font="semibold">
+              <h3 text="gray-900 lg md:xl" font="semibold">
                 {{ package_.title }}
               </h3>
               <span absolute inset-0 />
