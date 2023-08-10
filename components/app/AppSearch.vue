@@ -131,7 +131,7 @@ function selectFirstOption() {
       </TransitionChild>
 
       <div fixed inset-0>
-        <div h-full flex="~ justify-center items-center">
+        <div h-full w-full flex="~ justify-center items-center">
           <TransitionChild
             as="template"
             enter="duration-300 ease-out"
@@ -141,7 +141,7 @@ function selectFirstOption() {
             leave-from="opacity-100 scale-100"
             leave-to="opacity-0 scale-95"
           >
-            <DialogPanel h-112 w-full max-w-3xl fixed flex="~ col" gap="6">
+            <DialogPanel h-112 w="[calc(100%-2rem)] lg:full" max-w-3xl fixed flex="~ col" gap="6">
               <Combobox v-model="selected">
                 <div p="x-4 y-2" rounded="4" bg="white" flex="~" shadow-lg>
                   <ComboboxLabel for="search" flex="~ grow items-center" gap="4">
