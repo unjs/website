@@ -95,7 +95,7 @@ async function fetchRepos(): Promise<GitHubRepo[]> {
 function formatTree(items: string[]): string {
   let logs = ''
   for (const item of items) {
-    const isLast = items.indexOf(item) === item.length - 1
+    const isLast = items.indexOf(item) === items.length - 1
     logs += `  ${isLast ? '└─' : '├─'} ${item}\n`
   }
   return logs
