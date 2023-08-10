@@ -36,7 +36,10 @@ const query = ref('')
 
 function close() {
   emit('update:open', false)
-  query.value = ''
+  setTimeout(() => {
+    query.value = ''
+    selected.value = null
+  }, 200)
 }
 
 function navigate() {
