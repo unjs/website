@@ -15,7 +15,7 @@ export async function useSearch(search: MaybeRefOrGetter<string>): Promise<Compu
       fuzzy: 0.2,
       boost: {
         title: 4,
-        content: 2,
+        text: 2,
         titles: 1,
       },
     },
