@@ -1,3 +1,8 @@
 node_modules
 
-content/0.index.md
+content/*.index.md
+content/*.packages.md
+content/*.blog.md
+content/*.build.md
+content/*.explore.md
+content/*.learn.md

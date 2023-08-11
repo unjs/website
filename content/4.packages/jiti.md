@@ -1,6 +1,6 @@
 ---
 title: jiti
-description: Runtime Typescript and ESM support for Node.js
+description: Runtime TypeScript and ESM support for Node.js
 icon: i-noto-french-fries
 github:
   owner: unjs

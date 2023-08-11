@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 devDependencies:
   '@antfu/eslint-config':
     specifier: ^0.40.2
@@ -58,6 +62,9 @@ devDependencies:
   markdownlint-cli:
     specifier: ^0.35.0
     version: 0.35.0
+  minisearch:
+    specifier: ^6.1.0
+    version: 6.1.0
   nuxt:
     specifier: ^3.6.5
     version: 3.6.5(@types/node@20.4.9)(eslint@8.46.0)(typescript@5.1.6)
@@ -5183,6 +5190,7 @@ packages:
   /iconv-lite@0.6.3:
     resolution: {integrity: sha512-4fCk79wshMdzMp2rH06qWrJE4iolqLhCUH+OiuIgU++RB0+94NlDL81atO7GX55uUKueo0txHNtvEyI6D7WdMw==}
     engines: {node: '>=0.10.0'}
+    requiresBuild: true
     dependencies:
       safer-buffer: 2.1.2
     dev: true
@@ -6493,6 +6501,10 @@ packages:
   /minipass@6.0.2:
     resolution: {integrity: sha512-MzWSV5nYVT7mVyWCwn2o7JH13w2TBRmmSqSRCKzTw+lmft9X4z+3wjvs06Tzijo5z4W/kahUCDpRXTF+ZrmF/w==}
     engines: {node: '>=16 || 14 >=14.17'}
+    dev: true
+
+  /minisearch@6.1.0:
+    resolution: {integrity: sha512-PNxA/X8pWk+TiqPbsoIYH0GQ5Di7m6326/lwU/S4mlo4wGQddIcf/V//1f9TB0V4j59b57b+HZxt8h3iMROGvg==}
     dev: true
 
   /minizlib@2.1.2:
@@ -8181,6 +8193,7 @@ packages:
 
   /safer-buffer@2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
+    requiresBuild: true
     dev: true
     optional: true
 

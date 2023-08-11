@@ -16,7 +16,7 @@ body {
   background-color: transparent
 }
 
-pre::-webkit-scrollbar-track {
+:is(.gray-scrollbar, pre)::-webkit-scrollbar-track {
   --at-apply: bg-gray-100 rounded-full
 }
 
@@ -24,7 +24,7 @@ pre::-webkit-scrollbar-track {
   --at-apply: rounded-md bg-white
 }
 
-pre::-webkit-scrollbar-thumb {
+:is(.gray-scrollbar, pre)::-webkit-scrollbar-thumb {
   --at-apply: bg-gray-400 bg-op-20
 }
 
@@ -32,7 +32,7 @@ pre::-webkit-scrollbar-thumb {
   --at-apply: bg-gray-100
 }
 
-pre::-webkit-scrollbar-thumb:hover {
+:is(.gray-scrollbar, pre)::-webkit-scrollbar-thumb:hover {
   --at-apply: bg-gray-500 bg-op-20
 }
 
@@ -40,10 +40,10 @@ pre::-webkit-scrollbar-thumb:hover {
   --at-apply: bg-gray-200
 }
 
-pre::-webkit-scrollbar-thumb:active {
+:is(.gray-scrollbar, pre)::-webkit-scrollbar-thumb:active {
   --at-apply: bg-gray-600 bg-op-20
 }
 
 :is(h1, h2, h3, h4, h5, h6) {
-  scroll-margin-top: 6rem;
+  scroll-margin-top: 2rem;
 }

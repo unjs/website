@@ -1,6 +1,6 @@
 ---
 title: unplugin
-description: Unified plugin system for Vite, Rollup, Webpack, esbuild, and more
+description: Unified plugin system for Vite, Rollup, webpack, esbuild, and more
 icon: i-noto-puzzle-piece
 github:
   owner: unjs
