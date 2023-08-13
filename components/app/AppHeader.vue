@@ -19,6 +19,7 @@ useEventListener('keydown', (event) => {
 </script>
 
 <template>
+  <pre>{{ navigation }}</pre>
   <header h-3.75rem p="x-3 md:x-6 y-3" rounded-4 border="~ light" bg="white" flex="~ row items-center" text-gray-900>
     <div flex="1 ~">
       <NuxtLink to="/">
