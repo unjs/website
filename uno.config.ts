@@ -30,7 +30,10 @@ export default defineConfig({
         'h1 a,h2 a,h3 a,h4 a,h5 a,h6 a': {
           'text-decoration-line': 'none',
         },
-        'p a': {
+        'a:has(code)': {
+          'text-decoration': 'none',
+        },
+        'p a, ul a': {
           'text-decoration-line': 'none',
           'color': 'var(--un-prose-body)',
           'border-bottom': '1px solid var(--un-prose-body)',
