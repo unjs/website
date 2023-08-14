@@ -12,6 +12,15 @@ export default defineAppConfig({
         },
       ],
     },
+    rss: {
+      language: 'en',
+      site: 'https://unjs.io', // Set up in the app.config since we can't access to the nuxt.config in server routes.
+      webMaster: {
+        name: 'UnJS',
+        email: 'hi@unjs.io',
+      },
+      docs: 'https://validator.w3.org/feed/docs/rss2.html',
+    },
     footer: {
       quote: 'Unlock the potential of your web development journey with UnJS - where innovation meets simplicity, and possibilities become limitless.',
       menu: [

@@ -25,6 +25,26 @@ export default defineNuxtConfig({
         prerender: true,
         headers: { 'Content-Type': 'text/plain' }, // By default, Nitro will set the content type to text/html
       },
+      '/rss.xml': {
+        prerender: true,
+        headers: { 'Content-Type': 'text/xml' }, // By default, Nitro will set the content type to text/html
+      },
+      '/blog/rss.xml': {
+        prerender: true,
+        headers: { 'Content-Type': 'text/xml' }, // By default, Nitro will set the content type to text/html
+      },
+      '/learn/rss.xml': { // TODO: update for new navigation to /resources in the future
+        prerender: true,
+        headers: { 'Content-Type': 'text/xml' }, // By default, Nitro will set the content type to text/html
+      },
+      '/build/rss.xml': { // TODO: update for new navigation to /resources in the future
+        prerender: true,
+        headers: { 'Content-Type': 'text/xml' }, // By default, Nitro will set the content type to text/html
+      },
+      '/explore/rss.xml': { // TODO: update for new navigation to /resources in the future
+        prerender: true,
+        headers: { 'Content-Type': 'text/xml' }, // By default, Nitro will set the content type to text/html
+      },
     },
   },
   content: {
@@ -41,6 +61,9 @@ export default defineNuxtConfig({
   },
   unocss: {
     preflight: true,
+  },
+  site: {
+    url: 'https://unjs.io',
   },
   sitemap: {
     sitemaps: {
