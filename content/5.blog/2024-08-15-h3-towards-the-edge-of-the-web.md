@@ -10,10 +10,11 @@ authors:
     twitter: _pi0_
 categories:
   - h3
+  - release
 packages:
   - h3
-publishedAt:
-modifiedAt:
+publishedAt: 2023-08-15
+modifiedAt: 2023-08-15
 layout: blog-post
 ---
 
@@ -52,10 +53,10 @@ All of this is possible using new streaming capabilities and [unjs/unenv](https:
 
 Additionally, we have introduced new web helpers:
 
-- `toWebRequest`: Convert a H3 event object to web [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request)
+- `toWebRequest`: Convert a H3 event object to web [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request).
 - `getRequestWebStream`: Get a readable stream from the current H3 event request.
-- `fromPlainHandler`: Convert a plain object handler into H3 compatible event handler
-- `fromWebHandler`: Convert a Web Request/Response handler into H3 compatible event handler
+- `fromPlainHandler`: Convert a plain object handler into H3 compatible event handler.
+- `fromWebHandler`: Convert a Web Request/Response handler into H3 compatible event handler.
 
 ### Web Streams Support
 
@@ -98,7 +99,7 @@ const compression = defineResponseMiddleware((event) => {
 
 export default eventHandler({
   onRequest: [auth],
-  beforeResponse: [compression],
+  onBeforeResponse: [compression],
   async handler(event) {
     return `Hello ${event.context.auth?.name || 'Guest'}`
   },
@@ -143,12 +144,12 @@ export default defineEventHandler((event) => {
 
 We have introduced a couple of more utils to make the web app development experience even easier:
 
-- `getRequestIP`: Get the incoming request IP. `X-Forwarded-For` can be optionally enabled
-- `readFormData`: Read request body into [FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData)
+- `getRequestIP`: Get the incoming request IP. `X-Forwarded-For` can be optionally enabled.
+- `readFormData`: Read request body into [FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData).
 - `serveStatic`: Platform agnostic static asset server. Checkout [listhen source](https://github.com/unjs/listhen/blob/af6ea3af3fec4289c00b0ba589ca6f63c6a5dbbd/src/server/dev.ts#L66) for an example usage with Node.js.
-- `clearResponseHeaders`: Clear all (current) response headers
-- `removeResponseHeader`: Remove a specific response header
+- `clearResponseHeaders`: Clear all (current) response headers.
+- `removeResponseHeader`: Remove a specific response header.
 
 ## Full Changelog
 
-Check out the [release notes](https://github.com/unjs/h3/issues/486) for a full changelog.
+Check out the [release notes](https://github.com/unjs/h3/issues/486) for a full changelog. <!-- This need to be updated to the correct release. -->
