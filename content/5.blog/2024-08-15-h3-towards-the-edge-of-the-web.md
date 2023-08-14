@@ -19,17 +19,17 @@ layout: blog-post
 
 > H3 is a universal HTTP framework written in TypeScript powering [Nitro](https://nitro.unjs.io/) and [Nuxt](https://nuxt.com/).
 
-H3 was born almost two years ago with [the first commit](https://github.com/unjs/h3/tree/cbc8909b2003d6d5df694ab7a36aa067cc990c74) and a simple goal of making the smallest possible HTTP framework for [Nuxt 3](https://nuxt.com/) with [Node.js](https://nodejs.org/en) compatibility, elegant developer experience, and a futuristic vision to be compatible with Edge and Worker runtimes out of the box which back in the time was a new concept.
+H3 was born [almost two years ago](https://github.com/unjs/h3/tree/cbc8909b2003d6d5df694ab7a36aa067cc990c74) with the goal of making the smallest  HTTP framework for [Nuxt 3](https://nuxt.com/) with [Node.js](https://nodejs.org/en) compatibility, elegant developer experience, and a futuristic vision to be compatible with Edge and web worker runtimes out of the box which back in the time was a new concept.
 
 At the same time, we have developed [unjs/unenv](https://github.com/unjs/unenv/tree/main) a thin layer to unblock Node.js libraries and HTTP middleware for Edge-compatible runtimes without Node.js. This was crucial to make sure we can leverage most of the NPM and Node.js ecosystem to develop applications without making everything from scratch. H3 and Unenv together made [Nitro](https://nitro.unjs.io) one of the first web frameworks that is fully compatible with Edge runtimes.
 
-We have worked hard to bring you a native Web API compatibility experience with h3 out of the box.
+This release brings H3 even closer to a native Web API compatibility out of the box.
 
 ### Web and Plain Adapters
 
-We have introduced a new built-in adapter for [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) compatible signature with [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request) input and [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) return value.
+We have introduced a new built-in adapter with [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) compatible signature with [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request) input and [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) return value.
 
-This means that you can directly run your H3 applications out of the box on [Cloudflare Workers](https://workers.cloudflare.com/), [Deno Deploy](https://deno.com/deploy), [Bun](https://bun.sh/, and [Lagon](https://lagon.app/).
+This means that you can directly run your H3 applications out of the box on [Cloudflare Workers](https://workers.cloudflare.com/), [Deno Deploy](https://deno.com/deploy), [Bun](https://bun.sh/), and [Lagon](https://lagon.app/).
 
 Check out the [h3-on-edge](https://github.com/pi0/h3-on-edge) repository for examples and [demo](https://h3-on-edge.deno.dev/).
 
@@ -48,11 +48,11 @@ const webHandler = toWebHandler(app) // (Request) => Promise<Response>
 
 In addition to web handlers, we have introduced a new plain adapter format with `toPlainHandler(app)` syntax. This allows to virtually integrate H3 with any serverless platform with plain input and response objects!
 
-All of this is possible using new streaming capabilities and [unjs/unenv](https://unenv.unjs.io) that brings super lightweight Node.js compatibilities. Before, this was only possible with [Nitro presets](https://nitro.unjs.io/deploy).
+All of this is possible using new streaming capabilities and [unjs/unenv](https://unenv.unjs.io) that brings lightweight Node.js compatibility layer. Before, this was only possible with [Nitro presets](https://nitro.unjs.io/deploy).
 
 Additionally, we have introduced new web helpers:
 
-- `toWebRequest`: Conver a H3 event object to web [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request)
+- `toWebRequest`: Convert a H3 event object to web [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request)
 - `getRequestWebStream`: Get a readable stream from the current H3 event request.
 - `fromPlainHandler`: Convert a plain object handler into H3 compatible event handler
 - `fromWebHandler`: Convert a Web Request/Response handler into H3 compatible event handler
@@ -81,7 +81,7 @@ export default defineEventHandler((event) => {
 })
 ```
 
-For advanced use-cases, you might also use `sendStream` and `sendWebResponse` utilities instead of returning stream.
+For advanced use cases, you might also use `sendStream` and `sendWebResponse` utilities instead of returning the stream.
 
 ### Object Syntax Event Handlers
 
@@ -120,7 +120,7 @@ export default eventHandler<{ body: { name: string }; query: { id: string } }>(
 )
 ```
 
-### Runtime + Type-safe Request Utils
+### Runtime + Type-Safe Request Utils
 
 Two new `getValidatedQuery(event, validator)` and `readValidatedBody(event, validator)` utils, allow integration with schema validators such as [zod](https://zod.dev/) for both runtime and type safety.
 
@@ -139,15 +139,15 @@ export default defineEventHandler((event) => {
 })
 ```
 
-## New Utils
+## More Utils
 
-We have introduced a couple of more composable utils to make the web app development experience even easier:
+We have introduced a couple of more utils to make the web app development experience even easier:
 
-- `clearResponseHeaders`: Clear all (current) response headers
-- `removeResponseHeader`: Remove a specific response header
 - `getRequestIP`: Get the incoming request IP. `X-Forwarded-For` can be optionally enabled
 - `readFormData`: Read request body into [FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData)
-- `serveStatic`: Platform agnostic static asset serve. Checkout [listhen source](https://github.com/unjs/listhen/blob/af6ea3af3fec4289c00b0ba589ca6f63c6a5dbbd/src/server/dev.ts#L66) for an example usage with Node.js.
+- `serveStatic`: Platform agnostic static asset server. Checkout [listhen source](https://github.com/unjs/listhen/blob/af6ea3af3fec4289c00b0ba589ca6f63c6a5dbbd/src/server/dev.ts#L66) for an example usage with Node.js.
+- `clearResponseHeaders`: Clear all (current) response headers
+- `removeResponseHeader`: Remove a specific response header
 
 ## Full Changelog
 
