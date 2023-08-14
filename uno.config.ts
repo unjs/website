@@ -47,6 +47,9 @@ export default defineConfig({
           'border': '1px solid rgb(209, 213, 219)', // gray-300
           'border-radius': '0.875rem',
         },
+        'blockquote': {
+          'border-left-color': '#ecdc5a', // primary
+        },
         'pre': {
           margin: 0,
           padding: 0,
