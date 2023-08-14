@@ -153,7 +153,7 @@ We have introduced a couple of more utils to make the web app development experi
 - `clearResponseHeaders`: Clear all (current) response headers.
 - `removeResponseHeader`: Remove a specific response header.
 
-## Easy Development with Typescript and HMR
+## Easy Development with TypeScript and HMR
 
 We have released a new version of [unjs/listhen](https://listhen.unjs.io) that is compatible with H3 apps out of the box.
 
