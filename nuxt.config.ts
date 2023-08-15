@@ -43,26 +43,31 @@ export default defineNuxtConfig({
   unocss: {
     preflight: true,
   },
+  site: {
+    language: 'en',
+    url: 'https://unjs.io',
+    name: 'UnJS',
+    description: 'Agnostic Excellence: JavaScript Libraries, Tools, and Utilities, Crafted to Elevate Your Coding Journey.',
+  },
   sitemap: {
     sitemaps: {
       learn: {
         include: ['/learn/**'],
-        exclude: ['/build/**', '/explore/**', '/blog/**'],
       },
       build: {
         include: ['/build/**'],
-        exclude: ['/explore/**', '/learn/**', '/blog/**'],
       },
       explore: {
         include: ['/explore/**'],
-        exclude: ['/build/**', '/learn/**', '/blog/**'],
       },
       blog: {
         include: ['/blog/**'],
-        exclude: ['/build/**', '/explore/**', '/learn/**'],
+      },
+      packages: {
+        include: ['/packages/**'],
       },
       pages: {
-        exclude: ['/build/**', '/explore/**', '/learn/**', '/blog/**'],
+        exclude: ['/build/**', '/explore/**', '/learn/**', '/blog/**', '/packages/**', '/_footer-license', '_no-articles'],
       },
     },
   },
