@@ -171,7 +171,7 @@ Run `npx listhen@latest -w ./index.ts` to initiate a development server with Typ
 
 [Online Playground](https://stackblitz.com/github/unjs/h3/tree/main/playground?startScript=dev)
 
-![Screenshot of listhen](https://raw.githubusercontent.com/unjs/listhen/main/.assets/screenshot.png)
+![Screenshot of listhen](https://raw.githubusercontent.com/unjs/listhen/main/.assets/screenshot.png){withoutBorder}
 
 ## Full Changelog
 
