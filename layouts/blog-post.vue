@@ -10,7 +10,7 @@ useServerSeoMeta({
   ogDescription: page.value.description,
   ogImage: page.value.image?.src,
   ogImageAlt: page.value.image?.alt,
-  twitterTitle: page.value.title,
+  twitterTitle: `${page.value.title} · UnJS`,
   twitterDescription: page.value.description,
   twitterImage: page.value.image?.src,
   twitterImageAlt: page.value.image?.alt,
