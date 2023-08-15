@@ -18,9 +18,9 @@ modifiedAt: 2023-08-15
 layout: blog-post
 ---
 
-> H3 is a versatile H(TTP) framework written in TypeScript that powers both [Nitro](https://nitro.unjs.io/) and [Nuxt](https://nuxt.com/) today.
+> [H3](/packages/h3) is a versatile H(TTP) framework written in TypeScript that powers both [Nitro](https://nitro.unjs.io/) and [Nuxt](https://nuxt.com/) today.
 
-[Almost two years ago](https://github.com/unjs/h3/tree/cbc8909b2003d6d5df694ab7a36aa067cc990c74), we made H3 with the ambition to become the smallest HTTP framework for [Nuxt 3](https://nuxt.com/), ensuring compatibility with [Node.js](https://nodejs.org/en) and providing an elegant developer experience. It also aimed to have a futuristic design, being adaptable to Edge and Web Worker runtimes, a concept that was relatively new at the time.
+[Almost two years ago](https://h3.unjs.io/tree/cbc8909b2003d6d5df694ab7a36aa067cc990c74), we made H3 with the ambition to become the smallest HTTP framework for [Nuxt 3](https://nuxt.com/), ensuring compatibility with [Node.js](https://nodejs.org/en) and providing an elegant developer experience. It also aimed to have a futuristic design, being adaptable to Edge and Web Worker runtimes, a concept that was relatively new at the time.
 
 During the same period, we also developed [unjs/unenv](https://github.com/unjs/unenv/tree/main), a thin layer that enabled the utilization of Node.js libraries and HTTP middleware for Edge-compatible runtimes without the need for Node.js. This innovation played a pivotal role in enabling us to harness the power of the NPM and Node.js ecosystem without starting everything from scratch for web compatibility. The synergistic combination of H3 and unenv culminated in making [Nitro](https://nitro.unjs.io) one of the pioneering web frameworks fully compatible with Edge runtimes.
 
@@ -175,4 +175,4 @@ Run `npx listhen@latest -w ./index.ts` to initiate a development server with Typ
 
 ## Full Changelog
 
-For a comprehensive list of changes, refer to the [release notes](https://github.com/unjs/h3/releases/tag/v1.8.0).
+For a comprehensive list of changes, refer to the [release notes](https://h3.unjs.io/releases/tag/v1.8.0).
