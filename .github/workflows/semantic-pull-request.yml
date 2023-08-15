@@ -13,8 +13,8 @@ permissions:
 jobs:
   main:
     permissions:
-      pull-requests: read  # for amannn/action-semantic-pull-request to analyze PRs
-      statuses: write  # for amannn/action-semantic-pull-request to mark status of analyzed PR
+      pull-requests: read # for amannn/action-semantic-pull-request to analyze PRs
+      statuses: write # for amannn/action-semantic-pull-request to mark status of analyzed PR
     if: github.repository == 'unjs/website'
     runs-on: ubuntu-latest
     name: Semantic pull request
