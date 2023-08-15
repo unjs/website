@@ -1,6 +1,6 @@
 ---
 title: cookie-es
-description: ESM cookie serializer and desrializer
+description: ESM cookie serializer and deserializer
 icon: i-noto-cookie
 github:
   owner: unjs
