@@ -26,6 +26,8 @@ During the same period, we also developed [unjs/unenv](https://github.com/unjs/u
 
 This latest release takes H3 even closer to offering native Web API compatibility right out of the box.
 
+> 🚀 This release is immediately available for all ecosystem packages including [Nitro](https://nitro.unjs.io/) and [Nuxt 3](https://nuxt.com/). Please remember to refresh your `lockfile` and `node_modules` to receive the updates.
+
 ## Web and Plain Adapters
 
 We have introduced a new built-in adapter with a [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)-compatible signature, with [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request) as input and [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) as the return value.
@@ -147,9 +149,9 @@ We've introduced several other utilities to further enhance the web app developm
 
 - `getRequestIP(event, { xForwardedFor? })`: Retrieve the incoming request IP.
 - `readFormData(event)`: Read the request body into [FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData).
-- `serveStatic(event, options)`: Platform-agnostic static asset server. Check out the [listhen source](https://github.com/unjs/listhen/blob/af6ea3af3fec4289c00b0ba589ca6f63c6a5dbbd/src/server/dev.ts#L66) for an example of usage with Node.js.
 - `clearResponseHeaders(event)`: Clear all response headers.
 - `removeResponseHeader(event, name)`: Remove a specific response header.
+- `serveStatic(event, options)`: Platform-agnostic static asset server. Check out the [listhen source](https://github.com/unjs/listhen/blob/af6ea3af3fec4289c00b0ba589ca6f63c6a5dbbd/src/server/dev.ts#L66) for an example of usage with Node.js.
 
 ## Effortless TypeScript Development with HMR
 
@@ -174,4 +176,3 @@ Run `npx listhen@latest -w ./index.ts` to initiate a development server with Typ
 ## Full Changelog
 
 For a comprehensive list of changes, refer to the [release notes](https://github.com/unjs/h3/releases/tag/v1.8.0).
-]
