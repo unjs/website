@@ -3,9 +3,10 @@ const { toc, page } = useContent()
 
 const { data: packages } = await useAsyncData('package-nitro', () => queryContent('/packages/').only(['_path', 'title', 'icon', 'logo']).where({ _path: { $containsAny: page.value.packages } }).find(), { watch: [() => page.value.packages] })
 
+// TODO: Waiting for Nuxt SEOKit v2
 useServerSeoMeta({
+  ogTitle: `${page.value.title} · UnJS`,
   ogType: 'article',
-  ogTitle: page.value.title,
   ogDescription: page.value.description,
   ogImage: page.value.image?.src,
   ogImageAlt: page.value.image?.alt,
