@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 useServerSeoMeta({
   ogLocale: 'en_US',
-  ogLocaleAlternate: ['en_UK'], // We could add more locales here?
   ogSiteName: 'UnJS',
 })
 </script>
