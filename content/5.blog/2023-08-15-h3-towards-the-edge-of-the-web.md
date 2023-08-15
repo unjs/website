@@ -169,7 +169,7 @@ app.use('/', () => 'Hello world!')
 
 Run `npx listhen@latest -w ./index.ts` to initiate a development server with TypeScript support, Hot Module Replacement (HMR), and static asset server.
 
-[Online Playground]([Online Playground](https://stackblitz.com/github/unjs/h3/tree/main/playground?startScript=dev))
+[Online Playground](https://stackblitz.com/github/unjs/h3/tree/main/playground?startScript=dev)
 
 ![Screenshot of listhen](https://raw.githubusercontent.com/unjs/listhen/main/.assets/screenshot.png)
 
