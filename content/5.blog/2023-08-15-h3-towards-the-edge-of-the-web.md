@@ -26,7 +26,7 @@ At the same time, we have developed [unjs/unenv](https://github.com/unjs/unenv/t
 
 This release brings H3 even closer to a native Web API compatibility out of the box.
 
-### Web and Plain Adapters
+## Web and Plain Adapters
 
 We have introduced a new built-in adapter with [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) compatible signature with [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request) input and [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) return value.
 
@@ -59,7 +59,7 @@ Additionally, we have introduced new web helpers:
 - `fromPlainHandler`: Convert a plain object handler into H3 compatible event handler.
 - `fromWebHandler`: Convert a Web Request/Response handler into H3 compatible event handler.
 
-### Web Streams Support
+## Web Streams Support
 
 H3 now supports native [Readable Stream](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream) responses. This brings out-of-the-box compatibility with modern new libraries such as [Vercel/AI](https://github.com/vercel/ai) with streaming responses ([demo](https://github.com/Hebilicious/nuxt-openai-vercel-edge-demo)).
 
@@ -85,7 +85,7 @@ export default defineEventHandler((event) => {
 
 For advanced use cases, you might also use `sendStream` and `sendWebResponse` utilities instead of returning the stream.
 
-### Object Syntax Event Handlers
+## Object Syntax Event Handlers
 
 H3 supports a new way to define event handlers with Object syntax. Using object syntax you can define hooks that run before or after each handler such as authentication or compression middleware.
 
@@ -107,7 +107,7 @@ export default eventHandler({
 })
 ```
 
-### Typed Event Handler Requests
+## Typed Event Handler Requests
 
 You can now define H3 event types using new generic type support.
 
@@ -124,7 +124,7 @@ export default eventHandler<{ body: { name: string }; query: { id: string } }>(
 )
 ```
 
-### Runtime + Type-Safe Request Utils
+## Runtime + Type-Safe Request Utils
 
 Two new `getValidatedQuery(event, validator)` and `readValidatedBody(event, validator)` utils, allow integration with schema validators such as [zod](https://zod.dev/) for both runtime and type safety.
 
@@ -171,7 +171,7 @@ And run `npx listhen -w ./index.ts` to run a development server with TypeScript,
 
 👉 [Online Playground](https://stackblitz.com/github/unjs/h3/tree/main/playground?startScript=dev)
 
-<img width="80%" src="https://raw.githubusercontent.com/unjs/listhen/main/.assets/screenshot.png">
+![Screenshot of listhen](https://raw.githubusercontent.com/unjs/listhen/main/.assets/screenshot.png){withoutBorder}
 
 ## Full Changelog
 

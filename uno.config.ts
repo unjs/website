@@ -43,10 +43,6 @@ export default defineConfig({
           'color': 'var(--un-prose-links)',
           'border-bottom': '1px solid var(--un-prose-links)',
         },
-        'img': {
-          'border': '1px solid rgb(209, 213, 219)', // gray-300
-          'border-radius': '0.875rem',
-        },
         'blockquote': {
           'border-left-color': '#ecdc5a', // primary
         },
