@@ -175,4 +175,4 @@ Run `npx listhen@latest -w ./index.ts` to initiate a development server with Typ
 
 ## Full Changelog
 
-For a comprehensive list of changes, refer to the [release notes](https://h3.unjs.io/releases/tag/v1.8.0).
+For a comprehensive list of changes, refer to the [release notes](https://github.com/unjs/h3/releases/tag/v1.8.0).
