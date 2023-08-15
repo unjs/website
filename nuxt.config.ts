@@ -11,6 +11,7 @@ export default defineNuxtConfig({
     'nuxt-simple-robots',
     'nuxt-simple-sitemap',
     '@nuxthq/studio',
+    '@nuxtjs/plausible',
   ],
   css: [
     '~/assets/app.css',
