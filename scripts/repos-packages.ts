@@ -31,6 +31,17 @@ const internalRepos = new Set([
   'lmify',
   'governance',
   '.github',
+  // These are not internal but less maintained
+  'create-require',
+  'externality',
+  'ezpass',
+  'html-validate-es',
+  'is-https',
+  'items-promise',
+  'redirect-ssl',
+  'requrl',
+  'shiki-es',
+  'workbox-cdn',
 ])
 
 async function main() {
