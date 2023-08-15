@@ -4,10 +4,16 @@ const { toc, page } = useContent()
 const { data: packages } = await useAsyncData('package-nitro', () => queryContent('/packages/').only(['_path', 'title', 'icon', 'logo']).where({ _path: { $containsAny: page.value.packages } }).find(), { watch: [() => page.value.packages] })
 
 useServerSeoMeta({
+  ogType: 'article',
   ogTitle: page.value.title,
   ogDescription: page.value.description,
+  ogImage: page.value.image?.src,
+  ogImageAlt: page.value.image?.alt,
   twitterTitle: page.value.title,
   twitterDescription: page.value.description,
+  twitterImage: page.value.image?.src,
+  twitterImageAlt: page.value.image?.alt,
+  author: page.value.authors.map(author => author.name).join(', '),
   twitterCard: 'summary',
 })
 </script>
