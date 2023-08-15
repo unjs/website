@@ -136,12 +136,10 @@ const userSchema = z.object({
   email: z.string().email(),
 })
 
-export default defineEventHandler((event) => {
+export default defineEventHandler(async (event) => {
   const user = await readValidatedBody(event, userSchema.safeParse)
   // User object is validated and typed!
-  return {
-    user
-  }
+  return user
 })
 ```
 
