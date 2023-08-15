@@ -2,6 +2,21 @@
 const { toc, page } = useContent()
 
 const { data: packages } = await useAsyncData('package-nitro', () => queryContent('/packages/').only(['_path', 'title', 'icon', 'logo']).where({ _path: { $containsAny: page.value.packages } }).find(), { watch: [() => page.value.packages] })
+
+// TODO: Waiting for Nuxt SEOKit v2
+useServerSeoMeta({
+  ogTitle: `${page.value.title} · UnJS`,
+  ogType: 'article',
+  ogDescription: page.value.description,
+  ogImage: page.value.image?.src,
+  ogImageAlt: page.value.image?.alt,
+  twitterTitle: page.value.title,
+  twitterDescription: page.value.description,
+  twitterImage: page.value.image?.src,
+  twitterImageAlt: page.value.image?.alt,
+  author: page.value.authors.map(author => author.name).join(', '),
+  twitterCard: 'summary',
+})
 </script>
 
 <template>
@@ -15,15 +30,17 @@ const { data: packages } = await useAsyncData('package-nitro', () => queryConten
       </NuxtLink>
     </div>
 
-    <nav hidden xl:block xl:row-start-1 xl:col-start-3 sticky top-4 class="group">
+    <nav hidden xl:block xl:row-start-1 xl:col-start-3 sticky top-4 class="group/nav">
       <p flex="~ items-center" gap="2" text="right">
-        <span i-heroicons-list-bullet-20-solid block w-4 h-4 text="gray-400 group-hover:gray-600" transition="~ ease-in duration-150" />
+        <span i-heroicons-list-bullet-20-solid block w-4 h-4 text="gray-400 group-hover/nav:gray-600" transition="~ ease-in duration-150" />
         <span text="text-sm gray-600">Table of Contents</span>
       </p>
-      <ul mt-4 space-y-2 flex="~ col items-start" text="sm">
+      <ul mt-4 flex="~ col items-start" text="sm gray-400">
         <li v-for="link in toc.links" :key="link.id">
-          <NuxtLink :to="`#${link.id}`" class="block border-b border-gray-400 hover:border-gray-600 text-gray-400 hover:text-gray-600 transition ease-in duration-150">
-            {{ link.text }}
+          <NuxtLink :to="`#${link.id}`" block p="y-1" class="group">
+            <span border="b gray-400 group-hover:gray-700" text="group-hover:gray-700" transition="~ ease-in duration-150" leading="6">
+              {{ link.text }}
+            </span>
           </NuxtLink>
         </li>
       </ul>

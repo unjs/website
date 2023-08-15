@@ -1,3 +1,10 @@
+<script lang="ts" setup>
+useServerSeoMeta({
+  ogLocale: 'en_US',
+  ogSiteName: 'UnJS',
+})
+</script>
+
 <template>
   <Html lang="en" dir="ltr">
     <Head>
