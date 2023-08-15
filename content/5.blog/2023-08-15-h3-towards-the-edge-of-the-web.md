@@ -1,9 +1,9 @@
 ---
 title: H3 1.8 - Towards the Edge of the Web!
 description: Announcing H3 1.8 Release
-# image:
-#   src:
-#   alt:
+image:
+  src: # Add asap a social image
+  alt:
 authors:
   - name: Pooya Parsa
     picture: https://github.com/pi0.png
