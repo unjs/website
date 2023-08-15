@@ -30,7 +30,7 @@ useServerSeoMeta({
       </NuxtLink>
     </div>
 
-    <nav hidden xl:block xl:row-start-1 xl:col-start-3 sticky top-4 class="group/nav">
+    <nav xl:block xl:row-start-1 xl:col-start-3 sticky top-4 class="group/nav hidden">
       <p flex="~ items-center" gap="2" text="right">
         <span i-heroicons-list-bullet-20-solid block w-4 h-4 text="gray-400 group-hover/nav:gray-600" transition="~ ease-in duration-150" />
         <span text="text-sm gray-600">Table of Contents</span>
