@@ -7,6 +7,6 @@ github:
   repo: cookie-es
 npm:
   name: cookie-es
-documentation: https://githCub.com/unjs/cookie-es
+documentation: https://github.com/unjs/cookie-es
 layout: package
 ---
