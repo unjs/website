@@ -6,7 +6,7 @@ navigation.wip: true
 layout: explore
 ---
 
-::explore-hero
+::content-hero
 #title
 Explore
 #description

@@ -6,7 +6,7 @@ navigation.wip: true
 layout: learn
 ---
 
-::learn-hero
+::content-hero
 #title
 Learn
 #description

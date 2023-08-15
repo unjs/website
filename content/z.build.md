@@ -6,7 +6,7 @@ navigation.wip: true
 layout: build
 ---
 
-::build-hero
+::content-hero
 #title
 Build
 #description
