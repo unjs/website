@@ -4,12 +4,18 @@ export default defineNuxtConfig({
       titleTemplate: '%s · UnJS',
     },
   },
+  runtimeConfig: {
+    public: {
+      siteUrl: 'https://unjs.io',
+    },
+  },
   modules: [
     '@nuxt/content',
     '@vueuse/nuxt',
     '@unocss/nuxt',
     'nuxt-simple-robots',
     'nuxt-simple-sitemap',
+    'nuxt-schema-org',
     '@nuxthq/studio',
   ],
   css: [
