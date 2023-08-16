@@ -3,8 +3,8 @@ import { ComboboxOptions } from '@headlessui/vue'
 import type { SearchDisplayItem } from 'types/search'
 
 const props = defineProps<{
-  searchResults: Record<string, SearchDisplayItem[]>
-  defaultResults: Record<string, SearchDisplayItem[]>
+  searchResults: SearchDisplay
+  defaultResults: SearchDisplay
   haveQuery: boolean
 }>()
 

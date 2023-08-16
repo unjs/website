@@ -1,15 +1,14 @@
 import MiniSearch, { type Options as MiniSearchOptions } from 'minisearch'
-import type { SearchDisplayItem, SearchResult } from 'types/search'
+import type { SearchDisplay, SearchDisplayItem, SearchResult } from 'types/search'
 
-// TODO: add docs and create a type for the record<string, search-deplay-item[]>
-export async function useSearchDefaultResults(): Promise<ComputedRef<Record<string, SearchDisplayItem[]>>> {
+export async function useSearchDefaultResults(): Promise<ComputedRef<SearchDisplay>> {
   const { data: packages } = await useAsyncData('packages', () => queryContent('/packages/').find())
 
   return computed(() => {
     if (!packages.value)
       return {}
 
-    const defaultOptions: Record<string, SearchDisplayItem[]> = {}
+    const defaultOptions: SearchDisplay = {}
 
     defaultOptions.packages = packages.value.map((item) => {
       if (!item.title || !item._path)
@@ -28,7 +27,7 @@ export async function useSearchDefaultResults(): Promise<ComputedRef<Record<stri
   })
 }
 
-export async function useSearchResults(search: MaybeRefOrGetter<string>): Promise<ComputedRef<Record<string, SearchDisplayItem[]>>> {
+export async function useSearchResults(search: MaybeRefOrGetter<string>): Promise<ComputedRef<SearchDisplay>> {
   const website = useWebsite()
   const searchResults = await useSearch(search)
 
@@ -69,7 +68,7 @@ export async function useSearchResults(search: MaybeRefOrGetter<string>): Promis
       }
 
       return acc
-    }, {} as Record<string, SearchDisplayItem[]>)
+    }, {} as SearchDisplay)
 
     return grouped
   })
