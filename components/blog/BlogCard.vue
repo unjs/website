@@ -9,7 +9,7 @@ defineProps<{
 <template>
   <article relative overflow-hidden bg="white" rounded="4" flex="~ col" gap-4 hover:shadow-lg transition="~ ease-in duration-150">
     <img v-if="post.cover" :src="post.cover.src" :alt="post.cover.alt" width="1920" height="1080" aspect-video object-cover>
-    <div p="x-4 b-4" flex="~ col" gap-4>
+    <div p="x-4 b-4" flex="~ col" gap-4 :class="{ 'pt-4': !post.cover }">
       <h2 text="gray-900 md:xl" font="semibold">
         <NuxtLink :to="post._path">
           {{ post.title }}
