@@ -23,6 +23,6 @@ jobs:
       - name: Unlighthouse assertions and client
         run: unlighthouse-ci --site unjs.io --budget 75 --build-static
 
-      - run:  wrangler pages deploy .unlighthouse --branch=main --commit-dirty --project-name inspect-unjs-website
+      - run: wrangler pages deploy .unlighthouse --branch=main --commit-dirty --project-name inspect-unjs-website
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
