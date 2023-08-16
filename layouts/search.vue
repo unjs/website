@@ -5,18 +5,25 @@ import type { SearchDisplayItem } from 'types/search'
 const route = useRoute()
 
 const selected = ref<SearchDisplayItem | null>(null)
-const query = computed({
-  get: () => route.query.q as string || '',
-  set: (value: string) => updateQuery(value),
-})
-const queryDebounced = refDebounced(query, 100)
+
+const query = ref(route.query.q as string || '')
+
+const queryDebounced = refDebounced(query, 250)
 const results = await useSearchResults(queryDebounced)
 
-const defaultOptions = await useSearchDefaultResults()
-
-watch(query, (value) => {
-  updateQuery(value)
+watch(queryDebounced, () => {
+  updateQuery(queryDebounced.value)
 })
+
+watch(() => route.query.q as string, (value) => {
+  if (value === query.value)
+    return
+  if (!value)
+    return query.value = ''
+  query.value = value
+})
+
+const defaultOptions = await useSearchDefaultResults()
 
 function updateQuery(query: string) {
   if (!query)
@@ -25,15 +32,11 @@ function updateQuery(query: string) {
   navigateTo({ query: { q: query } })
 }
 
-function navigate() {
+async function navigate() {
   if (!selected.value)
     return
 
-  navigateTo(selected.value.id)
-  setTimeout(() => {
-    query.value = ''
-    selected.value = null
-  }, 200)
+  await navigateTo(selected.value.id)
 }
 </script>
 
