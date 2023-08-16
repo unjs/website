@@ -137,7 +137,7 @@ const userSchema = z.object({
 })
 
 export default defineEventHandler(async (event) => {
-  const user = await readValidatedBody(event, userSchema.safeParse)
+  const user = await readValidatedBody(event, userSchema.safeParse) // or `.parse` to throw an error
   // User object is validated and typed!
   return user
 })
