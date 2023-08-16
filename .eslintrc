@@ -1,3 +1,6 @@
 {
-  "extends": "@antfu"
+  "extends": "@antfu",
+  "rules": {
+    "yml/no-empty-mapping-value": "off"
+  }
 }
