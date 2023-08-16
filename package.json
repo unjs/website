@@ -37,7 +37,7 @@
     "minisearch": "^6.1.0",
     "nuxt": "^3.6.5",
     "nuxt-simple-robots": "^3.1.0",
-    "nuxt-simple-sitemap": "^3.1.5",
+    "nuxt-simple-sitemap": "^3.1.6",
     "unstorage": "^1.9.0"
   }
 }
