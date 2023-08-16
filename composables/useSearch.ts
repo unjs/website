@@ -76,7 +76,7 @@ export async function useSearchResults(search: MaybeRefOrGetter<string>): Promis
 }
 
 export async function useSearch(search: MaybeRefOrGetter<string>): Promise<ComputedRef<SearchResult[]>> {
-  const { data } = await useFetch<string>('/api/search')
+  const { data } = await useFetch<string>('/api/search.txt')
 
   if (!data.value)
     return computed(() => [])

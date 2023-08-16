@@ -22,7 +22,7 @@ export default defineNuxtConfig({
       crawlLinks: true,
     },
     routeRules: {
-      '/api/search': {
+      '/api/search.txt': {
         prerender: true,
         headers: { 'Content-Type': 'text/plain' }, // By default, Nitro will set the content type to text/html
       },
