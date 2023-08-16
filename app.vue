@@ -18,6 +18,7 @@ useServerSeoMeta({
       />
       <SchemaOrgWebSite name="UnJS" in-language="en" description="Agnostic Excellence: JavaScript Libraries, Tools, and Utilities, Crafted to Elevate Your Coding Journey." />
       <SchemaOrgWebPage />
+      <RobotMeta />
       <Link rel="icon" href="/favicon.svg" />
     </Head>
     <Body container mx-auto xl:max-w-7xl p="x-4 y-4 md:y-8" bg="primary">

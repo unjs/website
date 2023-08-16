@@ -32,6 +32,9 @@ devDependencies:
   '@nuxthq/studio':
     specifier: ^0.13.4
     version: 0.13.4
+  '@nuxtjs/plausible':
+    specifier: ^0.2.1
+    version: 0.2.1
   '@types/node':
     specifier: ^20.5.0
     version: 20.5.0
@@ -75,8 +78,8 @@ devDependencies:
     specifier: ^3.1.0
     version: 3.1.0
   nuxt-simple-sitemap:
-    specifier: ^3.1.5
-    version: 3.1.5(nuxt@3.6.5)(vite@4.4.9)
+    specifier: ^3.1.6
+    version: 3.1.6(nuxt@3.6.5)(vite@4.4.9)
   unstorage:
     specifier: ^1.9.0
     version: 1.9.0
@@ -1261,22 +1264,6 @@ packages:
     resolution: {integrity: sha512-GBzP8zOc7CGWyFQS6dv1lQz8VVpz5C2yRszbXufwG/9zhStTIH50EtD87NmWbTMwXDvZLNg8GIpb1UFdH93JCA==}
     dev: true
 
-  /@nuxt/devtools-kit@0.7.6(nuxt@3.6.5)(vite@4.4.9):
-    resolution: {integrity: sha512-2jSQ1rgStZifRHtfsdqmmvq/O5NskLCwg34JPchBRAx9Kv5IadABlBIWz1jLuaGarI/jsEEAmA5EpfxI5z/PJQ==}
-    peerDependencies:
-      nuxt: ^3.6.5
-      vite: '*'
-    dependencies:
-      '@nuxt/kit': 3.6.5
-      '@nuxt/schema': 3.6.5
-      execa: 7.2.0
-      nuxt: 3.6.5(@types/node@20.5.0)(eslint@8.47.0)(typescript@5.1.6)
-      vite: 4.4.9(@types/node@20.5.0)
-    transitivePeerDependencies:
-      - rollup
-      - supports-color
-    dev: true
-
   /@nuxt/devtools-kit@0.8.0(nuxt@3.6.5)(vite@4.4.9):
     resolution: {integrity: sha512-zHwotLFwmYPFDg0JHyInn0L3i2gZK24JYDfgOzqBuvCD/Q3ytQVyAMrX2Mp4iIrHjwToZBJ0dlyV+UYXCiWwSg==}
     peerDependencies:
@@ -1513,6 +1500,18 @@ packages:
       - rollup
       - supports-color
       - utf-8-validate
+    dev: true
+
+  /@nuxtjs/plausible@0.2.1:
+    resolution: {integrity: sha512-1AyV9woFeZKBhwYy05S7NBk4jeAXzWcF/SIK/S/GZ8C86G8x7f2hR2eJi9FRRQYGwHutBx2guU4tZAW4J71Azg==}
+    dependencies:
+      '@nuxt/kit': 3.6.5
+      defu: 6.1.2
+      pathe: 1.1.1
+      plausible-tracker: 0.3.8
+    transitivePeerDependencies:
+      - rollup
+      - supports-color
     dev: true
 
   /@parcel/watcher-wasm@2.3.0-alpha.1:
@@ -6987,10 +6986,10 @@ packages:
       - supports-color
     dev: true
 
-  /nuxt-simple-sitemap@3.1.5(nuxt@3.6.5)(vite@4.4.9):
-    resolution: {integrity: sha512-H5+RupbafIpNKkkrvpFTwfGutGx9mCf32dXZJusZ/yBMbH10PxIHrnAoGwmqMue+MwkT8XIkhgWXpyQgaigAUQ==}
+  /nuxt-simple-sitemap@3.1.6(nuxt@3.6.5)(vite@4.4.9):
+    resolution: {integrity: sha512-PtoerGXdON+H7BKrwgma6UIul51wAUriXCO7p/GNk3X7kdmksd3Pdf70BnZmH1IAyYN7WCV9r6iG+IVPk3g8QA==}
     dependencies:
-      '@nuxt/devtools-kit': 0.7.6(nuxt@3.6.5)(vite@4.4.9)
+      '@nuxt/devtools-kit': 0.8.0(nuxt@3.6.5)(vite@4.4.9)
       '@nuxt/kit': 3.6.5
       chalk: 5.3.0
       defu: 6.1.2
@@ -7465,6 +7464,11 @@ packages:
       jsonc-parser: 3.2.0
       mlly: 1.4.0
       pathe: 1.1.1
+    dev: true
+
+  /plausible-tracker@0.3.8:
+    resolution: {integrity: sha512-lmOWYQ7s9KOUJ1R+YTOR3HrjdbxIS2Z4de0P/Jx2dQPteznJl2eX3tXxKClpvbfyGP59B5bbhW8ftN59HbbFSg==}
+    engines: {node: '>=10'}
     dev: true
 
   /pluralize@8.0.0:

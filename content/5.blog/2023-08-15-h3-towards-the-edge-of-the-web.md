@@ -129,17 +129,17 @@ export default eventHandler<{ body: { name: string }; query: { id: string } }>(
 Two new utility functions, `getValidatedQuery(event, validator)` and `readValidatedBody(event, validator)`, facilitate integration with schema validators such as [zod](https://zod.dev/) for both runtime and type safety.
 
 ```ts
+import { z } from 'zod'
+
 const userSchema = z.object({
   name: z.string().default('Guest'),
-  email: z.email().required(),
+  email: z.string().email(),
 })
 
-export default defineEventHandler((event) => {
-  const user = await readValidatedBody(event, userSchema.parse)
+export default defineEventHandler(async (event) => {
+  const user = await readValidatedBody(event, userSchema.safeParse) // or `.parse` to throw an error
   // User object is validated and typed!
-  return {
-    user
-  }
+  return user
 })
 ```
 
@@ -171,8 +171,8 @@ Run `npx listhen@latest -w ./index.ts` to initiate a development server with Typ
 
 [Online Playground](https://stackblitz.com/github/unjs/h3/tree/main/playground?startScript=dev)
 
-![Screenshot of listhen](https://raw.githubusercontent.com/unjs/listhen/main/.assets/screenshot.png)
+![Screenshot of listhen](https://raw.githubusercontent.com/unjs/listhen/main/.assets/screenshot.png){withoutBorder}
 
 ## Full Changelog
 
-For a comprehensive list of changes, refer to the [release notes](https://h3.unjs.io/releases/tag/v1.8.0).
+For a comprehensive list of changes, refer to the [release notes](https://github.com/unjs/h3/releases/tag/v1.8.0).

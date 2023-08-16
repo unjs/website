@@ -1,37 +1,7 @@
 import process from 'node:process'
 import fs from 'node:fs'
 import { consola } from 'consola'
-import { ofetch } from 'ofetch'
-
-// https://github.com/unjs/ungh/tree/main#reposownername
-interface GitHubRepo {
-  'id': number
-  'name': string
-  'repo': string
-  'description': string
-  'createdAt': string
-  'updatedAt': string
-  'pushedAt': string
-  'stars': number
-  'watchers': number
-  'forks': number
-}
-
-const internalRepos = new Set([
-  'eslint-config',
-  'nitro-preset-starter',
-  'unjs.github.io',
-  'unjs.io',
-  'website',
-  'nitro-deploys',
-  'template',
-  'unkit',
-  'rollup-plugin-node-deno',
-  'renovate-config',
-  'lmify',
-  'governance',
-  '.github',
-])
+import { type GitHubRepo, fetchRepos } from './_repos'
 
 async function main() {
   // This script is used to determine if each repo of the unjs org have a package and if each package have stil a repo.
@@ -81,12 +51,6 @@ async function main() {
 }
 
 main().catch(consola.error)
-
-async function fetchRepos(): Promise<GitHubRepo[]> {
-  const repos = await ofetch<{ repos: GitHubRepo[] }>('https://ungh.cc/orgs/unjs/repos').then(r => r.repos)
-
-  return repos.filter(repo => !internalRepos.has(repo.name))
-}
 
 function formatTree(items: string[]): string {
   let logs = ''
