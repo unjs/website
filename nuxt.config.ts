@@ -67,7 +67,7 @@ export default defineNuxtConfig({
         include: ['/packages/**'],
       },
       pages: {
-        exclude: ['/build/**', '/explore/**', '/learn/**', '/blog/**', '/packages/**', '/_footer-license', '_no-articles'],
+        exclude: ['/build/**', '/explore/**', '/learn/**', '/blog/**', '/packages/**'],
       },
     },
   },
