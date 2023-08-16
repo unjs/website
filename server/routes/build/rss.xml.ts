@@ -1,6 +1,7 @@
 import type { BuildPost } from 'types/build'
 
 export default defineEventHandler(async (event) => {
+  const siteConfig = useSiteConfig(event)
   const rssConfig = useRssConfig()
 
   const files = await getMarkdownContent<BuildPost>(event, {
@@ -8,13 +9,13 @@ export default defineEventHandler(async (event) => {
   })
 
   const rssFeed = createRssFeed({
-    language: rssConfig.language,
+    language: siteConfig.language,
     title: 'UnJS - Build',
     description: 'Articles to build real world projects with the UnJS ecosystem.',
-    link: 'https://unjs.io/build', // TODO: upadate for new navigation to /resources in the future
+    link: `${siteConfig.url}/build`, // TODO: upadate for new navigation to /resources in the future
     webMaster: rssConfig.webMaster,
     docs: rssConfig.docs,
-    items: files.map(file => contentToRssItem(file, { site: rssConfig.site })),
+    items: files.map(file => contentToRssItem(file, { site: siteConfig.url })),
   })
 
   return rssFeed

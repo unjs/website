@@ -1,6 +1,7 @@
 import type { RssContent } from 'types/rss'
 
 export default defineEventHandler(async (event) => {
+  const siteConfig = useSiteConfig(event)
   const rssConfig = useRssConfig()
 
   const files = await getMarkdownContent<RssContent>(event, {
@@ -24,13 +25,13 @@ export default defineEventHandler(async (event) => {
   })
 
   const rssFeed = createRssFeed({
-    language: rssConfig.language,
+    language: siteConfig.language,
     title: 'UnJS - All Content',
     description: 'All the content from UnJS: blog posts and articles to learn, build and explore the UnJS ecosystem.',
-    link: 'https://unjs.io',
+    link: siteConfig.url,
     webMaster: rssConfig.webMaster,
     docs: rssConfig.docs,
-    items: files.map(file => contentToRssItem(file, { site: rssConfig.site })),
+    items: files.map(file => contentToRssItem(file, { site: siteConfig.url })),
   })
 
   return rssFeed
