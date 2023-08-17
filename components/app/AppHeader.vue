@@ -61,5 +61,5 @@ useEventListener('keydown', (event) => {
     </div>
   </header>
   <AppNavigationDialog v-if="navigation" v-model:open="openNavigation" :navigation="navigation" />
-  <AppSearch v-model:open="openSearch" />
+  <AppSearchDialog v-model:open="openSearch" />
 </template>
