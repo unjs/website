@@ -22,7 +22,7 @@ const transforms = [
 </script>
 
 <template>
-  <div relative flex justify-end style="width: 336px; height: 336px;">
+  <div relative flex justify-end w-84>
     <div flex="~ col" space-y--9 :class="triggered ? 'drop-shadow-xl' : 'drop-shadow-md'">
       <div v-for="(row, i) in rows" :key="i" flex flex-row space-x--9 transition-transform ease-in duration-200>
         <PuzzlePart v-for="(part, j) in row" :key="part.name" :part="part" :class="{ [transforms[i][j]]: !triggered, '<lg:opacity-0': !j }" shrink-0 />
