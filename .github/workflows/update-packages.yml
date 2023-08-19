@@ -1,0 +1,32 @@
+name: Update Packages
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 7 * * 1' # Every monday at 7am UTC
+
+permissions:
+  pull-requests: write
+  contents: write
+
+jobs:
+  update-packages:
+    name: Update Packages
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - run: corepack enable
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - run: jiti scripts/update-packages.ts
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,4 +1,4 @@
-import process from 'node:process'
+import process, { exit } from 'node:process'
 import fs from 'node:fs'
 import { consola } from 'consola'
 import { type GitHubRepo, fetchRepos } from './_repos'
@@ -23,6 +23,7 @@ async function main() {
 
   // Create markdowns
   if (process.argv.includes('--create')) {
+    consola.info('Creating markdowns...')
     const template = fs.readFileSync('./content/4.packages/.template.md', 'utf-8')
     for (const repo of undocumentedRepos) {
       fs.writeFileSync(`./content/4.packages/${repo.name}.md`,
@@ -48,9 +49,16 @@ async function main() {
 
   else
     consola.warn(`${docsWithoutRepo.length} packages does not have a repo:\n${formatTree(docsWithoutRepo)}`)
+
+  // Delete markdowns
+  if (process.argv.includes('--delete')) {
+    consola.info('Deleting markdowns...')
+    for (const name of docsWithoutRepo)
+      fs.rmSync(`./content/4.packages/${name}`)
+  }
 }
 
-main().catch(consola.error)
+main().then(() => exit(0)).catch(consola.error)
 
 function formatTree(items: string[]): string {
   let logs = ''
