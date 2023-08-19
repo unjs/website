@@ -25,8 +25,8 @@
     "@nuxthq/studio": "^0.13.4",
     "@nuxtjs/plausible": "^0.2.1",
     "@types/node": "^20.5.1",
-    "@unocss/nuxt": "^0.55.1",
-    "@unocss/reset": "^0.55.1",
+    "@unocss/nuxt": "^0.55.2",
+    "@unocss/reset": "^0.55.2",
     "@vueuse/core": "^10.3.0",
     "@vueuse/nuxt": "^10.3.0",
     "case-police": "^0.6.1",
@@ -37,7 +37,7 @@
     "minisearch": "^6.1.0",
     "nuxt": "^3.6.5",
     "nuxt-simple-robots": "^3.1.1",
-    "nuxt-simple-sitemap": "^3.1.7",
+    "nuxt-simple-sitemap": "^3.1.8",
     "unstorage": "^1.9.0"
   }
 }
