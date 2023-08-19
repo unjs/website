@@ -3,8 +3,7 @@ import { execSync } from 'node:child_process'
 import { consola } from 'consola'
 import { ofetch } from 'ofetch'
 
-// update all of this
-const owner = 'barbapapazes'
+const owner = 'unjs'
 const repo = 'website'
 const branch = 'chore/update-packages'
 
@@ -32,7 +31,7 @@ async function main() {
     consola.info('No changes to commit.')
     process.exit(0)
   }
-  execSync(`git push -u fork ${branch} --force`)
+  execSync(`git push -u origin ${branch} --force`)
 
   const [currentPR] = await ofetch(`https://api.github.com/repos/${owner}/${repo}/pulls?head=${owner}:${branch}`)
 
