@@ -27,6 +27,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - run: jiti scripts/update-packages.ts
+      - run: pnpm jiti scripts/update-packages.ts
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
