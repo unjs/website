@@ -22,6 +22,8 @@ useServerSeoMeta({
 <template>
   <Head>
     <SchemaOrgWebPage :type="['ItemPage']" />
+    <!-- TODO: missing in-language due to a but @see https://github.com/harlan-zw/unhead-schema-org/issues/29 -->
+    <SchemaOrgArticle :date-published="toISODateString(page.publishedAt)" :date-modified="toISODateString(page.modifiedAt)" type="BlogArticle" />
   </Head>
   <div m="y-6 md:y-10" p="x-4 md:x-6 t-6 md:t-10 b-10 md:b-20" rounded="4" bg="white" grid="~ cols-1 xl:cols-[1fr_auto_1fr] items-start" gap="6 md:8">
     <div flex="~ justify-start">

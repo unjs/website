@@ -7,6 +7,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       siteUrl: 'https://unjs.io',
+      inLanguage: 'en',
     },
   },
   modules: [
