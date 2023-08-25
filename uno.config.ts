@@ -57,6 +57,9 @@ export default defineConfig({
           margin: 0,
           padding: 0,
         },
+        'table': {
+          margin: 0,
+        },
       },
     }),
     presetIcons(),
