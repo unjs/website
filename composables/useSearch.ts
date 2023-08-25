@@ -1,8 +1,81 @@
 import MiniSearch, { type Options as MiniSearchOptions } from 'minisearch'
-import type { SearchResult } from 'types/search'
+import type { SearchDisplay, SearchDisplayItem, SearchResult } from 'types/search'
+
+export async function useSearchDefaultResults(): Promise<ComputedRef<SearchDisplay>> {
+  const { data: packages } = await useAsyncData('packages', () => queryContent('/packages/').find())
+
+  return computed(() => {
+    if (!packages.value)
+      return {}
+
+    const defaultOptions: SearchDisplay = {}
+
+    defaultOptions.packages = packages.value.map((item) => {
+      if (!item.title || !item._path)
+        return null
+
+      return {
+        id: item._path,
+        title: item.title,
+        titles: [],
+        level: 0,
+        children: null,
+      } satisfies SearchDisplayItem
+    }).filter(Boolean) as SearchDisplayItem[]
+
+    return defaultOptions
+  })
+}
+
+export async function useSearchResults(search: MaybeRefOrGetter<string>): Promise<ComputedRef<SearchDisplay>> {
+  const website = useWebsite()
+  const searchResults = await useSearch(search)
+
+  return computed(() => {
+    if (!searchResults.value)
+      return {}
+
+    const grouped = searchResults.value.reduce((acc, item) => {
+      const group = website.value.search.groups.find(group => item.id.startsWith(group.path))
+
+      // Remove the top level page from the search results like `/packages` or `/blog`
+      if (!group || group.path === item.id)
+        return acc
+
+      if (!acc[group.name])
+        acc[group.name] = []
+
+      const groupItems = acc[group.name]
+      const topLevelItem = groupItems.find(groupItem => item.id.startsWith(groupItem.id) && groupItem.level === 0)
+
+      if (topLevelItem && topLevelItem.children) {
+        topLevelItem.children.push({
+          id: item.id,
+          title: item.title,
+          titles: item.titles,
+          level: item.level,
+          children: null,
+        })
+      }
+      else {
+        groupItems.push({
+          id: item.id,
+          title: item.title,
+          titles: item.titles,
+          level: item.level,
+          children: [],
+        })
+      }
+
+      return acc
+    }, {} as SearchDisplay)
+
+    return grouped
+  })
+}
 
 export async function useSearch(search: MaybeRefOrGetter<string>): Promise<ComputedRef<SearchResult[]>> {
-  const { data } = await useFetch<string>('/api/search')
+  const { data } = await useFetch<string>('/api/search.txt')
 
   if (!data.value)
     return computed(() => [])

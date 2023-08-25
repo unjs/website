@@ -49,3 +49,5 @@ export interface SearchDisplayItem {
    */
   children: SearchDisplayItem[] | null
 }
+
+export type SearchDisplay = Record<string, SearchDisplayItem[]>

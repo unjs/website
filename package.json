@@ -14,8 +14,8 @@
     "verify:packages": "jiti scripts/package-has-puzzle-part.ts && jiti scripts/puzzle-part-has-package.ts"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.40.2",
-    "@headlessui/vue": "^1.7.15",
+    "@antfu/eslint-config": "^0.41.0",
+    "@headlessui/vue": "^1.7.16",
     "@iconify-json/heroicons": "^1.1.12",
     "@iconify-json/logos": "^1.1.34",
     "@iconify-json/noto": "^1.1.12",
@@ -24,20 +24,20 @@
     "@nuxt/devtools": "^0.8.0",
     "@nuxthq/studio": "^0.13.4",
     "@nuxtjs/plausible": "^0.2.1",
-    "@types/node": "^20.5.0",
-    "@unocss/nuxt": "^0.55.0",
-    "@unocss/reset": "^0.55.0",
+    "@types/node": "^20.5.6",
+    "@unocss/nuxt": "^0.55.3",
+    "@unocss/reset": "^0.55.3",
     "@vueuse/core": "^10.3.0",
     "@vueuse/nuxt": "^10.3.0",
     "case-police": "^0.6.1",
     "consola": "^3.2.3",
     "eslint": "^8.47.0",
-    "jiti": "^1.19.1",
+    "jiti": "^1.19.3",
     "markdownlint-cli": "^0.35.0",
     "minisearch": "^6.1.0",
     "nuxt": "^3.6.5",
-    "nuxt-simple-robots": "^3.1.0",
-    "nuxt-simple-sitemap": "^3.1.6",
+    "nuxt-simple-robots": "^3.1.1",
+    "nuxt-simple-sitemap": "^3.2.5",
     "unstorage": "^1.9.0"
   }
 }

@@ -45,35 +45,35 @@ export default defineAppConfig({
             },
           ],
         },
-        // {
-        //   title: 'Articles',
-        //   items: [
-        //     {
-        //       title: 'Learn',
-        //       url: '/learn',
-        //       rel: null,
-        //       target: null,
-        //     },
-        //     {
-        //       title: 'Build',
-        //       url: '/build',
-        //       rel: null,
-        //       target: null,
-        //     },
-        //     {
-        //       title: 'Explore',
-        //       url: '/explore',
-        //       rel: null,
-        //       target: null,
-        //     },
-        //     // {
-        //     //   title: 'Search',
-        //     //   url: '/search',
-        //     //   rel: null,
-        //     //   target: null,
-        //     // },
-        //   ],
-        // },
+        {
+          title: 'Content',
+          items: [
+          //   {
+          //     title: 'Learn',
+          //     url: '/learn',
+          //     rel: null,
+          //     target: null,
+          //   },
+          //   {
+          //     title: 'Build',
+          //     url: '/build',
+          //     rel: null,
+          //     target: null,
+          //   },
+          //   {
+          //     title: 'Explore',
+          //     url: '/explore',
+          //     rel: null,
+          //     target: null,
+          //   },
+            {
+              title: 'Search',
+              url: '/search',
+              rel: null,
+              target: null,
+            },
+          ],
+        },
         {
           title: 'UnJS',
           items: [
