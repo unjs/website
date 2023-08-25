@@ -1,6 +1,6 @@
 import type { ParsedContent } from '@nuxt/content/dist/runtime/types'
 
-export interface BlogPost extends ParsedContent {
+export interface ExplorePost extends ParsedContent {
   title: string
   description: string
   cover: {
@@ -13,11 +13,8 @@ export interface BlogPost extends ParsedContent {
     twitter: string
     email?: string
   }[]
-  categories: string[]
   packages: string[]
   publishedAt: Date
   modifiedAt: Date
-  layout: 'blog-post'
+  layout: 'explore-post'
 }
-
-export type BlogPostCard = Pick<BlogPost, '_path' | 'cover' | 'title' | 'description' | 'publishedAt' | 'authors'>
