@@ -5,6 +5,9 @@ const documentation = computed(() => page.value.documentation)
 </script>
 
 <template>
+  <Head>
+    <SchemaOrgWebPage :type="['ItemPage']" />
+  </Head>
   <div m="y-6 md:y-10" p="x-4 md:x-6 t-6 md:t-10 b-10 md:b-20" grid="~ cols-1 xl:cols-[1fr_auto_1fr] items-start" gap="6 xl:8" rounded="4" bg="white">
     <div flex="~ justify-start">
       <NuxtLink to="/packages" flex="~ items-center" gap="1" class="group">

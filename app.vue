@@ -8,6 +8,16 @@ useServerSeoMeta({
 <template>
   <Html lang="en" dir="ltr">
     <Head>
+      <SchemaOrgOrganization
+        name="UnJS"
+        logo="/favicon.svg"
+        :same-as="[
+          'https://github.com/unjs',
+          'https://twitter.com/unjsio',
+        ]"
+      />
+      <SchemaOrgWebSite name="UnJS" in-language="en" description="Agnostic Excellence: JavaScript Libraries, Tools, and Utilities, Crafted to Elevate Your Coding Journey." :potential-action="[defineSearchAction({ target: '/search?q={search_term_string}' })]" />
+      <SchemaOrgWebPage />
       <RobotMeta />
       <Link rel="icon" href="/favicon.svg" />
     </Head>
