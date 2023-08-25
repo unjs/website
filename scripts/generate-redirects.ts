@@ -11,7 +11,7 @@ async function main() {
   const redirects = []
   for (const repo of repos.sort((a, b) => a.name > b.name ? 1 : -1)) {
     const name = repo.name
-    const redirect = `${from + name} ${to + name} ${redirectCode}`
+    const redirect = `'${from + name}': { redirect: { to: '${to + name}', statusCode: ${redirectCode} } },`
     redirects.push(redirect)
   }
 
