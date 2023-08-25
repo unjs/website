@@ -41,6 +41,9 @@ async function navigate() {
 </script>
 
 <template>
+  <Head>
+    <SchemaOrgWebPage :type="['CollectionPage', 'SearchResultsPage']" />
+  </Head>
   <main m="y-6 md:y-10">
     <slot />
     <Combobox v-model="selected">
