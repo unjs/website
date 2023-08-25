@@ -1,6 +1,6 @@
-import type { RssChannel, RssContent, RssItem } from 'types/rss'
 import type { ParsedContent, QueryBuilderWhere } from '@nuxt/content/dist/runtime/types'
 import type { H3Event } from 'h3'
+import type { RssChannel, RssContent, RssItem } from '~/types/rss'
 import { serverQueryContent } from '#content/server'
 
 export function useRssConfig() {
@@ -29,17 +29,17 @@ export async function getMarkdownContent<T extends ParsedContent>(event: H3Event
   return filteredFiles
 }
 
-export function contentToRssItem<T extends RssContent>(content: T, options: { site: string }): RssItem {
+export function contentToRssItem<T extends RssContent>(content: T, options: { site: string; default: { email: string } }): RssItem {
   return {
     title: content.title ?? '',
     link: `${options.site}${content._path}`,
     description: content.description,
     pubDate: new Date(content.publishedAt).toUTCString(),
     guid: `${options.site}${content._path}`,
-    authors: content.authors.map((author) => {
+    authors: (content.authors).map((author) => {
       return {
         name: author.name,
-        email: author.email, // TODO: add email to the author in the md content and in the template
+        email: author.email ?? options.default.email,
       }
     }),
     categories: content.categories,

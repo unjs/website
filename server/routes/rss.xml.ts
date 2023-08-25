@@ -1,4 +1,4 @@
-import type { RssContent } from 'types/rss'
+import type { RssContent } from '~/types/rss'
 
 export default defineEventHandler(async (event) => {
   const siteConfig = useSiteConfig(event)
@@ -31,7 +31,7 @@ export default defineEventHandler(async (event) => {
     link: siteConfig.url,
     webMaster: rssConfig.webMaster,
     docs: rssConfig.docs,
-    items: files.map(file => contentToRssItem(file, { site: siteConfig.url })),
+    items: files.map(file => contentToRssItem(file, { site: siteConfig.url, default: { email: rssConfig.webMaster.email } })),
   })
 
   return rssFeed

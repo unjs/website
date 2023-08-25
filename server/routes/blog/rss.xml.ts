@@ -1,4 +1,4 @@
-import type { BlogPost } from 'types/blog'
+import type { BlogPost } from '../../../types/blog'
 
 export default defineEventHandler(async (event) => {
   const siteConfig = useSiteConfig(event)
@@ -15,7 +15,7 @@ export default defineEventHandler(async (event) => {
     link: `${siteConfig.url}/blog`,
     webMaster: rssConfig.webMaster,
     docs: rssConfig.docs,
-    items: files.map(file => contentToRssItem(file, { site: siteConfig.url })),
+    items: files.map(file => contentToRssItem(file, { site: siteConfig.url, default: { email: rssConfig.webMaster.email } })),
   })
 
   return rssFeed

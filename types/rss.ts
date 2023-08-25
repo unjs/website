@@ -31,7 +31,7 @@ export interface RssItem {
   pubDate: string
   guid: string
   categories?: string[]
-  authors?: {
+  authors: {
     name: string
     email: string
   }[]

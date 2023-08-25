@@ -11,9 +11,10 @@ export interface ExplorePost extends ParsedContent {
     name: string
     picture: string
     twitter: string
-    email: string
+    email?: string
   }[]
   packages: string[]
   publishedAt: Date
   modifiedAt: Date
+  layout: 'explore-post'
 }

@@ -1,4 +1,4 @@
-import type { BuildPost } from 'types/build'
+import type { BuildPost } from '~/types/build'
 
 export default defineEventHandler(async (event) => {
   const siteConfig = useSiteConfig(event)
@@ -15,7 +15,7 @@ export default defineEventHandler(async (event) => {
     link: `${siteConfig.url}/build`, // TODO: upadate for new navigation to /resources in the future
     webMaster: rssConfig.webMaster,
     docs: rssConfig.docs,
-    items: files.map(file => contentToRssItem(file, { site: siteConfig.url })),
+    items: files.map(file => contentToRssItem(file, { site: siteConfig.url, default: { email: rssConfig.webMaster.email } })),
   })
 
   return rssFeed

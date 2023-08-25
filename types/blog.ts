@@ -11,12 +11,13 @@ export interface BlogPost extends ParsedContent {
     name: string
     picture: string
     twitter: string
-    email: string
+    email?: string
   }[]
   categories: string[]
   packages: string[]
   publishedAt: Date
   modifiedAt: Date
+  layout: 'blog-post'
 }
 
 export type BlogPostCard = Pick<BlogPost, '_path' | 'cover' | 'title' | 'description' | 'publishedAt' | 'authors'>
