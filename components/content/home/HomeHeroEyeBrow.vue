@@ -7,7 +7,7 @@ defineProps<{
 </script>
 
 <template>
-  <NuxtLink :to="path" flex="~ items-center" gap-4>
+  <NuxtLink :to="`${path}?utm_source=unjs.io&utm_medium=home-hero`" flex="~ items-center" gap-4>
     <span p="x-3 y-1" bg="gray-900 opacity-10" border="~ gray-900 opacity-40" rounded="full" text="sm gray-900 nowrap" font="medium">
       {{ prefix }}
     </span>
