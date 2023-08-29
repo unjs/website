@@ -2,6 +2,16 @@
 const { page } = useContent()
 
 const documentation = computed(() => page.value.documentation)
+const owner = computed(() => page.value.github.owner)
+const repo = computed(() => page.value.github.repo)
+const description = computed(() => page.value.description)
+
+defineOgImage({
+  component: 'Package',
+  owner: owner.value,
+  repo: repo.value,
+  description: description.value,
+})
 </script>
 
 <template>
