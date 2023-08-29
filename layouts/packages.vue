@@ -3,6 +3,9 @@ const { data: packages } = await useAsyncData('packages', () => queryContent('/p
 </script>
 
 <template>
+  <Head>
+    <SchemaOrgWebPage :type="['CollectionPage']" />
+  </Head>
   <main m="y-6 md:y-10">
     <slot />
     <section m="t-6">

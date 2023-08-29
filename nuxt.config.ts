@@ -4,12 +4,20 @@ export default defineNuxtConfig({
       titleTemplate: '%s · UnJS',
     },
   },
+  runtimeConfig: {
+    public: {
+      siteUrl: 'https://unjs.io',
+      inLanguage: 'en',
+    },
+  },
   modules: [
     '@nuxt/content',
     '@vueuse/nuxt',
     '@unocss/nuxt',
     'nuxt-simple-robots',
     'nuxt-simple-sitemap',
+    'nuxt-schema-org',
+    'nuxt-og-image',
     '@nuxthq/studio',
     '@nuxtjs/plausible',
   ],
@@ -25,6 +33,26 @@ export default defineNuxtConfig({
       '/api/search.txt': {
         prerender: true,
         headers: { 'Content-Type': 'text/plain' }, // By default, Nitro will set the content type to text/html
+      },
+      '/rss.xml': {
+        prerender: true,
+        headers: { 'Content-Type': 'text/xml' }, // By default, Nitro will set the content type to text/html
+      },
+      '/blog/rss.xml': {
+        prerender: true,
+        headers: { 'Content-Type': 'text/xml' }, // By default, Nitro will set the content type to text/html
+      },
+      '/learn/rss.xml': { // TODO: update for new navigation to /resources in the future
+        prerender: true,
+        headers: { 'Content-Type': 'text/xml' }, // By default, Nitro will set the content type to text/html
+      },
+      '/build/rss.xml': { // TODO: update for new navigation to /resources in the future
+        prerender: true,
+        headers: { 'Content-Type': 'text/xml' }, // By default, Nitro will set the content type to text/html
+      },
+      '/explore/rss.xml': { // TODO: update for new navigation to /resources in the future
+        prerender: true,
+        headers: { 'Content-Type': 'text/xml' }, // By default, Nitro will set the content type to text/html
       },
     },
   },
@@ -70,6 +98,13 @@ export default defineNuxtConfig({
         exclude: ['/build/**', '/explore/**', '/learn/**', '/blog/**', '/packages/**'],
       },
     },
+  },
+  ogImage: {
+    defaults: {
+      width: 1920,
+      height: 1080,
+    },
+    fonts: ['Nunito:300', 'Nunito:400', 'Nunito:500', 'Nunito:600', 'Nunito:700', 'Nunito:800'],
   },
   routeRules: {
     '/bundle-runner': { redirect: { to: '/packages/bundle-runner', statusCode: 301 } },
