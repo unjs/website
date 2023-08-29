@@ -17,6 +17,7 @@ export default defineNuxtConfig({
     'nuxt-simple-robots',
     'nuxt-simple-sitemap',
     'nuxt-schema-org',
+    'nuxt-og-image',
     '@nuxthq/studio',
     '@nuxtjs/plausible',
   ],
@@ -97,6 +98,13 @@ export default defineNuxtConfig({
         exclude: ['/build/**', '/explore/**', '/learn/**', '/blog/**', '/packages/**'],
       },
     },
+  },
+  ogImage: {
+    defaults: {
+      width: 1920,
+      height: 1080,
+    },
+    fonts: ['Nunito:300', 'Nunito:400', 'Nunito:500', 'Nunito:600', 'Nunito:700', 'Nunito:800'],
   },
   routeRules: {
     '/bundle-runner': { redirect: { to: '/packages/bundle-runner', statusCode: 301 } },
