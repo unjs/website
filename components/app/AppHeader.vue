@@ -22,24 +22,18 @@ useEventListener('keydown', (event) => {
   <header h-3.75rem p="x-3 md:x-6 y-3" rounded-4 border="~ light" bg="white" flex="~ row items-center" text-gray-900>
     <div flex="1 ~">
       <NuxtLink to="/">
-        <AppLogo content-class="lg:hidden xl:block" />
+        <AppLogo />
       </NuxtLink>
     </div>
     <nav v-if="navigation" flex="lg:~ 1 justify-center" class="hidden">
-      <ul flex="~" gap="3" leading-5 class="text-[1.125rem]">
+      <ul flex="~" gap="4" leading-5 class="text-[1.125rem]">
         <li v-for="item in navigation" :key="item._path">
-          <NuxtLink v-if="!item.wip" :to="item._path" class="py-[0.375rem] rounded-[0.375rem]" px-3 flex="~" gap-2 hover:bg-primary hover:bg-opacity-30 transition ease-in duration-150 active-class="bg-primary bg-opacity-30">
+          <NuxtLink :to="item._path" class="py-[0.375rem] rounded-[0.375rem]" px-3 flex="~" gap-2 hover:bg-primary hover:bg-opacity-30 transition ease-in duration-150 active-class="bg-primary bg-opacity-30">
             <span :class="item.icon" w-5 h-5 block />
             <span>
               {{ item.title }}
             </span>
           </NuxtLink>
-          <span v-else class="py-[0.375rem] rounded-[0.375rem]" px-3 flex="~" gap-2 opacity-50 cursor-pointer>
-            <span :class="item.icon" w-5 h-5 block />
-            <span>
-              {{ item.title }}
-            </span>
-          </span>
         </li>
       </ul>
     </nav>
@@ -56,8 +50,8 @@ useEventListener('keydown', (event) => {
           Menu
         </span>
       </button>
-      <NuxtLink :title="twitter.name" :rel="twitter.rel" :target="twitter.target" :to="twitter.url" class="hidden" lg:block w-7 h-7 :class="twitter.icon" />
-      <NuxtLink :title="github.name" :rel="github.rel" :target="github.target" :to="github.url" class="hidden" lg:block w-7 h-7 :class="github.icon" />
+      <NuxtLink :title="twitter.name" :rel="twitter.rel" :target="twitter.target" :to="twitter.url" class="hidden" lg:block w-5 h-5 :class="twitter.icon" />
+      <NuxtLink :title="github.name" :rel="github.rel" :target="github.target" :to="github.url" class="hidden" lg:block w-5 h-5 :class="github.icon" />
     </div>
   </header>
   <AppNavigationDialog v-if="navigation" v-model:open="openNavigation" :navigation="navigation" />
