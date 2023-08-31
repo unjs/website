@@ -62,6 +62,9 @@ devDependencies:
   jiti:
     specifier: ^1.19.3
     version: 1.19.3
+  magicast:
+    specifier: ^0.2.10
+    version: 0.2.10
   markdownlint-cli:
     specifier: ^0.35.0
     version: 0.35.0

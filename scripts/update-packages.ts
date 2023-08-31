@@ -12,6 +12,7 @@ const branch = 'chore/update-packages'
  */
 async function main() {
   execSync('jiti scripts/repos-packages.ts --create --delete')
+  // TODO: handle redirects
 
   execSync('git config user.name "barbapapazes"')
   execSync('git config user.email "e.soubiran25@gmail.com"')
