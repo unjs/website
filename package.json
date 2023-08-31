@@ -11,7 +11,8 @@
     "lint:md:fix": "markdownlint --fix ./content && case-police --fix content/**/*",
     "prepare": "nuxt prepare",
     "preview": "nuxt preview",
-    "verify:packages": "jiti scripts/package-has-puzzle-part.ts && jiti scripts/puzzle-part-has-package.ts"
+    "verify:packages": "jiti scripts/package-has-puzzle-part && jiti scripts/puzzle-part-has-package",
+    "generate-redirects": "jiti scripts/generate-packages-redirects && pnpm run lint:fix"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.41.0",
@@ -33,6 +34,7 @@
     "consola": "^3.2.3",
     "eslint": "^8.47.0",
     "jiti": "^1.19.3",
+    "magicast": "^0.2.10",
     "markdownlint-cli": "^0.35.0",
     "minisearch": "^6.1.0",
     "nuxt": "^3.6.5",
