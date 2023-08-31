@@ -1,5 +1,5 @@
 import type { NitroConfig } from 'nitropack'
-import packagesRedirects from 'config/packages-redirects'
+import packagesRedirects from './config/packages-redirects'
 
 export default defineNuxtConfig({
   app: {
