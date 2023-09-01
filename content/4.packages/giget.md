@@ -1,7 +1,6 @@
 ---
 title: giget
 description: Download templates and git repositories with pleasure!
-icon: i-noto-sparkles
 github:
   owner: unjs
   repo: giget

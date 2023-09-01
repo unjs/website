@@ -1,7 +1,6 @@
 ---
 title: get-port-please
 description: Get an available open port
-icon: i-noto-electric-plug
 github:
   owner: unjs
   repo: get-port-please

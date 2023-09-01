@@ -1,7 +1,6 @@
 ---
 title: rc9
 description: Read/Write config couldn't be easier!
-icon: i-noto-abacus
 github:
   owner: unjs
   repo: rc9

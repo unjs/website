@@ -1,7 +1,6 @@
 ---
 title: fs-memo
 description: Easy persisted memo object for Node.js
-icon: i-noto-spiral-notepad
 github:
   owner: unjs
   repo: fs-memo

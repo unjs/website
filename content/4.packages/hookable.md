@@ -1,7 +1,6 @@
 ---
 title: hookable
 description: Awaitable Hooks
-icon: i-noto-hook
 github:
   owner: unjs
   repo: hookable
