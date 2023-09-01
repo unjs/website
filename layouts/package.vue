@@ -5,15 +5,13 @@ const documentation = computed(() => page.value.documentation)
 const owner = computed(() => page.value.github.owner)
 const repo = computed(() => page.value.github.repo)
 const description = computed(() => page.value.description)
-// TODO: export every icon from icones to use them as an icon in every packages
-const logo = computed(() => page.value.logo)
 
 defineOgImage({
   component: 'Package',
   owner: owner.value,
   repo: repo.value,
   description: description.value,
-  logo: logo.value,
+  logo: toPackageLogo(page.value.title),
 })
 </script>
 
