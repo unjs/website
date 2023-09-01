@@ -1,7 +1,6 @@
 ---
 title: unctx
 description: Composables in vanilla JS
-icon: i-noto-soft-ice-cream
 github:
   owner: unjs
   repo: unctx

@@ -1,7 +1,6 @@
 ---
 title: listhen
 description: Elegant HTTP Listener
-icon: i-noto-rocket
 github:
   owner: unjs
   repo: listhen

@@ -1,7 +1,6 @@
 ---
 title: untyped
 description: Generate types and markdown from a config object.
-icon: i-noto-wood
 github:
   owner: unjs
   repo: untyped
