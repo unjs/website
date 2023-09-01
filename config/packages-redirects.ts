@@ -3,364 +3,364 @@ export default {
   '/bundle-runner': {
     redirect: {
       to: '/packages/bundle-runner',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/c12': {
     redirect: {
       to: '/packages/c12',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/changelogen': {
     redirect: {
       to: '/packages/changelogen',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/citty': {
     redirect: {
       to: '/packages/citty',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/consola': {
     redirect: {
       to: '/packages/consola',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/cookie-es': {
     redirect: {
       to: '/packages/cookie-es',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/defu': {
     redirect: {
       to: '/packages/defu',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/destr': {
     redirect: {
       to: '/packages/destr',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/fs-memo': {
     redirect: {
       to: '/packages/fs-memo',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/get-port-please': {
     redirect: {
       to: '/packages/get-port-please',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/giget': {
     redirect: {
       to: '/packages/giget',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/h3': {
     redirect: {
       to: '/packages/h3',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/hookable': {
     redirect: {
       to: '/packages/hookable',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/httpxy': {
     redirect: {
       to: '/packages/httpxy',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/ipx': {
     redirect: {
       to: '/packages/ipx',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/jimp-compact': {
     redirect: {
       to: '/packages/jimp-compact',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/jiti': {
     redirect: {
       to: '/packages/jiti',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/knitwork': {
     redirect: {
       to: '/packages/knitwork',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/listhen': {
     redirect: {
       to: '/packages/listhen',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/magicast': {
     redirect: {
       to: '/packages/magicast',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/mkdist': {
     redirect: {
       to: '/packages/mkdist',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/mlly': {
     redirect: {
       to: '/packages/mlly',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/mongoz': {
     redirect: {
       to: '/packages/mongoz',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/nitro': {
     redirect: {
       to: '/packages/nitro',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/node-fetch-native': {
     redirect: {
       to: '/packages/node-fetch-native',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/nypm': {
     redirect: {
       to: '/packages/nypm',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/ofetch': {
     redirect: {
       to: '/packages/ofetch',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/ohash': {
     redirect: {
       to: '/packages/ohash',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/pathe': {
     redirect: {
       to: '/packages/pathe',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/perfect-debounce': {
     redirect: {
       to: '/packages/perfect-debounce',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/pkg-types': {
     redirect: {
       to: '/packages/pkg-types',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/radix3': {
     redirect: {
       to: '/packages/radix3',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/rc9': {
     redirect: {
       to: '/packages/rc9',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/scule': {
     redirect: {
       to: '/packages/scule',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/serve-placeholder': {
     redirect: {
       to: '/packages/serve-placeholder',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/std-env': {
     redirect: {
       to: '/packages/std-env',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/theme-colors': {
     redirect: {
       to: '/packages/theme-colors',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/ufo': {
     redirect: {
       to: '/packages/ufo',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/unbuild': {
     redirect: {
       to: '/packages/unbuild',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/uncrypto': {
     redirect: {
       to: '/packages/uncrypto',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/unctx': {
     redirect: {
       to: '/packages/unctx',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/unenv': {
     redirect: {
       to: '/packages/unenv',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/ungh': {
     redirect: {
       to: '/packages/ungh',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/unhead': {
     redirect: {
       to: '/packages/unhead',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/unimport': {
     redirect: {
       to: '/packages/unimport',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/unpdf': {
     redirect: {
       to: '/packages/unpdf',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/unplugin': {
     redirect: {
       to: '/packages/unplugin',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/unstorage': {
     redirect: {
       to: '/packages/unstorage',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/untun': {
     redirect: {
       to: '/packages/untun',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/untyped': {
     redirect: {
       to: '/packages/untyped',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/uqr': {
     redirect: {
       to: '/packages/uqr',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 
   '/webpackbar': {
     redirect: {
       to: '/packages/webpackbar',
-      statusCode: 301,
+      statusCode: 302,
     },
   },
 }

@@ -18,7 +18,7 @@ export default { }`)
 
   const from = '/'
   const to = '/packages/'
-  const redirectCode = 301 // Moved Permanently
+  const redirectCode = 302 // Temporary Redirect
 
   const redirects: NitroConfig['routeRules'] = {}
   for (const repo of repos.sort((a, b) => a.name > b.name ? 1 : -1)) {
