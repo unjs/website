@@ -20,6 +20,9 @@ export default defineNuxtConfig({
     '@nuxthq/studio',
     '@nuxtjs/plausible',
   ],
+  experimental: {
+    inlineSSRStyles: false, // Avoid CSS reset being applied after CSS
+  },
   css: [
     '~/assets/app.css',
   ],
