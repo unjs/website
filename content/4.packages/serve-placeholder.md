@@ -1,7 +1,6 @@
 ---
 title: serve-placeholder
 description: Smart placeholder for missing assets
-icon: i-noto-empty-nest
 github:
   owner: unjs
   repo: serve-placeholder

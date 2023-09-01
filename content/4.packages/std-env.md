@@ -1,7 +1,6 @@
 ---
 title: std-env
 description: Runtime agnostic JS utils
-icon: i-noto-green-apple
 github:
   owner: unjs
   repo: std-env

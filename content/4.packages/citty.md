@@ -1,7 +1,6 @@
 ---
 title: citty
 description: Elegant CLI Builder.
-icon: i-noto-cityscape-at-dusk
 github:
   owner: unjs
   repo: citty

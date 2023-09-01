@@ -1,7 +1,6 @@
 ---
 title: changelogen
 description: Generate Beautiful Changelogs using Conventional Commits.
-icon: i-noto-nail-polish-medium-light-skin-tone
 github:
   owner: unjs
   repo: changelogen

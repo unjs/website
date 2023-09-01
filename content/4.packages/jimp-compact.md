@@ -1,7 +1,6 @@
 ---
 title: jimp-compact
 description: Lightweight version of Jimp -- An image processing library written entirely in JavaScript for Node.js
-icon: i-noto-pencil
 github:
   owner: unjs
   repo: jimp-compact

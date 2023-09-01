@@ -66,8 +66,7 @@ useServerSeoMeta({
                 <ul flex="~" gap-3 text="sm gray-900" h-6>
                   <li v-for="package_ in packages" :key="package_._path">
                     <NuxtLink :to="package_._path" py-1 flex="~ items-center" gap-1>
-                      <img v-if="package_.logo" :src="package_.logo" w-4 h-4 width="16" height="16">
-                      <span v-else-if="package_.icon" w-4 h-4 :class="package_.icon" />
+                      <img :src="toPackageLogo(package_.title)" :alt="`Logo of ${package_.title}`" w-4 h-4 width="16" height="16">
                       <span>{{ package_.title }}</span>
                     </NuxtLink>
                   </li>

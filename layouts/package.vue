@@ -74,8 +74,7 @@ defineOgImage({
       <article>
         <header flex="~ col items-start" gap="1">
           <div flex="~ items-center" gap="4">
-            <img v-if="page.logo" :src="page.logo" :alt="`Logo from ${page.title}`" width="28" height="28" w-7 h-7>
-            <span v-else-if="page.icon" :class="page.icon" w-7 h-7 block />
+            <img :src="toPackageLogo(page.title)" :alt="`Logo from ${page.title}`" width="28" height="28" w-7 h-7>
             <h1 text="gray-900 2xl md:3xl" font="bold" tracking="wide">
               {{ page.title }}
             </h1>
