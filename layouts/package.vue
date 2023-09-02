@@ -8,7 +8,7 @@ const documentation = computed(() => page.value.documentation)
   <Head>
     <SchemaOrgWebPage :type="['ItemPage']" />
   </Head>
-  <div m="y-6 md:y-10" p="x-4 md:x-6 t-6 md:t-10 b-10 md:b-20" grid="~ cols-1 xl:cols-[1fr_auto_1fr] items-start" gap="6 xl:8" rounded="4" bg="white">
+  <div m="y-6 md:y-10" p="x-4 md:x-6 t-6 md:t-10 b-10 md:b-20" grid="~ cols-1 md:cols-[1fr_auto]  xl:cols-[1fr_auto_1fr] items-start" gap="6 xl:x-8 xl:y-12" rounded="4" bg="white">
     <div flex="~ justify-start">
       <NuxtLink to="/packages" flex="~ items-center" gap="1" class="group">
         <span i-heroicons-chevron-left-20-solid block w-4 h-4 text="gray-400 group-hover:gray-600" transition="~ ease-in duration-150" />
@@ -18,7 +18,7 @@ const documentation = computed(() => page.value.documentation)
       </NuxtLink>
     </div>
 
-    <nav row-start-3 xl="row-start-1 col-start-3" xl:sticky top="4" flex="~ col items-center" gap="6 xl:4">
+    <nav md="row-start-2 col-start-2" xl="row-start-1 col-start-3" xl:sticky top="4" flex="~ col items-center" gap="6 xl:4">
       <NuxtLink :to="documentation" target="_blank" rel="noopener" w-full p="x-3 y-2" rounded="0.375rem" bg="primary hover:op-80" flex="~ justify-center items-center" gap-2 text-gray-900 transition="~ ease-in duration-150">
         <span>
           Documentation
@@ -57,7 +57,7 @@ const documentation = computed(() => page.value.documentation)
       </div>
     </nav>
 
-    <main max-w-screen-md lg="mx-auto w-screen-md" xl="row-start-1 col-start-2">
+    <main row-start-2 md="row-start-1 col-start-2" max-w-screen-md lg="mx-auto w-screen-md" xl="row-start-1 col-start-2">
       <article>
         <header flex="~ col items-start" gap="1">
           <div flex="~ items-center" gap="4">
@@ -75,5 +75,9 @@ const documentation = computed(() => page.value.documentation)
         </div>
       </article>
     </main>
+
+    <div row-start-4 md="row-start-3 col-start-2" xl="row-start-2 col-start-2">
+      <PackagesLatestNews :name="page.title" />
+    </div>
   </div>
 </template>
