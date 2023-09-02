@@ -76,8 +76,6 @@ const documentation = computed(() => page.value.documentation)
       </article>
     </main>
 
-    <div row-start-4 md="row-start-3 col-start-2" xl="row-start-2 col-start-2">
-      <PackagesLatestNews :name="page.title" />
-    </div>
+    <PackagesLatestNews row-start-4 md="row-start-3 col-start-2" xl="row-start-2 col-start-2" :name="page.title" />
   </div>
 </template>

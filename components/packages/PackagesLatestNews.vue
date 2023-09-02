@@ -3,11 +3,11 @@ const props = defineProps<{
   name: string
 }>()
 
-const { data: posts } = useAsyncData(`latest-news:${props.name}`, () => queryContent('/blog/').sort({ publishedAt: -1 }).limit(2).only(['title', 'description', 'publishedAt', 'authors', '_path']).find())
+const { data: posts } = useAsyncData(`latest-news:${props.name}`, () => queryContent('/blog/').sort({ publishedAt: -1 }).where({ packages: { $contains: props.name } }).limit(2).only(['title', 'description', 'publishedAt', 'authors', '_path']).find())
 </script>
 
 <template>
-  <section>
+  <section v-if="posts && posts.length">
     <h2 text="gray-900 2xl" font="semibold">
       Latest News about {{ name }}
     </h2>
