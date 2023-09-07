@@ -2,6 +2,10 @@
 const { page } = useContent()
 
 const documentation = computed(() => page.value.documentation)
+
+const data = await useFetch('/api/github/unjs/nitro/contributors')
+
+console.log(data)
 </script>
 
 <template>
