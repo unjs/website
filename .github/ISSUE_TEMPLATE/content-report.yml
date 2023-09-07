@@ -1,0 +1,30 @@
+name: "📰 Content Suggestion"
+description: Suggest an improvement to the website content
+labels: ["pending triage"]
+body:
+  - type: markdown
+    attributes:
+      value: Thank you for taking the time to fill out this content suggestion!
+  - type: textarea
+    id: content-suggestion
+    attributes:
+      label: Describe the change
+      description: A clear and concise description of what you think would be a helpful addition, including the possible use cases and alternatives you have considered. If you have a working prototype or module that implements it, please include a link.
+      placeholder: Content suggestion
+    validations:
+      required: true
+  - type: textarea
+    id: content-urls
+    attributes:
+      label: URLs
+      description: A list (or a link) to the URLs that you think should be changed (if applicable).
+      placeholder: URLs
+    validations:
+      required: false
+  - type: checkboxes
+    id: additional-info
+    attributes:
+      label: Additional information
+      description: Additional information that helps us decide how to proceed.
+      options:
+        - label: Would you be willing to help?
