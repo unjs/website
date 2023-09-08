@@ -1,6 +1,6 @@
-name: "📰 Content Suggestion"
+name: 📰 Content Suggestion
 description: Suggest an improvement to the website content
-labels: ["pending triage"]
+labels: [pending triage]
 body:
   - type: markdown
     attributes:

@@ -1,7 +1,7 @@
-name: "\U0001F41E Bug Report"
+name: 🐞 Bug Report
 description: Report an Issue or a Bug
 # Labels must be prepared in advance, otherwise no labels are applied
-labels: ["pending triage"]
+labels: [pending triage]
 body:
   - type: markdown
     attributes:
