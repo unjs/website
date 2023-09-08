@@ -27,5 +27,7 @@ const { page } = useContent()
         </div>
       </article>
     </main>
+
+    <PackageLatestNews xl="row-start-2 col-start-2" :name="page.title" />
   </div>
 </template>
