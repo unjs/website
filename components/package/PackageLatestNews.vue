@@ -14,7 +14,7 @@ const { data: posts } = useAsyncData(`latest-news:${props.name}`, () => queryCon
     <ol m="t-6" grid="~ cols-2 gap-6">
       <li v-for="post in posts" :key="post._path">
         <!-- TODO: create a component -->
-        <article relative flex="~ col gap-4">
+        <article relative flex="~ col gap-4" p="4" rounded="xl" border="~ gray-300 hover:gray-400" bg="gray-300 op-10 hover:op-15" transition="~ ease-in duration-150">
           <NuxtLink :to="post._path">
             <h3 text="gray-900 xl" font="semibold">
               {{ post.title }}
