@@ -3,7 +3,10 @@ const { page } = useContent()
 
 const documentation = computed(() => page.value.documentation)
 
-const data = await useFetch('/api/github/unjs/nitro/contributors')
+const owner = computed(() => page.value.github.owner)
+const repo = computed(() => page.value.github.repo)
+console.log(`/repos/${owner.value}/${repo.value}/contributors`)
+const data = await useFetch(`/repos/${owner.value}/${repo.value}/contributors`)
 
 console.log(data)
 </script>

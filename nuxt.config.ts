@@ -56,15 +56,22 @@ export default defineNuxtConfig({
         prerender: true,
         headers: { 'Content-Type': 'text/xml' }, // By default, Nitro will set the content type to text/html
       },
-      // TODO: missing a way to rewrite the URL
-      // '/**': {
-      //   proxy: {
-      //     to: 'https://ungh.cc'
-      //   },
-      //   cache: {
-      //     maxAge: 24 * 60 * 60 * 1000 // 24h
-      //   }
-      // },
+      '/repos/**': {
+        proxy: {
+          to: 'https://ungh.cc/'
+        },
+        cache: {
+          maxAge: 24 * 60 * 60 * 1000 // 24h
+        }
+      },
+      '/stars/**': {
+        proxy: {
+          to: 'https://ungh.cc'
+        },
+        cache: {
+          maxAge: 24 * 60 * 60 * 1000 // 24h
+        }
+      },
     },
   },
   content: {
