@@ -37,7 +37,7 @@ const { data: posts } = useAsyncData(`latest-news:${props.name}`, () => queryCon
               Authors
             </dt>
             <dd>
-              <ul>
+              <ul flex="~" space-x-1>
                 <li v-for="author in post.authors" :key="author.name">
                   <img :src="author.picture" :alt="`Picture of ${author.name}`" width="20" height="20" w-5 h-5 rounded-full>
                 </li>

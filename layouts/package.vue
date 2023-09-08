@@ -6,7 +6,7 @@ const { page } = useContent()
   <Head>
     <SchemaOrgWebPage :type="['ItemPage']" />
   </Head>
-  <div m="y-6 md:y-10" p="x-4 md:x-6 t-6 md:t-10 b-10 md:b-20" grid="~ cols-1 md:cols-[1fr_auto]  xl:cols-[1fr_auto_1fr] items-start" gap="6 xl:x-8 xl:y-12" rounded="4" bg="white">
+  <div m="y-6 md:y-10" p="x-4 md:x-6 t-6 md:t-10 b-10 md:b-20" grid="~ xl:cols-[1fr_auto_1fr] items-start" gap="6 xl:8" rounded="4" bg="white">
     <div flex="~ justify-start">
       <NuxtLink to="/packages" flex="~ items-center" gap="1" class="group">
         <span i-heroicons-chevron-left-20-solid block w-4 h-4 text="gray-400 group-hover:gray-600" transition="~ ease-in duration-150" />
@@ -18,7 +18,7 @@ const { page } = useContent()
 
     <PackageMetadata row-start-3 xl="row-start-1 col-start-3" xl:sticky top="4" :documentation="page.documentation" :github="page.github" :npm="page.npm" />
 
-    <main row-start-2 md="row-start-1 col-start-2" max-w-screen-md lg="mx-auto w-screen-md" xl="row-start-1 col-start-2">
+    <main lg="mx-auto w-screen-md" xl="row-start-1 col-start-2">
       <article>
         <PackageHeader :name="page.title" :description="page.description" />
 
@@ -28,6 +28,6 @@ const { page } = useContent()
       </article>
     </main>
 
-    <PackagesLatestNews row-start-4 md="row-start-3 col-start-2" xl="row-start-2 col-start-2" :name="page.title" />
+    <PackageLatestNews xl="row-start-2 col-start-2" :name="page.title" />
   </div>
 </template>
