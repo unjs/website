@@ -1,0 +1,31 @@
+name: autofix.ci # needed to securely identify the workflow
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  autofix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # v4
+      - run: corepack enable
+      - uses: actions/setup-node@5e21ff4d9bc1a8cf6de233a3057d20ec6b3fb69d # v3
+        with:
+          node-version: 20.5
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Format files
+        run: pnpm run lint:fix
+
+      - name: Format Markdown files
+        run: pnpm run lint:md:fix
+
+      - uses: autofix-ci/action@8caa572fd27b0019a65e4c695447089c8d3138b9
