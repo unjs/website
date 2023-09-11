@@ -23,7 +23,11 @@ const { page } = useContent()
         <PackageHeader :name="page.title" :description="page.description" />
 
         <div mt-6 xl:mt-12 prose prose-gray max-w-none>
-          <slot />
+          <ContentDoc>
+            <template #empty>
+              <PackageReadme :github="page.github" />
+            </template>
+          </ContentDoc>
         </div>
       </article>
     </main>
