@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const { data: packages } = await useAsyncData('packages', () => queryContent('/packages/').find())
+const { data: packages } = await useAsyncData('content:packages', () => queryContent('/packages/').find())
 </script>
 
 <template>

@@ -2,7 +2,7 @@ import MiniSearch, { type Options as MiniSearchOptions } from 'minisearch'
 import type { SearchDisplay, SearchDisplayItem, SearchResult } from '~/types/search'
 
 export async function useSearchDefaultResults(): Promise<ComputedRef<SearchDisplay>> {
-  const { data: packages } = await useAsyncData('packages', () => queryContent('/packages/').only(['title', '_path']).find())
+  const { data: packages } = await useAsyncData('content:search:packages', () => queryContent('/packages/').only(['title', '_path']).find())
 
   return computed(() => {
     if (!packages.value)
