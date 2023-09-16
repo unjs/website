@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import type { Package, PackageCard } from 'types/package'
+import type { Package, PackageCard } from '~/types/package'
 
-const { data: packages } = await useAsyncData<PackageCard[]>('packages', () => queryContent<Package>('/packages/').find(), {
+const { data: packages } = await useAsyncData<PackageCard[]>('content:packages', () => queryContent<Package>('/packages/').find(), {
   transform: data => data.map((item) => {
     const { title, description, logo, icon, _path, documentation, github } = item
     return { title, description, logo, icon, _path, documentation, github }
@@ -22,8 +22,7 @@ const { data: packages } = await useAsyncData<PackageCard[]>('packages', () => q
       <ol grid="~ cols-1 sm:cols-2 lg:cols-3" gap="4 md:6">
         <li v-for="package_ in packages" :key="package_._path" relative p="4" rounded="4" bg="white" flex="~ col" gap="3" hover:shadow-xl transition="~ ease-in duration-150">
           <div flex="~ items-center" gap="2">
-            <img v-if="package_.logo" :src="package_.logo" :alt="`Logo of ${package_.title}`" w-5 h-5>
-            <span v-if="package_.icon" :class="package_.icon" w-5 h-5 />
+            <img :src="toPackageLogo(package_.title!)" :alt="`Logo of ${package_.title}`" w-5 h-5>
             <NuxtLink :to="package_._path">
               <h3 text="gray-900 lg md:xl" font="semibold">
                 {{ package_.title }}

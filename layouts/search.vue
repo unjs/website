@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { Combobox } from '@headlessui/vue'
-import type { SearchDisplayItem } from 'types/search'
+import type { SearchDisplayItem } from '~/types/search'
 
 const route = useRoute()
 

@@ -10,7 +10,7 @@ const { data: article } = await useAsyncData(`article:${props.link}`, () => quer
 <template>
   <div class="not-prose my-8 flex flex-col gap-2">
     <p text="gray-600">
-      {{ text ?? 'Read more' }}
+      {{ text ?? 'Read more:' }}
     </p>
     <article v-if="article" class="group" relative border="~ gray-300 hover:gray-400" bg="gray-300 op-10 hover:op-15" rounded="xl" transition="~ ease-in duration-150">
       <!-- TODO: handle image -->

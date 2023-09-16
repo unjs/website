@@ -1,8 +1,8 @@
 import MiniSearch, { type Options as MiniSearchOptions } from 'minisearch'
-import type { SearchDisplay, SearchDisplayItem, SearchResult } from 'types/search'
+import type { SearchDisplay, SearchDisplayItem, SearchResult } from '~/types/search'
 
 export async function useSearchDefaultResults(): Promise<ComputedRef<SearchDisplay>> {
-  const { data: packages } = await useAsyncData('packages', () => queryContent('/packages/').find())
+  const { data: packages } = await useAsyncData('content:search:packages', () => queryContent('/packages/').only(['title', '_path']).find())
 
   return computed(() => {
     if (!packages.value)
@@ -27,9 +27,9 @@ export async function useSearchDefaultResults(): Promise<ComputedRef<SearchDispl
   })
 }
 
-export async function useSearchResults(search: MaybeRefOrGetter<string>): Promise<ComputedRef<SearchDisplay>> {
+export async function useSearchResults(search: MaybeRefOrGetter<string>, options: { lazy?: boolean; server?: boolean } = {}): Promise<ComputedRef<SearchDisplay>> {
   const website = useWebsite()
-  const searchResults = await useSearch(search)
+  const searchResults = await useSearch(search, options)
 
   return computed(() => {
     if (!searchResults.value)
@@ -74,27 +74,29 @@ export async function useSearchResults(search: MaybeRefOrGetter<string>): Promis
   })
 }
 
-export async function useSearch(search: MaybeRefOrGetter<string>): Promise<ComputedRef<SearchResult[]>> {
-  const { data } = await useFetch<string>('/api/search.txt')
+export async function useSearch(search: MaybeRefOrGetter<string>, options: { lazy?: boolean; server?: boolean } = {}): Promise<ComputedRef<SearchResult[]>> {
+  const { data } = await useFetch<string>('/api/search.txt', options)
 
-  if (!data.value)
-    return computed(() => [])
+  return computed(() => {
+    if (!data.value)
+      return [] as SearchResult[]
 
-  const { results } = useIndexedMiniSearch(search, data as Ref<string>, {
-    fields: ['title', 'titles', 'text'],
-    storeFields: ['title', 'titles', 'text', 'level'],
-    searchOptions: {
-      prefix: true,
-      fuzzy: 0.2,
-      boost: {
-        title: 4,
-        text: 2,
-        titles: 1,
+    const { results } = useIndexedMiniSearch(search, data as Ref<string>, {
+      fields: ['title', 'titles', 'text'],
+      storeFields: ['title', 'titles', 'text', 'level'],
+      searchOptions: {
+        prefix: true,
+        fuzzy: 0.2,
+        boost: {
+          title: 4,
+          text: 2,
+          titles: 1,
+        },
       },
-    },
-  })
+    })
 
-  return results
+    return results.value
+  })
 }
 
 function useIndexedMiniSearch(search: MaybeRefOrGetter<string>, indexedData: MaybeRefOrGetter<string>, options: MiniSearchOptions) {
