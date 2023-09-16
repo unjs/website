@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { Combobox, Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
-import type { SearchDisplayItem } from 'types/search'
 import AppSearchInput from './search/AppSearchInput.vue'
+import type { SearchDisplayItem } from '~/types/search'
 
 defineProps<{
   open: boolean
@@ -15,7 +15,7 @@ const selected = ref<SearchDisplayItem | null>(null)
 const query = ref('')
 
 const queryDebounced = refDebounced(query, 100)
-const results = await useSearchResults(queryDebounced)
+const results = await useSearchResults(queryDebounced, { lazy: true, server: false }) // Options to avoid to add `/api/search.txt` to the payload
 
 const defaultOptions = await useSearchDefaultResults()
 
