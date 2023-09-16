@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const { data } = await useAsyncData('no-articles', () => queryContent('/_no-articles').findOne())
+const { data } = await useAsyncData('no-articles', () => queryContent('/_no-articles').only('body').findOne())
 </script>
 
 <template>

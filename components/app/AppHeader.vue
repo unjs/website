@@ -3,7 +3,7 @@ const website = useWebsite()
 const github = website.value.socials.github
 const twitter = website.value.socials.twitter
 
-const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation(queryContent('/')), {
+const { data: navigation } = await useAsyncData('content:navigation', () => fetchContentNavigation(queryContent('/')), {
   transform: data => data.filter(item => item._path !== '/').map((item) => {
     const { title, icon, _path } = item
     return { title, icon, _path }

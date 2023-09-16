@@ -1,12 +1,7 @@
 <script lang="ts" setup>
-import type { Package, PackageCard } from '~/types/package'
+import type { Package } from '~/types/package'
 
-const { data: packages } = await useAsyncData<PackageCard[]>('content:packages', () => queryContent<Package>('/packages/').find(), {
-  transform: data => data.map((item) => {
-    const { title, description, logo, icon, _path, documentation, github } = item
-    return { title, description, logo, icon, _path, documentation, github }
-  }),
-})
+const { data: packages } = await useAsyncData('content:packages', () => queryContent<Package>('/packages/').only(['title', 'description', 'logo', 'icon', '_path', 'documentation', 'github']).find())
 </script>
 
 <template>
