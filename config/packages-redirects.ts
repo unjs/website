@@ -91,13 +91,6 @@ export default {
     },
   },
 
-  '/httpxy': {
-    redirect: {
-      to: '/packages/httpxy',
-      statusCode: 302,
-    },
-  },
-
   '/ipx': {
     redirect: {
       to: '/packages/ipx',
@@ -311,13 +304,6 @@ export default {
   '/unimport': {
     redirect: {
       to: '/packages/unimport',
-      statusCode: 302,
-    },
-  },
-
-  '/unpdf': {
-    redirect: {
-      to: '/packages/unpdf',
       statusCode: 302,
     },
   },
