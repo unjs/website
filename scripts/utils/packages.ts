@@ -72,6 +72,22 @@ export async function addPackageRedirectRouteRule(name: string) {
 
   redirectsFile.exports.default[`/${name}`] = createRedirectRouteRule(name)
 
+  const sortedDefault = redirectsFile.exports.default.sort((a: NitroRouteConfig, b: NitroRouteConfig) => {
+    if (!a.redirect || !b.redirect)
+      return 0
+
+    if (typeof a.redirect === 'string' || typeof b.redirect === 'string')
+      return 0
+
+    if (a.redirect.to < b.redirect.to)
+      return -1
+    if (a.redirect.to > b.redirect.to)
+      return 1
+    return 0
+  })
+
+  redirectsFile.exports.default = sortedDefault
+
   await writeFile(redirectsFile.$ast, packagesRedirectsPath)
 }
 

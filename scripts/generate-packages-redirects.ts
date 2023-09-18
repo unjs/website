@@ -28,7 +28,7 @@ export default { }`)
 
   redirectsFile.exports.default = redirects
 
-  await writeFile(redirectsFile.$ast, redirectsFilePath)
+  await writeFile(redirectsFile, redirectsFilePath)
 
   consola.info('Packages Redirects Generated.')
 }
