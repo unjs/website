@@ -1,7 +1,8 @@
 import { consola } from 'consola'
 import { parseModule, writeFile } from 'magicast'
-import type { NitroConfig, NitroRouteConfig } from 'nitropack'
-import { fetchRepos } from './_repos'
+import type { NitroConfig } from 'nitropack'
+import { createRedirectRouteRule } from './utils/packages'
+import { fetchRepos } from './utils/repos'
 
 /**
  * Used to generate every package redirect from `/<package-name>` to `/packages/<package-name>`.
@@ -17,18 +18,11 @@ export default { }`)
   const repos = await fetchRepos()
 
   const from = '/'
-  const to = '/packages/'
-  const redirectCode = 302 // Temporary Redirect
 
   const redirects: NitroConfig['routeRules'] = {}
   for (const repo of repos.sort((a, b) => a.name > b.name ? 1 : -1)) {
     const name = repo.name
-    const redirect: NitroRouteConfig = {
-      redirect: {
-        to: `${to}${name}`,
-        statusCode: redirectCode,
-      },
-    }
+    const redirect = createRedirectRouteRule(name)
     redirects[`${from}${name}`] = redirect
   }
 
