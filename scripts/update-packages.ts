@@ -3,7 +3,7 @@ import { execSync } from 'node:child_process'
 import { consola } from 'consola'
 import { ofetch } from 'ofetch'
 import { fetchRepos } from './utils/repos'
-import { addPackageRedirectRouteRule, createPackage, getContentPackages, getPackagesWithoutRepo, getReposWithoutPackage, removePackage, removePackageRedirectRouteRule, sortPackageRedirectRouteRules } from './utils/packages'
+import { createPackage, generatePackagesRedirections, getContentPackages, getPackagesWithoutRepo, getReposWithoutPackage, removePackage } from './utils/packages'
 import type { GitHubRepo } from './types'
 
 const owner = 'unjs'
@@ -66,14 +66,12 @@ async function createPR(package_: string, repos: GitHubRepo[], operation: 'add' 
       process.exit(1)
     }
     createPackage(repo)
-    await addPackageRedirectRouteRule(package_)
   }
   else if (operation === 'remove') {
     removePackage(package_)
-    await removePackageRedirectRouteRule(package_)
   }
 
-  await sortPackageRedirectRouteRules()
+  await generatePackagesRedirections()
 
   execSync('git add ./config/packages-redirects.ts')
   execSync(`git add ./content/4.packages/${package_}.md`)

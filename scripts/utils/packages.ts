@@ -1,6 +1,6 @@
 import { readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
-import type { NitroRouteConfig } from 'nitropack'
-import { loadFile, writeFile } from 'magicast'
+import type { NitroConfig, NitroRouteConfig } from 'nitropack'
+import { parseModule, writeFile } from 'magicast'
 import type { GitHubRepo } from '../types'
 
 /**
@@ -62,39 +62,24 @@ export function createRedirectRouteRule(name: string): NitroRouteConfig {
   }
 }
 
-const packagesRedirectsPath = './config/packages-redirects.ts'
-
 /**
- * Add a redirect rule for a package in the config file.
+ * Generate the redirects file for packages. `content` folder is the source of truth.
  */
-export async function addPackageRedirectRouteRule(name: string) {
-  const redirectsFile = await loadFile(packagesRedirectsPath)
+export async function generatePackagesRedirections() {
+  const packagesRedirectsPath = './config/packages-redirects.ts'
+  const redirectsFile = parseModule(`/** Generated using a ./scripts/generate-packages-redirects. */
+export default { }`)
 
-  redirectsFile.exports.default[`/${name}`] = createRedirectRouteRule(name)
+  const packages = getContentPackages()
+
+  const from = '/'
+
+  const redirects: NitroConfig['routeRules'] = {}
+
+  for (const package_ of packages)
+    redirects[`${from}${package_}`] = createRedirectRouteRule(package_)
+
+  redirectsFile.exports.default = redirects
 
   await writeFile(redirectsFile, packagesRedirectsPath)
-}
-
-/**
- * Remove a redirect rule for a package from the config file.
- */
-export async function removePackageRedirectRouteRule(name: string) {
-  const redirectsFile = await loadFile(packagesRedirectsPath)
-
-  delete redirectsFile.exports.default[`/${name}`]
-
-  await writeFile(redirectsFile, packagesRedirectsPath)
-}
-
-/**
- * Sort the redirect rules in the config file.
- */
-export async function sortPackageRedirectRouteRules() {
-  const redirectFile = await loadFile(packagesRedirectsPath)
-
-  const sortedRedirects = Object.fromEntries(Object.entries(redirectFile.exports.default).sort(([a], [b]) => a.localeCompare(b)))
-
-  redirectFile.exports.default = sortedRedirects
-
-  await writeFile(redirectFile, packagesRedirectsPath)
 }
