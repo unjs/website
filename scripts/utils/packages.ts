@@ -70,7 +70,7 @@ const packagesRedirectsPath = './config/packages-redirects.ts'
 export async function addPackageRedirectRouteRule(name: string) {
   const redirectsFile = await loadFile(packagesRedirectsPath)
 
-  redirectsFile.exports.default[`${name}`] = createRedirectRouteRule(name)
+  redirectsFile.exports.default[`/${name}`] = createRedirectRouteRule(name)
 
   await writeFile(redirectsFile.$ast, packagesRedirectsPath)
 }
@@ -81,7 +81,7 @@ export async function addPackageRedirectRouteRule(name: string) {
 export async function removePackageRedirectRouteRule(name: string) {
   const redirectsFile = await loadFile(packagesRedirectsPath)
 
-  delete redirectsFile.exports.default[`${name}`]
+  delete redirectsFile.exports.default[`/${name}`]
 
   await writeFile(redirectsFile.$ast, packagesRedirectsPath)
 }
