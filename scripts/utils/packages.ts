@@ -72,22 +72,6 @@ export async function addPackageRedirectRouteRule(name: string) {
 
   redirectsFile.exports.default[`/${name}`] = createRedirectRouteRule(name)
 
-  const sortedDefault = redirectsFile.exports.default.sort((a: NitroRouteConfig, b: NitroRouteConfig) => {
-    if (!a.redirect || !b.redirect)
-      return 0
-
-    if (typeof a.redirect === 'string' || typeof b.redirect === 'string')
-      return 0
-
-    if (a.redirect.to < b.redirect.to)
-      return -1
-    if (a.redirect.to > b.redirect.to)
-      return 1
-    return 0
-  })
-
-  redirectsFile.exports.default = sortedDefault
-
   await writeFile(redirectsFile.$ast, packagesRedirectsPath)
 }
 
@@ -100,4 +84,17 @@ export async function removePackageRedirectRouteRule(name: string) {
   delete redirectsFile.exports.default[`/${name}`]
 
   await writeFile(redirectsFile.$ast, packagesRedirectsPath)
+}
+
+/**
+ * Sort the redirect rules in the config file.
+ */
+export async function sortPackageRedirectRouteRules() {
+  const redirectFile = await loadFile(packagesRedirectsPath)
+
+  const sortedRedirects = Object.fromEntries(Object.entries(redirectFile.exports.default).sort(([a], [b]) => a.localeCompare(b)))
+
+  redirectFile.exports.default = sortedRedirects
+
+  await writeFile(redirectFile.$ast, packagesRedirectsPath)
 }
