@@ -91,6 +91,13 @@ export default {
     },
   },
 
+  '/httpxy': {
+    redirect: {
+      to: '/packages/httpxy',
+      statusCode: 302,
+    },
+  },
+
   '/ipx': {
     redirect: {
       to: '/packages/ipx',
