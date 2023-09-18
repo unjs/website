@@ -72,7 +72,7 @@ export async function addPackageRedirectRouteRule(name: string) {
 
   redirectsFile.exports.default[`/${name}`] = createRedirectRouteRule(name)
 
-  await writeFile(redirectsFile.$ast, packagesRedirectsPath)
+  await writeFile(redirectsFile, packagesRedirectsPath)
 }
 
 /**
@@ -83,7 +83,7 @@ export async function removePackageRedirectRouteRule(name: string) {
 
   delete redirectsFile.exports.default[`/${name}`]
 
-  await writeFile(redirectsFile.$ast, packagesRedirectsPath)
+  await writeFile(redirectsFile, packagesRedirectsPath)
 }
 
 /**
@@ -96,5 +96,5 @@ export async function sortPackageRedirectRouteRules() {
 
   redirectFile.exports.default = sortedRedirects
 
-  await writeFile(redirectFile.$ast, packagesRedirectsPath)
+  await writeFile(redirectFile, packagesRedirectsPath)
 }
