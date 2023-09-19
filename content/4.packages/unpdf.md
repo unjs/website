@@ -1,6 +1,6 @@
 ---
 title: unpdf
-description: 📄 Utilities to work with PDFs in Node.js, browser and workers
+description: Utilities to work with PDFs in Node.js, browser and workers
 github:
   owner: unjs
   repo: unpdf
