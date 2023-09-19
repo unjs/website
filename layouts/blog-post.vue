@@ -138,7 +138,7 @@ function scrollToTop(close: () => void) {
         </header>
 
         <!-- TODO: create a component -->
-        <Popover relative sticky z-9999 top="0">
+        <Popover relative sticky z-20 top="0">
           <PopoverButton py="2" bg="white" class="xl:hidden" type="button" w-full flex="~ items-center" gap="2" text="right gray-700 sm">
             <span i-heroicons-list-bullet-20-solid block w-4 h-4 />
             <span>On this page</span>
