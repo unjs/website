@@ -11,8 +11,8 @@
     "lint:md:fix": "markdownlint --fix ./content && case-police --fix content/**/*",
     "prepare": "nuxt prepare",
     "preview": "nuxt preview",
-    "verify:packages": "jiti scripts/package-has-puzzle-part && jiti scripts/puzzle-part-has-package",
-    "generate-redirects": "jiti scripts/generate-packages-redirects && pnpm run lint:fix"
+    "packages:verify": "jiti scripts/logos-packages && jiti scripts/puzzle-packages",
+    "packages:redirects": "jiti scripts/generate-packages-redirects && pnpm run lint:fix"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.43.0",
