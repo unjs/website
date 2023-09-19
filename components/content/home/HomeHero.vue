@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { type PuzzlePart } from 'types/puzzle'
+import { type PuzzlePart } from '~/types/puzzle'
 
 defineProps<{
   news?: {
