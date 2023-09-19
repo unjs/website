@@ -26,7 +26,7 @@ useEventListener('keydown', (event) => {
 <template>
   <header h-3.75rem p="x-3 md:x-6 y-3" rounded-4 border="~ light" bg="white" flex="~ row items-center" text-gray-900>
     <div flex="1 ~">
-      <NuxtLink to="/">
+      <NuxtLink to="/?utm_source=unjs.io&utm_medium=header-icon">
         <AppLogo />
       </NuxtLink>
     </div>

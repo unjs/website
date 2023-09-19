@@ -22,7 +22,7 @@ defineProps<{
       <HomeTheUnjsUniverseCarousel :parts="carousel" />
     </div>
     <div flex="~ justify-center">
-      <NuxtLink :to="cta.to" px-3 py-2 bg-white flex="~ items-center" gap-2 text-gray-900 class="rounded-[0.375rem]" hover:shadow-md transition ease-in duration-150>
+      <NuxtLink :to="`${cta.to}?utm_source=unjs.io&utm_medium=home-carousel`" px-3 py-2 bg-white flex="~ items-center" gap-2 text-gray-900 class="rounded-[0.375rem]" hover:shadow-md transition ease-in duration-150>
         <span>
           {{ cta.text }}
         </span>
