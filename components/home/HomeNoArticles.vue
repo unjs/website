@@ -3,9 +3,9 @@ const { data } = await useAsyncData('no-articles', () => queryContent('/_no-arti
 </script>
 
 <template>
-  <div v-if="data" prose prose-gray mx-auto>
+  <AppContent v-if="data" mx-auto>
     <ContentRenderer :value="data" px-8 py-12 md:py-20 flex="~ col" gap-4 text-gray-700 text-center />
-  </div>
+  </AppContent>
 </template>
 
 <style scoped>

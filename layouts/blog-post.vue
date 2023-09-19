@@ -169,9 +169,9 @@ function scrollToTop(close: () => void) {
           </transition>
         </Popover>
 
-        <div mt="4" xl:mt="12" prose prose-gray max-w-none>
+        <AppContent m="t-4 xl:t-12" max-w-none>
           <slot />
-        </div>
+        </AppContent>
       </article>
     </main>
   </div>

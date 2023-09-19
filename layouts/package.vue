@@ -22,9 +22,9 @@ const { page } = useContent()
       <article>
         <PackageHeader :name="page.title" :description="page.description" />
 
-        <div mt-6 xl:mt-12 prose prose-gray max-w-none>
+        <AppContent m="t-6 xl:t-12" max-w-none>
           <slot />
-        </div>
+        </AppContent>
       </article>
     </main>
 
