@@ -315,6 +315,13 @@ export default {
     },
   },
 
+  '/unpdf': {
+    redirect: {
+      to: '/packages/unpdf',
+      statusCode: 302,
+    },
+  },
+
   '/unplugin': {
     redirect: {
       to: '/packages/unplugin',
