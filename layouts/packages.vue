@@ -1,5 +1,7 @@
 <script lang="ts" setup>
-const { data: packages } = await useAsyncData('content:packages', () => queryContent('/packages/').find())
+import type { Package } from '~/types/package'
+
+const { data: packages } = await useAsyncData('content:packages', () => queryContent<Package>('/packages/').only(['title', 'description', 'logo', 'icon', '_path', 'documentation', 'github']).find())
 </script>
 
 <template>
