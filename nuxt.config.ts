@@ -38,7 +38,7 @@ export default defineNuxtConfig({
       '/api/packages': {
         cache: {
           maxAge: 60 * 60 * 24 * 7, // 1 week
-        }
+        },
       },
       '/api/search.txt': {
         prerender: true,
