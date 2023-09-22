@@ -1,6 +1,7 @@
 import { serverQueryContent } from '#content/server'
 import { Package } from '~/types/package'
 
+// TODO: improve types
 export default defineEventHandler(async (event) => {
   const packages = await serverQueryContent<Package>(event).where({ _path: { $regex: /^\/packages\// } }).only(['github', 'npm', 'title']).find()
 
