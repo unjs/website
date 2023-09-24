@@ -19,7 +19,7 @@ async function fetchPackage(package_: Partial<Package>) {
 
   return {
     ...package_,
-    createAt: repo.createdAt,
+    createdAt: repo.createdAt,
     updatedAt: repo.updatedAt,
     stars: repo.stars,
     contributors: contributors.length,

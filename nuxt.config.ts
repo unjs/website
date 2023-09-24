@@ -35,7 +35,7 @@ export default defineNuxtConfig({
       crawlLinks: true,
     },
     routeRules: {
-      '/api/packages': {
+      '/api/packages/*': {
         cache: {
           maxAge: 60 * 60 * 24 * 7, // 1 week
         },
