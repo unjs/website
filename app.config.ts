@@ -13,6 +13,9 @@ export default defineAppConfig({
         },
       },
     },
+    buttonGroup: {
+      shadow: 'shadow-none',
+    },
     tooltip: {
       background: 'bg-white dark:bg-zinc-900',
       color: 'text-zinc-900 dark:text-white',
@@ -22,6 +25,37 @@ export default defineAppConfig({
       base: 'inline-flex items-center justify-center text-zinc-900 dark:text-white',
       background: 'bg-zinc-100 dark:bg-zinc-800',
       ring: 'ring-1 ring-zinc-300 dark:ring-zinc-700 ring-inset',
+    },
+    card: {
+      base: 'transition ease-in duration-150',
+      background: 'bg-white dark:bg-zinc-900',
+      divide: 'divide-y divide-zinc-200 dark:divide-zinc-800',
+      ring: 'ring-1 ring-zinc-200 dark:ring-zinc-700',
+    },
+    input: {
+      color: {
+        white: {
+          outline: 'shadow-none bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white ring-1 ring-inset ring-zinc-300 dark:ring-zinc-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400',
+        },
+        placeholder: 'placeholder-zinc-400 dark:placeholder-zinc-500',
+      },
+    },
+    select: {
+      placeholder: 'text-zinc-900 dark:text-white',
+      color: {
+        white: {
+          outline: 'shadow-none bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white ring-1 ring-inset ring-zinc-300 dark:ring-zinc-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400',
+        },
+      },
+    },
+    selectMenu: {
+      background: 'bg-white dark:bg-zinc-800',
+      ring: 'ring-1 ring-zinc-200 dark:ring-zinc-700',
+      option: {
+        base: 'cursor-pointer',
+        color: 'text-zinc-900 dark:text-white',
+        active: 'bg-zinc-100 dark:bg-zinc-900',
+      },
     },
   },
   website: {

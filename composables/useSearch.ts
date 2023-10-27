@@ -158,3 +158,34 @@ function useIndexedMiniSearch(search: MaybeRefOrGetter<string>, indexedData: May
     indexedMiniSearch,
   }
 }
+
+export function useMiniSearch<DataItem>(search: MaybeRefOrGetter<string>, data: MaybeRefOrGetter<DataItem[]>, options: MiniSearchOptions) {
+  const createMiniSearch = () => {
+    const miniSearch = new MiniSearch(toValue(options))
+    miniSearch.addAll(toValue(data))
+    return miniSearch
+  }
+
+  const miniSearch = shallowRef(createMiniSearch())
+
+  watch(
+    () => toValue(options),
+    () => { miniSearch.value = createMiniSearch() },
+    { deep: true },
+  )
+
+  watch(
+    () => toValue(data),
+    () => {
+      miniSearch.value.removeAll()
+      miniSearch.value.addAll(toValue(data))
+    },
+    { deep: true },
+  )
+
+  const results = computed(() => {
+    return miniSearch.value.search(toValue(search))
+  })
+
+  return results
+}

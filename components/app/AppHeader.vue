@@ -23,7 +23,7 @@ defineShortcuts({
 })
 
 const { metaSymbol } = useShortcuts()
-const uiButton = { color: { gray: { ghost: 'hover:bg-primary/10 dark:hover:bg-primary/90' } } }
+const uiButton = { color: { gray: { ghost: 'hover:bg-[#ECDC5A]/30 dark:hover:bg-[#ECDC5A]/90' } } }
 </script>
 
 <template>
@@ -37,7 +37,7 @@ const uiButton = { color: { gray: { ghost: 'hover:bg-primary/10 dark:hover:bg-pr
     <nav v-if="navigation" class="hidden lg:flex justify-center">
       <ol class="text-[1.125rem] flex gap-4 leading-5">
         <li v-for="item in navigation" :key="item._path">
-          <UButton size="md" variant="ghost" color="gray" :to="item._path" :icon="item.icon" :ui="{ size: { md: 'text-base' }, ...uiButton }" active-class="bg-primary bg-opacity-30">
+          <UButton size="md" variant="ghost" color="gray" :to="item._path" :icon="item.icon" :ui="{ size: { md: 'text-base' }, ...uiButton }" active-class="bg-[#ECDC5A] bg-opacity-30">
             {{ item.title }}
           </UButton>
         </li>

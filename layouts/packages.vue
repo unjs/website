@@ -1,41 +1,127 @@
 <script lang="ts" setup>
 import type { Package } from '~/types/package'
 
-const { data: packages } = await useAsyncData('content:packages', () => queryContent<Package>('/packages/').only(['title', 'description', 'logo', 'icon', '_path', 'documentation', 'github']).find())
+const { page } = useContent()
+
+const { data: packages } = await useAsyncData('content:packages', () => queryContent<Package>('/packages/').only(['_path', 'title', 'description']).find())
+
+if (!packages.value) {
+  throw createError({
+    statusCode: 500,
+    message: 'No packages found',
+  })
+}
+
+const search = ref('')
+const searchDebounced = refDebounced(search, 150)
+
+const searchResults = useMiniSearch(searchDebounced, packages, {
+  idField: 'title',
+  fields: ['title', 'description'],
+  storeFields: ['title', 'description', '_path'],
+  searchOptions: {
+    prefix: true,
+    fuzzy: 0.2,
+  },
+})
+
+const order = ref<1 | -1>(1)
+const toggleOrder = function () {
+  order.value = order.value === 1 ? -1 : 1
+}
+const orderByOptions = [
+  {
+    id: 'title',
+    label: 'Name',
+  },
+]
+const orderBy = ref<string>('title')
+const currentOrderBy = computed(() => orderByOptions.find(option => option.id === orderBy.value))
+
+const results = computed(() => {
+  const currentPackages = searchDebounced.value ? searchResults.value : packages.value
+
+  if (!orderBy.value)
+    return currentPackages
+
+
+  return currentPackages.sort((a, b) => {
+    const aTitle = a.title.toLowerCase()
+    const bTitle = b.title.toLowerCase()
+
+    if (aTitle < bTitle)
+      return -1 * order.value
+
+
+    if (aTitle > bTitle)
+      return 1 * order.value
+
+
+    return 0
+  })
+})
 </script>
 
 <template>
   <Head>
     <SchemaOrgWebPage :type="['CollectionPage']" />
   </Head>
-  <main m="y-6 md:y-10">
-    <slot />
-    <section m="t-6">
-      <h2 sr-only>
+  <main class="my-6 md:my-10">
+    <AppHero :title="page.title" :description="page.description" />
+
+    <section class="mt-8">
+      <h2 class="sr-only">
         Packages list
       </h2>
-      <ol grid="~ cols-1 sm:cols-2 lg:cols-3" gap="4 md:6">
-        <li v-for="package_ in packages" :key="package_._path" relative p="4" rounded="4" bg="white" flex="~ col" gap="3" hover:shadow-xl transition="~ ease-in duration-150">
-          <div flex="~ items-center" gap="2">
-            <img :src="toPackageLogo(package_.title!)" :alt="`Logo of ${package_.title}`" w-5 h-5>
-            <NuxtLink :to="package_._path">
-              <h3 text="gray-900 lg md:xl" font="semibold">
-                {{ package_.title }}
+
+      <div class="p-4 rounded-lg ring-1 ring-zinc-200 bg-white flex items-center justify-between">
+        <UInput
+          v-model="search"
+          color="white"
+          variant="outline"
+          name="search-packages"
+          placeholder="Search a package"
+          icon="i-heroicons-magnifying-glass-solid"
+        />
+        <UButtonGroup size="sm" orientation="horizontal">
+          <UButton
+            :icon="order === 1 ? 'i-heroicons-bars-arrow-up-20-solid' : 'i-heroicons-bars-arrow-down-20-solid'"
+            color="white"
+            :title="order === 1 ? 'Ascending order' : 'Descending order'"
+            @click="toggleOrder()"
+          />
+          <USelectMenu
+            v-model="orderBy"
+            class="w-32"
+            :options="orderByOptions"
+            color="white"
+            placeholder="Order By"
+            select-class="cursor-pointer"
+            value-attribute="id"
+            option-attribute="label"
+          >
+            <template #label>
+              {{ currentOrderBy?.label }}
+            </template>
+          </USelectMenu>
+        </UButtonGroup>
+      </div>
+
+      <ol v-if="packages" class="mt-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 place-items-stretch">
+        <li v-for="item in results" :key="item.title">
+          <UCard as="article" :ui="{ base: 'h-full relative', divide: '', shadow: 'shadow-none hover:shadow-lg', rounded: 'rounded-xl', header: { base: 'flex gap-3 items-center', padding: 'py-0 pt-4 sm:px-4 sm:pt-4' }, body: { padding: 'p-4 sm:p-4' } }">
+            <template #header>
+              <img :src="toPackageLogo(item.title)" :alt="`Logo of ${item.title}`" w-12 h-12>
+              <h3 class="text-xl font-semibold">
+                <NuxtLink :to="item._path" class="absolute inset-0" />
+                {{ item.title }}
               </h3>
-              <span absolute inset-0 />
-            </NuxtLink>
-          </div>
-          <p grow text="gray-600">
-            {{ package_.description }}
-          </p>
-          <div flex="~ justify-between" text="gray-700 sm">
-            <NuxtLink :to="package_.documentation" target="_blank" rel="noopener" z-10>
-              Documentation
-            </NuxtLink>
-            <NuxtLink :to="toGitHubRepo(package_.github.owner, package_.github.repo)" target="_blank" rel="noopener" z-10>
-              Sources
-            </NuxtLink>
-          </div>
+            </template>
+
+            <p class="text-zinc-500">
+              {{ item.description }}
+            </p>
+          </UCard>
         </li>
       </ol>
     </section>

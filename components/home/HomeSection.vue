@@ -8,7 +8,7 @@
         <h2 class="text-2xl md:text-3xl lg:text-4xl text-gray-900 font-extrabold tracking-wide">
           <slot name="title" />
         </h2>
-        <p class="text-lg md:text-[2.5xl] text-zinc-600 md:leading-tight">
+        <p class="text-lg md:text-[1.75rem] text-zinc-600 md:leading-tight">
           <slot name="subtitle" />
         </p>
       </div>
