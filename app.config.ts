@@ -1,4 +1,8 @@
 export default defineAppConfig({
+  ui: {
+    primary: 'yellow',
+    gray: 'zinc',
+  },
   website: {
     search: {
       groups: [
@@ -99,19 +103,19 @@ export default defineAppConfig({
         url: 'https://github.com/unjs',
         rel: 'noopener',
         target: '_blank',
-        icon: 'i-logos-github-icon?mask',
+        icon: 'i-simple-icons-github',
         name: 'GitHub',
       },
-      twitter: {
+      x: {
         url: 'https://x.com/unjsio',
-        icon: 'i-logos-twitter?mask',
+        icon: 'i-simple-icons-x',
         rel: 'noopener',
         target: '_blank',
-        name: 'Twitter',
+        name: 'X',
       },
       rss: {
         url: '/rss',
-        icon: 'i-heroicons-rss?mask',
+        icon: 'i-heroicons-rss',
         name: 'RSS',
         target: null,
         rel: null,

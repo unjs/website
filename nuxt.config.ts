@@ -14,9 +14,9 @@ export default defineNuxtConfig({
     },
   },
   modules: [
+    '@nuxt/ui',
     '@nuxt/content',
     '@vueuse/nuxt',
-    '@unocss/nuxt',
     'nuxt-simple-robots',
     'nuxt-simple-sitemap',
     'nuxt-schema-org',
@@ -29,6 +29,9 @@ export default defineNuxtConfig({
   css: [
     '~/assets/app.css',
   ],
+  ui: {
+    icons: ['heroicons', 'simple-icons'],
+  },
   nitro: {
     prerender: {
       failOnError: false,
@@ -73,9 +76,12 @@ export default defineNuxtConfig({
       theme: 'github-light',
     },
   },
-  unocss: {
-    preflight: true,
-  },
+  colorMode: {
+    preference: 'light',
+   },
+  // unocss: {
+  //   preflight: true,
+  // },
   site: {
     language: 'en',
     url: 'https://unjs.io',

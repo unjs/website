@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 const website = useWebsite()
 const github = website.value.socials.github
-const twitter = website.value.socials.twitter
+const x = website.value.socials.x
 
 const { data: navigation } = await useAsyncData('content:navigation', () => fetchContentNavigation(queryContent('/')), {
   transform: data => data.filter(item => item._path !== '/').map((item) => {
@@ -24,16 +24,16 @@ useEventListener('keydown', (event) => {
 </script>
 
 <template>
-  <header h-3.75rem p="x-3 md:x-6 y-3" rounded-4 border="~ light" bg="white" flex="~ row items-center" text-gray-900>
-    <div flex="1 ~">
+  <header class="h-[3.75rem] px-3 md:px-6 py-3 rounded-4 border border-zinc-100 bg-white flex flex-row items-center text-zinc-900">
+    <div class="grow flex">
       <NuxtLink to="/?utm_source=unjs.io&utm_medium=header-icon">
         <AppLogo />
       </NuxtLink>
     </div>
-    <nav v-if="navigation" flex="lg:~ 1 justify-center" class="hidden">
-      <ul flex="~" gap="4" leading-5 class="text-[1.125rem]">
+    <nav v-if="navigation" class="hidden grow lg:flex justify-center">
+      <ul class="text-[1.125rem] flex gap-4 leading-5">
         <li v-for="item in navigation" :key="item._path">
-          <NuxtLink :to="item._path" class="py-[0.375rem] rounded-[0.375rem]" px-3 flex="~" gap-2 hover:bg-primary hover:bg-opacity-30 transition ease-in duration-150 active-class="bg-primary bg-opacity-30">
+          <NuxtLink :to="item._path" class="py-[0.375rem] px-3 rounded-[0.375rem] flex gap-2 hover:bg-primary hover:bg-opacity-30 transitino ease-in duration-150" active-class="bg-primary bg-opacity-30">
             <span :class="item.icon" w-5 h-5 block />
             <span>
               {{ item.title }}
@@ -42,7 +42,10 @@ useEventListener('keydown', (event) => {
         </li>
       </ul>
     </nav>
-    <div flex="~ lg:1 justify-end items-center" gap-3>
+    <div class="flex justify-end items-center lg:grow gap-3">
+      <UButton size="md" icon="i-heroicons-magnifying-glass-20-solid" color="primary" variant="ghost" @click="openSearch = true">
+        Search
+      </UButton>
       <button type="button" p="x-0.375rem lg:x-3 y-0.125rem lg:y-0.375rem" rounded="0.375rem" flex="~ items-center" gap-2 hover:bg-primary hover:bg-opacity-30 transition ease-in duration-150 @click="openSearch = true">
         <span class="i-heroicons-magnifying-glass-20-solid?mask" h-7 w-7 lg:h-5 lg:w-5 />
         <span sr-only lg:not-sr-only>
@@ -55,8 +58,8 @@ useEventListener('keydown', (event) => {
           Menu
         </span>
       </button>
-      <NuxtLink :title="twitter.name" :rel="twitter.rel" :target="twitter.target" :to="twitter.url" class="hidden" lg:block w-5 h-5 :class="twitter.icon" />
-      <NuxtLink :title="github.name" :rel="github.rel" :target="github.target" :to="github.url" class="hidden" lg:block w-5 h-5 :class="github.icon" />
+      <UButton size="md" variant="ghost" color="white" :icon="x.icon" :to="x.url" :target="x.target" :title="x.name"></UButton>
+      <UButton size="md" variant="ghost" color="white" :icon="github.icon" :to="github.url" :target="github.target" :title="github.name"></UButton>
     </div>
   </header>
   <AppNavigationDialog v-if="navigation" v-model:open="openNavigation" :navigation="navigation" />
