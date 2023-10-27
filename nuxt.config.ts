@@ -14,14 +14,15 @@ export default defineNuxtConfig({
     },
   },
   modules: [
-    '@nuxt/ui',
     '@nuxt/content',
+    '@nuxt/ui',
     '@vueuse/nuxt',
     'nuxt-simple-robots',
     'nuxt-simple-sitemap',
     'nuxt-schema-org',
     '@nuxthq/studio',
     '@nuxtjs/plausible',
+    'nuxt-payload-analyzer',
   ],
   experimental: {
     inlineSSRStyles: false, // Avoid CSS reset being applied after CSS
@@ -38,6 +39,9 @@ export default defineNuxtConfig({
       crawlLinks: true,
     },
     routeRules: {
+      '/api/github/stars': {
+        prerender: true,
+      },
       '/api/search.txt': {
         prerender: true,
         headers: { 'Content-Type': 'text/plain' }, // By default, Nitro will set the content type to text/html
@@ -78,7 +82,7 @@ export default defineNuxtConfig({
   },
   colorMode: {
     preference: 'light',
-   },
+  },
   // unocss: {
   //   preflight: true,
   // },

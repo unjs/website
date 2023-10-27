@@ -10,7 +10,7 @@ const align = computed(() => props.part.align)
 </script>
 
 <template>
-  <div class="puzzle-part" flex transition-transform ease-in duration-200>
+  <div class="puzzle-part flex transition-transform ease-in-out duration-200">
     <img v-if="part.name" :src="`/assets/puzzle/${part.name}.svg`">
     <div v-else />
   </div>
