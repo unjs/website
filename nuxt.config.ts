@@ -23,6 +23,7 @@ export default defineNuxtConfig({
     '@nuxthq/studio',
     '@nuxtjs/plausible',
     'nuxt-payload-analyzer',
+    '@nuxtjs/fontaine',
   ],
   experimental: {
     inlineSSRStyles: false, // Avoid CSS reset being applied after CSS
