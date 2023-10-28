@@ -15,9 +15,9 @@ const imageHeight = ref('auto')
 
 <template>
   <div class="slider">
-    <div class="absolute z-50 left-0 top-0 bottom-0 w-4 md:w-8 lg:w-16 bg-gradient-to-r from-[#ECDC5A] via-[#ECDC5A] to-[#ECDC5A]/0" />
+    <div class="absolute z-50 left-0 top-0 bottom-0 w-4 md:w-8 lg:w-16 bg-gradient-to-r from-primary via-primary to-primary/0" />
 
-    <div class="absolute z-50 right-0 top-0 bottom-0 w-4 md:w-8 lg:w-16 bg-gradient-to-l from-[#ECDC5A] via-[#ECDC5A] to-[#ECDC5A]/0" />
+    <div class="absolute z-50 right-0 top-0 bottom-0 w-4 md:w-8 lg:w-16 bg-gradient-to-l from-primary via-primary to-primary/0" />
 
     <div class="slide-track animation py-4">
       <template v-for="item in [...parts, ...parts]" :key="item.part">

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 const website = useWebsite()
 
-const uiButton = { color: { gray: { ghost: 'hover:bg-[#ECDC5A]/10 dark:hover:bg-[#ECDC5A]/90' } } }
+const uiButton = { color: { gray: { ghost: 'hover:bg-primary/10 dark:hover:bg-primary/90' } } }
 </script>
 
 <template>

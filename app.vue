@@ -21,7 +21,7 @@ useServerSeoMeta({
       <RobotMeta />
       <Link rel="icon" href="/favicon.svg" />
     </Head>
-    <Body class="container mx-auto xl:max-w-7xl px-4 py-4 md:py-8 bg-[#ECDC5A] font-sans">
+    <Body class="container mx-auto xl:max-w-7xl px-4 py-4 md:py-8 bg-primary font-sans">
       <AppHeader />
       <NuxtPage />
       <AppFooter />
