@@ -3,7 +3,7 @@ import type { BlogPostCard } from '~/types/blog'
 
 const { page } = useContent()
 
-const { data: blog } = await useAsyncData('blog', () => queryContent('/blog/').only(['_path', 'cover', 'title', 'description', 'publishedAt', 'authors']).sort({ publishedAt: -1 }).find() as Promise<BlogPostCard[]>)
+const { data: blog } = await useAsyncData('blog', () => queryContent('/blog/').only(['_path', 'title', 'description', 'publishedAt', 'authors']).sort({ publishedAt: -1 }).find() as Promise<BlogPostCard[]>)
 
 if (!blog.value) {
   throw createError({
@@ -18,7 +18,7 @@ const searchDebounced = refDebounced(search, 150)
 const searchResults = useMiniSearch(searchDebounced, blog, {
   idField: 'title',
   fields: ['title', 'description'],
-  storeFields: ['title', 'description', '_path'],
+  storeFields: ['title', 'description', '_path', 'publishedAt', 'authors'],
   searchOptions: {
     prefix: true,
     fuzzy: 0.2,
@@ -79,8 +79,8 @@ const results = computed(() => {
           v-model="search"
           color="white"
           variant="outline"
-          name="search-packages"
-          placeholder="Search a package"
+          name="search-article"
+          placeholder="Search an article"
           icon="i-heroicons-magnifying-glass-solid"
         />
         <UButtonGroup size="sm" orientation="horizontal">

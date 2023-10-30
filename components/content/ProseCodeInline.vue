@@ -1,5 +1,5 @@
 <template>
-  <code class="mx-1px px-[0.375rem] py-[0.2rem] rounded-md font-mono font-400 text-sm text-gray-900 bg-primary bg-op-30 before-content-empty after-content-empty">
+  <code class="mx-1px px-[0.375rem] py-[0.2rem] rounded-md font-mono font-400 text-sm text-zinc-900 bg-primary/30 before:content-[''] after:content-['']">
     <slot />
   </code>
 </template>
@@ -8,7 +8,7 @@
 a code {
   border-width: 1px;
   border-style: dashed;
-  border-color: theme('colors.gray.900');
+  border-color: theme('colors.zinc.900');
 }
 
 a:hover code {

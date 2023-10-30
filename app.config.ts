@@ -57,6 +57,12 @@ export default defineAppConfig({
         active: 'bg-zinc-100 dark:bg-zinc-900',
       },
     },
+    avatar: {
+      background: 'bg-zinc-100 dark:bg-zinc-800',
+      rounded: 'rounded-full',
+      text: 'font-medium leading-none text-zinc-900 dark:text-white truncate',
+      placeholder: 'font-medium leading-none text-zinc-500 dark:text-zinc-400 truncate',
+    },
   },
   website: {
     search: {

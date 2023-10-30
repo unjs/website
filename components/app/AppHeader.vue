@@ -23,7 +23,7 @@ defineShortcuts({
 })
 
 const { metaSymbol } = useShortcuts()
-const uiButton = { color: { gray: { ghost: 'hover:bg-primary/30 dark:hover:bg-primary/90' } } }
+const uiButton = { font: 'font-semibold', color: { gray: { ghost: 'hover:bg-primary/30 dark:hover:bg-primary/90' } } }
 </script>
 
 <template>
@@ -44,7 +44,7 @@ const uiButton = { color: { gray: { ghost: 'hover:bg-primary/30 dark:hover:bg-pr
       </ol>
     </nav>
 
-    <div class="flex justify-end items-center gap-3">
+    <div class="flex justify-end items-center gap-1">
       <UTooltip text="Open Search" :shortcuts="[metaSymbol, 'K']">
         <UButton size="md" icon="i-heroicons-magnifying-glass-solid" color="gray" variant="ghost" :ui="{ size: { md: 'text-base' }, ...uiButton }" @click="openSearch = true">
           <span class="hidden lg:inline">
@@ -52,18 +52,16 @@ const uiButton = { color: { gray: { ghost: 'hover:bg-primary/30 dark:hover:bg-pr
           </span>
         </UButton>
       </UTooltip>
+
       <UTooltip text="Open Navigation">
         <UButton size="md" variant="ghost" color="gray" icon="i-heroicons-bars-3-bottom-right" class="lg:hidden" :ui="uiButton" @click="openNavigation = true" />
       </UTooltip>
 
-      <div class="flex items-center">
-        <UButton size="md" variant="ghost" color="gray" :icon="x.icon" :to="x.url" :target="x.target" :aria-label="`Follow us on ${x.name}`" :ui="uiButton" class="hidden lg:flex" />
-        <UTooltip text="GitHub Stars">
-          <UButton size="md" variant="ghost" color="gray" :icon="github.icon" :to="github.url" :target="github.target" :aria-label="`Follow us on ${github.name}`" :ui="uiButton" class="hidden lg:flex">
-            {{ stars ? formatNumber(stars) : '' }}
-          </UButton>
-        </UTooltip>
-      </div>
+      <UTooltip text="GitHub Stars">
+        <UButton size="md" variant="ghost" color="gray" :icon="github.icon" :to="github.url" :target="github.target" :aria-label="`Follow us on ${github.name}`" :ui="{ size: { md: 'text-base' }, ...uiButton }" class="hidden lg:flex">
+          {{ stars ? formatNumber(stars) : '' }}
+        </UButton>
+      </UTooltip>
     </div>
   </header>
   <AppNavigationDialog v-if="navigation" v-model:open="openNavigation" :navigation="navigation" />

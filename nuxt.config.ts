@@ -32,7 +32,7 @@ export default defineNuxtConfig({
     '~/assets/app.css',
   ],
   ui: {
-    icons: ['heroicons', 'simple-icons'],
+    icons: ['heroicons', 'simple-icons', 'vscode-icons'],
   },
   nitro: {
     prerender: {
@@ -42,6 +42,9 @@ export default defineNuxtConfig({
     routeRules: {
       '/api/github/stars': {
         prerender: true,
+        cache: {
+          maxAge: 7 * 24 * 60 * 60 * 1000, // 1 week
+        },
       },
       '/api/search.txt': {
         prerender: true,
