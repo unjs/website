@@ -144,7 +144,7 @@ function scrollToTop(close: () => void) {
             <span>On this page</span>
           </PopoverButton>
 
-          <transition
+          <Transition
             enter-active-class="transition duration-200 ease-out"
             enter-from-class="translate-y--1 opacity-0"
             enter-to-class="translate-y-0 opacity-100"
@@ -166,7 +166,7 @@ function scrollToTop(close: () => void) {
                 </ol>
               </nav>
             </PopoverPanel>
-          </transition>
+          </Transition>
         </Popover>
 
         <AppContent m="t-4 xl:t-12" max-w-none>
