@@ -2,6 +2,7 @@
   "name": "website",
   "type": "module",
   "private": true,
+  "packageManager": "pnpm@8.7.1",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -15,7 +16,6 @@
     "packages:verify": "jiti scripts/logos-packages && jiti scripts/puzzle-packages",
     "packages:redirects": "jiti scripts/generate-packages-redirects && pnpm run lint:fix"
   },
-  "packageManager": "pnpm@8.7.1",
   "devDependencies": {
     "@antfu/eslint-config": "1.0.0-beta.29",
     "@headlessui/vue": "^1.7.16",
