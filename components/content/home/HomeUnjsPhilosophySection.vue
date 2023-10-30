@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { HomeUnjsPhilosophyCard } from '~/types/home'
+import type { HomeUnjsPhilosophyCard } from '~/types/home'
 
 defineProps<{
   cards: HomeUnjsPhilosophyCard[]
