@@ -46,14 +46,11 @@ export default defineConfig({
           border: '0',
         },
         'p a:has(img)': {
-          border: '0',
+          'text-decoration': 'none',
+          'border': '0',
         },
         'p a:has(img) + a:has(img)': {
           'margin-left': '0.5rem',
-        },
-        'p a:hover': {
-          'color': 'var(--un-prose-links)',
-          'border-bottom': '1px solid var(--un-prose-links)',
         },
         'blockquote': {
           'border-left-color': '#ecdc5a', // primary
