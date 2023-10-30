@@ -1,5 +1,5 @@
 import { parseMarkdown } from '@nuxtjs/mdc/runtime'
-import type {  MarkdownNode, ParsedContent } from '@nuxt/content/dist/runtime/types'
+import type { MarkdownNode, ParsedContent } from '@nuxt/content/dist/runtime/types'
 
 export default defineEventHandler(async (event) => {
   const owner = getRouterParam(event, 'owner')
