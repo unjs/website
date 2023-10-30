@@ -33,7 +33,7 @@ export default defineNuxtConfig({
     prerender: {
       failOnError: false,
       crawlLinks: true,
-      routes: ['/', '/packages', '/blog']
+      routes: ['/', '/packages', '/blog'],
     },
     routeRules: {
       '/api/github/**': {
