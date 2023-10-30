@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-import { HomeUnjsPhilosophyCard } from '~/types/home'
+// eslint-disable-next-line ts/consistent-type-imports
+import type { HomeUnjsPhilosophyCard } from '~/types/home'
 
 defineProps<{
   cards: HomeUnjsPhilosophyCard[]
