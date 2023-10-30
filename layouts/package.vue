@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 const { page } = useContent()
 
-const { data: readme } = await useFetch(`/api/${page.value.github.owner}/${page.value.github.repo}/readme`)
+const { data: readme } = await useFetch(`/api/github/${page.value.github.owner}/${page.value.github.repo}/readme`)
 </script>
 
 <template>
