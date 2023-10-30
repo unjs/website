@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { PuzzlePart } from '~/types/puzzle'
+import { PuzzlePart } from '~/types/puzzle'
 
 const props = defineProps<{
   parts: PuzzlePart[]
