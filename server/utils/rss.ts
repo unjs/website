@@ -10,9 +10,7 @@ export function useRssConfig() {
 }
 
 /**
- * Used to retrive the markdown content.
- *
- * @param query The query to filter the content.
+ * Used to retrieve the markdown content.
  */
 export async function getMarkdownContent<T extends ParsedContent>(event: H3Event, query: QueryBuilderWhere): Promise<T[]> {
   const files = await serverQueryContent<T>(event).where(query).sort({ publishedAt: -1 }).find()
