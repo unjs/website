@@ -33,6 +33,7 @@ export default defineNuxtConfig({
     prerender: {
       failOnError: false,
       crawlLinks: true,
+      routes: ['/'],
     },
     routeRules: {
       '/api/search.txt': {
