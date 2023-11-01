@@ -33,6 +33,9 @@ export default <Partial<Config>> {
               'text-underline-offset': '0.2em',
               'color': 'var(--un-prose-body)',
             },
+            'p code, ul code': {
+              fontWeight: 'inherit',
+            },
             'blockquote': {
               'border-left-color': theme('colors.primary')
             },
