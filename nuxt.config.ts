@@ -30,15 +30,13 @@ export default defineNuxtConfig({
     '~/assets/app.css',
   ],
   nitro: {
+    static: true,
     prerender: {
       failOnError: false,
       crawlLinks: true,
       routes: ['/'],
     },
     routeRules: {
-      '/**': {
-        static: true,
-      },
       '/api/github/**': {
         cache: {
           maxAge: 60 * 60 * 24 * 7, // 7 days
