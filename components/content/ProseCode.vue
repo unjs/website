@@ -34,7 +34,8 @@ const { copy, copied, isSupported } = useClipboard()
             leave-from-class="opacity-100"
             leave-to-class="opacity-0"
           >
-            <div v-if="copied" class="i-heroicons-check-solid w-4 h-4" />
+          <div v-if="copied" class="i-heroicons-check-solid w-4 h-4" />
+          <div v-else class="i-heroicons-clipboard-solid w-4 h-4" />
           </transition>
         </button>
       </ClientOnly>

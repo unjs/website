@@ -22,39 +22,19 @@ export default <Partial<Config>> {
       fontFamily: {
         sans: ['Nunito', ...fontFamily.sans],
       },
-      typography: {
+      typography: (theme) => ({
         DEFAULT: {
           css: {
             'h1 a,h2 a,h3 a,h4 a,h5 a,h6 a': {
               'text-decoration-line': 'none',
             },
-            'a:has(code)': {
-              'text-decoration': 'none',
-            },
             'p a, ul a': {
               'text-decoration-line': 'underline',
               'text-underline-offset': '0.2em',
               'color': 'var(--un-prose-body)',
-              'font-weight': '600',
-            },
-            'p a:has(code)': {
-              border: '0',
-            },
-            'p a:has(code):hover': {
-              border: '0',
-            },
-            'p a:has(img)': {
-              border: '0',
-            },
-            'p a:has(img) + a:has(img)': {
-              'margin-left': '0.5rem',
-            },
-            'p a:hover': {
-              'color': 'var(--un-prose-links)',
-              'border-bottom': '1px solid var(--un-prose-links)',
             },
             'blockquote': {
-              'border-left-color': '#ecdc5a', // primary
+              'border-left-color': theme('colors.primary')
             },
             'pre': {
               'margin': 0,
@@ -67,7 +47,7 @@ export default <Partial<Config>> {
             },
           },
         },
-      },
+      }),
     },
   },
 }

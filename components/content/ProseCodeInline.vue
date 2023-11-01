@@ -3,15 +3,3 @@
     <slot />
   </code>
 </template>
-
-<style scoped>
-a code {
-  border-width: 1px;
-  border-style: dashed;
-  border-color: theme('colors.zinc.900');
-}
-
-a:hover code {
-  border-style: solid;
-}
-</style>
