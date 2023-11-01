@@ -34,7 +34,7 @@ export default defineNuxtConfig({
     prerender: {
       failOnError: false,
       crawlLinks: true,
-      routes: ['/', '/api/search.txt', '/rss.xml', '/rss.xml', '/blog/rss.xml', '/learn/rss.xml', '/explore/rss.xml', '/build/rss.xml']
+      routes: ['/', '/api/search.txt', '/rss.xml', '/rss.xml', '/blog/rss.xml', '/learn/rss.xml', '/explore/rss.xml', '/build/rss.xml'],
     },
     routeRules: {
       '/api/github/**': {
