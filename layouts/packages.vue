@@ -15,7 +15,7 @@ if (!packages.value) {
 const search = ref('')
 const searchDebounced = refDebounced(search, 150)
 
-const searchResults = useMiniSearch(searchDebounced, packages, {
+const searchResults = useMiniSearch(searchDebounced, packages as Ref<Package[]>, {
   idField: 'title',
   fields: ['title', 'description'],
   storeFields: ['title', 'description', '_path'],
@@ -39,7 +39,7 @@ const orderBy = ref<string>('title')
 const currentOrderBy = computed(() => orderByOptions.find(option => option.id === orderBy.value))
 
 const results = computed(() => {
-  const currentPackages = searchDebounced.value ? searchResults.value : packages.value
+  const currentPackages = searchDebounced.value ? searchResults.value : packages.value as Package[]
 
   if (!orderBy.value)
     return currentPackages

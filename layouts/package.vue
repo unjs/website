@@ -1,7 +1,16 @@
 <script lang="ts" setup>
+import type { ParsedContent } from '@nuxt/content/dist/runtime/types';
+
 const { page } = useContent()
 
-const { data: readme } = await useFetch(`/api/github/${page.value.github.owner}/${page.value.github.repo}/readme`)
+const { data: readme } = await useFetch<ParsedContent>(`/api/github/${page.value.github.owner}/${page.value.github.repo}/readme`)
+
+if (!readme.value) {
+  throw createError({
+    statusCode: 500,
+    message: 'No readme found',
+  })
+}
 </script>
 
 <template>
@@ -25,7 +34,7 @@ const { data: readme } = await useFetch(`/api/github/${page.value.github.owner}/
         <PackageHeader :name="page.title" :description="page.description" />
 
         <AppContent class="mt-6 xl:mt-12 max-w-none">
-          <ContentRendererMarkdown :value="readme.content" />
+          <ContentRendererMarkdown :value="readme!" />
         </AppContent>
       </article>
     </main>
