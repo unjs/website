@@ -1,5 +1,7 @@
 <script lang="ts" setup>
 const { page } = useContent()
+
+const { data: readme } = await useFetch(`/api/github/${page.value.github.owner}/${page.value.github.repo}/readme`)
 </script>
 
 <template>
@@ -23,7 +25,7 @@ const { page } = useContent()
         <PackageHeader :name="page.title" :description="page.description" />
 
         <AppContent class="mt-6 xl:mt-12 max-w-none">
-          <slot />
+          <ContentRendererMarkdown :value="readme.content" />
         </AppContent>
       </article>
     </main>

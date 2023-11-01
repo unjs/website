@@ -35,15 +35,16 @@ export default defineNuxtConfig({
     icons: ['heroicons', 'simple-icons', 'vscode-icons'],
   },
   nitro: {
+    static: true,
     prerender: {
       failOnError: false,
       crawlLinks: true,
+      routes: ['/'],
     },
     routeRules: {
-      '/api/github/stars': {
-        prerender: true,
+      '/api/github/**': {
         cache: {
-          maxAge: 7 * 24 * 60 * 60 * 1000, // 1 week
+          maxAge: 60 * 60 * 24 * 7, // 7 days
         },
       },
       '/api/search.txt': {

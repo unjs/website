@@ -24,7 +24,7 @@ const { copy, copied, isSupported } = useClipboard()
           <span class="sr-only">
             Copy to clipboard
           </span>
-          <transition
+          <Transition
             appear
             mode="out-in"
             enter-active-class="duration-150 ease-int"
@@ -35,7 +35,6 @@ const { copy, copied, isSupported } = useClipboard()
             leave-to-class="opacity-0"
           >
             <div v-if="copied" class="i-heroicons-check-solid w-4 h-4" />
-            <div v-else class="i-heroicons-clipboard-document w-4 h-4" />
           </transition>
         </button>
       </ClientOnly>

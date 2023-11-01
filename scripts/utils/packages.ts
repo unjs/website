@@ -19,14 +19,12 @@ export function createPackage(repo: GitHubRepo) {
   if (!template)
     template = readFileSync('./content/4.packages/.template.md', 'utf-8')
 
-  writeFileSync(`./content/4.packages/${repo.name}.md`,
-    template
-      .replace('package_title', repo.name)
-      .replace('package_description', repo.description)
-      .replace('repo_name', repo.name)
-      .replace('npm_name', repo.name)
-      .replace('docs_link', `https://github.com/unjs/${repo.name}`),
-  )
+  writeFileSync(`./content/4.packages/${repo.name}.md`, template
+    .replace('package_title', repo.name)
+    .replace('package_description', repo.description)
+    .replace('repo_name', repo.name)
+    .replace('npm_name', repo.name)
+    .replace('docs_link', `https://github.com/unjs/${repo.name}`))
 }
 
 /**

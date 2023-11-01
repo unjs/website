@@ -111,7 +111,6 @@ function scrollToTop(close: () => void) {
         </dl>
       </header>
     </template>
-
     <slot />
   </Prose>
 </template>

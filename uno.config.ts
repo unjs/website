@@ -46,6 +46,7 @@ export default defineConfig({
           border: '0',
         },
         'p a:has(img)': {
+          'text-decoration': 'none',
           border: '0',
         },
         'p a:has(img) + a:has(img)': {
