@@ -30,12 +30,18 @@ export default defineNuxtConfig({
     '~/assets/app.css',
   ],
   nitro: {
+    static: true,
     prerender: {
       failOnError: false,
       crawlLinks: true,
       routes: ['/'],
     },
     routeRules: {
+      '/api/github/**': {
+        cache: {
+          maxAge: 60 * 60 * 24 * 7, // 7 days
+        },
+      },
       '/api/search.txt': {
         prerender: true,
         headers: { 'Content-Type': 'text/plain' }, // By default, Nitro will set the content type to text/html
