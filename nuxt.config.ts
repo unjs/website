@@ -36,6 +36,9 @@ export default defineNuxtConfig({
       routes: ['/'],
     },
     routeRules: {
+      '/**': {
+        static: true,
+      },
       '/api/github/**': {
         cache: {
           maxAge: 60 * 60 * 24 * 7, // 7 days
