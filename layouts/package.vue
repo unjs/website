@@ -11,6 +11,14 @@ if (!readme.value) {
     message: 'No readme found',
   })
 }
+
+defineShortcuts({
+  meta_g: {
+    handler: () => {
+      window.open(toGitHubRepo(page.value.github.owner, page.value.github.repo), '_blank')
+    },
+  },
+})
 </script>
 
 <template>
