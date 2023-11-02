@@ -7,7 +7,7 @@ import type { GitHubRepo } from '../types'
  * Get the list of markdown files in packages folder.
  */
 export function getContentPackages() {
-  return readdirSync('./content/4.packages').filter(p => p.endsWith('.md') && !p.startsWith('.')).map(p => p.replace('.md', ''))
+  return readdirSync('./content/4.packages').filter(p => p.endsWith('.yml') && !p.startsWith('.')).map(p => p.replace('.yml', ''))
 }
 
 let template: string | null = null
@@ -17,9 +17,9 @@ let template: string | null = null
  */
 export function createPackage(repo: GitHubRepo) {
   if (!template)
-    template = readFileSync('./content/4.packages/.template.md', 'utf-8')
+    template = readFileSync('./content/4.packages/.template.yml', 'utf-8')
 
-  writeFileSync(`./content/4.packages/${repo.name}.md`, template
+  writeFileSync(`./content/4.packages/${repo.name}.yml`, template
     .replace('package_title', repo.name)
     .replace('package_description', repo.description)
     .replace('repo_name', repo.name)
@@ -31,7 +31,7 @@ export function createPackage(repo: GitHubRepo) {
  * Remove a markdown file from packages folder for a repo.
  */
 export function removePackage(name: string) {
-  rmSync(`./content/4.packages/${name}.md`)
+  rmSync(`./content/4.packages/${name}.yml`)
 }
 
 /**

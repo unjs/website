@@ -79,7 +79,7 @@ async function createPR(package_: string, repos: GitHubRepo[], operation: 'add' 
   execSync('pnpm run lint:fix')
 
   execSync('git add ./config/packages-redirects.ts')
-  execSync(`git add ./content/4.packages/${package_}.md`)
+  execSync(`git add ./content/4.packages/${package_}.yml`)
   try {
     execSync(`git commit -m "${type}: ${title}"`)
   }
