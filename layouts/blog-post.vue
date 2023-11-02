@@ -111,6 +111,44 @@ useServerSeoMeta({
         </dl>
       </header>
     </template>
+
     <slot />
+
+    <template #nav>
+      <UDivider />
+      <ProseNavGroup>
+        <template #title>
+          Packages
+        </template>
+        <template #links>
+           <ol>
+            <li v-for="package_ in packages" :key="package_._path">
+              <ProseNavGroupLink :to="package_._path">
+                <template #icon="props">
+                  <img :src="toPackageLogo(package_.title)" :alt="`Logo of ${package_.title}`" :class="props.class" width="20" height="20">
+                </template>
+                <span>{{ package_.title }}</span>
+              </ProseNavGroupLink>
+            </li>
+          </ol>
+        </template>
+      </ProseNavGroup>
+      <UDivider />
+      <ProseNavGroup>
+        <template #title>
+          Community
+        </template>
+        <template #links>
+           <ProseNavGroupLink :to="toEditPage(page._file)" target="_blank" icon="i-heroicons-pencil-square-20-solid">
+              Edit this page
+           </ProseNavGroupLink>
+           <ProseNavGroupLink
+           to="https://github.com/unjs/website" target="_blank"
+           icon="i-simple-icons-github">
+              Star on GitHub
+           </ProseNavGroupLink>
+        </template>
+      </ProseNavGroup>
+    </template>
   </Prose>
 </template>

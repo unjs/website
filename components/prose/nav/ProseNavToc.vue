@@ -11,14 +11,18 @@ function activeClass(id: string): string {
 </script>
 
 <template>
-  <p class="text-zinc-900 font-semibold text-sm">
-    On this page
-  </p>
-  <ol v-if="toc" class="mt-2 text-sm text-zinc-500">
-    <li v-for="link in toc.links" :key="link.id">
-      <NuxtLink :to="`#${link.id}`" class="inline-block py-1 hover:text-zinc-900 transition ease-in" :class="activeClass(link.id)">
-        {{ link.text }}
-      </NuxtLink>
-    </li>
-  </ol>
+  <ProseNavGroup>
+    <template #title>
+      On this page
+    </template>
+    <template #links>
+      <ol v-if="toc" class=" text-zinc-500">
+        <li v-for="link in toc.links" :key="link.id">
+          <ProseNavGroupLink :to="`#${link.id}`"  :class="activeClass(link.id)">
+            {{ link.text }}
+          </ProseNavGroupLink>
+        </li>
+      </ol>
+    </template>
+  </ProseNavGroup>
 </template>

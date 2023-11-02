@@ -17,7 +17,7 @@
     "packages:redirects": "jiti scripts/generate-packages-redirects && pnpm run lint:fix"
   },
   "dependencies": {
-    "@nuxt/ui": "^2.9.0"
+    "@nuxt/ui": "^2.10.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "1.0.0-beta.29",

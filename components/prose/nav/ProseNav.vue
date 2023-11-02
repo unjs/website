@@ -1,5 +1,5 @@
 <template>
-  <nav>
+  <nav class="space-y-4">
     <slot />
   </nav>
 </template>

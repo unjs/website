@@ -2,6 +2,11 @@ export default defineAppConfig({
   ui: {
     primary: 'yellow',
     gray: 'zinc',
+    divider: {
+      border: {
+         "base": "flex border-zinc-200 dark:border-zinc-800",
+      }
+    },
     button: {
       base: 'transition ease-in',
       color: {
