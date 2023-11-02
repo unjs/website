@@ -1,5 +1,0 @@
-<template>
-  <div class="prose prose-zinc">
-    <slot />
-  </div>
-</template>
