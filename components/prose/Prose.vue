@@ -10,7 +10,7 @@ provide('toc', props.toc)
 </script>
 
 <template>
-  <article class="pt-6 md:pt-10 pb-10 md:pb-20 bg-white rounded-2xl grid grid-cols-[1fr_320px] gap-x-8 items-start">
+  <article class="pt-6 md:pt-10 pb-10 md:pb-20 bg-white rounded-2xl grid grid-cols-[75%_1fr] gap-x-8 items-start">
     <div>
       <slot name="header" />
     </div>

@@ -5,9 +5,6 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
-  '@iconify-json/simple-icons':
-    specifier: ^1.1.76
-    version: 1.1.76
   '@nuxt/ui':
     specifier: ^2.9.0
     version: 2.9.0(vue@3.3.7)(webpack@5.89.0)
@@ -28,6 +25,9 @@ devDependencies:
   '@iconify-json/noto':
     specifier: ^1.1.12
     version: 1.1.12
+  '@iconify-json/simple-icons':
+    specifier: ^1.1.76
+    version: 1.1.76
   '@iconify-json/vscode-icons':
     specifier: ^1.1.29
     version: 1.1.29
@@ -1055,7 +1055,7 @@ packages:
     resolution: {integrity: sha512-jZEMvkMfD5tTadFJIOIxKE4cTVXslrktWEiMJV6HaABi9qw02zS7bzrllR1YtGPxzniKkq2UVg/dKS6lliIxVA==}
     dependencies:
       '@iconify/types': 2.0.0
-    dev: false
+    dev: true
 
   /@iconify-json/vscode-icons@1.1.29:
     resolution: {integrity: sha512-wJMxrnA5DZcFYgfEQBV7zH4gDk15GbViQ9bHTYror+jKR6bNDkX6wvAyEApb3Tuo6RDJkAY/WbgwoIfqFGyKZg==}
