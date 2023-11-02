@@ -11,7 +11,7 @@ function activeClass(id: string): string {
 </script>
 
 <template>
-  <ProseNavGroup>
+  <ProseNavGroup icon="i-heroicons-bars-3-solid">
     <template #title>
       On this page
     </template>

@@ -65,7 +65,7 @@ defineShortcuts({
       <UButton :to="page.documentation" rel="noopener" size="lg" color="gray" :ui="{ base: 'w-full justify-center' }">
         Documentation
       </UButton>
-      <ProseNavGroup>
+      <ProseNavGroup no-disclosure>
         <template #links>
           <div class="flex flex-col gap-1">
             <ProseNavGroupLink label="Stars" :to="toGitHubRepo(page.github.owner, page.github.repo)" target="_blank" icon="i-heroicons-star-solid" no-external>
@@ -81,7 +81,7 @@ defineShortcuts({
         </template>
       </ProseNavGroup>
       <UDivider />
-      <ProseNavGroup>
+      <ProseNavGroup icon="i-simple-icons-github">
         <template #title>
           GitHub
         </template>
@@ -99,7 +99,7 @@ defineShortcuts({
       </ProseNavGroup>
       <UDivider />
       <template v-if="hasResources">
-        <ProseNavGroup>
+        <ProseNavGroup icon="i-heroicons-beaker-solid">
           <template #title>
             Resources
           </template>
@@ -117,7 +117,7 @@ defineShortcuts({
         </ProseNavGroup>
         <UDivider />
       </template>
-      <ProseNavGroup>
+      <ProseNavGroup icon="i-heroicons-sparkles-solid">
         <template #title>
           <div class="flex items-center gap-1">
             <span>

@@ -101,7 +101,7 @@ useServerSeoMeta({
 
     <template #nav>
       <UDivider />
-      <ProseNavGroup>
+      <ProseNavGroup icon="i-heroicons-cube-solid">
         <template #title>
           Packages
         </template>
@@ -119,7 +119,7 @@ useServerSeoMeta({
         </template>
       </ProseNavGroup>
       <UDivider />
-      <ProseNavGroup>
+      <ProseNavGroup icon="i-heroicons-user-group-solid">
         <template #title>
           Community
         </template>
