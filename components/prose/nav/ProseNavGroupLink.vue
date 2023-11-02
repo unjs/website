@@ -1,13 +1,15 @@
 <script lang="ts" setup>
 const props = defineProps<{
+  label?: string
   to?: string
   icon?: string
+  noExternal?: boolean
 }>()
 
 const iconClass = 'w-5 h-5'
 
 const external = computed(() => {
-  if (!props.to)
+  if (!props.to || props.noExternal)
     return false
 
   return props.to.startsWith('http')
@@ -15,15 +17,23 @@ const external = computed(() => {
 </script>
 
 <template>
-  <NuxtLink :to="to" class="py-1 flex gap-x-1 hover:text-zinc-900 transition ease-in" rel="noopener">
-    <div class="flex items-center gap-x-2">
-      <slot name="icon" :class="iconClass">
-        <span v-if="icon" :class="[icon, iconClass]" />
+  <NuxtLink :to="to" class="block group py-1 hover:text-zinc-900 transition ease-in" rel="noopener">
+    <div class="text-xs font-medium text-zinc-400" :class="{ 'ml-7': icon }">
+      <slot name="label">
+        {{ label }}
       </slot>
-
-      <slot />
     </div>
 
-    <div v-if="external" class="i-heroicons-arrow-up-right-20-solid w-3 h-3" />
+    <div class="flex gap-x-1">
+      <div class="flex items-center gap-x-2">
+        <slot name="icon" :class="iconClass">
+          <span v-if="icon" :class="[icon, iconClass]" />
+        </slot>
+
+        <slot />
+      </div>
+
+      <div v-if="external" class="i-heroicons-arrow-up-right-20-solid w-3 h-3" />
+    </div>
   </NuxtLink>
 </template>

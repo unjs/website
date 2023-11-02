@@ -47,6 +47,11 @@ export default defineNuxtConfig({
           maxAge: 60 * 60 * 24 * 7, // 7 days
         },
       },
+      '/api/npm/**': {
+        cache: {
+          maxAge: 60 * 60 * 24 * 7, // 7 days
+        },
+      },
       '/api/search.txt': {
         prerender: true,
         headers: { 'Content-Type': 'text/plain' }, // By default, Nitro will set the content type to text/html
@@ -88,9 +93,6 @@ export default defineNuxtConfig({
   colorMode: {
     preference: 'light',
   },
-  // unocss: {
-  //   preflight: true,
-  // },
   site: {
     language: 'en',
     url: 'https://unjs.io',

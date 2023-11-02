@@ -7,6 +7,9 @@ github:
   repo: nitro
 npm:
   name: nitropack
+playgrounds:
+  stackblitz: https://stackblitz.com/github/unjs/nitro/tree/main/examples/hello-world
+  codesandbox: https://codesandbox.io/p/sandbox/nitro-template-5jssbm
 documentation: https://nitro.unjs.io
 layout: package
 ---

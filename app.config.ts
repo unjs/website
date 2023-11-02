@@ -7,6 +7,13 @@ export default defineAppConfig({
         base: 'flex border-zinc-200 dark:border-zinc-800',
       },
     },
+    badge: {
+      color: {
+        gray: {
+          solid: 'ring-1 ring-inset ring-zinc-300 dark:ring-zinc-700 text-zinc-700 dark:text-zinc-200 bg-zinc-50 dark:bg-zinc-800',
+        },
+      },
+    },
     button: {
       base: 'transition ease-in',
       color: {
@@ -14,6 +21,7 @@ export default defineAppConfig({
           solid: 'shadow-sm ring-1 ring-inset ring-zinc-300 dark:ring-zinc-700 text-zinc-900 dark:text-white bg-white hover:bg-zinc-50 disabled:bg-white dark:bg-zinc-900 dark:hover:bg-zinc-800/50 dark:disabled:bg-zinc-900 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400',
         },
         gray: {
+          solid: 'shadow-sm ring-1 ring-inset ring-zinc-300 dark:ring-zinc-700 text-zinc-700 dark:text-zinc-200 bg-zinc-50 hover:bg-zinc-100 disabled:bg-zinc-50 dark:bg-zinc-800 dark:hover:bg-zinc-700/50 dark:disabled:bg-zinc-800 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400',
           ghost: 'text-zinc-700 dark:text-zinc-200 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-50 dark:hover:bg-zinc-800 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400',
         },
       },

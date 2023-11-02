@@ -35,7 +35,7 @@ useServerSeoMeta({
     <SchemaOrgArticle :date-published="toISODateString(page.publishedAt)" :date-modified="toISODateString(page.modifiedAt)" type="BlogArticle" />
   </Head>
 
-  <Prose class="my-6 md:my-10 px-4 md:px-6" :toc="toc">
+  <Prose class="my-6 md:my-10" :toc="toc">
     <template #header>
       <header class="relative pt-10">
         <div class="flex flex-col gap-1">

@@ -1,6 +1,7 @@
+/**
+ * Format number using k, m, M to have the shortest possible string.
+ */
 export function formatNumber(value: number): string {
-  // format using k, m, M,
-
   if (value < 1e3)
     return value.toString()
 

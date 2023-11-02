@@ -12,6 +12,33 @@ if (!readme.value) {
   })
 }
 
+const { data: metadata } = await useFetch(`/api/github/${page.value.github.owner}/${page.value.github.repo}/metadata`)
+
+if (!metadata.value) {
+  throw createError({
+    statusCode: 500,
+    message: 'No metadata found',
+  })
+}
+
+let monthlyDownloads: number | null = null
+if (page.value.npm) {
+  const { data } = await useFetch(`/api/npm/${page.value.npm.name}/monthly-downloads`)
+
+  if (!data.value) {
+    throw createError({
+      statusCode: 500,
+      message: 'No monthly downloads found',
+    })
+  }
+
+  monthlyDownloads = data.value
+}
+
+const hasResources = computed(() => {
+  return page.value.npm || page.value.playgrounds
+})
+
 defineShortcuts({
   meta_g: {
     handler: () => {
@@ -25,28 +52,97 @@ defineShortcuts({
   <Head>
     <SchemaOrgWebPage :type="['ItemPage']" />
   </Head>
-  <div class="my-6 md:my-10 px-4 md:px-6 pt-6 md:pt-10 mb-10 md:pb-20 grid grid-cols-1 xl:grid-cols-[1fr_auto_1fr] items-start gap-6 xl:gap-8 rounded-2xl bg-white">
-    <div class="flex justify-start">
-      <NuxtLink to="/packages" class="group flex items-center gap-1">
-        <span class="i-heroicons-chevron-left-20-solid block w-4 h-4 text-zinc-400 group-hover:text-zinc-600 transition ease-in" />
-        <span class="text-sm text-zinc-600">
-          Packages
-        </span>
-      </NuxtLink>
-    </div>
 
-    <PackageMetadata class="row-start-3 xl:row-start-1 xl:col-start-3 xl:sticky top-4" :documentation="page.documentation" :github="page.github" :npm="page.npm" />
+  <Prose class="my-6 md:my-10">
+    <template #header>
+      <!-- rework to have the same title size of blog post -->
+      <PackageHeader :name="page.title" :description="page.description" />
+    </template>
 
-    <main class="max-w-screen-md lg:mx-auto lg:w-[768px] xl:row-start-1 xl:col-start-2">
-      <article>
-        <PackageHeader :name="page.title" :description="page.description" />
+    <ContentRendererMarkdown :value="readme!" />
 
-        <AppContent class="mt-6 xl:mt-12 max-w-none">
-          <ContentRendererMarkdown :value="readme!" />
-        </AppContent>
-      </article>
-    </main>
+    <template #nav>
+      <UButton :to="page.documentation" rel="noopener" size="lg" color="gray" :ui="{ base: 'w-full justify-center' }">
+        Documentation
+      </UButton>
+      <ProseNavGroup>
+        <template #links>
+          <div class="flex flex-col gap-1">
+            <ProseNavGroupLink label="Stars" :to="toGitHubRepo(page.github.owner, page.github.repo)" target="_blank" icon="i-heroicons-star-solid" no-external>
+              {{ formatNumber(metadata!.stars) }}
+            </ProseNavGroupLink>
+            <ProseNavGroupLink v-if="monthlyDownloads" label="Monthly Downloads" :to="toGitHubRepo(page.github.owner, page.github.repo)" target="_blank" icon="i-heroicons-arrow-trending-up-solid" no-external>
+              {{ formatNumber(monthlyDownloads) }}
+            </ProseNavGroupLink>
+            <ProseNavGroupLink v-if="metadata!.latestRelease" label="Latest Version" :to="toGitHubLatestRelease(page.github.owner, page.github.repo)" target="_blank" icon="i-heroicons-tag-solid" no-external>
+              {{ metadata!.latestRelease }}
+            </ProseNavGroupLink>
+          </div>
+        </template>
+      </ProseNavGroup>
+      <UDivider />
+      <ProseNavGroup>
+        <template #title>
+          GitHub
+        </template>
+        <template #links>
+          <ProseNavGroupLink :to="toGitHubRepo(page.github.owner, page.github.repo)" target="_blank" icon="i-simple-icons-github">
+            View source
+          </ProseNavGroupLink>
+          <ProseNavGroupLink
+            :to="toGitHubIssue(page.github.owner, page.github.repo)" target="_blank"
+            icon="i-simple-icons-github"
+          >
+            Report an issue
+          </ProseNavGroupLink>
+        </template>
+      </ProseNavGroup>
+      <UDivider />
+      <template v-if="hasResources">
+        <ProseNavGroup>
+          <template #title>
+            Resources
+          </template>
+          <template #links>
+            <ProseNavGroupLink v-if="page.npm" :to="toNpmPackage(page.npm.name)" target="_blank" icon="i-simple-icons-npm">
+              Discover on npm
+            </ProseNavGroupLink>
+            <ProseNavGroupLink v-if="page.playgrounds?.stackblitz" :to="page.playgrounds.stackblitz" target="_blank" icon="i-simple-icons-stackblitz">
+              Open on Stackblitz
+            </ProseNavGroupLink>
+            <ProseNavGroupLink v-if="page.playgrounds?.codesandbox" :to="page.playgrounds.codesandbox" target="_blank" icon="i-simple-icons-codesandbox">
+              Open on CodeSandbox
+            </ProseNavGroupLink>
+          </template>
+        </ProseNavGroup>
+        <UDivider />
+      </template>
+      <ProseNavGroup>
+        <template #title>
+          <div class="flex items-center gap-1">
+            <span>
+              Contributors
+            </span>
+            <UBadge color="gray" variant="solid" size="xs">
+              {{ metadata!.contributors.length }}
+            </UBadge>
+          </div>
+        </template>
+        <template #links>
+          <ol>
+            <li v-for="contributor in metadata!.contributors" :key="contributor.id">
+              <ProseNavGroupLink :to="`https://github.com/${contributor.username}`" no-external>
+                <div class="flex items-center gap-1">
+                  <UAvatar :src="`https://github.com/${contributor.username}.png`" :alt="`Avatar of ${contributor.username}`" size="3xs" />
+                  {{ contributor.username }}
+                </div>
+              </ProseNavGroupLink>
+            </li>
+          </ol>
+        </template>
+      </ProseNavGroup>
+    </template>
+  </Prose>
 
-    <PackageLatestNews class="xl:row-start-2 col-start-2" :name="page.title" />
-  </div>
+  <!-- <PackageLatestNews class="xl:row-start-2 col-start-2" :name="page.title" /> -->
 </template>
