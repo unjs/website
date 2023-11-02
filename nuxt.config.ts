@@ -22,7 +22,7 @@ export default defineNuxtConfig({
     'nuxt-schema-org',
     '@nuxthq/studio',
     '@nuxtjs/plausible',
-    'nuxt-payload-analyzer',
+    // 'nuxt-payload-analyzer',
     '@nuxtjs/fontaine',
   ],
   experimental: {
