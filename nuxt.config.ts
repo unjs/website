@@ -39,7 +39,7 @@ export default defineNuxtConfig({
     prerender: {
       failOnError: false,
       crawlLinks: true,
-      routes: ['/'],
+      routes: ['/', '/api/search.txt', '/rss.xml', '/rss.xml', '/blog/rss.xml', '/learn/rss.xml', '/explore/rss.xml', '/build/rss.xml'],
     },
     routeRules: {
       '/api/github/**': {
@@ -51,30 +51,6 @@ export default defineNuxtConfig({
         cache: {
           maxAge: 60 * 60 * 24 * 7, // 7 days
         },
-      },
-      '/api/search.txt': {
-        prerender: true,
-        headers: { 'Content-Type': 'text/plain' }, // By default, Nitro will set the content type to text/html
-      },
-      '/rss.xml': {
-        prerender: true,
-        headers: { 'Content-Type': 'text/xml' }, // By default, Nitro will set the content type to text/html
-      },
-      '/blog/rss.xml': {
-        prerender: true,
-        headers: { 'Content-Type': 'text/xml' }, // By default, Nitro will set the content type to text/html
-      },
-      '/learn/rss.xml': { // TODO: update for new navigation to /resources in the future
-        prerender: true,
-        headers: { 'Content-Type': 'text/xml' }, // By default, Nitro will set the content type to text/html
-      },
-      '/build/rss.xml': { // TODO: update for new navigation to /resources in the future
-        prerender: true,
-        headers: { 'Content-Type': 'text/xml' }, // By default, Nitro will set the content type to text/html
-      },
-      '/explore/rss.xml': { // TODO: update for new navigation to /resources in the future
-        prerender: true,
-        headers: { 'Content-Type': 'text/xml' }, // By default, Nitro will set the content type to text/html
       },
     },
   },

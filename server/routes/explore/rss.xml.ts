@@ -18,5 +18,6 @@ export default defineEventHandler(async (event) => {
     items: files.map(file => contentToRssItem(file, { site: siteConfig.url, default: { email: rssConfig.webMaster.email } })),
   })
 
+  setResponseHeader(event, 'Content-Type', 'application/rss+xml')
   return rssFeed
 })

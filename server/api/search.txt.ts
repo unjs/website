@@ -28,6 +28,6 @@ export default defineEventHandler(async (event) => {
   // Index the documents
   miniSearch.addAll(sections)
 
-  // Send the index to the client
+  setResponseHeader(event, 'Content-Type', 'text/plain')
   return JSON.stringify(miniSearch)
 })
