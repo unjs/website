@@ -121,7 +121,7 @@ useServerSeoMeta({
           Packages
         </template>
         <template #links>
-           <ol>
+          <ol>
             <li v-for="package_ in packages" :key="package_._path">
               <ProseNavGroupLink :to="package_._path">
                 <template #icon="props">
@@ -139,14 +139,15 @@ useServerSeoMeta({
           Community
         </template>
         <template #links>
-           <ProseNavGroupLink :to="toEditPage(page._file)" target="_blank" icon="i-heroicons-pencil-square-20-solid">
-              Edit this page
-           </ProseNavGroupLink>
-           <ProseNavGroupLink
-           to="https://github.com/unjs/website" target="_blank"
-           icon="i-simple-icons-github">
-              Star on GitHub
-           </ProseNavGroupLink>
+          <ProseNavGroupLink :to="toEditPage(page._file)" target="_blank" icon="i-heroicons-pencil-square-20-solid">
+            Edit this page
+          </ProseNavGroupLink>
+          <ProseNavGroupLink
+            to="https://github.com/unjs/website" target="_blank"
+            icon="i-simple-icons-github"
+          >
+            Star on GitHub
+          </ProseNavGroupLink>
         </template>
       </ProseNavGroup>
     </template>

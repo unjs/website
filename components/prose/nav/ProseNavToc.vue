@@ -18,7 +18,7 @@ function activeClass(id: string): string {
     <template #links>
       <ol v-if="toc" class=" text-zinc-500">
         <li v-for="link in toc.links" :key="link.id">
-          <ProseNavGroupLink :to="`#${link.id}`"  :class="activeClass(link.id)">
+          <ProseNavGroupLink :to="`#${link.id}`" :class="activeClass(link.id)">
             {{ link.text }}
           </ProseNavGroupLink>
         </li>
