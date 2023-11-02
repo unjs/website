@@ -2,19 +2,22 @@
 import type { Toc } from '@nuxt/content/dist/runtime/types'
 
 const toc = inject<Toc>('toc')
+
+const { activeHeadings } = useScrollSpyHeadings()
+
+function activeClass(id: string): string {
+  return activeHeadings.value.includes(id) ? '!text-primary-700' : '' // Important to override text-zinc-900
+}
 </script>
 
 <template>
-  <p class="flex items-center gap-2 text-right">
-    <span class="i-heroicons-list-bullet-20-solid block w-4 h-4 text-zinc-400 group-hover/nav:text-zinc-600 transition ease-in" />
-    <span class="text-zinc-600 text-sm">On this page</span>
+  <p class="text-zinc-900 font-semibold text-sm">
+    On this page
   </p>
-  <ol v-if="toc" class="mt-4 flex flex-col items-start text-sm text-zinc-400">
+  <ol v-if="toc" class="mt-2 text-sm text-zinc-500">
     <li v-for="link in toc.links" :key="link.id">
-      <NuxtLink :to="`#${link.id}`" class="group block py-1">
-        <span class="border-b border-zinc-400 group-hover:zinc-700 group-hover:zinc-700 transition ease-in leading-6">
-          {{ link.text }}
-        </span>
+      <NuxtLink :to="`#${link.id}`" class="inline-block py-1 hover:text-zinc-900 transition ease-in" :class="activeClass(link.id)">
+        {{ link.text }}
       </NuxtLink>
     </li>
   </ol>
