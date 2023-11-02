@@ -42,21 +42,6 @@ useServerSeoMeta({
           <h1 class="text-2xl md:text-3xl text-zinc-900 font-bold tracking-wide">
             {{ page.title }}
           </h1>
-          <dl>
-            <dt class="sr-only">
-              Related packages
-            </dt>
-            <dd>
-              <ul class="flex gap-3 text-sm text-zinc-900 h-6">
-                <li v-for="package_ in packages" :key="package_._path">
-                  <NuxtLink :to="package_._path" class="py-1 flex items-center gap-1">
-                    <img :src="toPackageLogo(package_.title)" :alt="`Logo of ${package_.title}`" class="w-4 h-4" width="16" height="16">
-                    <span>{{ package_.title }}</span>
-                  </NuxtLink>
-                </li>
-              </ul>
-            </dd>
-          </dl>
         </div>
 
         <div class="absolute top-0 left-0 text-sm text-zinc-700 font-light">
