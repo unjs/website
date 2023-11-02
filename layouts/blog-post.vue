@@ -1,4 +1,7 @@
 <script lang="ts" setup>
+import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
+import { NuxtLink } from '#components'
+
 const { toc, page } = useContent()
 
 const { data: packages } = await useAsyncData(`packages${page.value.packages.join(':')}`, () => queryContent('/packages/').only(['_path', 'title', 'icon', 'logo']).where({ _path: { $containsAny: page.value.packages } }).find(), { watch: [() => page.value.packages] })
@@ -17,6 +20,13 @@ useServerSeoMeta({
   author: page.value.authors.map(author => author.name).join(', '),
   twitterCard: 'summary',
 })
+
+function scrollToTop(close: () => void) {
+  window.location.hash = ''
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+
+  close()
+}
 </script>
 
 <template>
@@ -38,9 +48,9 @@ useServerSeoMeta({
     <nav xl:block xl:row-start-1 xl:col-start-3 sticky top-4 class="group/nav hidden">
       <p flex="~ items-center" gap="2" text="right">
         <span i-heroicons-list-bullet-20-solid block w-4 h-4 text="gray-400 group-hover/nav:gray-600" transition="~ ease-in duration-150" />
-        <span text="text-sm gray-600">Table of Contents</span>
+        <span text="text-sm gray-600">On this page</span>
       </p>
-      <ul mt-4 flex="~ col items-start" text="sm gray-400">
+      <ol mt-4 flex="~ col items-start" text="sm gray-400">
         <li v-for="link in toc.links" :key="link.id">
           <NuxtLink :to="`#${link.id}`" block p="y-1" class="group">
             <span border="b gray-400 group-hover:gray-700" text="group-hover:gray-700" transition="~ ease-in duration-150" leading="6">
@@ -48,12 +58,12 @@ useServerSeoMeta({
             </span>
           </NuxtLink>
         </li>
-      </ul>
+      </ol>
     </nav>
 
     <main max-w-screen-md lg="mx-auto w-screen-md" xl="row-start-1 col-start-2">
       <article>
-        <header relative p="t-10">
+        <header relative mb="8" p="t-10">
           <div flex="~ col" gap-1>
             <h1 text="2xl md:3xl gray-900" font="bold" tracking="wide">
               {{ page.title }}
@@ -126,9 +136,42 @@ useServerSeoMeta({
             </dd>
           </dl>
         </header>
-        <div mt-6 md:mt-12 prose prose-gray max-w-none>
+
+        <!-- TODO: create a component -->
+        <Popover relative sticky z-20 top="0">
+          <PopoverButton py="2" bg="white" class="xl:hidden" type="button" w-full flex="~ items-center" gap="2" text="right gray-700 sm">
+            <span i-heroicons-list-bullet-20-solid block w-4 h-4 />
+            <span>On this page</span>
+          </PopoverButton>
+
+          <Transition
+            enter-active-class="transition duration-200 ease-out"
+            enter-from-class="translate-y--1 opacity-0"
+            enter-to-class="translate-y-0 opacity-100"
+            leave-active-class="transition duration-200 ease-in"
+            leave-from-class="translate-y-0 opacity-100"
+            leave-to-class="translate-y--1 opacity-0"
+          >
+            <PopoverPanel v-slot="{ close }" absolute left-0 right-0 mt="2" max-h-xs bg-white shadow-xl rounded-lg flex="~ col" border="~ gray-400" overflow-y-scroll class="gray-scrollbar">
+              <nav text="sm">
+                <button type="button" w-full p="y-2 x-4" text="left gray-700" border="b gray-300" @click="scrollToTop(close)">
+                  Return to top
+                </button>
+                <ol my="2" text="gray-500">
+                  <li v-for="link in toc.links" :key="link.id">
+                    <NuxtLink :to="`#${link.id}`" class="block py-2 px-4" @click="close">
+                      {{ link.text }}
+                    </NuxtLink>
+                  </li>
+                </ol>
+              </nav>
+            </PopoverPanel>
+          </Transition>
+        </Popover>
+
+        <AppContent m="t-4 xl:t-12" max-w-none>
           <slot />
-        </div>
+        </AppContent>
       </article>
     </main>
   </div>

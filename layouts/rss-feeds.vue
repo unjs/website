@@ -14,9 +14,9 @@ const { page } = useContent()
         </h1>
       </header>
 
-      <div mt-6 md:mt-12 prose prose-gray max-w-none>
+      <AppContent m="t-6 xl:t-12" max-w-none>
         <slot />
-      </div>
+      </AppContent>
     </main>
   </div>
 </template>

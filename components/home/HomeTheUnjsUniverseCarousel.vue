@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { PuzzlePart } from 'types/puzzle'
+import type { PuzzlePart } from '~/types/puzzle'
 
 const props = defineProps<{
   parts: PuzzlePart[]
@@ -22,7 +22,7 @@ const imageHeight = ref('auto')
     <div class="slide-track animation" py-4>
       <template v-for="item in [...parts, ...parts]" :key="item.part">
         <div class="slide" shrink-0 :style="`align-items:${item.align};`">
-          <NuxtLink :to="`/packages/${item.name}`">
+          <NuxtLink :to="`/packages/${item.name}?utm_source=unjs.io&utm_medium=home-carousel`">
             <img :src="`/assets/puzzle/${item.name}.svg`" drop-shadow-md hover:drop-shadow-xl transition ease-in duration-150>
           </NuxtLink>
         </div>

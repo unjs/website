@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 const { page } = useContent()
 
-const documentation = computed(() => page.value.documentation)
+const { data: readme } = await useFetch(`/api/github/${page.value.github.owner}/${page.value.github.repo}/readme`)
 </script>
 
 <template>
@@ -18,62 +18,18 @@ const documentation = computed(() => page.value.documentation)
       </NuxtLink>
     </div>
 
-    <nav row-start-3 xl="row-start-1 col-start-3" xl:sticky top="4" flex="~ col items-center" gap="6 xl:4">
-      <NuxtLink :to="documentation" target="_blank" rel="noopener" w-full p="x-3 y-2" rounded="0.375rem" bg="primary hover:op-80" flex="~ justify-center items-center" gap-2 text-gray-900 transition="~ ease-in duration-150">
-        <span>
-          Documentation
-        </span>
-        <span w-4 h-4 i-heroicons-arrow-top-right-on-square-20-solid />
-      </NuxtLink>
-      <hr w="1/2" rounded="full" border="~ gray-900 op-20">
-      <div w-full>
-        <PackagesExternalLink :to="toGitHubRepo(page.github.owner, page.github.repo)">
-          <span w-4 h-4 block i="logos-github-icon?mask" />
-          <span>
-            View source
-          </span>
-        </PackagesExternalLink>
-        <PackagesExternalLink :to="toGitHubLatestRelease(page.github.owner, page.github.repo)">
-          <span w-4 h-4 block i="logos-github-icon?mask" />
-          <span>
-            Latest release
-          </span>
-        </PackagesExternalLink>
-        <PackagesExternalLink :to="toGitHubIssue(page.github.owner, page.github.repo)">
-          <span w-4 h-4 block i="logos-github-icon?mask" />
-          <span>
-            Report an issue
-          </span>
-        </PackagesExternalLink>
-      </div>
-      <hr w="1/2" rounded="full" border="~ gray-900 op-20">
-      <div w-full>
-        <PackagesExternalLink :to="toNpmPackage(page.npm.name)">
-          <span w-4 h-4 block i-vscode-icons-file-type-npm />
-          <span>
-            Discover the package
-          </span>
-        </PackagesExternalLink>
-      </div>
-    </nav>
+    <PackageMetadata row-start-3 xl="row-start-1 col-start-3" xl:sticky top="4" :documentation="page.documentation" :github="page.github" :npm="page.npm" />
 
     <main max-w-screen-md lg="mx-auto w-screen-md" xl="row-start-1 col-start-2">
       <article>
-        <header flex="~ col items-start" gap="1">
-          <div flex="~ items-center" gap="4">
-            <img :src="toPackageLogo(page.title)" :alt="`Logo from ${page.title}`" width="28" height="28" w-7 h-7>
-            <h1 text="gray-900 2xl md:3xl" font="bold" tracking="wide">
-              {{ page.title }}
-            </h1>
-          </div>
-          <p gray="gray-700" font="italic medium">
-            {{ page.description }}
-          </p>
-        </header>
-        <div mt-6 xl:mt-12 prose prose-gray max-w-none>
-          <slot />
-        </div>
+        <PackageHeader :name="page.title" :description="page.description" />
+
+        <AppContent m="t-6 xl:t-12" max-w-none>
+          <ContentRendererMarkdown :value="readme.content" />
+        </AppContent>
       </article>
     </main>
+
+    <PackageLatestNews xl="row-start-2 col-start-2" :name="page.title" />
   </div>
 </template>
