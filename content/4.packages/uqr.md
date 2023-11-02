@@ -1,7 +1,6 @@
 ---
 title: uqr
 description: Generate QR Code universally, in any runtime, to ANSI, Unicode or SVG.
-icon: i-box-qr
 github:
   owner: unjs
   repo: uqr

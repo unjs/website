@@ -1,7 +1,6 @@
 ---
 title: scule
 description: String Case Utils
-icon: i-noto-worm
 github:
   owner: unjs
   repo: scule

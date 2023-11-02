@@ -8,11 +8,11 @@ defineProps<{
 }>()
 
 const emit = defineEmits<{
-  close: []
+  selected: []
 }>()
 
-function close() {
-  emit('close')
+function onSelected() {
+  emit('selected')
 }
 
 function isLastChildren(children: SearchDisplayItem[] | null, index: number) {
@@ -25,7 +25,7 @@ function isLastChildren(children: SearchDisplayItem[] | null, index: number) {
 
 <template>
   <section>
-    <h2 text="gray-700" font="bold" m="b-2">
+    <h2 text="gray-700" capitalize font="bold" m="b-2">
       {{ name }}
     </h2>
     <template v-for="item in results" :key="item.id">
@@ -37,7 +37,7 @@ function isLastChildren(children: SearchDisplayItem[] | null, index: number) {
         <AppSearchGroupItem
           :active="active"
           :item="item"
-          @click="close"
+          @click="onSelected"
         />
       </ComboboxOption>
       <ComboboxOption
@@ -49,7 +49,7 @@ function isLastChildren(children: SearchDisplayItem[] | null, index: number) {
       >
         <AppSearchGroupItem
           :active="active" :item="child" child :last="isLastChildren(item.children, index)"
-          @click="close"
+          @click="onSelected"
         />
       </ComboboxOption>
     </template>

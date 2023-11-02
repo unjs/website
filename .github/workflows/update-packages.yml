@@ -1,0 +1,33 @@
+name: Update Packages
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 7 * * 1' # Every monday at 7am UTC
+
+permissions:
+  pull-requests: write
+  contents: write
+
+jobs:
+  update-packages:
+    if: github.repository_owner == 'unjs'
+    name: Update Packages
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+        with:
+          fetch-depth: 0
+      - run: corepack enable
+      - uses: actions/setup-node@8f152de45cc393bb48ce5d89d36b731f54556e65 # v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - run: pnpm jiti scripts/update-packages.ts
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

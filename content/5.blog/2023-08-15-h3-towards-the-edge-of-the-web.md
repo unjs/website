@@ -129,17 +129,17 @@ export default eventHandler<{ body: { name: string }; query: { id: string } }>(
 Two new utility functions, `getValidatedQuery(event, validator)` and `readValidatedBody(event, validator)`, facilitate integration with schema validators such as [zod](https://zod.dev/) for both runtime and type safety.
 
 ```ts
+import { z } from 'zod'
+
 const userSchema = z.object({
   name: z.string().default('Guest'),
-  email: z.email().required(),
+  email: z.string().email(),
 })
 
-export default defineEventHandler((event) => {
-  const user = await readValidatedBody(event, userSchema.parse)
+export default defineEventHandler(async (event) => {
+  const user = await readValidatedBody(event, userSchema.safeParse) // or `.parse` to throw an error
   // User object is validated and typed!
-  return {
-    user
-  }
+  return user
 })
 ```
 

@@ -1,7 +1,6 @@
 ---
 title: defu
 description: Assign default properties, recursively. Lightweight and Fast.
-icon: i-noto-water-wave
 github:
   owner: unjs
   repo: defu

@@ -1,7 +1,16 @@
+import type { NitroConfig } from 'nitropack'
+import packagesRedirects from './config/packages-redirects'
+
 export default defineNuxtConfig({
   app: {
     head: {
       titleTemplate: '%s · UnJS',
+    },
+  },
+  runtimeConfig: {
+    public: {
+      siteUrl: 'https://unjs.io',
+      inLanguage: 'en',
     },
   },
   modules: [
@@ -10,21 +19,28 @@ export default defineNuxtConfig({
     '@unocss/nuxt',
     'nuxt-simple-robots',
     'nuxt-simple-sitemap',
+    'nuxt-schema-org',
     '@nuxthq/studio',
     '@nuxtjs/plausible',
   ],
+  experimental: {
+    inlineSSRStyles: false, // Avoid CSS reset being applied after CSS
+  },
   css: [
     '~/assets/app.css',
   ],
   nitro: {
+    static: true,
     prerender: {
       failOnError: false,
       crawlLinks: true,
+      routes: ['/', '/api/search.txt', '/rss.xml', '/rss.xml', '/blog/rss.xml', '/learn/rss.xml', '/explore/rss.xml', '/build/rss.xml'],
     },
     routeRules: {
-      '/api/search': {
-        prerender: true,
-        headers: { 'Content-Type': 'text/plain' }, // By default, Nitro will set the content type to text/html
+      '/api/github/**': {
+        cache: {
+          maxAge: 60 * 60 * 24 * 7, // 7 days
+        },
       },
     },
   },
@@ -67,9 +83,12 @@ export default defineNuxtConfig({
         include: ['/packages/**'],
       },
       pages: {
-        exclude: ['/build/**', '/explore/**', '/learn/**', '/blog/**', '/packages/**', '/_footer-license', '_no-articles'],
+        exclude: ['/build/**', '/explore/**', '/learn/**', '/blog/**', '/packages/**'],
       },
     },
+  },
+  routeRules: {
+    ...packagesRedirects as NitroConfig['routeRules'],
   },
   devtools: {
     enable: true,

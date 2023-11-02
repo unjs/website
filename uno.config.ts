@@ -34,14 +34,23 @@ export default defineConfig({
           'text-decoration': 'none',
         },
         'p a, ul a': {
-          'text-decoration-line': 'none',
+          'text-decoration-line': 'underline',
+          'text-underline-offset': '0.2em',
           'color': 'var(--un-prose-body)',
-          'border-bottom': '1px solid var(--un-prose-body)',
-          'transition': 'border 150ms ease-in',
+          'font-weight': '600',
         },
-        'p a:hover': {
-          'color': 'var(--un-prose-links)',
-          'border-bottom': '1px solid var(--un-prose-links)',
+        'p a:has(code)': {
+          border: '0',
+        },
+        'p a:has(code):hover': {
+          border: '0',
+        },
+        'p a:has(img)': {
+          'text-decoration': 'none',
+          'border': '0',
+        },
+        'p a:has(img) + a:has(img)': {
+          'margin-left': '0.5rem',
         },
         'blockquote': {
           'border-left-color': '#ecdc5a', // primary
@@ -49,6 +58,9 @@ export default defineConfig({
         'pre': {
           margin: 0,
           padding: 0,
+        },
+        'table': {
+          margin: 0,
         },
       },
     }),

@@ -1,7 +1,6 @@
 ---
 title: unimport
 description: Unified utils for auto importing APIs in modules.
-icon: i-noto-accordion
 github:
   owner: unjs
   repo: unimport

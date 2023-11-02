@@ -21,3 +21,11 @@ const refinedSrc = computed(() => {
 <template>
   <img :src="refinedSrc" :alt="alt" :width="width" :height="height" :class="{ 'border border-gray-300 rounded-[0.875rem]': !withoutBorder }">
 </template>
+
+<style scoped>
+a img {
+  display: inline;
+  border-radius: 0;
+  border: none;
+}
+</style>
