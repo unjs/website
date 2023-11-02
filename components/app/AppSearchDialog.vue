@@ -42,7 +42,7 @@ function navigate() {
     as="template"
     appear
   >
-    <Dialog as="div" @close="close" class="relative z-50">
+    <Dialog as="div" class="relative z-50" @close="close">
       <TransitionChild
         appear
         as="template"

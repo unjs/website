@@ -20,7 +20,7 @@ defineProps<{
     </svg>
 
     <span v-if="item.level === 0" class="i-heroicons-document-text-20-solid w-6 h-6 block text-zinc-900" />
-    <span v-else class="i-heroicons-hashtag-20-solid h-5 w-5 block text-zinc-700"/>
+    <span v-else class="i-heroicons-hashtag-20-solid h-5 w-5 block text-zinc-700" />
 
     <span class="flex flex-col">
       <span class="text-zinc-900 font-semibold">

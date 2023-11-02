@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import type { Toc } from '@nuxt/content/dist/runtime/types'
 
-
 const props = defineProps<{
   toc?: Toc
 }>()

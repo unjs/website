@@ -22,7 +22,7 @@ export default <Partial<Config>> {
       fontFamily: {
         sans: ['Nunito', ...fontFamily.sans],
       },
-      typography: (theme) => ({
+      typography: theme => ({
         DEFAULT: {
           css: {
             'h1 a,h2 a,h3 a,h4 a,h5 a,h6 a': {
@@ -37,7 +37,7 @@ export default <Partial<Config>> {
               fontWeight: 'inherit',
             },
             'blockquote': {
-              'border-left-color': theme('colors.primary')
+              'border-left-color': theme('colors.primary'),
             },
             'pre': {
               'margin': 0,

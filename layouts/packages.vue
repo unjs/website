@@ -44,7 +44,6 @@ const results = computed(() => {
   if (!orderBy.value)
     return currentPackages
 
-
   return currentPackages.sort((a, b) => {
     const aTitle = a.title.toLowerCase()
     const bTitle = b.title.toLowerCase()
@@ -52,10 +51,8 @@ const results = computed(() => {
     if (aTitle < bTitle)
       return -1 * order.value
 
-
     if (aTitle > bTitle)
       return 1 * order.value
-
 
     return 0
   })

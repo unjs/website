@@ -20,12 +20,12 @@ useServerSeoMeta({
   twitterCard: 'summary',
 })
 
-function scrollToTop(close: () => void) {
-  window.location.hash = ''
-  window.scrollTo({ top: 0, behavior: 'smooth' })
+// function scrollToTop(close: () => void) {
+//   window.location.hash = ''
+//   window.scrollTo({ top: 0, behavior: 'smooth' })
 
-  close()
-}
+//   close()
+// }
 </script>
 
 <template>

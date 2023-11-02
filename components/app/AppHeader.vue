@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 const website = useWebsite()
 const github = website.value.socials.github
-const x = website.value.socials.x
 
 const { data: navigation } = await useAsyncData('content:navigation', () => fetchContentNavigation(queryContent('/')), {
   transform: data => data.filter(item => item._path !== '/').map((item) => {

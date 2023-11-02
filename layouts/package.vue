@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { ParsedContent } from '@nuxt/content/dist/runtime/types';
+import type { ParsedContent } from '@nuxt/content/dist/runtime/types'
 
 const { page } = useContent()
 
