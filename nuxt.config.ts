@@ -55,7 +55,7 @@ export default defineNuxtConfig({
       '/blog/2023-08-25-nitro-2.6': {
         redirect: {
           statusCode: 301,
-          to: '/blog/2021-08-25-nitro-2-6',
+          to: '/blog/2023-08-25-nitro-2-6',
         },
       },
     },
