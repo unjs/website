@@ -39,7 +39,7 @@ export default defineNuxtConfig({
     prerender: {
       failOnError: false,
       crawlLinks: true,
-      routes: ['/', '/api/search.txt', '/rss.xml', '/rss.xml', '/blog/rss.xml', '/learn/rss.xml', '/explore/rss.xml', '/build/rss.xml'],
+      routes: ['/', '/blog', '/packages', '/api/search.txt', '/rss.xml', '/rss.xml', '/blog/rss.xml', '/learn/rss.xml', '/explore/rss.xml', '/build/rss.xml'],
     },
     routeRules: {
       '/api/github/**': {
@@ -52,6 +52,12 @@ export default defineNuxtConfig({
           maxAge: 60 * 60 * 24 * 7, // 7 days
         },
       },
+      '/blog/2023-08-25-nitro-2.6': {
+        redirect: {
+          statusCode: 301,
+          to: '/blog/2021-08-25-nitro-2-6',
+        }
+      }
     },
   },
   content: {
