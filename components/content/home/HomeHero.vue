@@ -31,7 +31,7 @@ const { data } = await useAsyncData(' blog:latest', () => queryContent('/blog').
         Explore the Universe
       </UButton>
     </div>
-    <div class="puzzle shrink-0 relative transform translate-x-1/2 lg:translate-x-0 left-50% lg:left-0 flex justify-center items-center">
+    <div class="puzzle shrink-0 relative transform -translate-x-1/2 left-1/2 lg:translate-x-0 lg:left-0 flex justify-center items-center">
       <Puzzle :parts="puzzle" :away="away" />
     </div>
   </section>
