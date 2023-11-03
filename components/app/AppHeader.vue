@@ -3,16 +3,16 @@ const website = useWebsite()
 const github = website.value.socials.github
 
 const { data: navigation } = await useAsyncData('content:navigation', () => fetchContentNavigation(queryContent('/')), {
-  transform: data => {
+  transform: (data) => {
     const filteredData = data.filter(item => item._path !== '/').map((item) => {
-      if (item._path !== '/resources' ) {
+      if (item._path !== '/resources')
         delete item.children
-      }
+
       return {
         title: item.title,
         _path: item._path,
         icon: item.icon,
-        children: item.children
+        children: item.children,
       }
     })
 
@@ -49,7 +49,7 @@ const uiButton = { font: 'font-semibold', color: { gray: { ghost: 'hover:bg-prim
         <li v-for="item in navigation" :key="item._path">
           <UPopover v-if="item.children" mode="hover" :ui="{ width: 'max-w-[18rem]' }">
             <UButton size="md" variant="ghost" color="gray" :to="item._path" :icon="item.icon" :ui="{ size: { md: 'text-base' }, ...uiButton }" active-class="bg-primary bg-opacity-30">
-                {{ item.title }}
+              {{ item.title }}
             </UButton>
 
             <template #panel>
@@ -57,7 +57,7 @@ const uiButton = { font: 'font-semibold', color: { gray: { ghost: 'hover:bg-prim
                 <li v-for="child in item.children" :key="child._path">
                   <ULink :to="child._path" class="px-3 py-2 flex flex-col hover:bg-primary/30 dark:hover:bg-primary/90 transition ease-in rounded-md text-base">
                     <span class="flex flex-row gap-2 items-center">
-                      <span :class="child.icon" class="h-5 w-5"></span>
+                      <span :class="child.icon" class="h-5 w-5" />
                       <span class="text-zinc-700 hover:text-zinc-800 font-medium"> {{ child.title }} </span>
                     </span>
 
