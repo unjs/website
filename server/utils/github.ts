@@ -1,7 +1,7 @@
 import { FetchError } from 'ofetch'
 
-export async function fetchRepo(owner: string, repo: string): Promise<{ stars: number, createdAt: string, updatedAt: string }> {
-  const repos = await $fetch<{ repo: { stars: number, createdAt: string, updatedAt: string } }>(`https://ungh.cc/repos/${owner}/${repo}`)
+export async function fetchRepo(owner: string, repo: string): Promise<{ stars: number; createdAt: string; updatedAt: string }> {
+  const repos = await $fetch<{ repo: { stars: number; createdAt: string; updatedAt: string } }>(`https://ungh.cc/repos/${owner}/${repo}`)
 
   return repos.repo
 }
