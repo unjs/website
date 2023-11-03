@@ -52,6 +52,11 @@ export default defineNuxtConfig({
           maxAge: 60 * 60 * 24 * 7, // 7 days
         },
       },
+      '/api/packages': {
+        cache: {
+          maxAge: 60 * 60 * 24 * 7, // 7 days
+        },
+      },
       '/blog/2023-08-25-nitro-2.6': {
         redirect: {
           statusCode: 301,

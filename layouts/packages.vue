@@ -3,7 +3,7 @@ import type { Package } from '~/types/package'
 
 const { page } = useContent()
 
-const { data: packages } = await useAsyncData('content:packages', () => queryContent<Package>('/packages/').only(['_path', 'title', 'description']).find())
+const { data: packages } = await useFetch('/api/packages')
 
 if (!packages.value) {
   throw createError({
@@ -34,6 +34,14 @@ const orderByOptions = [
     id: 'title',
     label: 'Name',
   },
+  {
+    id: 'stars',
+    label: 'Stars',
+  },
+  {
+    id: 'monthlyDownloads',
+    label: 'Downloads',
+  },
 ]
 const orderBy = ref<string>('title')
 const currentOrderBy = computed(() => orderByOptions.find(option => option.id === orderBy.value))
@@ -45,13 +53,13 @@ const results = computed(() => {
     return currentPackages
 
   return currentPackages.sort((a, b) => {
-    const aTitle = a.title.toLowerCase()
-    const bTitle = b.title.toLowerCase()
+    const aValue = a[orderBy.value]
+    const bValue = b[orderBy.value]
 
-    if (aTitle < bTitle)
+    if (aValue < bValue)
       return -1 * order.value
 
-    if (aTitle > bTitle)
+    if (aValue > bValue)
       return 1 * order.value
 
     return 0
@@ -106,7 +114,7 @@ const results = computed(() => {
 
       <ol v-if="packages" class="mt-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 place-items-stretch">
         <li v-for="item in results" :key="item.title">
-          <UCard as="article" :ui="{ base: 'h-full relative', divide: '', shadow: 'shadow-none hover:shadow-lg', rounded: 'rounded-xl', header: { base: 'flex gap-3 items-center', padding: 'py-0 pt-4 sm:px-4 sm:pt-4' }, body: { padding: 'p-4 sm:p-4' } }">
+          <!-- <UCard as="article" :ui="{ base: 'h-full relative', divide: '', shadow: 'shadow-none hover:shadow-lg', rounded: 'rounded-xl', header: { base: 'flex gap-3 items-center', padding: 'py-0 pt-4 sm:px-4 sm:pt-4' }, body: { padding: 'p-4 sm:p-4' } }">
             <template #header>
               <img :src="toPackageLogo(item.title)" :alt="`Logo of ${item.title}`" w-12 h-12>
               <h3 class="text-xl font-semibold">
@@ -118,6 +126,48 @@ const results = computed(() => {
             <p class="text-zinc-500">
               {{ item.description }}
             </p>
+          </UCard> -->
+          <UCard as="article" :ui="{ base: 'relative h-full', divide: '', shadow: 'shadow-none hover:shadow-lg', rounded: 'rounded-xl', body: { base: 'h-full flex flex-col gap-3', padding: 'px-4 py-4 sm:p-4' } }">
+            <header class="flex items-center gap-3">
+              <img :src="toPackageLogo(item.title)" :alt="`Logo of ${item.title}`" class="w-12 h-12">
+              <h3 class="font-semibold text-xl text-zinc-950">
+                <NuxtLink :to="item._path">
+                  <span class="absolute inset-0" />
+                  {{ item.title }}
+                </NuxtLink>
+              </h3>
+            </header>
+
+            <p class="grow text-zinc-500">
+              {{ item.description }}
+            </p>
+
+            <dl class="text-zinc-500 text-sm font-medium grid grid-cols-3">
+              <div class="flex gap-1 items-center">
+                <dt>
+                  <span class="sr-only">
+                    Stars
+                  </span>
+                  <span class="i-heroicons-star-solid" />
+                </dt>
+                <dd>
+                  {{ formatNumber(item.stars) }}
+                </dd>
+              </div>
+              <template v-if="item.monthlyDownloads">
+                <div class="flex gap-1 justify-center items-center">
+                  <dt>
+                    <span class="sr-only">
+                      Monthly Downloads
+                    </span>
+                    <span class="i-heroicons-arrow-trending-up-solid" />
+                  </dt>
+                  <dd>
+                    {{ formatNumber(item.monthlyDownloads) }}
+                  </dd>
+                </div>
+              </template>
+            </dl>
           </UCard>
         </li>
       </ol>
