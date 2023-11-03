@@ -6,4 +6,5 @@ github:
 npm:
   name: ofetch
 documentation: https://github.com/unjs/ofetch#ofetch
+examples: https://github.com/unjs/ofetch/tree/main/examples
 layout: package

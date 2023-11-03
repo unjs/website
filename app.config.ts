@@ -126,24 +126,30 @@ export default defineAppConfig({
         {
           title: 'Content',
           items: [
-          //   {
-          //     title: 'Learn',
-          //     url: '/learn',
-          //     rel: null,
-          //     target: null,
-          //   },
-          //   {
-          //     title: 'Build',
-          //     url: '/build',
-          //     rel: null,
-          //     target: null,
-          //   },
-          //   {
-          //     title: 'Explore',
-          //     url: '/explore',
-          //     rel: null,
-          //     target: null,
-          //   },
+            {
+              title: 'Resouces',
+              url: '/resources',
+              rel: null,
+              target: null,
+            },
+            {
+              title: 'Learn',
+              url: '/resources/learn',
+              rel: null,
+              target: null,
+            },
+            //   {
+            //     title: 'Build',
+            //     url: '/build',
+            //     rel: null,
+            //     target: null,
+            //   },
+            //   {
+            //     title: 'Explore',
+            //     url: '/explore',
+            //     rel: null,
+            //     target: null,
+            //   },
             {
               title: 'Search',
               url: '/search',
@@ -158,6 +164,12 @@ export default defineAppConfig({
             {
               title: 'Website',
               url: 'https://unjs.io',
+              rel: 'noopener',
+              target: '_blank',
+            },
+            {
+              title: 'X',
+              url: 'https://x.com/unjsio',
               rel: 'noopener',
               target: '_blank',
             },
