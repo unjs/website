@@ -12,51 +12,17 @@ if (!packages.value) {
   })
 }
 
-const search = ref('')
-const searchDebounced = refDebounced(search, 150)
+const { search, searchResults } = useSimpleSearch(packages as Ref<Package[]>)
 
-const searchResults = useMiniSearch(searchDebounced, packages as Ref<Package[]>, {
-  idField: 'title',
-  fields: ['title', 'description'],
-  storeFields: ['title', 'description', '_path'],
-  searchOptions: {
-    prefix: true,
-    fuzzy: 0.2,
-  },
-})
-
-const order = ref<1 | -1>(1)
-const toggleOrder = function () {
-  order.value = order.value === 1 ? -1 : 1
-}
 const orderByOptions = [
   {
     id: 'title',
     label: 'Name',
   },
 ]
-const orderBy = ref<string>('title')
-const currentOrderBy = computed(() => orderByOptions.find(option => option.id === orderBy.value))
+const { order, toggleOrder, orderBy, currentOrderBy, sort } = useOrder(1, { init: 'title', options: orderByOptions })
 
-const results = computed(() => {
-  const currentPackages = searchDebounced.value ? searchResults.value : packages.value as Package[]
-
-  if (!orderBy.value)
-    return currentPackages
-
-  return currentPackages.sort((a, b) => {
-    const aTitle = a.title.toLowerCase()
-    const bTitle = b.title.toLowerCase()
-
-    if (aTitle < bTitle)
-      return -1 * order.value
-
-    if (aTitle > bTitle)
-      return 1 * order.value
-
-    return 0
-  })
-})
+const results = sort(searchResults)
 </script>
 
 <template>
@@ -108,7 +74,7 @@ const results = computed(() => {
         <li v-for="item in results" :key="item.title">
           <UCard as="article" :ui="{ base: 'h-full relative', divide: '', shadow: 'shadow-none hover:shadow-lg', rounded: 'rounded-xl', header: { base: 'flex gap-3 items-center', padding: 'py-0 pt-4 sm:px-4 sm:pt-4' }, body: { padding: 'p-4 sm:p-4' } }">
             <template #header>
-              <img :src="toPackageLogo(item.title)" :alt="`Logo of ${item.title}`" w-12 h-12>
+              <img :src="toPackageLogo(item.title!)" :alt="`Logo of ${item.title}`" w-12 h-12>
               <h3 class="text-xl font-semibold">
                 <NuxtLink :to="item._path" class="absolute inset-0" />
                 {{ item.title }}

@@ -76,10 +76,18 @@ export default defineAppConfig({
       text: 'font-medium leading-none text-zinc-900 dark:text-white truncate',
       placeholder: 'font-medium leading-none text-zinc-500 dark:text-zinc-400 truncate',
     },
+    popover: {
+      background: 'bg-white dark:bg-zinc-900',
+      ring: 'ring-1 ring-zinc-200 dark:ring-zinc-800',
+    },
   },
   website: {
     search: {
       groups: [
+        {
+          name: 'Articles',
+          path: '/resources',
+        },
         {
           name: 'Blog',
           path: '/blog',
