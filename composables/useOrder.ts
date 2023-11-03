@@ -6,7 +6,9 @@ export function useOrder(orderInit: Order, orderByConfig: {
   options: orderByOption[]
 }) {
   const order = ref<1 | -1>(orderInit)
-  const toggleOrder = () => { order.value = order.value === 1 ? -1 : 1 }
+  const toggleOrder = () => {
+    order.value = order.value === 1 ? -1 : 1
+  }
 
   const orderBy = ref(orderByConfig.init)
   const currentOrderBy = computed(() => orderByConfig.options.find(option => option.id === orderBy.value))
