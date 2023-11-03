@@ -11,15 +11,13 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  const [stars, contributors, latestRelease] = await Promise.all([
+  const [stars, latestRelease] = await Promise.all([
     fetchStars(owner, repo),
-    fetchContributors(owner, repo),
     fetchLatestRelease(owner, repo),
   ])
 
   return {
     stars,
-    contributors,
     latestRelease,
   }
 })
@@ -30,14 +28,15 @@ async function fetchStars(owner: string, repo: string): Promise<number> {
   return repos.repo.stars
 }
 
-async function fetchContributors(owner: string, repo: string): Promise<{ id: number; username: string }[]> {
-  const { contributors } = await $fetch<{ contributors: { id: number; username: string; contributions: number }[] }>(`https://ungh.cc/repos/${owner}/${repo}/contributors`)
+// TODO: use it later
+// async function fetchContributors(owner: string, repo: string): Promise<{ id: number; username: string }[]> {
+//   const { contributors } = await $fetch<{ contributors: { id: number; username: string; contributions: number }[] }>(`https://ungh.cc/repos/${owner}/${repo}/contributors`)
 
-  const filteredContributors = contributors.filter(({ username }) => !username.includes('[bot]'))
-  const sortedContributors = filteredContributors.sort((a, b) => b.contributions - a.contributions)
+//   const filteredContributors = contributors.filter(({ username }) => !username.includes('[bot]'))
+//   const sortedContributors = filteredContributors.sort((a, b) => b.contributions - a.contributions)
 
-  return sortedContributors.map(({ id, username }) => ({ id, username }))
-}
+//   return sortedContributors.map(({ id, username }) => ({ id, username }))
+// }
 
 async function fetchLatestRelease(owner: string, repo: string): Promise<string | null> {
   try {

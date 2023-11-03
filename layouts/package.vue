@@ -55,7 +55,7 @@ defineShortcuts({
 
   <Prose class="my-6 md:my-10">
     <template #header>
-      <!-- rework to have the same title size of blog post -->
+      <!-- TODO: rework to have the same title size of blog post -->
       <PackageHeader :name="page.title" :description="page.description" />
     </template>
 
@@ -115,9 +115,10 @@ defineShortcuts({
             </ProseNavGroupLink>
           </template>
         </ProseNavGroup>
-        <UDivider />
+        <!-- <UDivider /> -->
       </template>
-      <ProseNavGroup icon="i-heroicons-sparkles-solid">
+      <!-- TODO: do it later -->
+      <!-- <ProseNavGroup icon="i-heroicons-sparkles-solid">
         <template #title>
           <div class="flex items-center gap-1">
             <span>
@@ -140,7 +141,7 @@ defineShortcuts({
             </li>
           </ol>
         </template>
-      </ProseNavGroup>
+      </ProseNavGroup> -->
     </template>
   </Prose>
 
