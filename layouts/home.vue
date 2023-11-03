@@ -1,5 +1,5 @@
 <template>
-  <main m="y-16 md:y-30">
+  <main class="my-16 md:my-[7.5rem]">
     <slot />
   </main>
 </template>

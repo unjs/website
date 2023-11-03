@@ -1,35 +1,149 @@
 <script lang="ts" setup>
+import type { ParsedContent } from '@nuxt/content/dist/runtime/types'
+
 const { page } = useContent()
 
-const { data: readme } = await useFetch(`/api/github/${page.value.github.owner}/${page.value.github.repo}/readme`)
+const { data: readme } = await useFetch<ParsedContent>(`/api/github/${page.value.github.owner}/${page.value.github.repo}/readme`)
+
+if (!readme.value) {
+  throw createError({
+    statusCode: 500,
+    message: 'No readme found',
+  })
+}
+
+const { data: metadata } = await useFetch(`/api/github/${page.value.github.owner}/${page.value.github.repo}/metadata`)
+
+if (!metadata.value) {
+  throw createError({
+    statusCode: 500,
+    message: 'No metadata found',
+  })
+}
+
+let monthlyDownloads: number | null = null
+if (page.value.npm) {
+  const { data } = await useFetch(`/api/npm/${page.value.npm.name}/monthly-downloads`)
+
+  if (!data.value) {
+    throw createError({
+      statusCode: 500,
+      message: 'No monthly downloads found',
+    })
+  }
+
+  monthlyDownloads = data.value
+}
+
+const hasResources = computed(() => {
+  return page.value.npm || page.value.playgrounds
+})
+
+defineShortcuts({
+  meta_g: {
+    handler: () => {
+      window.open(toGitHubRepo(page.value.github.owner, page.value.github.repo), '_blank')
+    },
+  },
+})
 </script>
 
 <template>
   <Head>
     <SchemaOrgWebPage :type="['ItemPage']" />
   </Head>
-  <div m="y-6 md:y-10" p="x-4 md:x-6 t-6 md:t-10 b-10 md:b-20" grid="~ cols-1 xl:cols-[1fr_auto_1fr] items-start" gap="6 xl:8" rounded="4" bg="white">
-    <div flex="~ justify-start">
-      <NuxtLink to="/packages" flex="~ items-center" gap="1" class="group">
-        <span i-heroicons-chevron-left-20-solid block w-4 h-4 text="gray-400 group-hover:gray-600" transition="~ ease-in duration-150" />
-        <span text="text-sm gray-600">
-          Packages
-        </span>
-      </NuxtLink>
-    </div>
 
-    <PackageMetadata row-start-3 xl="row-start-1 col-start-3" xl:sticky top="4" :documentation="page.documentation" :github="page.github" :npm="page.npm" />
+  <Prose class="my-6 md:my-10">
+    <template #header>
+      <!-- TODO: rework to have the same title size of blog post -->
+      <PackageHeader :name="page.title" :description="page.description" />
+    </template>
 
-    <main max-w-screen-md lg="mx-auto w-screen-md" xl="row-start-1 col-start-2">
-      <article>
-        <PackageHeader :name="page.title" :description="page.description" />
+    <ContentRendererMarkdown :value="readme!" />
 
-        <AppContent m="t-6 xl:t-12" max-w-none>
-          <ContentRendererMarkdown :value="readme.content" />
-        </AppContent>
-      </article>
-    </main>
+    <template #nav>
+      <UButton :to="page.documentation" rel="noopener" size="lg" color="gray" :ui="{ base: 'w-full justify-center' }">
+        Documentation
+      </UButton>
+      <ProseNavGroup no-disclosure>
+        <template #links>
+          <div class="flex flex-col gap-1">
+            <ProseNavGroupLink label="Stars" :to="toGitHubRepo(page.github.owner, page.github.repo)" target="_blank" icon="i-heroicons-star-solid" no-external>
+              {{ formatNumber(metadata!.stars) }}
+            </ProseNavGroupLink>
+            <ProseNavGroupLink v-if="monthlyDownloads" label="Monthly Downloads" :to="toGitHubRepo(page.github.owner, page.github.repo)" target="_blank" icon="i-heroicons-arrow-trending-up-solid" no-external>
+              {{ formatNumber(monthlyDownloads) }}
+            </ProseNavGroupLink>
+            <ProseNavGroupLink v-if="metadata!.latestRelease" label="Latest Version" :to="toGitHubLatestRelease(page.github.owner, page.github.repo)" target="_blank" icon="i-heroicons-tag-solid" no-external>
+              {{ metadata!.latestRelease }}
+            </ProseNavGroupLink>
+          </div>
+        </template>
+      </ProseNavGroup>
+      <UDivider />
+      <ProseNavGroup icon="i-simple-icons-github">
+        <template #title>
+          GitHub
+        </template>
+        <template #links>
+          <ProseNavGroupLink :to="toGitHubRepo(page.github.owner, page.github.repo)" target="_blank" icon="i-simple-icons-github">
+            View source
+          </ProseNavGroupLink>
+          <ProseNavGroupLink
+            :to="toGitHubIssue(page.github.owner, page.github.repo)" target="_blank"
+            icon="i-simple-icons-github"
+          >
+            Report an issue
+          </ProseNavGroupLink>
+        </template>
+      </ProseNavGroup>
+      <UDivider />
+      <template v-if="hasResources">
+        <ProseNavGroup icon="i-heroicons-beaker-solid">
+          <template #title>
+            Resources
+          </template>
+          <template #links>
+            <ProseNavGroupLink v-if="page.npm" :to="toNpmPackage(page.npm.name)" target="_blank" icon="i-simple-icons-npm">
+              Discover on npm
+            </ProseNavGroupLink>
+            <ProseNavGroupLink v-if="page.playgrounds?.stackblitz" :to="page.playgrounds.stackblitz" target="_blank" icon="i-simple-icons-stackblitz">
+              Open on Stackblitz
+            </ProseNavGroupLink>
+            <ProseNavGroupLink v-if="page.playgrounds?.codesandbox" :to="page.playgrounds.codesandbox" target="_blank" icon="i-simple-icons-codesandbox">
+              Open on CodeSandbox
+            </ProseNavGroupLink>
+          </template>
+        </ProseNavGroup>
+        <!-- <UDivider /> -->
+      </template>
+      <!-- TODO: do it later -->
+      <!-- <ProseNavGroup icon="i-heroicons-sparkles-solid">
+        <template #title>
+          <div class="flex items-center gap-1">
+            <span>
+              Contributors
+            </span>
+            <UBadge color="gray" variant="solid" size="xs">
+              {{ metadata!.contributors.length }}
+            </UBadge>
+          </div>
+        </template>
+        <template #links>
+          <ol>
+            <li v-for="contributor in metadata!.contributors" :key="contributor.id">
+              <ProseNavGroupLink :to="`https://github.com/${contributor.username}`" no-external>
+                <div class="flex items-center gap-1">
+                  <UAvatar :src="`https://github.com/${contributor.username}.png`" :alt="`Avatar of ${contributor.username}`" size="3xs" />
+                  {{ contributor.username }}
+                </div>
+              </ProseNavGroupLink>
+            </li>
+          </ol>
+        </template>
+      </ProseNavGroup> -->
+    </template>
+  </Prose>
 
-    <PackageLatestNews xl="row-start-2 col-start-2" :name="page.title" />
-  </div>
+  <!-- <PackageLatestNews class="xl:row-start-2 col-start-2" :name="page.title" /> -->
 </template>

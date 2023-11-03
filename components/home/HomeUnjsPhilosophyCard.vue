@@ -7,13 +7,13 @@ defineProps<{
 </script>
 
 <template>
-  <div bg-white rounded-4 border border-light flex="~ col" gap-4>
-    <img aria-hidden="true" :src="card.image" aspect-video width="1920" height="1080">
-    <div px-6 pb-5 flex="~ col" gap-2>
-      <h3 md:text-xl text-gray-900 font-bold>
+  <div class="overflow-hidden bg-white rounded-2xl border border-zinc-100 flex flex-col gap-4">
+    <img aria-hidden="true" :src="card.image" width="1920" height="1080" class="aspect-video">
+    <div class="px-6 pb-5 flex flex-col gap-2">
+      <h3 class="md:text-xl text-zinc-900 font-bold">
         {{ card.title }}
       </h3>
-      <p text-gray-600>
+      <p class="text-zinc-600">
         {{ card.description }}
       </p>
     </div>

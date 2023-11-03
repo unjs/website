@@ -8,6 +8,9 @@ export default defineEventHandler(async (event) => {
   const { markdown } = await $fetch<{ markdown: string }>(`https://ungh.cc/repos/${owner}/${repo}/readme`)
   const content = await parseMarkdown(markdown) as ParsedContent
 
+  if (!content.body)
+    return content
+
   const children: MarkdownNode[] = []
   for (const child of content.body.children)
     children.push(walk(child))
@@ -26,9 +29,7 @@ export default defineEventHandler(async (event) => {
     content.body.children.push(child)
   }
 
-  return {
-    content,
-  }
+  return content
 })
 
 function walk(node: MarkdownNode): MarkdownNode {

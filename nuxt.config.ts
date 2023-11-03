@@ -15,13 +15,15 @@ export default defineNuxtConfig({
   },
   modules: [
     '@nuxt/content',
+    '@nuxt/ui',
     '@vueuse/nuxt',
-    '@unocss/nuxt',
     'nuxt-simple-robots',
     'nuxt-simple-sitemap',
     'nuxt-schema-org',
     '@nuxthq/studio',
     '@nuxtjs/plausible',
+    // 'nuxt-payload-analyzer',
+    '@nuxtjs/fontaine',
   ],
   experimental: {
     inlineSSRStyles: false, // Avoid CSS reset being applied after CSS
@@ -29,6 +31,9 @@ export default defineNuxtConfig({
   css: [
     '~/assets/app.css',
   ],
+  ui: {
+    icons: ['heroicons', 'simple-icons', 'vscode-icons'],
+  },
   nitro: {
     static: true,
     prerender: {
@@ -38,6 +43,11 @@ export default defineNuxtConfig({
     },
     routeRules: {
       '/api/github/**': {
+        cache: {
+          maxAge: 60 * 60 * 24 * 7, // 7 days
+        },
+      },
+      '/api/npm/**': {
         cache: {
           maxAge: 60 * 60 * 24 * 7, // 7 days
         },
@@ -56,8 +66,8 @@ export default defineNuxtConfig({
       theme: 'github-light',
     },
   },
-  unocss: {
-    preflight: true,
+  colorMode: {
+    preference: 'light',
   },
   site: {
     language: 'en',
