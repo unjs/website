@@ -10,19 +10,18 @@ const { copy, copied, isSupported } = useClipboard()
 </script>
 
 <template>
-  <div my="8" border="~ gray-300" rounded-xl overflow-hidden>
-    <div relative p="4" bg="gray-300 op-10" class="group">
-      <span v-if="filename" absolute top-2 right-3 text-xs font-mono>
+  <div class="my-8 border border-zinc-300 rounded-xl overflow-hidden">
+    <div class="group relative p-4 bg-zinc-300/10">
+      <span v-if="filename" class="absolute top-2 right-3 text-xs font-mono">
         {{ filename }}
       </span>
       <slot />
       <ClientOnly>
         <button
-          v-if="isSupported" absolute right-3 bottom-2 p="1" op="0 group-hover:100"
-          transition="~ ease-in duration-150"
+          v-if="isSupported" class="absolute right-3 bottom-2 p-1 opacity-0 group-hover:opacity-100 transition ease-in"
           @click="copy(code)"
         >
-          <span sr-only>
+          <span class="sr-only">
             Copy to clipboard
           </span>
           <Transition
@@ -35,9 +34,9 @@ const { copy, copied, isSupported } = useClipboard()
             leave-from-class="opacity-100"
             leave-to-class="opacity-0"
           >
-            <div v-if="copied" i-heroicons-check-solid w-4 h-4 />
-            <div v-else i-heroicons-clipboard-document w-4 h-4 />
-          </Transition>
+            <div v-if="copied" class="i-heroicons-check-solid w-4 h-4" />
+            <div v-else class="i-heroicons-clipboard-solid w-4 h-4" />
+          </transition>
         </button>
       </ClientOnly>
     </div>

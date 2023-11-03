@@ -1,9 +1,9 @@
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  --at-apply: font-sans
+@font-face {
+  font-family: "Nunito";
+  font-weight: 100 900;
+  font-display: swap;
+  font-style: normal;
+  src: url("/assets/fonts/nunito.ttf") format("truetype");
 }
 
 ::-webkit-scrollbar {
@@ -17,33 +17,33 @@ body {
 }
 
 :is(.gray-scrollbar, pre)::-webkit-scrollbar-track {
-  --at-apply: bg-gray-100 rounded-full
+ @apply bg-zinc-100 rounded-full
 }
 
 ::-webkit-scrollbar-thumb {
-  --at-apply: rounded-md bg-white
+ @apply rounded-md bg-white
 }
 
 :is(.gray-scrollbar, pre)::-webkit-scrollbar-thumb {
-  --at-apply: bg-gray-400 bg-op-20
+ @apply bg-zinc-400/20
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  --at-apply: bg-gray-100
+ @apply bg-zinc-100
 }
 
 :is(.gray-scrollbar, pre)::-webkit-scrollbar-thumb:hover {
-  --at-apply: bg-gray-500 bg-op-20
+ @apply bg-zinc-500/20
 }
 
 ::-webkit-scrollbar-thumb:active {
-  --at-apply: bg-gray-200
+ @apply bg-zinc-200
 }
 
 :is(.gray-scrollbar, pre)::-webkit-scrollbar-thumb:active {
-  --at-apply: bg-gray-600 bg-op-20
+ @apply bg-zinc-600/20
 }
 
 :is(h1, h2, h3, h4, h5, h6) {
---at-apply: scroll-mt-16 xl:scroll-mt-8
+@apply scroll-mt-16 xl:scroll-mt-8
 }

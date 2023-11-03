@@ -2,6 +2,7 @@
 import { Combobox } from '@headlessui/vue'
 import type { SearchDisplayItem } from '~/types/search'
 
+const { page } = useContent()
 const route = useRoute()
 
 const selected = ref<SearchDisplayItem | null>(null)
@@ -44,13 +45,14 @@ async function navigate() {
   <Head>
     <SchemaOrgWebPage :type="['CollectionPage', 'SearchResultsPage']" />
   </Head>
-  <main m="y-6 md:y-10">
-    <slot />
+  <main class="my-6 md:my-10">
+    <AppHero :title="page.title" :description="page.description" />
+
     <Combobox v-model="selected">
-      <div m="t-6" h-12 p="x-4 y-2" rounded="4" bg="white" flex="~ items-center">
+      <div class="mt-6 h-12 px-4 md:py-2 rounded-2xl bg-white flex items-center">
         <AppSearchInput v-model:query="query" :search-results="results" @validate="navigate" />
       </div>
-      <div m="t-6" p="4" rounded="4" bg="white">
+      <div class="mt-6 p-4 rounded-2xl bg-white">
         <AppSearchResult
           static
           :search-results="results"

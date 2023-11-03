@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ComboboxOptions } from '@headlessui/vue'
-import type { SearchDisplayItem } from 'types/search'
+import type { SearchDisplay, SearchDisplayItem } from '~/types/search'
 
 const props = defineProps<{
   searchResults: SearchDisplay

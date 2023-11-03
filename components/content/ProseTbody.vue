@@ -12,6 +12,6 @@
 }
 
 :deep(tr:nth-child(2n)) {
-  --at-apply: bg-gray-300 bg-op-10;
+  background-color: theme('colors.zinc.300 / 10%');
 }
 </style>

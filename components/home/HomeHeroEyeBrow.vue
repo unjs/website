@@ -7,13 +7,13 @@ defineProps<{
 </script>
 
 <template>
-  <NuxtLink :to="`${path}?utm_source=unjs.io&utm_medium=home-hero`" flex="~ items-center" gap-4>
-    <span p="x-3 y-1" bg="gray-900 opacity-10" border="~ gray-900 opacity-40" rounded="full" text="sm gray-900 nowrap" font="medium">
+  <NuxtLink :to="`${path}?utm_source=unjs.io&utm_medium=home-hero`" class="flex items-center gap-4">
+    <span class="px-3 py-1 bg-zinc-900/10 border border-zinc-900/40 rounded-full text-sm text-zinc-900 nowrap font-medium">
       {{ prefix }}
     </span>
-    <span flex="~ row items-center" gap-2>
-      <span text="left">{{ title }}</span>
-      <span shrink="0" i-heroicons-chevron-right-20-solid w-5 h-5 />
+    <span class="flex items-center gap-2">
+      <span class="text-left">{{ title }}</span>
+      <span class="shrink-0 w-5 h-5 i-heroicons-chevron-right-20-solid" />
     </span>
   </NuxtLink>
 </template>

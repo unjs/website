@@ -6,12 +6,12 @@ defineProps<{
 </script>
 
 <template>
-  <header grid="~ cols-[1.75rem_auto] md:cols-[3rem_auto] items-center" gap="x-3 y-1 md:x-5 md:y-0">
-    <img :src="toPackageLogo(name)" :alt="`Logo of ${name}`" width="48" height="48" w-7 h-7 md="w-12 h-12 row-span-2">
-    <h1 text="gray-900 2xl md:3xl" font="bold" tracking="wide">
+  <header class="grid grid-cols-[1.75rem_auto] md:grid-cols-[3rem_auto] items-center gap-x-3 gap-y-1 md:gap-x-5 md:gap-y-0">
+    <img :src="toPackageLogo(name)" :alt="`Logo of ${name}`" width="48" height="48" class="w-7 h-7 md:w-12 md:h-12 row-span-2">
+    <h1 class="text-zinc-900 text-2xl md:text-3xl font-bold tracking-wide">
       {{ name }}
     </h1>
-    <p col-span-2 md="col-span-1 col-start-2" gray="gray-700" font="italic medium">
+    <p class="col-span-2 md:col-span-1 md:col-start-2 text-zinc-700 font-italic font-medium">
       {{ description }}
     </p>
   </header>
