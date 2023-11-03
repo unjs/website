@@ -7,4 +7,5 @@ npm:
   name: npm_name
 playgrounds:
 documentation: docs_link
+examples:
 layout: package
