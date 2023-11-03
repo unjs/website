@@ -83,6 +83,7 @@ function navigate() {
                 <div class="rounded-2xl bg-white overflow-hidden">
                   <AppSearchResult
                     class="gray-scrollbar static space-y-6 p-4 h-full overflow-y-scroll"
+                    static
                     :search-results="results"
                     :default-results="defaultOptions"
                     :have-query="!!queryDebounced"
