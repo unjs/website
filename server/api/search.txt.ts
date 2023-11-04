@@ -7,7 +7,8 @@ export default defineEventHandler(async (event) => {
   const sections = (await Promise.all(
     files
       .filter(file => file._extension === 'md' && !file?._draft && !file?.empty && !file?._partial)
-      .map(page => splitPageIntoSections(page))))
+      .map(page => splitPageIntoSections(page)),
+  ))
     .flat()
 
   const miniSearch = new MiniSearch({
@@ -27,6 +28,6 @@ export default defineEventHandler(async (event) => {
   // Index the documents
   miniSearch.addAll(sections)
 
-  // Send the index to the client
+  setResponseHeader(event, 'Content-Type', 'text/plain')
   return JSON.stringify(miniSearch)
 })

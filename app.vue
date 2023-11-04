@@ -6,7 +6,7 @@ useServerSeoMeta({
 </script>
 
 <template>
-  <Html lang="en" dir="ltr">
+  <Html lang="en" dir="ltr" class="scroll-smooth">
     <Head>
       <SchemaOrgOrganization
         name="UnJS"
@@ -21,7 +21,7 @@ useServerSeoMeta({
       <RobotMeta />
       <Link rel="icon" href="/favicon.svg" />
     </Head>
-    <Body container mx-auto xl:max-w-7xl p="x-4 y-4 md:y-8" bg="primary">
+    <Body class="container mx-auto xl:max-w-7xl px-4 py-4 md:py-8 bg-primary font-sans">
       <AppHeader />
       <NuxtPage />
       <AppFooter />

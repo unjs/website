@@ -1,5 +1,30 @@
+import type { ParsedContent } from '@nuxt/content/dist/runtime/types'
 import MiniSearch, { type Options as MiniSearchOptions } from 'minisearch'
 import type { SearchDisplay, SearchDisplayItem, SearchResult } from '~/types/search'
+
+export function useSimpleSearch(data: MaybeRefOrGetter<Partial<ParsedContent>[]>, options: { idField: string; fields: string[]; storeFields: string[] } = { idField: 'title', fields: ['title', 'description'], storeFields: ['title', 'description', '_path', 'publishedAt', 'authors'] }) {
+  const search = ref('')
+  const searchDebounced = useDebounce(search, 150)
+
+  const miniSearchResults = useMiniSearch(searchDebounced, data, {
+    idField: options.idField,
+    fields: options.fields,
+    storeFields: options.storeFields,
+    searchOptions: {
+      prefix: true,
+      fuzzy: 0.2,
+    },
+  })
+
+  const searchResults = computed(() => {
+    return searchDebounced.value ? miniSearchResults.value : toValue(data)
+  })
+
+  return {
+    search,
+    searchResults,
+  }
+}
 
 export async function useSearchDefaultResults(): Promise<ComputedRef<SearchDisplay>> {
   const { data: packages } = await useAsyncData('content:search:packages', () => queryContent('/packages/').only(['title', '_path']).find())
@@ -157,4 +182,35 @@ function useIndexedMiniSearch(search: MaybeRefOrGetter<string>, indexedData: May
     results,
     indexedMiniSearch,
   }
+}
+
+export function useMiniSearch<DataItem>(search: MaybeRefOrGetter<string>, data: MaybeRefOrGetter<DataItem[]>, options: MiniSearchOptions) {
+  const createMiniSearch = () => {
+    const miniSearch = new MiniSearch(toValue(options))
+    miniSearch.addAll(toValue(data))
+    return miniSearch
+  }
+
+  const miniSearch = shallowRef(createMiniSearch())
+
+  watch(
+    () => toValue(options),
+    () => { miniSearch.value = createMiniSearch() },
+    { deep: true },
+  )
+
+  watch(
+    () => toValue(data),
+    () => {
+      miniSearch.value.removeAll()
+      miniSearch.value.addAll(toValue(data))
+    },
+    { deep: true },
+  )
+
+  const results = computed(() => {
+    return miniSearch.value.search(toValue(search))
+  })
+
+  return results
 }

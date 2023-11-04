@@ -1,0 +1,10 @@
+title: package_title
+description: package_description
+github:
+  owner: unjs
+  repo: repo_name
+npm:
+  name: npm_name
+playgrounds:
+documentation: docs_link
+layout: package

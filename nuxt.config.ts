@@ -15,13 +15,15 @@ export default defineNuxtConfig({
   },
   modules: [
     '@nuxt/content',
+    '@nuxt/ui',
     '@vueuse/nuxt',
-    '@unocss/nuxt',
     'nuxt-simple-robots',
     'nuxt-simple-sitemap',
     'nuxt-schema-org',
     '@nuxthq/studio',
     '@nuxtjs/plausible',
+    // 'nuxt-payload-analyzer',
+    '@nuxtjs/fontaine',
   ],
   experimental: {
     inlineSSRStyles: false, // Avoid CSS reset being applied after CSS
@@ -29,35 +31,39 @@ export default defineNuxtConfig({
   css: [
     '~/assets/app.css',
   ],
+  ui: {
+    icons: ['heroicons', 'simple-icons', 'vscode-icons'],
+  },
   nitro: {
+    static: true,
     prerender: {
       failOnError: false,
       crawlLinks: true,
+      routes: ['/', '/blog', '/packages', '/api/search.txt', '/rss.xml', '/rss.xml', '/blog/rss.xml', '/learn/rss.xml', '/explore/rss.xml', '/build/rss.xml'],
     },
     routeRules: {
-      '/api/search.txt': {
-        prerender: true,
-        headers: { 'Content-Type': 'text/plain' }, // By default, Nitro will set the content type to text/html
+      '/api/github/**': {
+        cache: {
+          maxAge: 60 * 60 * 24 * 7, // 7 days
+        },
       },
-      '/rss.xml': {
-        prerender: true,
-        headers: { 'Content-Type': 'text/xml' }, // By default, Nitro will set the content type to text/html
+      '/api/npm/**': {
+        cache: {
+          maxAge: 60 * 60 * 24 * 7, // 7 days
+        },
       },
-      '/blog/rss.xml': {
-        prerender: true,
-        headers: { 'Content-Type': 'text/xml' }, // By default, Nitro will set the content type to text/html
+      // Temporary to have time to create the resources page
+      '/resources': {
+        redirect: {
+          to: '/resources/learn',
+          statusCode: 302,
+        },
       },
-      '/learn/rss.xml': { // TODO: update for new navigation to /resources in the future
-        prerender: true,
-        headers: { 'Content-Type': 'text/xml' }, // By default, Nitro will set the content type to text/html
-      },
-      '/build/rss.xml': { // TODO: update for new navigation to /resources in the future
-        prerender: true,
-        headers: { 'Content-Type': 'text/xml' }, // By default, Nitro will set the content type to text/html
-      },
-      '/explore/rss.xml': { // TODO: update for new navigation to /resources in the future
-        prerender: true,
-        headers: { 'Content-Type': 'text/xml' }, // By default, Nitro will set the content type to text/html
+      '/blog/2023-08-25-nitro-2.6': {
+        redirect: {
+          statusCode: 301,
+          to: '/blog/2023-08-25-nitro-2-6',
+        },
       },
     },
   },
@@ -73,8 +79,8 @@ export default defineNuxtConfig({
       theme: 'github-light',
     },
   },
-  unocss: {
-    preflight: true,
+  colorMode: {
+    preference: 'light',
   },
   site: {
     language: 'en',

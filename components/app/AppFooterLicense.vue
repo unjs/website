@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const { data } = await useAsyncData('footer-license', () => queryContent('/_footer-license').findOne())
+const { data } = await useAsyncData('content:footer-license', () => queryContent('/_footer-license').only('body').findOne())
 </script>
 
 <template>

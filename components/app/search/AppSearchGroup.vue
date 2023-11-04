@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ComboboxOption } from '@headlessui/vue'
-import type { SearchDisplayItem } from 'types/search'
+import type { SearchDisplayItem } from '~/types/search'
 
 defineProps<{
   name: string
@@ -25,7 +25,7 @@ function isLastChildren(children: SearchDisplayItem[] | null, index: number) {
 
 <template>
   <section>
-    <h2 text="gray-700" capitalize font="bold" m="b-2">
+    <h2 class="text-zinc-700 capitalize font-bold mb-2">
       {{ name }}
     </h2>
     <template v-for="item in results" :key="item.id">
