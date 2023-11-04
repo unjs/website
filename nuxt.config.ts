@@ -52,6 +52,13 @@ export default defineNuxtConfig({
           maxAge: 60 * 60 * 24 * 7, // 7 days
         },
       },
+      // Temporary to have time to create the resources page
+      '/resources': {
+        redirect: {
+          to: '/resources/learn',
+          statusCode: 302,
+        },
+      },
       '/blog/2023-08-25-nitro-2.6': {
         redirect: {
           statusCode: 301,

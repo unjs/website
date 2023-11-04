@@ -3,10 +3,21 @@ const website = useWebsite()
 const github = website.value.socials.github
 
 const { data: navigation } = await useAsyncData('content:navigation', () => fetchContentNavigation(queryContent('/')), {
-  transform: data => data.filter(item => item._path !== '/').map((item) => {
-    const { title, icon, _path } = item
-    return { title, icon, _path }
-  }),
+  transform: (data) => {
+    const filteredData = data.filter(item => item._path !== '/').map((item) => {
+      if (item._path !== '/resources')
+        delete item.children
+
+      return {
+        title: item.title,
+        _path: item._path,
+        icon: item.icon,
+        children: item.children,
+      }
+    })
+
+    return filteredData
+  },
 })
 const { data: stars } = await useFetch('/api/github/stars')
 
@@ -36,7 +47,27 @@ const uiButton = { font: 'font-semibold', color: { gray: { ghost: 'hover:bg-prim
     <nav v-if="navigation" class="hidden lg:flex justify-center">
       <ol class="text-[1.125rem] flex gap-4 leading-5">
         <li v-for="item in navigation" :key="item._path">
-          <UButton size="md" variant="ghost" color="gray" :to="item._path" :icon="item.icon" :ui="{ size: { md: 'text-base' }, ...uiButton }" active-class="bg-primary bg-opacity-30">
+          <UPopover v-if="item.children" mode="hover" :ui="{ width: 'max-w-[18rem]' }">
+            <UButton size="md" variant="ghost" color="gray" :to="item._path" :icon="item.icon" :ui="{ size: { md: 'text-base' }, ...uiButton }" active-class="bg-primary bg-opacity-30">
+              {{ item.title }}
+            </UButton>
+
+            <template #panel>
+              <ol class="p-2">
+                <li v-for="child in item.children" :key="child._path">
+                  <ULink :to="child._path" class="px-3 py-2 flex flex-col hover:bg-primary/30 dark:hover:bg-primary/90 transition ease-in rounded-md text-base">
+                    <span class="flex flex-row gap-2 items-center">
+                      <span :class="child.icon" class="h-5 w-5" />
+                      <span class="text-zinc-700 hover:text-zinc-800 font-medium"> {{ child.title }} </span>
+                    </span>
+
+                    <span class="ml-7 text-zinc-500 text-sm"> {{ child.description }} </span>
+                  </ULink>
+                </li>
+              </ol>
+            </template>
+          </UPopover>
+          <UButton v-else size="md" variant="ghost" color="gray" :to="item._path" :icon="item.icon" :ui="{ size: { md: 'text-base' }, ...uiButton }" active-class="bg-primary bg-opacity-30">
             {{ item.title }}
           </UButton>
         </li>

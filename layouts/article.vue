@@ -1,9 +1,8 @@
 <script lang="ts" setup>
-const { toc, page } = useContent()
+const { page, toc } = useContent()
 
 const { data: packages } = await useAsyncData(`packages:${page.value.packages.join(':')}`, () => queryContent('/packages/').only(['_path', 'title', 'icon', 'logo']).where({ _path: { $containsAny: page.value.packages } }).find(), { watch: [() => page.value.packages] })
 
-// TODO: Waiting for Nuxt SEOKit v2
 useServerSeoMeta({
   ogTitle: `${page.value.title} · UnJS`,
   ogType: 'article',
@@ -23,7 +22,7 @@ useServerSeoMeta({
   <Head>
     <SchemaOrgWebPage :type="['ItemPage']" />
     <!-- TODO: missing in-language due to a but @see https://github.com/harlan-zw/unhead-schema-org/issues/29 -->
-    <SchemaOrgArticle :date-published="toISODateString(page.publishedAt)" :date-modified="toISODateString(page.modifiedAt)" type="TechArticle" />
+    <SchemaOrgArticle :date-published="toISODateString(page.publishedAt)" :date-modified="toISODateString(page.modifiedAt)" type="BlogArticle" />
   </Head>
 
   <Main>
@@ -43,7 +42,13 @@ useServerSeoMeta({
         <UDivider />
         <ArticleProseNavGroupPackages :packages="packages" />
         <UDivider />
-        <ArticleProseNavGroupCommunity :filename="page._file" />
+        <ArticleProseNavGroupCommunity :filename="page._file">
+          <template #before>
+            <ProseNavGroupLink v-if="page.project" :to="page.project" target="_blank" icon="i-simple-icons-github">
+              Project code
+            </ProseNavGroupLink>
+          </template>
+        </ArticleProseNavGroupCommunity>
       </template>
     </Prose>
   </Main>

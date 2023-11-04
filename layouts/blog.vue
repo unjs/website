@@ -12,51 +12,21 @@ if (!blog.value) {
   })
 }
 
-const search = ref('')
-const searchDebounced = refDebounced(search, 150)
+const { search, searchResults } = useSimpleSearch(blog as Ref<BlogPostCard[]>)
 
-const searchResults = useMiniSearch(searchDebounced, blog, {
-  idField: 'title',
-  fields: ['title', 'description'],
-  storeFields: ['title', 'description', '_path', 'publishedAt', 'authors'],
-  searchOptions: {
-    prefix: true,
-    fuzzy: 0.2,
-  },
-})
-
-const order = ref<1 | -1>(1)
-const toggleOrder = function () {
-  order.value = order.value === 1 ? -1 : 1
-}
 const orderByOptions = [
   {
     id: 'title',
     label: 'Name',
   },
+  {
+    id: 'publishedAt',
+    label: 'Published at',
+  },
 ]
-const orderBy = ref<string>('title')
-const currentOrderBy = computed(() => orderByOptions.find(option => option.id === orderBy.value))
+const { order, toggleOrder, orderBy, currentOrderBy, sort } = useOrder(-1, { init: 'publishedAt', options: orderByOptions })
 
-const results = computed(() => {
-  const currentBlog = searchDebounced.value ? searchResults.value : blog.value
-
-  if (!orderBy.value)
-    return currentBlog
-
-  return currentBlog.sort((a, b) => {
-    const aTitle = a.title.toLowerCase()
-    const bTitle = b.title.toLowerCase()
-
-    if (aTitle < bTitle)
-      return -1 * order.value
-
-    if (aTitle > bTitle)
-      return 1 * order.value
-
-    return 0
-  })
-})
+const results = sort(searchResults)
 </script>
 
 <template>
