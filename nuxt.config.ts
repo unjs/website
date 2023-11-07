@@ -4,7 +4,9 @@ import packagesRedirects from './config/packages-redirects'
 export default defineNuxtConfig({
   app: {
     head: {
-      titleTemplate: '%s · UnJS',
+      templateParams: {
+        separator: '·',
+      },
     },
   },
   modules: [
@@ -77,10 +79,16 @@ export default defineNuxtConfig({
     preference: 'light',
   },
   site: {
-    language: 'en',
+    defaultLocale: 'en',
     url: 'https://unjs.io',
     name: 'UnJS',
     description: 'Agnostic Excellence: JavaScript Libraries, Tools, and Utilities, Crafted to Elevate Your Coding Journey.',
+    identity: {
+      type: 'Organization',
+    },
+    trailingSlash: false,
+    twitter: '@unjsio',
+    github: 'unjs',
   },
   sitemap: {
     sitemaps: {
