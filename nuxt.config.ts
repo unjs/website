@@ -25,9 +25,6 @@ export default defineNuxtConfig({
     'nuxt-payload-analyzer',
     '@nuxtjs/fontaine',
   ],
-  experimental: {
-    inlineSSRStyles: false, // Avoid CSS reset being applied after CSS
-  },
   css: [
     '~/assets/app.css',
   ],
