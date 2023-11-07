@@ -26,11 +26,12 @@ export default defineNuxtConfig({
     icons: ['heroicons', 'simple-icons', 'vscode-icons'],
   },
   nitro: {
-    static: true,
     prerender: {
+      concurrency: 3,
       failOnError: false,
       crawlLinks: true,
       routes: ['/', '/blog', '/packages', '/api/search.txt', '/rss.xml', '/rss.xml', '/blog/rss.xml', '/learn/rss.xml', '/explore/rss.xml', '/build/rss.xml', '/robots.txt', '/sitemap.xml'],
+      ignore: ['/search'],
     },
     routeRules: {
       '/api/github/**': {
