@@ -1,3 +1,7 @@
+<script lang="ts" setup>
+defineRobotMeta()
+</script>
+
 <template>
   <Html lang="en" dir="ltr" class="scroll-smooth">
     <Head>

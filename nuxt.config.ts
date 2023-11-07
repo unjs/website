@@ -33,7 +33,7 @@ export default defineNuxtConfig({
     prerender: {
       failOnError: false,
       crawlLinks: true,
-      routes: ['/', '/blog', '/packages', '/api/search.txt', '/rss.xml', '/rss.xml', '/blog/rss.xml', '/learn/rss.xml', '/explore/rss.xml', '/build/rss.xml'],
+      routes: ['/', '/blog', '/packages', '/api/search.txt', '/rss.xml', '/rss.xml', '/blog/rss.xml', '/learn/rss.xml', '/explore/rss.xml', '/build/rss.xml', '/robots.txt', '/sitemap.xml'],
     },
     routeRules: {
       '/api/github/**': {
@@ -86,27 +86,8 @@ export default defineNuxtConfig({
     },
     trailingSlash: false,
   },
-  sitemap: {
-    sitemaps: {
-      learn: {
-        include: ['/learn/**'],
-      },
-      build: {
-        include: ['/build/**'],
-      },
-      explore: {
-        include: ['/explore/**'],
-      },
-      blog: {
-        include: ['/blog/**'],
-      },
-      packages: {
-        include: ['/packages/**'],
-      },
-      pages: {
-        exclude: ['/build/**', '/explore/**', '/learn/**', '/blog/**', '/packages/**'],
-      },
-    },
+  linkChecker: {
+    enabled: false,
   },
   routeRules: {
     ...packagesRedirects as NitroConfig['routeRules'],
