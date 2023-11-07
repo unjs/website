@@ -34,7 +34,6 @@
     "@nuxtjs/plausible": "^0.2.3",
     "@nuxtseo/module": "2.0.0-beta.40",
     "@types/node": "^20.8.10",
-    "@unocss/nuxt": "^0.55.7",
     "@vueuse/core": "^10.5.0",
     "@vueuse/nuxt": "^10.5.0",
     "case-police": "^0.6.1",
