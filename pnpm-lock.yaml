@@ -8,9 +8,6 @@ dependencies:
   '@nuxt/ui':
     specifier: ^2.10.0
     version: 2.10.0(vue@3.3.8)(webpack@5.89.0)
-  un:
-    specifier: ^0.0.0
-    version: 0.0.0
 
 devDependencies:
   '@antfu/eslint-config':
@@ -91,15 +88,6 @@ devDependencies:
   nuxt-payload-analyzer:
     specifier: ^0.1.3
     version: 0.1.3
-  nuxt-schema-org:
-    specifier: ^2.2.0
-    version: 2.2.0(@unhead/vue@1.8.3)
-  nuxt-simple-robots:
-    specifier: ^3.1.9
-    version: 3.1.9(vue@3.3.8)
-  nuxt-simple-sitemap:
-    specifier: ^3.4.1
-    version: 3.4.1(nuxt@3.8.1)(vite@4.5.0)(vue@3.3.8)
   unstorage:
     specifier: ^1.9.0
     version: 1.9.0
@@ -2825,15 +2813,6 @@ packages:
     dependencies:
       '@unhead/schema': 1.8.3
       '@unhead/shared': 1.8.3
-    dev: true
-
-  /@unhead/schema-org-vue@0.6.0(@unhead/vue@1.8.3):
-    resolution: {integrity: sha512-2zTVczJ8iI8jDOzaz2md8fr8j+jWqkmMdo89OI/VVPYWpA6Cy2BFCMvDqrptBZ2h3ieOZ/lhA/y+cTobBZEvaQ==}
-    engines: {node: '>=14.0.0'}
-    peerDependencies:
-      '@unhead/vue': '>=1.1.9'
-    dependencies:
-      '@unhead/vue': 1.8.3(vue@3.3.8)
     dev: true
 
   /@unhead/schema-org@1.8.3(@unhead/shared@1.8.3)(unhead@1.8.3):
@@ -9048,18 +9027,6 @@ packages:
       - supports-color
     dev: true
 
-  /nuxt-schema-org@2.2.0(@unhead/vue@1.8.3):
-    resolution: {integrity: sha512-V0LHh4A3tZSRLGv9P+SG8zm9N4e1qZt2x6z7FgL9qYjpNDyCJ5G186vmTqT4kN0JErjRiYVxantBjDQa7DcVKQ==}
-    dependencies:
-      '@nuxt/kit': 3.8.0
-      '@unhead/schema-org-vue': 0.6.0(@unhead/vue@1.8.3)
-      pathe: 1.1.1
-    transitivePeerDependencies:
-      - '@unhead/vue'
-      - rollup
-      - supports-color
-    dev: true
-
   /nuxt-schema-org@3.1.3(@nuxt/devtools@1.0.0)(@unhead/shared@1.8.3)(@vue/compiler-core@3.3.8)(nuxt@3.8.1)(postcss@8.4.31)(unhead@1.8.3)(vite@4.5.0)(vue@3.3.8)(webpack@5.89.0):
     resolution: {integrity: sha512-/4Vz3EKqiSrycN2XS3O8D3u8KPuURxLuVPdL2275U3PK+jg6RCiL9lDVN6GVE86IvfKIbSZ18Xh6xWD2YakEsQ==}
     dependencies:
@@ -11634,10 +11601,6 @@ packages:
   /ultrahtml@1.5.2:
     resolution: {integrity: sha512-qh4mBffhlkiXwDAOxvSGxhL0QEQsTbnP9BozOK3OYPEGvPvdWzvAUaXNtUSMdNsKDtuyjEbyVUPFZ52SSLhLqw==}
     dev: true
-
-  /un@0.0.0:
-    resolution: {integrity: sha512-Ysrl5s9YnTl7hVDOK2l5h2dKDne+/Q9FDbV5Hb1Mub1W8svfaqZj1xp/7XkzswJwzKpntT+L/9uDGLfPVsnRVA==}
-    dev: false
 
   /unbox-primitive@1.0.2:
     resolution: {integrity: sha512-61pPlCD9h51VoreyJ0BReideM3MDKMKnh6+V9L08331ipq6Q8OFXZYiqP6n/tbHx4s5I9uRhcye6BrbkizkBDw==}
