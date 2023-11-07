@@ -4,22 +4,16 @@ import packagesRedirects from './config/packages-redirects'
 export default defineNuxtConfig({
   app: {
     head: {
-      titleTemplate: '%s · UnJS',
-    },
-  },
-  runtimeConfig: {
-    public: {
-      siteUrl: 'https://unjs.io',
-      inLanguage: 'en',
+      templateParams: {
+        separator: '·',
+      },
     },
   },
   modules: [
+    '@nuxtseo/module',
     '@nuxt/content',
     '@nuxt/ui',
     '@vueuse/nuxt',
-    'nuxt-simple-robots',
-    'nuxt-simple-sitemap',
-    'nuxt-schema-org',
     '@nuxthq/studio',
     '@nuxtjs/plausible',
     'nuxt-payload-analyzer',
@@ -36,7 +30,7 @@ export default defineNuxtConfig({
     prerender: {
       failOnError: false,
       crawlLinks: true,
-      routes: ['/', '/blog', '/packages', '/api/search.txt', '/rss.xml', '/rss.xml', '/blog/rss.xml', '/learn/rss.xml', '/explore/rss.xml', '/build/rss.xml'],
+      routes: ['/', '/blog', '/packages', '/api/search.txt', '/rss.xml', '/rss.xml', '/blog/rss.xml', '/learn/rss.xml', '/explore/rss.xml', '/build/rss.xml', '/robots.txt', '/sitemap.xml'],
     },
     routeRules: {
       '/api/github/**': {
@@ -80,32 +74,17 @@ export default defineNuxtConfig({
     preference: 'light',
   },
   site: {
-    language: 'en',
+    defaultLocale: 'en',
     url: 'https://unjs.io',
     name: 'UnJS',
     description: 'Agnostic Excellence: JavaScript Libraries, Tools, and Utilities, Crafted to Elevate Your Coding Journey.',
-  },
-  sitemap: {
-    sitemaps: {
-      learn: {
-        include: ['/learn/**'],
-      },
-      build: {
-        include: ['/build/**'],
-      },
-      explore: {
-        include: ['/explore/**'],
-      },
-      blog: {
-        include: ['/blog/**'],
-      },
-      packages: {
-        include: ['/packages/**'],
-      },
-      pages: {
-        exclude: ['/build/**', '/explore/**', '/learn/**', '/blog/**', '/packages/**'],
-      },
+    identity: {
+      type: 'Organization',
     },
+    trailingSlash: false,
+  },
+  linkChecker: {
+    enabled: false,
   },
   routeRules: {
     ...packagesRedirects as NitroConfig['routeRules'],
