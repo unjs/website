@@ -2,6 +2,7 @@
   <Html lang="en" dir="ltr" class="scroll-smooth">
     <Head>
       <SchemaOrgOrganization
+        logo="/favicon.svg"
         :same-as="[
           'https://github.com/unjs',
           'https://twitter.com/unjsio',
