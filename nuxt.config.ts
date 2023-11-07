@@ -10,12 +10,10 @@ export default defineNuxtConfig({
     },
   },
   modules: [
+    '@nuxtseo/module',
     '@nuxt/content',
     '@nuxt/ui',
     '@vueuse/nuxt',
-    'nuxt-simple-robots',
-    'nuxt-simple-sitemap',
-    'nuxt-schema-org',
     '@nuxthq/studio',
     '@nuxtjs/plausible',
     'nuxt-payload-analyzer',
@@ -87,8 +85,6 @@ export default defineNuxtConfig({
       type: 'Organization',
     },
     trailingSlash: false,
-    twitter: '@unjsio',
-    github: 'unjs',
   },
   sitemap: {
     sitemaps: {
