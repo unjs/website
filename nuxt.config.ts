@@ -86,6 +86,9 @@ export default defineNuxtConfig({
   linkChecker: {
     enabled: false,
   },
+  ogImage: {
+    enabled: false,
+  },
   routeRules: {
     ...packagesRedirects as NitroConfig['routeRules'],
   },
