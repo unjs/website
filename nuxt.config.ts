@@ -7,12 +7,6 @@ export default defineNuxtConfig({
       titleTemplate: '%s · UnJS',
     },
   },
-  runtimeConfig: {
-    public: {
-      siteUrl: 'https://unjs.io',
-      inLanguage: 'en',
-    },
-  },
   modules: [
     '@nuxt/content',
     '@nuxt/ui',
