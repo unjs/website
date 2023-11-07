@@ -5,7 +5,7 @@ const github = website.value.socials.github
 const { data: navigation } = await useAsyncData('content:navigation', () => fetchContentNavigation(queryContent('/')), {
   transform: (data) => {
     const filteredData = data.filter(item => item._path !== '/').map((item) => {
-      if (item._path !== '/resources')
+      if (item._path !== '/resources' && item._path !== '/about')
         delete item.children
 
       return {
