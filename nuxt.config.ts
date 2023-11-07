@@ -27,7 +27,6 @@ export default defineNuxtConfig({
   },
   nitro: {
     prerender: {
-      concurrency: 3,
       failOnError: false,
       crawlLinks: true,
       routes: ['/', '/blog', '/packages', '/api/search.txt', '/rss.xml', '/rss.xml', '/blog/rss.xml', '/learn/rss.xml', '/explore/rss.xml', '/build/rss.xml', '/robots.txt', '/sitemap.xml'],
