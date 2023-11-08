@@ -117,7 +117,7 @@ When you define types, request utilities will be aware of the event input types.
 
 ```ts
 export default eventHandler<{ body: { name: string }; query: { id: string } }>(
-  (event) => {
+  async (event) => {
     const query = getQuery(event) // Query is typed as { id: string }
     const body = await readBody(event) // Body is typed as { name: string }
   },
