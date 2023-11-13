@@ -98,6 +98,13 @@ export default {
     },
   },
 
+  '/image-meta': {
+    redirect: {
+      to: '/packages/image-meta',
+      statusCode: 302,
+    },
+  },
+
   '/ipx': {
     redirect: {
       to: '/packages/ipx',
