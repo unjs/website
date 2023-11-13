@@ -1,22 +1,11 @@
 <script lang="ts" setup>
-const { page } = useContent()
+const { page, toc } = useContent()
 </script>
 
 <template>
   <Main>
-    <AppHero :title="page.title" :description="page.description" />
-
-    <!--
-      le nom et la manière dont on l'écrit
-     -->
-     <!--
-      le logo (fond blanc et noir)
-      -->
-      <!--
-        Les 3 couleurs principales (jaune, noir et blanc)
-       -->
-      <!--
-        la typographie
-       -->
+    <Prose :title="page.title" :toc="toc">
+      <slot />
+    </Prose>
   </Main>
 </template>
