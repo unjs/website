@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import type { BlogPostCard } from '~/types/blog'
+import type { Author, BlogPostCard } from '~/types/blog'
 
 const { page } = useContent()
 
-const { data: blog } = await useAsyncData('blog', () => queryContent('/blog/').only(['_path', 'title', 'description', 'publishedAt', 'authors']).sort({ publishedAt: -1 }).find() as Promise<BlogPostCard[]>)
+const { data: blog } = await useAsyncData('blog', () => queryContent('/blog/').only(['_path', 'title', 'description', 'publishedAt', 'authors', 'packages']).sort({ publishedAt: -1 }).find() as Promise<BlogPostCard[]>)
 
 if (!blog.value) {
   throw createError({
@@ -12,7 +12,42 @@ if (!blog.value) {
   })
 }
 
+// rework all of this for a cleaner code
 const { search, searchResults } = useSimpleSearch(blog as Ref<BlogPostCard[]>)
+
+const authors = blog.value.flatMap(item => item.authors).reduce((acc, author) => {
+  if (!acc.find(item => item.name === author.name))
+    acc.push(author)
+
+  return acc
+}, [] as Author[])
+const selectedAuthors = ref<Author[]>([])
+
+const packages = blog.value.flatMap(item => item.packages).reduce((acc, pkg) => {
+  if (!acc.find(item => item === pkg))
+    acc.push(pkg)
+
+  return acc
+}, [] as string[])
+const selectedPackages = ref<string[]>([])
+
+const filtered = computed(() => {
+  if (!selectedAuthors.value.length && !selectedPackages.value.length)
+    return searchResults.value
+
+  return searchResults.value.filter((item) => {
+    if (selectedAuthors.value.length && selectedPackages.value.length) // TODO: find a better way
+      return item.authors.some(author => selectedAuthors.value.includes(author.name)) && item.packages.some(pkg => selectedPackages.value.includes(pkg))
+
+    if (selectedAuthors.value.length)
+      return item.authors.some(author => selectedAuthors.value.includes(author.name))
+
+    if (selectedPackages.value.length)
+      return item.packages.some(pkg => selectedPackages.value.includes(pkg))
+
+    return true
+  })
+})
 
 const orderByOptions = [
   {
@@ -26,72 +61,124 @@ const orderByOptions = [
 ]
 const { order, toggleOrder, orderBy, currentOrderBy, sort } = useOrder(-1, { init: 'publishedAt', options: orderByOptions })
 
-const results = sort(searchResults)
+const results = sort(filtered)
 </script>
 
 <template>
   <Head>
     <SchemaOrgWebPage :type="['CollectionPage']" />
   </Head>
-  <main class="my-6 md:my-10">
-    <AppHero :title="page.title" :description="page.description" />
+  <Main>
+    <template #header>
+      <PageHeader :title="page.title" :description="page.description">
+        <template #right>
+          <div>
+            <img :src="page.header.image.src" :alt="page.header.image.alt" class="absolute left-24 top-10 opacity-70">
+          </div>
+        </template>
+      </PageHeader>
+    </template>
 
-    <section class="mt-8">
+    <section>
       <h2 class="sr-only">
         Packages list
       </h2>
 
-      <div class="p-4 rounded-lg ring-1 ring-zinc-200 bg-white flex items-center justify-between">
+      <div class="grid grid-cols-3 gap-8">
         <UInput
           v-model="search"
-          color="white"
+          size="lg"
+          color="gray"
           variant="outline"
           name="search-article"
           placeholder="Search an article"
           icon="i-heroicons-magnifying-glass-solid"
         />
-        <UButtonGroup size="sm" orientation="horizontal">
-          <UButton
-            :icon="order === 1 ? 'i-heroicons-bars-arrow-up-20-solid' : 'i-heroicons-bars-arrow-down-20-solid'"
-            color="white"
-            :title="order === 1 ? 'Ascending order' : 'Descending order'"
-            @click="toggleOrder()"
-          />
+        <div class="col-span-2 flex items-center justify-end gap-3">
           <USelectMenu
-            v-model="orderBy"
-            class="w-32"
-            :options="orderByOptions"
-            color="white"
-            placeholder="Order By"
+            v-model="selectedAuthors"
+            :options="authors"
+            color="gray"
+            variant="outline"
+            size="lg"
+            placeholder="Authors"
             select-class="cursor-pointer"
-            value-attribute="id"
-            option-attribute="label"
+            value-attribute="name"
+            option-attribute="name"
+            multiple
           >
-            <template #label>
-              {{ currentOrderBy?.label }}
+            <template #option="{ option: author }">
+              <UAvatar size="2xs" :src="author.picture" :alt="`Avatar of ${author.name}`" />
+              <span class="truncate">
+                {{ author.name }}
+              </span>
             </template>
           </USelectMenu>
-        </UButtonGroup>
+          <USelectMenu
+            v-model="selectedPackages"
+            :options="packages"
+            color="gray"
+            variant="outline"
+            size="lg"
+            placeholder="Packages"
+            select-class="cursor-pointer"
+            multiple
+          >
+            <template #option="{ option: pkg }">
+              <UAvatar size="2xs" :src="`/assets/logos/${pkg}.svg`" :alt="`Icon of ${pkg}`" />
+              <span class="truncate">
+                {{ pkg }}
+              </span>
+            </template>
+          </USelectMenu>
+          <!-- add the author select-menu -->
+          <!-- add the package select menu -->
+          <!-- update the logic -->
+          <!-- harmonize the hover:color -->
+          <UButtonGroup size="lg" orientation="horizontal">
+            <UButton
+              :icon="order === 1 ? 'i-heroicons-bars-arrow-up-20-solid' : 'i-heroicons-bars-arrow-down-20-solid'"
+              color="gray"
+              variant="solid"
+              :title="order === 1 ? 'Ascending order' : 'Descending order'"
+              @click="toggleOrder()"
+            />
+            <USelectMenu
+              v-model="orderBy"
+              :options="orderByOptions"
+              color="gray"
+              variant="outline"
+              placeholder="Order By"
+              select-class="cursor-pointer"
+              value-attribute="id"
+              option-attribute="label"
+            >
+              <template #label>
+                {{ currentOrderBy?.label }}
+              </template>
+            </USelectMenu>
+          </UButtonGroup>
+        </div>
       </div>
 
       <ol v-if="blog" class="mt-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 place-items-stretch">
         <li v-for="item in results" :key="item.title">
-          <UCard as="article" :ui="{ base: 'h-full relative', divide: '', shadow: 'shadow-none hover:shadow-lg', rounded: 'rounded-xl', header: { base: 'flex gap-3 items-center', padding: 'py-0 pt-4 sm:px-4 sm:pt-4' }, body: { padding: 'p-4 sm:p-4' }, footer: { padding: 'py-0 pb-4 sm:px-4 sm:pb-4' } }">
+          <UCard as="article" :ui="{ base: 'h-full relative', background: 'dark:bg-gray-700/40 hover:dark:bg-gray-700/60', divide: '', shadow: 'shadow-none hover:shadow-lg ', ring: 'dark:highlight-white/10', rounded: 'rounded-lg', header: { base: 'flex gap-3 items-center', padding: 'py-0 pt-4 sm:px-4 sm:pt-4' }, body: { padding: 'p-4 sm:p-4' }, footer: { padding: 'py-0 pb-4 sm:px-4 sm:pb-4' } }">
             <template #header>
-              <h3 class="text-xl font-semibold">
+              <h3 class="text-xl font-semibold dark:text-gray-50">
                 <NuxtLink :to="item._path" class="absolute inset-0" />
                 {{ item.title }}
               </h3>
             </template>
 
-            <p class="text-zinc-500">
+            <p class="dark:text-zinc-400">
               {{ item.description }}
             </p>
 
             <template #footer>
-              <dl class="text-zinc-500 text-sm flex flex-row justify-between items-center">
+              <dl class="dark:text-zinc-400 text-sm flex flex-row justify-between items-center">
                 <dt class="sr-only">
-                  Published on
+                  Published at
                 </dt>
                 <dd>
                   <time :datetime="toISODateString(item.publishedAt)">
@@ -101,18 +188,17 @@ const results = sort(searchResults)
                 <dt class="sr-only">
                   Authors
                 </dt>
-                <dd>
-                  <ul class="flex gap-2">
-                    <li v-for="author in item.authors" :key="author._id">
-                      <UAvatar :src="author.picture" :alt="author.name" size="xs" />
-                    </li>
-                  </ul>
+                <dd class="flex">
+                  <UAvatarGroup size="2xs" :max="3" :ui="{ ring: '' }">
+                    <UAvatar v-for="author in item.authors" :key="author._id" :src="author.picture" :alt="author.name" />
+                  </UAvatarGroup>
                 </dd>
               </dl>
             </template>
           </UCard>
         </li>
       </ol>
+      <!-- add a placeholder when there is no content -->
     </section>
-  </main>
+  </Main>
 </template>

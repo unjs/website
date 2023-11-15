@@ -12,7 +12,7 @@
       <RobotMeta />
       <Link rel="icon" href="/favicon.svg" />
     </Head>
-    <Body class="container mx-auto xl:max-w-7xl px-4 py-4 md:py-8 font-sans bg-gray-900">
+    <Body class="container mx-auto xl:max-w-7xl py-4 md:py-8 font-sans bg-gray-900">
       <AppHeader />
       <NuxtPage />
       <AppFooter />

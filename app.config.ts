@@ -1,9 +1,20 @@
 export default defineAppConfig({
   ui: {
     primary: 'yellow',
-    gray: 'grey',
+    gray: 'cool',
     button: {
       base: 'transition ease-in',
+      color: {
+        gray: {
+          solid: 'dark:bg-gray-700/40 dark:hover:bg-gray-700/50',
+        },
+      },
+    },
+    select: {
+      base: 'transition ease-in',
+      color: {
+        gray: { outline: 'dark:bg-gray-700/40 dark:hover:bg-gray-700/50' },
+      },
     },
     buttonGroup: {
       shadow: 'shadow-none',
@@ -13,17 +24,10 @@ export default defineAppConfig({
 
     },
     input: {
+      base: 'transition ease-in',
       color: {
-        white: {
-          outline: 'shadow-none ',
-        },
-
-      },
-    },
-    select: {
-      color: {
-        white: {
-          outline: 'shadow-none ',
+        gray: {
+          outline: 'dark:bg-gray-700/40 dark:hover:bg-gray-700/50',
         },
       },
     },
