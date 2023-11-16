@@ -1,5 +1,5 @@
 import { ofetch } from 'ofetch'
-import type { GitHubRepo } from '../types'
+import type { GitHubRepo, GithubRelease } from '../types'
 
 export const internalRepos = new Set([
   'eslint-config',
@@ -35,4 +35,19 @@ export async function fetchRepos(): Promise<GitHubRepo[]> {
   const repos = await ofetch<{ repos: GitHubRepo[] }>('https://ungh.cc/orgs/unjs/repos').then(r => r.repos)
 
   return repos.filter(repo => !internalRepos.has(repo.name))
+}
+
+/**
+ * Fetch all releases from repos
+ */
+export async function fetchReleases(repos: GitHubRepo[]): Promise<{ releases: GithubRelease[]; name: string }[]> {
+  const releases = await Promise.all(repos.map(async (repo) => {
+    const releases = await ofetch<{ releases: GithubRelease[] }>(`https://ungh.cc/repos/unjs/${repo.name}/releases`)
+    return {
+      name: repo.name,
+      releases: releases.releases,
+    }
+  }))
+
+  return releases
 }
