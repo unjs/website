@@ -2,7 +2,7 @@ import process from 'node:process'
 import { execSync } from 'node:child_process'
 import { consola } from 'consola'
 import { ofetch } from 'ofetch'
-import { fetchRepos } from './utils/repos'
+import { fetchRepos } from './utils/github'
 import { createPackage, generatePackagesRedirections, getContentPackages, getPackagesWithoutRepo, getReposWithoutPackage, removePackage } from './utils/packages'
 import type { GitHubRepo } from './types'
 

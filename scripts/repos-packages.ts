@@ -1,7 +1,7 @@
 import process, { exit } from 'node:process'
 import { consola } from 'consola'
 import { createPackage, getContentPackages, getPackagesWithoutRepo, getReposWithoutPackage, removePackage } from './utils/packages'
-import { fetchRepos } from './utils/repos'
+import { fetchRepos } from './utils/github'
 
 /**
  * This script is used to check if each repo have a package and if each package have a repo.
