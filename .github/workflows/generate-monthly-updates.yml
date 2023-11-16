@@ -37,7 +37,7 @@ jobs:
           git checkout -b monthly-updates
           git add .
           git commit -m "content: create monthly updates"
-          git push -f origin main
+          git push -f origin monthly-updates
         env:
           EMAIL: ${{ secrets.EMAIL }}
           USERNAME: ${{ secrets.USERNAME }}
@@ -47,7 +47,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const { data: pullRequests } = await github.pulls.list({
+            const { data: pullRequests } = await github.rest.pulls.list({
               owner: context.repo.owner,
               repo: context.repo.repo,
               state: 'open',
@@ -55,7 +55,7 @@ jobs:
             })
 
             if (pullRequests.length === 0) {
-              await github.pulls.create({
+              await github.rest.pulls.create({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 title: 'content: create monthly updates',
