@@ -10,9 +10,9 @@ permissions:
   contents: write
 
 jobs:
-  update-packages:
+  generate-monthly-updates:
     if: github.repository_owner == 'unjs'
-    name: Update Packages
+    name: Generate Monthly Updates
     runs-on: ubuntu-latest
 
     steps:
