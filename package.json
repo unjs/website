@@ -20,7 +20,7 @@
     "@nuxt/ui": "^2.10.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "1.0.0-beta.29",
+    "@antfu/eslint-config": "2.0.0",
     "@headlessui/vue": "^1.7.16",
     "@iconify-json/heroicons": "^1.1.13",
     "@iconify-json/logos": "^1.1.37",
