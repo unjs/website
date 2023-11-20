@@ -81,7 +81,7 @@ const results = sort(filtered)
 
     <section>
       <h2 class="sr-only">
-        Packages list
+        Articles list
       </h2>
 
       <div class="grid grid-cols-3 gap-8">
@@ -131,10 +131,6 @@ const results = sort(filtered)
               </span>
             </template>
           </USelectMenu>
-          <!-- add the author select-menu -->
-          <!-- add the package select menu -->
-          <!-- update the logic -->
-          <!-- harmonize the hover:color -->
           <UButtonGroup size="lg" orientation="horizontal">
             <UButton
               :icon="order === 1 ? 'i-heroicons-bars-arrow-up-20-solid' : 'i-heroicons-bars-arrow-down-20-solid'"
@@ -197,8 +193,10 @@ const results = sort(filtered)
             </template>
           </UCard>
         </li>
+        <li v-if="results.length === 0" class="col-spance-1 md:col-span-2 xl:col-span-3 text-center">
+          No articles found
+        </li>
       </ol>
-      <!-- add a placeholder when there is no content -->
     </section>
   </Main>
 </template>

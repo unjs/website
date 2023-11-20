@@ -33,11 +33,11 @@ defineShortcuts({
 })
 
 const { metaSymbol } = useShortcuts()
-const uiButton = { font: 'font-semibold', color: { gray: { ghost: 'hover:bg-primary/30 dark:hover:bg-primary/90' } } }
+const uiButton = { font: 'font-semibold', color: { gray: { ghost: 'dark:text-gray-50 dark:hover:bg-primary/40' } } }
 </script>
 
 <template>
-  <header class="h-[3.75rem] px-3 md:px-6 py-3 grid grid-cols-2 lg:grid-cols-3 rounded-2xl ring-1 ring-zinc-100 bg-white text-zinc-900">
+  <header class="h-[3.75rem] px-3 md:px-6 py-3 grid grid-cols-2 lg:grid-cols-3 rounded-lg ring-1 dark:ring-gray-700 dark:bg-gray-700/20">
     <div class="flex items-center">
       <NuxtLink to="/?utm_source=unjs.io&utm_medium=header-icon">
         <AppLogo />
@@ -84,7 +84,7 @@ const uiButton = { font: 'font-semibold', color: { gray: { ghost: 'hover:bg-prim
       </UTooltip>
 
       <UTooltip text="Open Navigation">
-        <UButton size="md" variant="ghost" color="gray" icon="i-heroicons-bars-3-bottom-right" class="lg:hidden" :ui="uiButton" @click="openNavigation = true" />
+        <UButton size="md" variant="ghost" color="gray" icon="i-heroicons-bars-3-bottom-right" class="lg:hidden" :ui="uiButton" aria-label="Search content" @click="openNavigation = true" />
       </UTooltip>
 
       <UTooltip text="GitHub Stars">
