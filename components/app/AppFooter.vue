@@ -3,7 +3,7 @@ const website = useWebsite()
 
 const colorMode = useColorMode()
 const toggleTheme = function () {
-  colorMode.value = colorMode.value === 'dark' ? 'light' : 'dark'
+  colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
 }
 
 const uiButton = { color: { gray: { ghost: 'dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-primary/40' } } }

@@ -53,73 +53,73 @@ defineShortcuts({
     <SchemaOrgWebPage :type="['ItemPage']" />
   </Head>
 
-  <Prose class="my-6 md:my-10">
-    <template #header>
-      <!-- TODO: rework to have the same title size of blog post -->
-      <PackageHeader :name="page.title" :description="page.description" />
-    </template>
+  <Main>
+    <Prose>
+      <template #header>
+        <PackageHeader :name="page.title" :description="page.description" />
+      </template>
 
-    <ContentRendererMarkdown :value="readme!" />
+      <ContentRendererMarkdown :value="readme!" />
 
-    <template #nav>
-      <UButton :to="page.documentation" rel="noopener" size="lg" color="gray" :ui="{ base: 'w-full justify-center' }">
-        Documentation
-      </UButton>
-      <ProseNavGroup no-disclosure>
-        <template #links>
-          <div class="flex flex-col gap-1">
-            <ProseNavGroupLink label="Stars" :to="toGitHubRepo(page.github.owner, page.github.repo)" target="_blank" icon="i-heroicons-star-solid" no-external>
-              {{ formatNumber(metadata!.stars) }}
-            </ProseNavGroupLink>
-            <ProseNavGroupLink v-if="monthlyDownloads" label="Monthly Downloads" :to="toGitHubRepo(page.github.owner, page.github.repo)" target="_blank" icon="i-heroicons-arrow-trending-up-solid" no-external>
-              {{ formatNumber(monthlyDownloads) }}
-            </ProseNavGroupLink>
-            <ProseNavGroupLink v-if="metadata!.latestRelease" label="Latest Version" :to="toGitHubLatestRelease(page.github.owner, page.github.repo)" target="_blank" icon="i-heroicons-tag-solid" no-external>
-              {{ metadata!.latestRelease }}
-            </ProseNavGroupLink>
-          </div>
-        </template>
-      </ProseNavGroup>
-      <UDivider />
-      <ProseNavGroup icon="i-simple-icons-github">
-        <template #title>
-          GitHub
-        </template>
-        <template #links>
-          <ProseNavGroupLink :to="toGitHubRepo(page.github.owner, page.github.repo)" target="_blank" icon="i-simple-icons-github">
-            View source
-          </ProseNavGroupLink>
-          <ProseNavGroupLink v-if="page.examples" :to="page.examples" target="_blank" icon="i-simple-icons-github">
-            Examples
-          </ProseNavGroupLink>
-          <ProseNavGroupLink
-            :to="toGitHubIssue(page.github.owner, page.github.repo)" target="_blank"
-            icon="i-simple-icons-github"
-          >
-            Report an issue
-          </ProseNavGroupLink>
-        </template>
-      </ProseNavGroup>
-      <UDivider />
-      <template v-if="hasResources">
-        <ProseNavGroup icon="i-heroicons-beaker-solid">
+      <template #nav>
+        <UButton :to="page.documentation" rel="noopener" size="lg" color="gray" :ui="{ base: 'w-full justify-center' }">
+          Documentation
+        </UButton>
+        <ProseNavGroup no-disclosure>
+          <template #links>
+            <div class="flex flex-col gap-1">
+              <ProseNavGroupLink label="Stars" :to="toGitHubRepo(page.github.owner, page.github.repo)" target="_blank" icon="i-heroicons-star-solid" no-external>
+                {{ formatNumber(metadata!.stars) }}
+              </ProseNavGroupLink>
+              <ProseNavGroupLink v-if="monthlyDownloads" label="Monthly Downloads" :to="toGitHubRepo(page.github.owner, page.github.repo)" target="_blank" icon="i-heroicons-arrow-trending-up-solid" no-external>
+                {{ formatNumber(monthlyDownloads) }}
+              </ProseNavGroupLink>
+              <ProseNavGroupLink v-if="metadata!.latestRelease" label="Latest Version" :to="toGitHubLatestRelease(page.github.owner, page.github.repo)" target="_blank" icon="i-heroicons-tag-solid" no-external>
+                {{ metadata!.latestRelease }}
+              </ProseNavGroupLink>
+            </div>
+          </template>
+        </ProseNavGroup>
+        <UDivider />
+        <ProseNavGroup icon="i-simple-icons-github">
           <template #title>
-            Resources
+            GitHub
           </template>
           <template #links>
-            <ProseNavGroupLink v-if="page.npm" :to="toNpmPackage(page.npm.name)" target="_blank" icon="i-simple-icons-npm">
-              Discover on npm
+            <ProseNavGroupLink :to="toGitHubRepo(page.github.owner, page.github.repo)" target="_blank" icon="i-simple-icons-github">
+              View source
             </ProseNavGroupLink>
-            <ProseNavGroupLink v-if="page.playgrounds?.stackblitz" :to="page.playgrounds.stackblitz" target="_blank" icon="i-simple-icons-stackblitz">
-              Open on Stackblitz
+            <ProseNavGroupLink v-if="page.examples" :to="page.examples" target="_blank" icon="i-simple-icons-github">
+              Examples
             </ProseNavGroupLink>
-            <ProseNavGroupLink v-if="page.playgrounds?.codesandbox" :to="page.playgrounds.codesandbox" target="_blank" icon="i-simple-icons-codesandbox">
-              Open on CodeSandbox
+            <ProseNavGroupLink
+              :to="toGitHubIssue(page.github.owner, page.github.repo)" target="_blank"
+              icon="i-simple-icons-github"
+            >
+              Report an issue
             </ProseNavGroupLink>
           </template>
         </ProseNavGroup>
+        <UDivider />
+        <template v-if="hasResources">
+          <ProseNavGroup icon="i-heroicons-beaker-solid">
+            <template #title>
+              Resources
+            </template>
+            <template #links>
+              <ProseNavGroupLink v-if="page.npm" :to="toNpmPackage(page.npm.name)" target="_blank" icon="i-simple-icons-npm">
+                Discover on npm
+              </ProseNavGroupLink>
+              <ProseNavGroupLink v-if="page.playgrounds?.stackblitz" :to="page.playgrounds.stackblitz" target="_blank" icon="i-simple-icons-stackblitz">
+                Open on Stackblitz
+              </ProseNavGroupLink>
+              <ProseNavGroupLink v-if="page.playgrounds?.codesandbox" :to="page.playgrounds.codesandbox" target="_blank" icon="i-simple-icons-codesandbox">
+                Open on CodeSandbox
+              </ProseNavGroupLink>
+            </template>
+          </ProseNavGroup>
         <!-- <UDivider /> -->
-      </template>
+        </template>
       <!-- TODO: do it later -->
       <!-- <ProseNavGroup icon="i-heroicons-sparkles-solid">
         <template #title>
@@ -145,8 +145,9 @@ defineShortcuts({
           </ol>
         </template>
       </ProseNavGroup> -->
-    </template>
-  </Prose>
+      </template>
+    </Prose>
+  </Main>
 
   <!-- <PackageLatestNews class="xl:row-start-2 col-start-2" :name="page.title" /> -->
 </template>

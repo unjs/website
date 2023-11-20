@@ -6,7 +6,7 @@ const toc = inject<Toc>('toc')
 const { activeHeadings } = useScrollSpyHeadings()
 
 function activeClass(id: string): string {
-  return activeHeadings.value.includes(id) ? '!text-primary-700' : '' // Important to override text-zinc-900
+  return activeHeadings.value.includes(id) ? '!text-primary' : '' // Important to override text-zinc-900
 }
 </script>
 
@@ -16,7 +16,7 @@ function activeClass(id: string): string {
       On this page
     </template>
     <template #links>
-      <ol v-if="toc" class=" text-zinc-500">
+      <ol v-if="toc" class=" dark:text-gray-400">
         <li v-for="link in toc.links" :key="link.id">
           <ProseNavGroupLink :to="`#${link.id}`" :class="activeClass(link.id)">
             {{ link.text }}

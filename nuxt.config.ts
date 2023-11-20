@@ -67,11 +67,14 @@ export default defineNuxtConfig({
       fields: ['icon'],
     },
     highlight: {
-      theme: 'github-light',
+      theme: {
+        default: 'github-light',
+        dark: 'github-dark',
+      },
     },
   },
   colorMode: {
-    preference: 'light',
+    preference: 'system',
   },
   site: {
     defaultLocale: 'en',
