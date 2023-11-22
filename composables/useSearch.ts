@@ -2,7 +2,7 @@ import type { ParsedContent } from '@nuxt/content/dist/runtime/types'
 import MiniSearch, { type Options as MiniSearchOptions } from 'minisearch'
 import type { SearchDisplay, SearchDisplayItem, SearchResult } from '~/types/search'
 
-export function useSimpleSearch(data: MaybeRefOrGetter<Partial<ParsedContent>[]>, options: { idField: string; fields: string[]; storeFields: string[] } = { idField: 'title', fields: ['title', 'description'], storeFields: ['title', 'description', '_path', 'publishedAt', 'authors'] }) {
+export function useSimpleSearch(data: MaybeRefOrGetter<Partial<ParsedContent>[]>, options: { idField: string, fields: string[], storeFields: string[] } = { idField: 'title', fields: ['title', 'description'], storeFields: ['title', 'description', '_path', 'publishedAt', 'authors'] }) {
   const search = ref('')
   const searchDebounced = useDebounce(search, 150)
 
@@ -52,7 +52,7 @@ export async function useSearchDefaultResults(): Promise<ComputedRef<SearchDispl
   })
 }
 
-export async function useSearchResults(search: MaybeRefOrGetter<string>, options: { lazy?: boolean; server?: boolean } = {}): Promise<ComputedRef<SearchDisplay>> {
+export async function useSearchResults(search: MaybeRefOrGetter<string>, options: { lazy?: boolean, server?: boolean } = {}): Promise<ComputedRef<SearchDisplay>> {
   const website = useWebsite()
   const searchResults = await useSearch(search, options)
 
@@ -99,7 +99,7 @@ export async function useSearchResults(search: MaybeRefOrGetter<string>, options
   })
 }
 
-export async function useSearch(search: MaybeRefOrGetter<string>, options: { lazy?: boolean; server?: boolean } = {}): Promise<ComputedRef<SearchResult[]>> {
+export async function useSearch(search: MaybeRefOrGetter<string>, options: { lazy?: boolean, server?: boolean } = {}): Promise<ComputedRef<SearchResult[]>> {
   const { data } = await useFetch<string>('/api/search.txt', options)
 
   return computed(() => {

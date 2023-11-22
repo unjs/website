@@ -40,7 +40,7 @@ export async function fetchRepos(): Promise<GitHubRepo[]> {
 /**
  * Fetch all releases from repos
  */
-export async function fetchReleases(repos: GitHubRepo[]): Promise<{ releases: GithubRelease[]; name: string }[]> {
+export async function fetchReleases(repos: GitHubRepo[]): Promise<{ releases: GithubRelease[], name: string }[]> {
   const releases = await Promise.all(repos.map(async (repo) => {
     const releases = await ofetch<{ releases: GithubRelease[] }>(`https://ungh.cc/repos/unjs/${repo.name}/releases`)
     return {
