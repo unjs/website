@@ -11,6 +11,7 @@ UnJS, pronounced `/ʌn-dʒeɪɛs/` or `un-jay-ess`, is a collection, an ecosyste
 
 UnJS is a short form of **Unified JavaScript**, which refers to the idea that every package can work both together and individually, with external packages, in any environment and agnostic of any framework or library, to reunify the JavaScript ecosystem around a common vision.
 
+<!-- @case-police-ignore UnJS unJS -->
 Please write **UnJS** and not **unJS** or **Unjs** or **unjs**.
 
 However, all packages are lowercase, like `unbuild`, `ofetch`, `nitro`, etc.
