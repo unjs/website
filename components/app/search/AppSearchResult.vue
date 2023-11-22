@@ -22,7 +22,7 @@ function onSelected() {
 </script>
 
 <template>
-  <ComboboxOptions>
+  <ComboboxOptions class="space-y-6">
     <template v-if="hasResult">
       <AppSearchGroup v-for="(value, key) in searchResults" :key="key" :name="key" :results="value as SearchDisplayItem[]" @selected="onSelected" />
     </template>

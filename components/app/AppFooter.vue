@@ -41,11 +41,13 @@ const uiButton = { color: { gray: { ghost: 'dark:text-gray-400 dark:hover:text-g
       </nav>
 
       <div class="place-self-center md:place-self-end">
-        <UTooltip :text="$colorMode.value === 'dark' ? 'Light Mode' : 'Dark Mode'">
-          <UButton size="xl" variant="ghost" color="gray" square :trailing-icon="$colorMode.value === 'dark' ? 'i-heroicons-sun-solid' : 'i-heroicons-moon-solid'" :ui="uiButton" aria-label="Toggle Theme" @click="toggleTheme">
-            {{ $colorMode.value === 'dark' ? 'Light' : 'Dark' }}
-          </UButton>
-        </UTooltip>
+        <ClientOnly>
+          <UTooltip :text="$colorMode.value === 'dark' ? 'Light Mode' : 'Dark Mode'">
+            <UButton size="xl" variant="ghost" color="gray" square :trailing-icon="$colorMode.value === 'dark' ? 'i-heroicons-sun-solid' : 'i-heroicons-moon-solid'" :ui="uiButton" aria-label="Toggle Theme" @click="toggleTheme">
+              {{ $colorMode.value === 'dark' ? 'Light' : 'Dark' }}
+            </UButton>
+          </UTooltip>
+        </ClientOnly>
       </div>
     </div>
     <AppFooterLicense class="text-sm dark:text-zinc-400 text-center" />

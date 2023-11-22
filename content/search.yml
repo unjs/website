@@ -1,4 +1,8 @@
-title: Search
-description: Easily find everything from an article to a package.
+title: Search Contents
+description: Easily find anything you need, from an article to a package, to quickly access to all of UnJS
+header:
+  image:
+    src: /assets/images/search/header.svg
+    alt: Illustration of a search bar with some results
 navigation: false
 layout: search

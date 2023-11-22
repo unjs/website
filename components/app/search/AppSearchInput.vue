@@ -31,7 +31,7 @@ function selectFirstOption() {
 </script>
 
 <template>
-  <ComboboxLabel for="search" class="grow flex items-center gap-4">
+  <ComboboxLabel for="search" class="h-12 px-4 md:py-2 flex items-center gap-4 ring-1 dark:ring-gray-700 dark:bg-gray-700/40 dark:hover:bg-gray-700/50 rounded-lg transition ease-in">
     <span class="i-heroicons-magnifying-glass-20-solid w-5 h-5 block text-zinc-400" />
     <ComboboxInput
       id="search"
@@ -39,7 +39,7 @@ function selectFirstOption() {
       type="text"
       name="search"
       placeholder="Search..."
-      class="placeholder:text-zinc-400 text-zinc-900 grow focus:outline-none"
+      class="bg-transparent placeholder:dark:text-zinc-400 dark:text-gray-50 grow focus:outline-none"
       autocomplete="off"
       :value="query"
       @change="onChange($event.target.value)"

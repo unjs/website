@@ -2,7 +2,7 @@ title: Blog
 description: Never miss a package release with the blog. Stay up-to-date on the latest announcements and get access to cutting-edge news.
 header:
   image:
-    src: /assets/images/blog/our-blog.svg
+    src: /assets/images/blog/header.svg
     alt: Illustration of a browser with a blog post
 navigation.icon: i-heroicons-newspaper-solid
 layout: blog

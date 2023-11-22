@@ -3,7 +3,7 @@ defineProps<{
   title: string
   date?: string
   categories?: string[]
-  authors: {
+  authors?: {
     name: string
     picture: string
     twitter: string

@@ -4,7 +4,7 @@ const { data } = await useAsyncData('no-articles', () => queryContent('/_no-arti
 
 <template>
   <ProseContent v-if="data" class="mx-auto">
-    <ContentRenderer :value="data" class="px-8 py-12 md:py-20 flex flex-col gap-4 text-zinc-700 text-center" />
+    <ContentRenderer :value="data" class="px-8 py-12 md:py-20 flex flex-col gap-4 dark:text-gray-400 text-center" />
   </ProseContent>
 </template>
 

@@ -24,8 +24,8 @@ function isLastChildren(children: SearchDisplayItem[] | null, index: number) {
 </script>
 
 <template>
-  <section>
-    <h2 class="text-zinc-700 capitalize font-bold mb-2">
+  <section class="p-4 dark:bg-gray-700/20 ring-1 dark:ring-gray-700 rounded-lg">
+    <h2 class="dark:text-gray-400 capitalize font-bold mb-2">
       {{ name }}
     </h2>
     <template v-for="item in results" :key="item.id">

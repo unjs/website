@@ -45,14 +45,20 @@ async function navigate() {
   <Head>
     <SchemaOrgWebPage :type="['CollectionPage', 'SearchResultsPage']" />
   </Head>
-  <main class="my-6 md:my-10">
-    <AppHero :title="page.title" :description="page.description" />
+  <Main>
+    <template #header>
+      <PageHeader :title="page.title" :description="page.description">
+        <template #right>
+          <div>
+            <img :src="page.header.image.src" :alt="page.header.image.alt" class="absolute left-24 opacity-70">
+          </div>
+        </template>
+      </PageHeader>
+    </template>
 
     <Combobox v-model="selected">
-      <div class="mt-6 h-12 px-4 md:py-2 rounded-2xl bg-white flex items-center">
-        <AppSearchInput v-model:query="query" :search-results="results" @validate="navigate" />
-      </div>
-      <div class="mt-6 p-4 rounded-2xl bg-white">
+      <AppSearchInput v-model:query="query" :search-results="results" @validate="navigate" />
+      <div class="mt-6">
         <AppSearchResult
           static
           :search-results="results"
@@ -61,5 +67,5 @@ async function navigate() {
         />
       </div>
     </Combobox>
-  </main>
+  </Main>
 </template>
