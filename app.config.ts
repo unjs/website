@@ -170,6 +170,10 @@ export default defineAppConfig({
               target: '_blank',
             },
             {
+              title: 'Design Kit',
+              url: '/design-kit?utm_source=unjs&utm_medium=footer',
+            },
+            {
               title: 'GitHub',
               url: 'https://github.com/unjs',
               rel: 'noopener',

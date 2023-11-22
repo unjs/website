@@ -34,12 +34,16 @@ defineShortcuts({
 
 const { metaSymbol } = useShortcuts()
 const uiButton = { font: 'font-semibold', color: { gray: { ghost: 'hover:bg-primary/30 dark:hover:bg-primary/90' } } }
+
+function toDesignKit() {
+  navigateTo('/design-kit?utm_source=unjs.io&utm_medium=header-icon')
+}
 </script>
 
 <template>
   <header class="h-[3.75rem] px-3 md:px-6 py-3 grid grid-cols-2 lg:grid-cols-3 rounded-2xl ring-1 ring-zinc-100 bg-white text-zinc-900">
     <div class="flex items-center">
-      <NuxtLink to="/?utm_source=unjs.io&utm_medium=header-icon">
+      <NuxtLink to="/?utm_source=unjs.io&utm_medium=header-icon" @click.right.prevent="toDesignKit()">
         <AppLogo />
       </NuxtLink>
     </div>
