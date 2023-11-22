@@ -2,6 +2,7 @@
 import type { Toc } from '@nuxt/content/dist/runtime/types'
 
 const props = defineProps<{
+  title?: string
   toc?: Toc
 }>()
 
@@ -11,7 +12,13 @@ provide('toc', props.toc)
 <template>
   <article class="grid grid-cols-1 md:grid-cols-[70%_1fr] xl:grid-cols-[75%_1fr] gap-y-12 md:gap-y-0 md:gap-x-8 items-start">
     <div class="row-start-1">
-      <slot name="header" />
+      <slot name="header">
+        <header>
+          <h1 class="text-zinc-900 text-2xl md:text-3xl font-bold tracking-wide">
+            {{ title }}
+          </h1>
+        </header>
+      </slot>
     </div>
 
     <ProseContent class="md:mt-8 col-start-1 row-start-3 md:row-start-2">
