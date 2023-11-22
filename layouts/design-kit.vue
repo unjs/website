@@ -4,7 +4,12 @@ const { page, toc } = useContent()
 
 <template>
   <Main>
-    <Prose :title="page.title" :toc="toc">
+    <Prose :toc="toc">
+      <template #header>
+        <ProseHeaderArticle
+          :title="page.title"
+        />
+      </template>
       <slot />
     </Prose>
   </Main>
