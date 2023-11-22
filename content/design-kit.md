@@ -20,7 +20,7 @@ However, all packages are lowercase, like `unbuild`, `ofetch`, `nitro`, etc.
 
 The UnJS logo is a combination of these two elements:
 
-- Two letters, `u` and `u`, the Un part of UnJS, but lowercase on the logo
+- Two letters, `u` and `n`, the Un part of UnJS, but lowercase on the logo
 - The logo of JavaScript with the iconic yellow color, the JS part of UnJS
 
 Note that the logo, like repos, is lowercase.
