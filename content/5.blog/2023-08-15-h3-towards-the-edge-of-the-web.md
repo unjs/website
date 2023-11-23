@@ -137,10 +137,10 @@ const userSchema = z.object({
 })
 
 export default defineEventHandler(async (event) => {
-  const result = await readValidatedBody(event, userSchema.safeParse) // or `.parse` to throw an error
+  const result = await readValidatedBody(event, userSchema.safeParse) // or `.parse` to directly throw an error
 
   if (!result.success) {
-     throw result.issues;
+     throw result.error.issues;
   }
   
   // User object is validated and typed!
