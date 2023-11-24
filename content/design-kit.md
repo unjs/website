@@ -34,6 +34,10 @@ logo:
     src:
       svg: /assets/images/design-kit/unjs-logo-black.svg
       png: /assets/images/design-kit/unjs-logo-black.png
+  - name: White # Usable on both white and black backgrounds
+    src:
+      svg: /assets/images/design-kit/unjs-logo-black.svg
+      png: /assets/images/design-kit/unjs-logo-black.png
 ---
 ::
 
