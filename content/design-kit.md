@@ -57,4 +57,10 @@ colors:
 
 UnJS uses the [Nunito](https://fonts.google.com/specimen/Nunito) font for its rounded and friendly look. This reminds us of the ambition of unifying the JavaScript ecosystem around a common vision and the agnostic nature of UnJS.
 
-::design-kit-typography{.not-prose .mt-8}
+:design-kit-typography{.not-prose .mt-8}
+
+## Package Logos
+
+Each package has its own logo. For most of them, the logo is an emoji from the [Noto collection](https://icones.js.org/collection/noto) that try to represent the package purpose.
+
+:design-kit-package-logos{.not-prose .mt-8}
