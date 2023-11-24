@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const { data } = await useAsyncData('content:design-kit-package-logo', () => {
+const { data } = await useAsyncData('content:design-kit-package-logos', () => {
   return queryContent('/packages/').only(['title']).find()
 })
 </script>
