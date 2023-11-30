@@ -27,7 +27,7 @@ export async function getMarkdownContent<T extends ParsedContent>(event: H3Event
   return filteredFiles
 }
 
-export function contentToRssItem<T extends RssContent>(content: T, options: { site: string; default: { email: string } }): RssItem {
+export function contentToRssItem<T extends RssContent>(content: T, options: { site: string, default: { email: string } }): RssItem {
   return {
     title: content.title ?? '',
     link: `${options.site}${content._path}`,
@@ -151,6 +151,6 @@ function createRssChannelItem(item: RssItem): string {
  *
  * @see https://www.rssboard.org/rss-profile#data-types-email
  */
-function buildRssEmail(email: { name: string; email: string }): string {
+function buildRssEmail(email: { name: string, email: string }): string {
   return `${email.email} (${email.name})`
 }

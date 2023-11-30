@@ -21,7 +21,7 @@ useSeoMeta({
 
 // TODO: Add og-image
 
-const { data: packages } = await useAsyncData(`packages:${page.value?.packages.join(':')}`, () => queryContent('/packages/').only(['_path', 'title']).where({ _path: { $containsAny: page.value?.packages } }).find(), { watch: [() => page.value?.packages], default: () => [] }) as { data: Ref<{ _path: string; title: string }[]> }
+const { data: packages } = await useAsyncData(`packages:${page.value?.packages.join(':')}`, () => queryContent('/packages/').only(['_path', 'title']).where({ _path: { $containsAny: page.value?.packages } }).find(), { watch: [() => page.value?.packages], default: () => [] }) as { data: Ref<{ _path: string, title: string }[]> }
 </script>
 
 <template>
