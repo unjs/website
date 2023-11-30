@@ -23,7 +23,9 @@ useSeoMeta({
 
 // TODO: Add og-image
 
-const { data: readme } = await useFetch<ParsedContent>(`/api/github/${page.value?.github.owner}/${page.value?.github.repo}/readme`, { default: () => { return { _id: '', body: null } } })
+const { data: readme } = await useFetch<ParsedContent>(`/api/github/${page.value?.github.owner}/${page.value?.github.repo}/readme`, { default: () => {
+  return { _id: '', body: null }
+} })
 
 const { data: metadata } = await useFetch(`/api/github/${page.value?.github.owner}/${page.value?.github.repo}/metadata`, { default: () => ({ stars: null, latestRelease: null }) })
 

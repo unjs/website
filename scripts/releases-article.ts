@@ -33,7 +33,7 @@ async function main() {
     }
 
     return acc
-  }, [] as { name: string, releases: GithubRelease[] }[]).sort((a, b) => a.name.localeCompare(b.name))
+  }, [] as { name: string; releases: GithubRelease[] }[]).sort((a, b) => a.name.localeCompare(b.name))
 
   const numberOfReleases = releasesFromCurrentMonth.reduce((acc, releases) => acc + releases.releases.length, 0)
 

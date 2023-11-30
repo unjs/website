@@ -5,7 +5,7 @@ export default defineEventHandler(async (event) => {
 
   const populatedPackages = await Promise.all(
     packages.map(async (pkg) => {
-            const [stars, monthlyDownloads, contributors] = await Promise.all([
+      const [stars, monthlyDownloads, contributors] = await Promise.all([
         fetchStars(pkg.github.owner, pkg.github.repo),
         pkg.npm?.name ? fetchMonthlyDownloads(pkg.npm.name) : null,
         fetchContributors(pkg.github.owner, pkg.github.repo),
@@ -20,10 +20,9 @@ export default defineEventHandler(async (event) => {
         url: `https://unjs.io${pkg._path}`,
         npm: pkg.npm,
       }
-    }
+    },
     ),
   )
-
 
   return populatedPackages
 })

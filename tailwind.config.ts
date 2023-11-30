@@ -55,11 +55,11 @@ export default <Partial<Config>> {
     },
   },
   plugins: [function ({ matchUtilities, theme }) {
-      matchUtilities(
-        {
-          highlight: (value) => ({ boxShadow: `inset 0 1px 0 0 ${value}` }),
-        },
-        { values: flattenColorPalette(theme('backgroundColor')), type: 'color' }
-      )
-    },]
+    matchUtilities(
+      {
+        highlight: value => ({ boxShadow: `inset 0 1px 0 0 ${value}` }),
+      },
+      { values: flattenColorPalette(theme('backgroundColor')), type: 'color' },
+    )
+  }],
 }
