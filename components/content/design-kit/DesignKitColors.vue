@@ -22,7 +22,7 @@ defineProps<{
             </div>
             <DesignKitColorsCopyButton :text="color.hex" class="font-normal" />
           </div>
-          <div class="font-normal text-sm text-zinc-500">
+          <div class="font-normal text-sm text-gray-500 dark:text-gray-400">
             {{ color.hex }}
           </div>
         </div>

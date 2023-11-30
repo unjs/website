@@ -2,7 +2,6 @@
 title: Design Kit
 description: Find all the design resources about UnJS.
 navigation: false
-layout: design-kit
 ---
 
 ## About UnJS

@@ -79,7 +79,7 @@ function toDesignKit() {
       </ol>
     </nav>
 
-    <div class="flex justify-end items-center gap-1">
+    <div class="flex justify-end items-center">
       <UTooltip text="Open Search" :shortcuts="[metaSymbol, 'K']">
         <UButton size="md" icon="i-heroicons-magnifying-glass-solid" color="gray" variant="ghost" :ui="{ size: { md: 'text-base' }, ...uiButton }" @click="openSearch = true">
           <span class="hidden lg:inline">
@@ -88,12 +88,12 @@ function toDesignKit() {
         </UButton>
       </UTooltip>
 
-      <UTooltip text="Open Navigation">
-        <UButton size="md" variant="ghost" color="gray" icon="i-heroicons-bars-3-bottom-right" class="lg:hidden" :ui="uiButton" aria-label="Search content" @click="openNavigation = true" />
+      <UTooltip class="ml-1 lg:hidden" text="Open Navigation">
+        <UButton square size="md" variant="ghost" color="gray" icon="i-heroicons-bars-3-bottom-right" :ui="uiButton" aria-label="Search content" @click="openNavigation = true" />
       </UTooltip>
 
-      <UTooltip text="GitHub Stars">
-        <UButton size="md" variant="ghost" color="gray" :icon="github.icon" :to="github.url" :target="github.target" :aria-label="`Follow us on ${github.name}`" :ui="{ size: { md: 'text-base' }, ...uiButton }" class="hidden lg:flex">
+      <UTooltip class="ml-1 hidden lg:flex" text="GitHub Stars">
+        <UButton size="md" variant="ghost" color="gray" :icon="github.icon" :to="github.url" :target="github.target" :aria-label="`Follow us on ${github.name}`" :ui="{ size: { md: 'text-base' }, ...uiButton }">
           {{ stars ? formatNumber(stars) : '' }}
         </UButton>
       </UTooltip>

@@ -23,7 +23,7 @@ const { data } = await useAsyncData(' blog:latest', () => queryContent('/blog').
         <h1 class="dark:text-gray-50 text-[2rem] md:text-4xl lg:text-5xl font-extrabold tracking-wide leading-normal lg:leading-normal">
           <ContentSlot :use="$slots.title" unwrap="p" />
         </h1>
-        <p class="dark:text-gray-400 text-2xl md:text-2.5xl leading-normal md:leading-normal">
+        <p class="dark:text-gray-400 text-2xl md:text-[1.75rem] leading-normal md:leading-normal">
           <ContentSlot :use="$slots.subtitle" unwrap="p" />
         </p>
       </div>

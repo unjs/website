@@ -12,6 +12,8 @@ defineEmits<{
 }>()
 
 const website = useWebsite()
+
+const uiButton = { color: { gray: { ghost: 'dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-primary/40' } } }
 </script>
 
 <template>
@@ -30,28 +32,23 @@ const website = useWebsite()
         leave-from="opacity-100"
         leave-to="opacity-0"
       >
-        <DialogPanel class="z-1 fixed inset-0 bg-white flex flex-col justify-between text-zinc-900">
+        <DialogPanel class="z-20 fixed inset-0 dark:bg-gray-900 flex flex-col justify-between dark:text-50">
           <div class="container mx-auto px-7 pt-4 flex flex-1 flex-col justify-between">
-            <div class="h-[3.75rem] flex justify-between items-center border border-transparent">
+            <div class="h-[3.75rem] flex justify-between items-center">
               <DialogTitle>
                 <AppLogo />
               </DialogTitle>
-              <button type="button" class="flex px-0.375rem md:px-3 py-0.125rem md:py-0.375rem" @click="$emit('update:open', false)">
-                <span class="i-heroicons-x-mark h-8 w-8" />
-                <span class="sr-only">
-                  Close
-                </span>
-              </button>
+              <UButton :ui="{ ...uiButton }" square size="md" variant="ghost" color="gray" icon="i-heroicons-x-mark" aria-label="Close" @click="$emit('update:open', false)" />
             </div>
             <nav class="mb-40">
               <ul
                 aria-labelledby="Navigation mobile"
-                class="flex flex-col gap-12 text-4xl font-semibold"
+                class="flex flex-col gap-12 text-2xl font-semibold"
               >
                 <li v-for="item in navigation" :key="item._path">
                   <NuxtLink :to="item._path" class="flex items-center gap-5" active-class="text-primary" @click="$emit('update:open', false)">
-                    <span :class="item.icon" class="w-10 h-10 block" />
-                    <span class="text-zinc-900">
+                    <span :class="item.icon" class="w-8 h-8 block" />
+                    <span>
                       {{ item.title }}
                     </span>
                   </NuxtLink>
@@ -59,14 +56,14 @@ const website = useWebsite()
               </ul>
             </nav>
             <div class="flex justify-center">
-              <ul class="flex gap-10">
+              <ul class="flex gap-2">
                 <li v-for="social in website.socials" :key="social.name">
-                  <NuxtLink :title="social.name" :rel="social.rel" :target="social.target" :to="social.url" :class="social.icon" class="block h-8 w-8" />
+                  <UButton :rel="social.rel" :target="social.target" :to="social.url" :icon="social.icon" :aria-label="`Follow us on ${social.name}`" size="xl" variant="ghost" color="gray" :ui="{ icon: { xl: 'md:w-7 md:h-7' }, ...uiButton }" />
                 </li>
               </ul>
             </div>
           </div>
-          <div class="mt-12 w-full h-4 bg-primary" />
+          <div class="mt-12 w-full h-2 dark:bg-primary-500" />
         </DialogPanel>
       </TransitionChild>
     </Dialog>

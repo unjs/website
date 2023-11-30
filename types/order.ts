@@ -1,4 +1,4 @@
-export interface orderByOption {
+export interface OrderByOption {
   id: string
   label: string
 }

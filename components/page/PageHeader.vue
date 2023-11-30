@@ -6,8 +6,8 @@ defineProps<{
 </script>
 
 <template>
-  <section class="relative overflow-hidden px-8 py-12 rounded-xl ring-1 dark:ring-zinc-700 grid grid-cols-2">
-    <div class="flex flex-col gap-4">
+  <section class="relative overflow-hidden px-4 py-8 lg:px-8 lg:py-12 rounded-xl ring-1 dark:ring-zinc-700 grid lg:grid-cols-2 lg:min-h-[280px]">
+    <div class="flex flex-col gap-2 lg:gap-4">
       <h1 class="dark:text-gray-50 text-2xl md:text-3xl lg:text-[2.5rem] font-extrabold tracking-wide leading-normal md:leading-normal">
         <slot name="title">
           {{ title }}
@@ -20,10 +20,10 @@ defineProps<{
       </p>
     </div>
 
-    <div class="relative z-10">
+    <div class="hidden lg:block relative z-10">
       <slot name="right" />
     </div>
 
-    <img src="/assets/images/blog/ellipse.svg" alt="A yellow ellipse to decorate the header" aria-hidden="true" class="absolute right-[-120px] top-[-130px]">
+    <img src="/assets/header/ellipse.svg" alt="A yellow ellipse to decorate the header" aria-hidden="true" class="absolute top-[-60px] right-[-80px] lg:top-[-130px] lg:right-[-120px]">
   </section>
 </template>

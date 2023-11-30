@@ -3,8 +3,6 @@ defineProps<{
   packages: {
     _path: string
     title: string
-    icon: string
-    logo: string
   }[]
 }>()
 </script>

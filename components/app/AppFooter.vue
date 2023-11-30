@@ -25,7 +25,7 @@ const uiButton = { color: { gray: { ghost: 'dark:text-gray-400 dark:hover:text-g
           <UButton :rel="social.rel" :target="social.target" :to="social.url" :icon="social.icon" :aria-label="`Follow us on ${social.name}`" size="xl" variant="ghost" color="gray" :ui="{ icon: { xl: 'md:w-7 md:h-7' }, ...uiButton }" />
         </li>
       </ul>
-      <nav class="mt-6 md:mt-0 md:justify-self-end md:col-start-2 md:row-start-1 grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-10 text-[1.125rem]">
+      <nav class="mt-6 md:mt-0 md:justify-self-end md:col-start-2 md:row-start-1 grid grid-cols-2 md:grid-cols-3 gap-x-2 gap-y-6 md:gap-10 text-[1.125rem]">
         <div v-for="list in website.footer.menu" :key="list.title" class="flex flex-col gap-4">
           <p class="font-bold dark:text-gray-50">
             {{ list.title }}

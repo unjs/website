@@ -13,7 +13,7 @@ provide('toc', props.toc)
   <article class="grid grid-cols-1 md:grid-cols-[70%_1fr] xl:grid-cols-[75%_1fr] gap-y-12 md:gap-y-0 md:gap-x-8 items-start">
     <div class="row-start-1">
       <slot name="header">
-        <header>
+        <header v-if="title">
           <h1 class="text-zinc-900 text-2xl md:text-3xl font-bold tracking-wide">
             {{ title }}
           </h1>
@@ -21,7 +21,7 @@ provide('toc', props.toc)
       </slot>
     </div>
 
-    <ProseContent class="md:mt-8 col-start-1 row-start-3 md:row-start-2">
+    <ProseContent class="col-start-1 row-start-3 md:row-start-2" :class="{ 'md:mt-8': title || $slots.header }">
       <slot />
     </ProseContent>
 

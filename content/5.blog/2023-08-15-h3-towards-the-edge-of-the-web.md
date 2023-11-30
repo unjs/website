@@ -15,7 +15,6 @@ packages:
   - h3
 publishedAt: 2023-08-15
 modifiedAt: 2023-08-15
-layout: blog-post
 ---
 
 > [H3](/packages/h3) is a versatile H(TTP) framework written in TypeScript that powers both [Nitro](https://nitro.unjs.io/) and [Nuxt](https://nuxt.com/) today.
@@ -116,7 +115,7 @@ H3 now supports defining event types using new generic type support.
 When you define types, request utilities will be aware of the event input types. This enhancenment also allows us to enhance type safety for `$fetch` handlers in upstream frameworks like [Nitro](https://nitro.unjs.io/) and [Nuxt](https://nuxt.com/).
 
 ```ts
-export default eventHandler<{ body: { name: string }, query: { id: string } }>(
+export default eventHandler<{ body: { name: string }; query: { id: string } }>(
   async (event) => {
     const query = getQuery(event) // Query is typed as { id: string }
     const body = await readBody(event) // Body is typed as { name: string }

@@ -2,13 +2,22 @@
 const { data } = await useAsyncData('content:design-kit-package-logos', () => {
   return queryContent('/packages/').only(['title']).find()
 })
+
+const toast = useToast()
+
+function showNotification(title: string) {
+  toast.add({
+    title: `Downloading ${title} logo`,
+    timeout: 3000,
+  })
+}
 </script>
 
 <template>
   <DesignKitGrid v-if="data">
     <DesignKitGridItem v-for="pkg in data" :key="pkg.title">
       <template #content>
-        <div class="bg-white h-full flex items-center justify-center p-4">
+        <div class=" dark:bg-gray-700/20 h-full flex items-center justify-center p-4">
           <img :alt="`Logo of ${pkg.title}`" :src="toPackageLogo(pkg.title)" class="h-full">
         </div>
       </template>
@@ -18,7 +27,7 @@ const { data } = await useAsyncData('content:design-kit-package-logos', () => {
             {{ pkg.title }}
           </p>
           <div class="font-normal flex gap-2">
-            <NuxtLink download :to="toPackageLogo(pkg.title)" target="_blank" class="hover:underline hover:underline-offset-2">
+            <NuxtLink download :to="toPackageLogo(pkg.title)" target="_blank" class="hover:underline hover:underline-offset-2" @click="showNotification(pkg.title)">
               svg
             </NuxtLink>
           </div>

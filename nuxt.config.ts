@@ -71,11 +71,12 @@ export default defineNuxtConfig({
     },
   },
   colorMode: {
-    preference: 'system',
+    preference: 'dark',
   },
   site: {
     defaultLocale: 'en',
     url: 'https://unjs.io',
+    separator: '·',
     name: 'UnJS',
     description: 'Agnostic Excellence: JavaScript Libraries, Tools, and Utilities, Crafted to Elevate Your Coding Journey.',
     identity: {

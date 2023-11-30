@@ -1,6 +1,17 @@
 import type { ParsedContent } from '@nuxt/content/dist/runtime/types'
 
-export interface Package extends ParsedContent {
+export interface Package extends Record<string, string | number | undefined> {
+  title: string
+  description: string
+  path: string
+  url: string
+  stars: number
+  monthlyDownloads: number
+  contributors: number
+  npm?: string
+}
+
+export interface PackageContent extends ParsedContent {
   title: string
   description: string
   icon?: string
@@ -13,7 +24,4 @@ export interface Package extends ParsedContent {
     name: string
   }
   documentation: string
-  layout: 'package'
 }
-
-export type PackageCard = Pick<Package, '_path' | 'title' | 'logo' | 'icon' | 'description' | 'documentation' | 'github'>
