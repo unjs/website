@@ -1,4 +1,9 @@
 <script lang="ts" setup>
+useSeoMeta({
+  ogImage: 'https://unjs.io/og/design-kit.jpg',
+  twitterImage: 'https://unjs.io/og/design-kit.jpg',
+})
+
 const { page, toc } = useContent()
 </script>
 

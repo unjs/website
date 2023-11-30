@@ -1,3 +1,13 @@
+<script lang="ts" setup>
+useSeoMeta({
+  ogImage: 'https://unjs.io/og/home.jpg',
+  ogImageWidth: 1440,
+  ogImageHeight: 810,
+  twitterSite: '@unjsio',
+  twitterImage: 'https://unjs.io/og/home.jpg',
+})
+</script>
+
 <template>
   <Html lang="en" dir="ltr" class="scroll-smooth">
     <Head>

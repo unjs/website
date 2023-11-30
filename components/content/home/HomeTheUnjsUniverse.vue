@@ -2,7 +2,7 @@
 import type { PuzzlePart } from '~/types/puzzle'
 
 defineProps<{
-  cta: { to: string; text: string }
+  cta: { to: string, text: string }
   carousel: PuzzlePart[]
 }>()
 </script>

@@ -2,6 +2,11 @@
 import { Combobox } from '@headlessui/vue'
 import type { SearchDisplayItem } from '~/types/search'
 
+useSeoMeta({
+  ogImage: 'https://unjs.io/og/search.jpg',
+  twitterImage: 'https://unjs.io/og/search.jpg',
+})
+
 const { page } = useContent()
 const route = useRoute()
 

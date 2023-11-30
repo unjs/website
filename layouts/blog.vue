@@ -1,6 +1,11 @@
 <script lang="ts" setup>
 import type { Author, BlogPostCard } from '~/types/blog'
 
+useSeoMeta({
+  ogImage: 'https://unjs.io/og/blog.jpg',
+  twitterImage: 'https://unjs.io/og/blog.jpg',
+})
+
 const { page } = useContent()
 
 const { data: blog } = await useAsyncData('blog', () => queryContent('/blog/').only(['_path', 'title', 'description', 'publishedAt', 'authors', 'packages']).sort({ publishedAt: -1 }).find() as Promise<BlogPostCard[]>)

@@ -20,7 +20,7 @@ However, all packages are lowercase, like `unbuild`, `ofetch`, `nitro`, etc.
 
 The UnJS logo is a combination of these two elements:
 
-- Two letters, `u` and `u`, the Un part of UnJS, but lowercase on the logo
+- Two letters, `u` and `n`, the Un part of UnJS, but lowercase on the logo
 - The logo of JavaScript with the iconic yellow color, the JS part of UnJS
 
 Note that the logo, like repos, is lowercase.
@@ -31,6 +31,10 @@ The logo can be used on a white background or a black background.
 ---
 logo:
   - name: Black
+    src:
+      svg: /assets/images/design-kit/unjs-logo-black.svg
+      png: /assets/images/design-kit/unjs-logo-black.png
+  - name: White # Usable on both white and black backgrounds
     src:
       svg: /assets/images/design-kit/unjs-logo-black.svg
       png: /assets/images/design-kit/unjs-logo-black.png
@@ -57,4 +61,10 @@ colors:
 
 UnJS uses the [Nunito](https://fonts.google.com/specimen/Nunito) font for its rounded and friendly look. This reminds us of the ambition of unifying the JavaScript ecosystem around a common vision and the agnostic nature of UnJS.
 
-::design-kit-typography{.not-prose .mt-8}
+:design-kit-typography{.not-prose .mt-8}
+
+## Package Logos
+
+Each package has its own logo. For most of them, the logo is an emoji from the [Noto collection](https://icones.js.org/collection/noto) that try to represent the package purpose.
+
+:design-kit-package-logos{.not-prose .mt-8}
