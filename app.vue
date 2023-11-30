@@ -3,6 +3,7 @@ useSeoMeta({
   ogImage: 'https://unjs.io/og/home.jpg',
   ogImageWidth: 1440,
   ogImageHeight: 810,
+  twitterSite: '@unjsio',
   twitterImage: 'https://unjs.io/og/home.jpg',
 })
 </script>
