@@ -59,10 +59,7 @@ export default defineNuxtConfig({
     },
   },
   content: {
-    documentDriven: {
-      navigation: false,
-      surround: false,
-    },
+    documentDriven: false,
     navigation: {
       fields: ['icon'],
     },
