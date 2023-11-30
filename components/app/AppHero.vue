@@ -25,6 +25,6 @@ defineProps<{
       <slot name="right" />
     </div>
 
-    <img src="/assets/images/blog/ellipse.svg" alt="A yellow ellipse to decorate the header" aria-hidden="true" class="absolute right-[-120px] top-[-130px]">
+    <img src="/assets/header/ellipse.svg" alt="A yellow ellipse to decorate the header" aria-hidden="true" class="absolute right-[-120px] top-[-130px]">
   </section>
 </template>
