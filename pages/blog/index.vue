@@ -53,7 +53,9 @@ const orderByOptions: OrderByOption[] = [
     label: 'Published at',
   },
 ]
-const { order, orderBy, sort } = useSort<BlogPostCard>(-1, 'publishedAt')
+const defaultOrder = -1
+const defaultOrderBy = 'publishedAt'
+const { order, orderBy, sort } = useSort<BlogPostCard>(defaultOrder, defaultOrderBy)
 
 const { search, searchResults } = useSimpleSearch<BlogPostCard>(blog)
 
@@ -75,6 +77,14 @@ const filtered = computed(() => {
 })
 
 const results = sort(filtered)
+
+function resetFilter() {
+  search.value = ''
+  selectedAuthors.value = []
+  selectedPackages.value = []
+  order.value = defaultOrder
+  orderBy.value = defaultOrderBy
+}
 </script>
 
 <template>
@@ -97,7 +107,7 @@ const results = sort(filtered)
         List of blog posts
       </h2>
 
-      <ListTopBar v-model:search="search" v-model:order="order" v-model:order-by="orderBy" search-placeholder="Search an article" :order-by-options="orderByOptions">
+      <ListTopBar v-model:search="search" v-model:order="order" v-model:order-by="orderBy" search-placeholder="Search an article" :order-by-options="orderByOptions" @reset="resetFilter">
         <template #right>
           <USelectMenu
             v-model="selectedAuthors"
