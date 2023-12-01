@@ -27,7 +27,7 @@ useSeoMeta({
   ogType: 'website',
   twitterCard: 'summary_large_image',
   twitterSite: '@unjsio',
-  twitterImage: joinURL('/og/home.jpg'),
+  twitterImage: joinURL(site.url, '/og/home.jpg'),
 })
 </script>
 
