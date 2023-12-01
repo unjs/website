@@ -5,7 +5,7 @@ defineProps<{
   path: string
   title: string
   description: string
-  publishedAt: Date
+  publishedAt: string
   authors: Author[]
 }>()
 </script>

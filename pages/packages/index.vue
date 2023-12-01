@@ -97,16 +97,21 @@ const results = sort(searchResults)
 
       <ListTopBar v-model:search="search" v-model:order="order" v-model:order-by="orderBy" search-placeholder="Search a package" :order-by-options="orderByOptions" />
 
-      <ListGrid v-slot="{ item }" class="mt-8" :items="results" items-not-found="No packages found">
-        <PackageCard
-          v-if="item.title && item.path"
-          :title="item.title"
-          :description="item.description"
-          :path="item.path"
-          :stars="item.stars"
-          :monthly-downloads="item.monthlyDownloads"
-          :contributors="item.contributors"
-        />
+      <ListGrid class="mt-8">
+        <ListGridItem v-for="item in results" :key="item._path">
+          <PackageCard
+            v-if="item.title && item.path"
+            :title="item.title"
+            :description="item.description"
+            :path="item.path"
+            :stars="item.stars"
+            :monthly-downloads="item.monthlyDownloads"
+            :contributors="item.contributors"
+          />
+        </ListGridItem>
+        <ListGridEmpty v-if="results && results.length === 0">
+          No packages found
+        </ListGridEmpty>
       </ListGrid>
     </section>
   </Main>

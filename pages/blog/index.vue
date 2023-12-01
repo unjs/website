@@ -138,14 +138,19 @@ const results = sort(filtered)
         </template>
       </ListTopBar>
 
-      <ListGrid v-slot="{ item }" class="mt-8" :items="results" items-not-found="No articles found">
-        <BlogCard
-          :path="item._path!"
-          :title="item.title"
-          :description="item.description"
-          :published-at="item.publishedAt"
-          :authors="item.authors"
-        />
+      <ListGrid class="mt-8">
+        <ListGridItem v-for="item in results" :key="item._path">
+          <BlogCard
+            :path="item._path!"
+            :title="item.title"
+            :description="item.description"
+            :published-at="item.publishedAt"
+            :authors="item.authors"
+          />
+        </ListGridItem>
+        <ListGridEmpty v-if="results && results.length === 0">
+          No articles found
+        </ListGridEmpty>
       </ListGrid>
     </section>
   </Main>

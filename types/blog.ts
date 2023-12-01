@@ -17,7 +17,7 @@ export interface BlogPost extends ParsedContent {
   authors: Author[]
   categories: string[]
   packages: string[]
-  publishedAt: Date
+  publishedAt: string
   modifiedAt: Date
 }
 
