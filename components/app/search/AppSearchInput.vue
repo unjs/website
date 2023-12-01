@@ -31,15 +31,15 @@ function selectFirstOption() {
 </script>
 
 <template>
-  <ComboboxLabel for="search" class="h-12 px-4 md:py-2 flex items-center gap-4 ring-1 dark:ring-gray-700 dark:bg-gray-700/40 dark:hover:bg-gray-700/50 rounded-lg transition ease-in">
-    <span class="i-heroicons-magnifying-glass-20-solid w-5 h-5 block text-zinc-400" />
+  <ComboboxLabel for="search" class="h-12 px-4 md:py-2 flex items-center gap-4 ring-1 ring-gray-300 bg-gray-300/20 hover:bg-gray-300/40 dark:ring-gray-700 dark:bg-gray-700/40 dark:hover:bg-gray-700/50 rounded-lg transition ease-in">
+    <span class="i-heroicons-magnifying-glass-20-solid w-5 h-5 block text-gray-500 dark:text-gray-400" />
     <ComboboxInput
       id="search"
       ref="comboboxInput"
       type="text"
       name="search"
       placeholder="Search..."
-      class="bg-transparent placeholder:dark:text-zinc-400 dark:text-gray-50 grow focus:outline-none"
+      class="bg-transparent placeholder:text-gray-500 placeholder:dark:text-gray-400 text-gray-950 dark:text-gray-50 grow focus:outline-none"
       autocomplete="off"
       :value="query"
       @change="onChange($event.target.value)"

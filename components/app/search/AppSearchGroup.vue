@@ -24,7 +24,7 @@ function isLastChildren(children: SearchDisplayItem[] | null, index: number) {
 </script>
 
 <template>
-  <section class="p-4 dark:bg-gray-700/20 ring-1 dark:ring-gray-700 rounded-lg">
+  <section class="p-4 bg-gray-300/20 ring-gray-300 dark:bg-gray-700/20 ring-1 dark:ring-gray-700 rounded-lg">
     <h2 class="dark:text-gray-400 capitalize font-bold mb-2">
       {{ name }}
     </h2>

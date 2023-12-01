@@ -23,7 +23,7 @@ function showNotification() {
   <DesignKitGrid>
     <DesignKitGridItem v-for="item in logo" :key="item.name">
       <template #content>
-        <div class=" dark:bg-gray-700/20 h-full flex items-center justify-center p-4">
+        <div class="bg-gray-300/20 dark:bg-gray-700/20 h-full flex items-center justify-center p-4">
           <img :src="item.src.svg" :alt="`${item.name} logo`" class="h-full">
         </div>
       </template>

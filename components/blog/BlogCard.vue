@@ -11,7 +11,7 @@ defineProps<{
 </script>
 
 <template>
-  <UCard as="article" :ui="{ base: 'h-full relative', background: 'dark:bg-gray-700/40 hover:dark:bg-gray-700/60', divide: '', shadow: 'shadow-none hover:shadow-lg ', ring: 'dark:highlight-white/10', rounded: 'rounded-lg', header: { base: 'flex gap-3 items-center', padding: 'py-0 pt-4 sm:px-4 sm:pt-4' }, body: { padding: 'p-4 sm:p-4' }, footer: { padding: 'py-0 pb-4 sm:px-4 sm:pb-4' } }">
+  <UCard as="article" :ui="{ base: 'h-full relative', background: 'bg-gray-300/20 hover:bg-gray-300/40 dark:bg-gray-700/40 hover:dark:bg-gray-700/60', divide: '', shadow: 'shadow-none hover:dark:shadow-lg ', ring: 'dark:highlight-white/10', rounded: 'rounded-lg', header: { base: 'flex gap-3 items-center', padding: 'py-0 pt-4 sm:px-4 sm:pt-4' }, body: { padding: 'p-4 sm:p-4' }, footer: { padding: 'py-0 pb-4 sm:px-4 sm:pb-4' } }">
     <template #header>
       <h3 class="text-xl font-semibold dark:text-gray-50">
         <NuxtLink :to="path" class="absolute inset-0" />

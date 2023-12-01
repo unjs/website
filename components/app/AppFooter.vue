@@ -6,17 +6,17 @@ const toggleTheme = function () {
   colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
 }
 
-const uiButton = { color: { gray: { ghost: 'dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-primary/40' } } }
+const uiButton = { color: { gray: { ghost: 'text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 hover:bg-primary/60 dark:hover:bg-primary/40' } } }
 </script>
 
 <template>
-  <footer class="px-6 pt-20 pb-20 md:pb-30 flex flex-col gap-12 md:gap-20 rounded-lg ring-1 dark:ring-gray-700 dark:bg-gray-700/20">
+  <footer class="px-6 pt-20 pb-20 md:pb-30 flex flex-col gap-12 md:gap-20 rounded-lg ring-1 ring-gray-300 bg-gray-300/20 dark:ring-gray-700 dark:bg-gray-700/20">
     <div class="grid md:grid-cols-2 gap-y-6 gap-x-12 md:gap-x-25">
       <div class="grow flex flex-col gap-6 max-w-sm">
         <NuxtLink to="/" class="block">
           <AppLogo />
         </NuxtLink>
-        <p class="max-w-lg text-sm md:text-base dark:text-zinc-400 italic">
+        <p class="max-w-lg text-sm md:text-base text-gray-500 dark:text-gray-400 italic">
           {{ website.footer.quote }}
         </p>
       </div>
@@ -27,10 +27,10 @@ const uiButton = { color: { gray: { ghost: 'dark:text-gray-400 dark:hover:text-g
       </ul>
       <nav class="mt-6 md:mt-0 md:justify-self-end md:col-start-2 md:row-start-1 grid grid-cols-2 md:grid-cols-3 gap-x-2 gap-y-6 md:gap-10 text-[1.125rem]">
         <div v-for="list in website.footer.menu" :key="list.title" class="flex flex-col gap-4">
-          <p class="font-bold dark:text-gray-50">
+          <p class="font-bold text-gray-950 dark:text-gray-50">
             {{ list.title }}
           </p>
-          <ul class="flex flex-col gap-3 dark:text-gray-400">
+          <ul class="flex flex-col gap-3 text-gray-500 dark:text-gray-400">
             <li v-for="item in list.items" :key="item.url">
               <NuxtLink :to="item.url" :rel="item.rel" :target="item.target" class="hover:underline underline-offset-8">
                 {{ item.title }}
@@ -50,6 +50,6 @@ const uiButton = { color: { gray: { ghost: 'dark:text-gray-400 dark:hover:text-g
         </ClientOnly>
       </div>
     </div>
-    <AppFooterLicense class="text-sm dark:text-zinc-400 text-center" />
+    <AppFooterLicense class="text-sm dark:text-gray-400 text-center" />
   </footer>
 </template>

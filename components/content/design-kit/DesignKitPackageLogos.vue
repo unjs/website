@@ -17,7 +17,7 @@ function showNotification(title: string) {
   <DesignKitGrid v-if="data">
     <DesignKitGridItem v-for="pkg in data" :key="pkg.title">
       <template #content>
-        <div class=" dark:bg-gray-700/20 h-full flex items-center justify-center p-4">
+        <div class="bg-gray-300/20 dark:bg-gray-700/20 h-full flex items-center justify-center p-4">
           <img :alt="`Logo of ${pkg.title}`" :src="toPackageLogo(pkg.title)" class="h-full">
         </div>
       </template>

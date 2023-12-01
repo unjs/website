@@ -76,9 +76,9 @@ function resetFilter() {
     <template #header>
       <PageHeader :title="page.title" :description="page.description">
         <template #right>
-          <div class="flex justify-end gap-12 text-gray-400 font-medium text-xl">
+          <div class="flex justify-end gap-12 text-gray-500 dark:text-gray-400 font-medium text-xl">
             <div class="flex flex-col gap-2">
-              <span class="text-gray-50 text-8xl font-extrabold">
+              <span class="text-gray-950 dark:text-gray-50 text-8xl font-extrabold">
                 {{ packages!.length }}
               </span>
               <span>
@@ -86,7 +86,7 @@ function resetFilter() {
               </span>
             </div>
             <div class="flex flex-col gap-2">
-              <span class="text-gray-50 text-8xl font-extrabold">
+              <span class="text-gray-950 dark:text-gray-50 text-8xl font-extrabold">
                 {{ formatNumber(monthlyDownloads, 0) }}
               </span>
               <span>

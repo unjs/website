@@ -6,14 +6,14 @@ export default defineAppConfig({
       base: 'transition ease-in',
       color: {
         gray: {
-          solid: 'dark:bg-gray-700/40 dark:hover:bg-gray-700/50',
+          solid: 'shadow-none bg-gray-300/20 hover:bg-gray-300/40 dark:bg-gray-700/40 dark:hover:bg-gray-700/50',
         },
       },
     },
     select: {
       base: 'transition ease-in',
       color: {
-        gray: { outline: 'dark:bg-gray-700/40 dark:hover:bg-gray-700/50' },
+        gray: { outline: 'shadow-none bg-gray-300/20 hover:bg-gray-300/40 dark:bg-gray-700/40 dark:hover:bg-gray-700/50' },
       },
     },
     buttonGroup: {
@@ -27,7 +27,7 @@ export default defineAppConfig({
       base: 'transition ease-in',
       color: {
         gray: {
-          outline: 'dark:bg-gray-700/40 dark:hover:bg-gray-700/50',
+          outline: 'shadow-none bg-gray-300/20 hover:bg-gray-300/40 dark:bg-gray-700/40 dark:hover:bg-gray-700/50',
         },
       },
     },

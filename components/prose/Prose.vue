@@ -14,7 +14,7 @@ provide('toc', props.toc)
     <div class="row-start-1">
       <slot name="header">
         <header v-if="title">
-          <h1 class="text-zinc-900 text-2xl md:text-3xl font-bold tracking-wide">
+          <h1 class="text-gray-950 dark:text-gray-50 text-2xl md:text-3xl font-bold tracking-wide">
             {{ title }}
           </h1>
         </header>

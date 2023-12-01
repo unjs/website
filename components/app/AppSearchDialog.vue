@@ -54,7 +54,7 @@ function navigate() {
         leave-from="opacity-100"
         leave-to="opacity-0"
       >
-        <div class="fixed inset-0 bg-gray-900/70 backdrop-blur-sm" aria-hidden="true" />
+        <div class="fixed inset-0 bg-gray-100/70 dark:bg-gray-900/70 backdrop-blur-sm" aria-hidden="true" />
       </TransitionChild>
 
       <div class="fixed inset-0">
@@ -73,7 +73,7 @@ function navigate() {
                 <div class="relative">
                   <AppSearchInput v-model:query="query" class="w-full" :search-results="results" @validate="navigate" />
 
-                  <button class="absolute right-4 top-0 bottom-0 flex items-center dark:text-gray-400" type="button" @click="$emit('update:open', false)">
+                  <button class="absolute right-4 top-0 bottom-0 flex items-center text-gray-500 dark:text-gray-400" type="button" @click="$emit('update:open', false)">
                     <span class="i-heroicons-x-mark-20-solid w-5 h-5 block" aria-hidden="true" />
                     <span class="sr-only">
                       Close

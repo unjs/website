@@ -34,7 +34,8 @@ defineShortcuts({
 
 const { metaSymbol } = useShortcuts()
 
-const uiButton = { font: 'font-semibold', color: { gray: { ghost: 'dark:text-gray-50 dark:hover:bg-primary/40' } } }
+const uiButton = { font: 'font-semibold', color: { gray: { ghost: 'text-gray-950 hover:bg-primary/60 dark:text-gray-50 dark:hover:bg-primary/40' } } }
+const activeClassButton = 'bg-primary bg-opacity-40 dark:bg-opacity-30'
 
 function toDesignKit() {
   navigateTo('/design-kit?utm_source=unjs.io&utm_medium=header-icon')
@@ -42,7 +43,7 @@ function toDesignKit() {
 </script>
 
 <template>
-  <header class="h-[3.75rem] px-3 md:px-6 py-3 grid grid-cols-2 lg:grid-cols-3 rounded-lg ring-1 dark:ring-gray-700 dark:bg-gray-700/20">
+  <header class="h-[3.75rem] px-3 md:px-6 py-3 grid grid-cols-2 lg:grid-cols-3 rounded-lg ring-1 ring-gray-300 bg-gray-300/20  dark:ring-gray-700 dark:bg-gray-700/20">
     <div class="flex items-center">
       <NuxtLink to="/?utm_source=unjs.io&utm_medium=header-icon" @click.right.prevent="toDesignKit()">
         <AppLogo />
@@ -53,7 +54,7 @@ function toDesignKit() {
       <ol class="text-[1.125rem] flex gap-4 leading-5">
         <li v-for="item in navigation" :key="item._path">
           <UPopover v-if="item.children" mode="hover" :ui="{ width: 'max-w-[18rem]' }">
-            <UButton size="md" variant="ghost" color="gray" :to="item._path" :icon="item.icon" :ui="{ size: { md: 'text-base' }, ...uiButton }" active-class="bg-primary bg-opacity-30">
+            <UButton size="md" variant="ghost" color="gray" :to="item._path" :icon="item.icon" :ui="{ size: { md: 'text-base' }, ...uiButton }" :active-class="activeClassButton">
               {{ item.title }}
             </UButton>
 
@@ -72,7 +73,7 @@ function toDesignKit() {
               </ol>
             </template>
           </UPopover>
-          <UButton v-else size="md" variant="ghost" color="gray" :to="item._path" :icon="item.icon" :ui="{ size: { md: 'text-base' }, ...uiButton }" active-class="bg-primary bg-opacity-30">
+          <UButton v-else size="md" variant="ghost" color="gray" :to="item._path" :icon="item.icon" :ui="{ size: { md: 'text-base' }, ...uiButton }" :active-class="activeClassButton">
             {{ item.title }}
           </UButton>
         </li>

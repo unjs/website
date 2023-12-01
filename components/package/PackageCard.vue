@@ -10,10 +10,10 @@ defineProps<{
 </script>
 
 <template>
-  <UCard as="article" :ui="{ base: 'h-full relative flex flex-col', background: 'dark:bg-gray-700/40 hover:dark:bg-gray-700/60', divide: '', shadow: 'shadow-none hover:shadow-lg ', ring: 'dark:highlight-white/10', rounded: 'rounded-lg', header: { base: 'flex gap-3 items-center', padding: 'py-0 pt-4 sm:px-4 sm:pt-4' }, body: { base: 'grow', padding: 'p-4 sm:p-4' }, footer: { padding: 'py-0 pb-4 sm:px-4 sm:pb-4' } }">
+  <UCard as="article" :ui="{ base: 'h-full relative flex flex-col', background: 'bg-gray-300/20 hover:bg-gray-300/40 dark:bg-gray-700/40 hover:dark:bg-gray-700/60', divide: '', shadow: 'shadow-none hover:dark:shadow-lg ', ring: 'dark:highlight-white/10', rounded: 'rounded-lg', header: { base: 'flex gap-3 items-center', padding: 'py-0 pt-4 sm:px-4 sm:pt-4' }, body: { base: 'grow', padding: 'p-4 sm:p-4' }, footer: { padding: 'py-0 pb-4 sm:px-4 sm:pb-4' } }">
     <template #header>
       <img :src="toPackageLogo(title!)" :alt="`Logo of ${title}`" w-12 h-12>
-      <h3 class="dark:text-gray-50 text-xl font-semibold">
+      <h3 class="text-gray-950 dark:text-gray-50 text-xl font-semibold">
         <NuxtLink :to="path" class="absolute inset-0" />
         {{ title }}
       </h3>

@@ -20,10 +20,10 @@ const { data } = await useAsyncData(' blog:latest', () => queryContent('/blog').
       <HomeHeroEyeBrow v-if="news" :prefix="news.prefix" :title="news.title" :path="news.path" />
       <HomeHeroEyeBrow v-else-if="data" prefix="What's new" :title="data.title" :path="data._path" />
       <div class="flex flex-col gap-2">
-        <h1 class="dark:text-gray-50 text-[2rem] md:text-4xl lg:text-5xl font-extrabold tracking-wide leading-normal lg:leading-normal">
+        <h1 class="text-gray-950 dark:text-gray-50 text-[2rem] md:text-4xl lg:text-5xl font-extrabold tracking-wide leading-normal lg:leading-normal">
           <ContentSlot :use="$slots.title" unwrap="p" />
         </h1>
-        <p class="dark:text-gray-400 text-2xl md:text-[1.75rem] leading-normal md:leading-normal">
+        <p class="text-gray-500 dark:text-gray-400 text-2xl md:text-[1.75rem] leading-normal md:leading-normal">
           <ContentSlot :use="$slots.subtitle" unwrap="p" />
         </p>
       </div>
