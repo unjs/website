@@ -23,7 +23,7 @@ export default defineNuxtConfig({
     '~/assets/app.css',
   ],
   ui: {
-    icons: ['heroicons', 'simple-icons', 'vscode-icons'],
+    icons: ['heroicons', 'simple-icons', 'vscode-icons', 'carbon'],
   },
   nitro: {
     static: true,
@@ -60,9 +60,6 @@ export default defineNuxtConfig({
   },
   content: {
     documentDriven: false,
-    navigation: {
-      fields: ['icon'],
-    },
     highlight: {
       theme: {
         default: 'github-light',

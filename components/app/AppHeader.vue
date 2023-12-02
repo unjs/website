@@ -73,7 +73,7 @@ function toDesignKit() {
               </ol>
             </template>
           </UPopover>
-          <UButton v-else size="md" variant="ghost" color="gray" :to="item._path" :icon="item.icon" :ui="{ size: { md: 'text-base' }, ...uiButton }" :active-class="activeClassButton">
+          <UButton v-else size="md" variant="ghost" color="gray" :to="item._path" :ui="{ size: { md: 'text-base' }, ...uiButton }" :active-class="activeClassButton">
             {{ item.title }}
           </UButton>
         </li>
@@ -82,15 +82,11 @@ function toDesignKit() {
 
     <div class="flex justify-end items-center">
       <UTooltip text="Open Search" :shortcuts="[metaSymbol, 'K']">
-        <UButton size="md" icon="i-heroicons-magnifying-glass-solid" color="gray" variant="ghost" :ui="{ size: { md: 'text-base' }, ...uiButton }" @click="openSearch = true">
-          <span class="hidden lg:inline">
-            Search
-          </span>
-        </UButton>
+        <UButton size="md" icon="i-carbon-search" color="gray" variant="ghost" :ui="{ size: { md: 'text-base' }, ...uiButton }" aria-label="Open Search" square @click="openSearch = true" />
       </UTooltip>
 
       <UTooltip class="ml-1 lg:hidden" text="Open Navigation">
-        <UButton square size="md" variant="ghost" color="gray" icon="i-heroicons-bars-3-bottom-right" :ui="uiButton" aria-label="Search content" @click="openNavigation = true" />
+        <UButton square size="md" variant="ghost" color="gray" icon="i-heroicons-bars-3-bottom-right" :ui="uiButton" aria-label="Open Navigation" @click="openNavigation = true" />
       </UTooltip>
 
       <UTooltip class="ml-1 hidden lg:flex" text="GitHub Stars">
