@@ -82,7 +82,7 @@ function toDesignKit() {
 
     <div class="flex justify-end items-center">
       <UTooltip text="Open Search" :shortcuts="[metaSymbol, 'K']">
-        <UButton size="md" icon="i-carbon-search" color="gray" variant="ghost" :ui="{ size: { md: 'text-base' }, ...uiButton }" aria-label="Open Search" square @click="openSearch = true" />
+        <UButton size="md" icon="i-heroicons-magnifying-glass" color="gray" variant="ghost" :ui="{ size: { md: 'text-base' }, ...uiButton }" aria-label="Open Search" square @click="openSearch = true" />
       </UTooltip>
 
       <UTooltip class="ml-1 lg:hidden" text="Open Navigation">

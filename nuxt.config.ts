@@ -23,7 +23,7 @@ export default defineNuxtConfig({
     '~/assets/app.css',
   ],
   ui: {
-    icons: ['heroicons', 'simple-icons', 'vscode-icons', 'carbon'],
+    icons: ['heroicons', 'simple-icons', 'vscode-icons'],
   },
   nitro: {
     static: true,

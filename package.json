@@ -22,7 +22,6 @@
   "devDependencies": {
     "@antfu/eslint-config": "2.0.0",
     "@headlessui/vue": "^1.7.16",
-    "@iconify-json/carbon": "^1.1.24",
     "@iconify-json/heroicons": "^1.1.13",
     "@iconify-json/logos": "^1.1.37",
     "@iconify-json/noto": "^1.1.12",
