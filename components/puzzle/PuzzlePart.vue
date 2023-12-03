@@ -13,8 +13,8 @@ const align = computed(() => props.part.align)
   <div class="puzzle-part flex transition-transform ease-in-out duration-200">
     <template v-if="part.name">
       <AppColorModeImage
-        :light="`/assets/puzzle/${part.name}.svg`"
-        :dark="`/assets/puzzle/dark/${part.name}.svg`"
+        :light="toPackagePuzzlePart(part.name)"
+        :dark="toPackagePuzzlePart(part.name, true)"
       />
     </template>
     <div v-else />

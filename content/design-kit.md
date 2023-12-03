@@ -67,3 +67,9 @@ UnJS uses the [Nunito](https://fonts.google.com/specimen/Nunito) font for its ro
 Each package has its own logo. For most of them, the logo is an emoji from the [Noto collection](https://icones.js.org/collection/noto) that try to represent the package purpose.
 
 :design-kit-package-logos{.not-prose .mt-8}
+
+## Package Puzzle Parts
+
+Each package has its own puzzle part. The puzzle part is an important element of UnJS because it represents the idea that all packages can be used together to form a bigger picture, the UnJS ecosystem. In the meantime, each package can be used individually to solve a specific problem.
+
+:design-kit-package-puzzle-parts{.not-prose .mt-8}
