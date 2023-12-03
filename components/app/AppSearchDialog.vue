@@ -80,8 +80,8 @@ const isXs = breakpoints.smaller('mobile')
 </script>
 
 <template>
-  <UModal :model-value="open" :overlay="!isXs" :transition="!isXs" :ui="{ height: 'h-screen sm:h-auto', width: 'sm:max-w-3xl', padding: 'p-0 sm:p-4', rounded: 'rounded-none sm:rounded-lg' }" @update:model-value="close">
-    <div class="min-h-0 flex-1 sm:h-[28rem] flex flex-col">
+  <UModal :model-value="open" :overlay="!isXs" :transition="!isXs" :ui="{ height: 'h-screen sm:h-[28rem]', width: 'sm:max-w-3xl', padding: 'p-0 sm:p-4', rounded: 'rounded-none sm:rounded-lg' }" @update:model-value="close">
+    <div class="min-h-0 flex-1 flex flex-col">
       <Combobox @update:model-value="onSelection($event)">
         <div class="relative shrink-0 h-16 sm:h-auto border-b border-b-gray-200 dark:border-b-gray-800">
           <ComboboxLabel class="h-full flex items-center gap-2 px-4 sm:py-4">
