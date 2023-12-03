@@ -37,6 +37,12 @@ const options = computed(() => {
   return null
 })
 
+watch(options, (value) => {
+  if (!query.value)
+    return
+  useTrackEvent('Search', { props: { query: `${query.value} - ${value?.length ?? 0} results` } })
+})
+
 function isLastChildren(children: SearchDisplayItem[] | null, index: number) {
   if (!children)
     return false
