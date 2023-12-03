@@ -44,13 +44,17 @@ useSeoMeta({
       <SchemaOrgWebSite :potential-action="[defineSearchAction({ target: '/search?q={search_term_string}' })]" />
       <RobotMeta />
     </Head>
-    <Body class="px-4 py-4 md:py-8 font-sans dark:bg-gray-900">
+    <Body class="font-sans dark:bg-gray-900">
       <NuxtLoadingIndicator color="#ECDC5A" />
 
-      <div class="container mx-auto xl:max-w-7xl ">
-        <AppHeader />
+      <div class="border-b border-gray-100 dark:border-gray-800">
+        <AppHeader class="px-4 container mx-auto xl:max-w-7xl" />
+      </div>
+      <div class="px-4 container mx-auto xl:max-w-7xl">
         <NuxtPage />
-        <AppFooter />
+      </div>
+      <div class="border-t border-gray-100 dark:border-gray-800">
+        <AppFooter class="px-4 container mx-auto xl:max-w-7xl" />
       </div>
 
       <UNotifications />

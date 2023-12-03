@@ -22,7 +22,7 @@ const transforms = [
 
 <template>
   <div class="group relative flex justify-end w-[21rem] h-[21rem]">
-    <div class="flex flex-col -space-y-9 transition-filter ease-in duration-200 drop-shadow-md group-hover:drop-shadow-xl pointer-events-none">
+    <div class="flex flex-col -space-y-9 transition-filter ease-in duration-200 drop-shadow-sm group-hover:drop-shadow pointer-events-none">
       <div v-for="(row, i) in rows" :key="i" class="flex flex-row -space-x-9">
         <PuzzlePart v-for="(part, j) in row" :key="part.name" :part="part" :class="[`${transforms[i][j]} group-hover:translate-x-0 group-hover:translate-y-0 group-hover:rotate-0`, { 'opacity-0 lg:opacity-100': !j }]" class="shrink-0" />
       </div>
