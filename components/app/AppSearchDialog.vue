@@ -77,8 +77,8 @@ function selectFirstOption() {
 </script>
 
 <template>
-  <UModal :model-value="open" :ui="{ height: 'h-screen sm:h-auto', width: 'sm:max-w-3xl', padding: 'p-0 sm:p-4', rounded: 'rounded-none sm:rounded-lg' }" @update:model-value="close">
-    <UCard :ui="{ base: 'sm:h-[28rem]', rounded: '', body: { base: 'h-full flex flex-col', padding: '' }, shadow: '', ring: '' }">
+  <UModal :model-value="open" :overlay="false" :transition="false" :ui="{ height: 'h-screen sm:h-auto', width: 'sm:max-w-3xl', padding: 'p-0 sm:p-4', rounded: 'rounded-none sm:rounded-lg' }" @update:model-value="close">
+    <div class="min-h-0 flex-1 sm-h-[28rem] flex flex-col">
       <Combobox @update:model-value="onSelection($event)">
         <div class="relative shrink-0 h-16 sm:h-auto border-b border-b-gray-200 dark:border-b-gray-800">
           <ComboboxLabel class="h-full flex items-center gap-2 px-4 sm:py-4">
@@ -116,7 +116,7 @@ function selectFirstOption() {
                     :value="option"
                     @click="close"
                   >
-                    <AppSearchItem
+                    <SearchItem
                       :active="active"
                       :item="option"
                     />
@@ -128,7 +128,7 @@ function selectFirstOption() {
                     :value="childOption"
                     @click="close"
                   >
-                    <AppSearchItem
+                    <SearchItem
                       :active="active"
                       :item="childOption"
                       child
@@ -150,6 +150,6 @@ function selectFirstOption() {
           </div>
         </ComboboxOptions>
       </Combobox>
-    </UCard>
+    </div>
   </UModal>
 </template>
