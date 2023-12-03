@@ -36,10 +36,30 @@ const options = computed(() => {
   return null
 })
 
+function getLength(data: SearchDisplayItem): number {
+  let value = 1
+  if (data.children && data.children.length) {
+    for (const item of data.children)
+      value += getLength(item)
+  }
+
+  return value
+}
+
 watch(options, (value) => {
   if (!query.value)
     return
-  useTrackEvent('Search', { props: { query: `${query.value} - ${value?.length ?? 0} results` } })
+
+  let length = 0
+
+  if (value) {
+    for (const key in value) {
+      for (const item of value[key])
+        length += getLength(item)
+    }
+  }
+
+  useTrackEvent('Search', { props: { query: `${query.value} - ${length} results` } })
 })
 
 function isLastChildren(children: SearchDisplayItem[] | null, index: number) {
