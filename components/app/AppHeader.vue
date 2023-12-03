@@ -96,6 +96,8 @@ function toDesignKit() {
       </UTooltip>
     </div>
   </header>
-  <AppNavigationDialog v-if="navigation" v-model:open="openNavigation" :navigation="navigation" />
-  <AppSearchDialog v-model:open="openSearch" />
+  <ClientOnly>
+    <AppNavigationDialog v-if="navigation" v-model:open="openNavigation" :navigation="navigation" />
+    <AppSearchDialog v-model:open="openSearch" />
+  </ClientOnly>
 </template>

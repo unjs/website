@@ -1,101 +1,155 @@
 <script lang="ts" setup>
-import { Combobox, Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
-import AppSearchInput from './search/AppSearchInput.vue'
+import { Combobox, ComboboxButton, ComboboxInput, ComboboxLabel, ComboboxOption, ComboboxOptions } from '@headlessui/vue'
+import { UButton } from '#components'
 import type { SearchDisplayItem } from '~/types/search'
 
 defineProps<{
   open: boolean
 }>()
 
-const emit = defineEmits<{
+const emits = defineEmits<{
   'update:open': [boolean]
 }>()
 
 const selected = ref<SearchDisplayItem | null>(null)
+
 const query = ref('')
+const queryDebounced = ref('')
+watchDebounced(
+  query,
+  () => {
+    queryDebounced.value = query.value
+    selectFirstOption()
+  },
+  { debounce: 100, maxWait: 300 },
+)
 
-const queryDebounced = refDebounced(query, 100)
-const results = await useSearchResults(queryDebounced, { lazy: true, server: false }) // Options to avoid to add `/api/search.txt` to the payload
-
+const resultsOptions = await useSearchResults(queryDebounced, { lazy: true, server: false }) // Options to avoid to add `/api/search.txt` to the payload
 const defaultOptions = await useSearchDefaultResults()
+const options = computed(() => {
+  if (Object.keys(resultsOptions.value).length > 0)
+    return resultsOptions.value
+
+  if (!queryDebounced.value)
+    return defaultOptions.value
+
+  return null
+})
+
+function isLastChildren(children: SearchDisplayItem[] | null, index: number) {
+  if (!children)
+    return false
+
+  return index === children.length - 1
+}
+
+function onSelection(value: SearchDisplayItem | null) {
+  if (!value)
+    return
+
+  close()
+  navigateTo(value.id)
+}
 
 function close() {
-  emit('update:open', false)
+  emits('update:open', false)
   setTimeout(() => {
     query.value = ''
     selected.value = null
   }, 200)
 }
 
-function navigate() {
-  if (!selected.value)
-    return
+const comboboxInput = ref<ComponentPublicInstance<HTMLElement>>()
 
-  close()
-  navigateTo(selected.value.id)
+function resetQuery() {
+  query.value = ''
+  queryDebounced.value = ''
+  comboboxInput.value?.$el.focus()
+  selectFirstOption()
+}
+
+function selectFirstOption() {
+  setTimeout(() => {
+    // https://github.com/tailwindlabs/headlessui/blob/6fa6074cd5d3a96f78a2d965392aa44101f5eede/packages/%40headlessui-vue/src/components/combobox/combobox.ts#L804
+    comboboxInput.value?.$el.dispatchEvent(new KeyboardEvent('keydown', { key: 'PageUp' }))
+  }, 0)
 }
 </script>
 
 <template>
-  <!-- TODO: need to rework everything in search (rebuild it from the ground up) -->
-  <TransitionRoot
-    :show="open"
-    as="template"
-    appear
-  >
-    <Dialog as="div" class="relative z-50" @close="close">
-      <TransitionChild
-        appear
-        as="template"
-        enter="duration-200 ease-out"
-        enter-from="opacity-0"
-        enter-to="opacity-100"
-        leave="duration-200 ease-in"
-        leave-from="opacity-100"
-        leave-to="opacity-0"
-      >
-        <div class="fixed inset-0 bg-gray-100/70 dark:bg-gray-900/70 backdrop-blur-sm" aria-hidden="true" />
-      </TransitionChild>
-
-      <div class="fixed inset-0">
-        <div class="h-full w-full flex justify-center items-center">
-          <TransitionChild
-            as="template"
-            enter="duration-300 ease-out"
-            enter-from="opacity-0 scale-95"
-            enter-to="opacity-100 scale-100"
-            leave="duration-200 ease-in"
-            leave-from="opacity-100 scale-100"
-            leave-to="opacity-0 scale-95"
-          >
-            <DialogPanel class="h-[28rem] w-[calc(100%-2rem)] lg:w-full max-w-3xl fixed flex flex-col gap-6 drop-shadow-lg">
-              <Combobox v-model="selected">
-                <div class="relative">
-                  <AppSearchInput v-model:query="query" class="w-full" :search-results="results" @validate="navigate" />
-
-                  <button class="absolute right-4 top-0 bottom-0 flex items-center text-gray-500 dark:text-gray-400" type="button" @click="$emit('update:open', false)">
-                    <span class="i-heroicons-x-mark-20-solid w-5 h-5 block" aria-hidden="true" />
-                    <span class="sr-only">
-                      Close
-                    </span>
-                  </button>
-                </div>
-
-                <div class="overflow-y-hidden">
-                  <AppSearchResult
-                    class="gray-scrollbar static h-full overflow-y-scroll"
-                    static
-                    :search-results="results"
-                    :default-results="defaultOptions"
-                    :have-query="!!queryDebounced"
-                    @selected="close"
-                  />
-                </div>
-              </Combobox>
-            </DialogPanel>
-          </TransitionChild>
+  <UModal :model-value="open" :ui="{ height: 'h-screen sm:h-auto', width: 'sm:max-w-3xl', padding: 'p-0 sm:p-4', rounded: 'rounded-none sm:rounded-lg' }" @update:model-value="close">
+    <UCard :ui="{ base: 'sm:h-[28rem]', rounded: '', body: { base: 'h-full flex flex-col', padding: '' }, shadow: '', ring: '' }">
+      <Combobox @update:model-value="onSelection($event)">
+        <div class="relative shrink-0 h-16 sm:h-auto border-b border-b-gray-200 dark:border-b-gray-800">
+          <ComboboxLabel class="h-full flex items-center gap-2 px-4 sm:py-4">
+            <span class="i-heroicons-magnifying-glass w-5 h-5 text-gray-500 dark:text-gray-400" />
+            <ComboboxInput
+              ref="comboboxInput"
+              :value="query"
+              autofocus type="text"
+              name="search" placeholder="Search..."
+              class="grow bg-transparent focus-within:outline-none placeholder:text-gray-500 dark:placeholder:text-gray-400"
+              @change="query = $event.target.value"
+            />
+          </ComboboxLabel>
+          <ComboboxButton
+            :as="UButton"
+            icon="i-heroicons-x-mark"
+            color="gray"
+            variant="ghost"
+            square
+            size="xs"
+            class="absolute top-1/2 transform -translate-y-1/2 right-4"
+            @click="close"
+          />
         </div>
-      </div>
-    </Dialog>
-  </TransitionRoot>
+        <ComboboxOptions static class="grow  overflow-y-auto">
+          <template v-if="options">
+            <div class="divide-y divide-gray-200 dark:divide-gray-800">
+              <div v-for="(value, key) in options" :key="key" class="px-4 pb-4">
+                <h2 class="mt-2 pt-2 pb-1 sticky top-0 bg-white dark:bg-gray-900 w-full z-10 capitalize text-sm font-bold text-gray-500 dark:text-gray-400">
+                  {{ key }}
+                </h2>
+                <template v-for="option in value" :key="option.id">
+                  <ComboboxOption
+                    v-slot="{ active }"
+                    :value="option"
+                    @click="close"
+                  >
+                    <AppSearchItem
+                      :active="active"
+                      :item="option"
+                    />
+                  </ComboboxOption>
+                  <ComboboxOption
+                    v-for="(childOption, index) in option.children"
+                    :key="childOption.id"
+                    v-slot="{ active }"
+                    :value="childOption"
+                    @click="close"
+                  >
+                    <AppSearchItem
+                      :active="active"
+                      :item="childOption"
+                      child
+                      :last="isLastChildren(option.children, index)"
+                    />
+                  </ComboboxOption>
+                </template>
+              </div>
+            </div>
+          </template>
+          <div v-else class="w-full h-full flex flex-col gap-8 justify-center items-center">
+            <span class="text-gray-950 dark:text-gray-50">
+              No results found
+            </span>
+
+            <UButton color="gray" variant="ghost" icon="i-heroicons-arrow-path" @click="resetQuery">
+              Reset search
+            </UButton>
+          </div>
+        </ComboboxOptions>
+      </Combobox>
+    </UCard>
+  </UModal>
 </template>
