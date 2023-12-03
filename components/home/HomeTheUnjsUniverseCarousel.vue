@@ -26,7 +26,7 @@ const imageHeight = ref('auto')
             <AppColorModeImage
               :light="toPackagePuzzlePart(item.name)"
               :dark="toPackagePuzzlePart(item.name, true)"
-              class="drop-shadow-sm hover:drop-shadow-xl transition ease-in duration-150"
+              class="drop-shadow hover:drop-shadow-md transition ease-in duration-150"
             />
           </NuxtLink>
         </div>

@@ -27,9 +27,11 @@ const { data } = await useAsyncData(' blog:latest', () => queryContent('/blog').
           <ContentSlot :use="$slots.subtitle" unwrap="p" />
         </p>
       </div>
-      <UButton to="/packages?utm_source=unjs.io&utm_medium=home-hero" size="md" color="gray" icon="i-heroicons-chevron-right-20-solid" trailing>
-        Explore the Universe
-      </UButton>
+      <div class="lg:-ml-3.5">
+        <UButton to="/packages?utm_source=unjs.io&utm_medium=home-hero" size="xl" color="gray" variant="ghost" icon="i-heroicons-chevron-right-20-solid" trailing :ui="{ font: 'font-semibold' }">
+          Explore the Universe
+        </UButton>
+      </div>
     </div>
     <div class="puzzle shrink-0 relative transform -translate-x-1/2 left-1/2 lg:translate-x-0 lg:left-0 flex justify-center items-center">
       <Puzzle :parts="puzzle" :away="away" />
