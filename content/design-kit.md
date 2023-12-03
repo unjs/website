@@ -49,8 +49,8 @@ UnJS colors are based on the JavaScript logo colors with a yellow color as the m
 colors:
   - name: yellow
     hex: '#ECDC5A'
-  - name: black
-    hex: '#000000'
+  - name: deep black
+    hex: '#111827'
   - name: white
     hex: '#FFFFFF'
 ---
