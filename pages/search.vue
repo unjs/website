@@ -102,8 +102,8 @@ function selectFirstOption() {
 
 <template>
   <Main>
-    <Combobox @update:model-value="onSelection($event)">
-      <div class="relative shrink-0 h-16 sm:h-auto border-b border-b-gray-200 dark:border-b-gray-800">
+    <Combobox as="div" class="flex flex-col flex-1 min-h-0 divide-y divide-gray-100 dark:divide-gray-800" @update:model-value="onSelection($event)">
+      <div class="relative shrink-0 h-16 sm:h-auto">
         <ComboboxLabel class="h-full flex items-center gap-2 px-4 sm:py-4">
           <span class="i-heroicons-magnifying-glass w-5 h-5 text-gray-500 dark:text-gray-400" />
           <ComboboxInput
@@ -116,38 +116,36 @@ function selectFirstOption() {
           />
         </ComboboxLabel>
       </div>
-      <ComboboxOptions static class="grow  overflow-y-auto">
+      <ComboboxOptions static class="divide-y divide-gray-200 dark:divide-gray-800" as="ul">
         <template v-if="options">
-          <div class="divide-y divide-gray-200 dark:divide-gray-800">
-            <div v-for="(value, key) in options" :key="key" class="px-4 pb-4">
-              <h2 class="mt-2 pt-2 pb-1 capitalize text-sm font-bold text-gray-500 dark:text-gray-400">
-                {{ key }}
-              </h2>
-              <template v-for="option in value" :key="option.id">
-                <ComboboxOption
-                  v-slot="{ active }"
-                  :value="option"
-                >
-                  <SearchItem
-                    :active="active"
-                    :item="option"
-                  />
-                </ComboboxOption>
-                <ComboboxOption
-                  v-for="(childOption, index) in option.children"
-                  :key="childOption.id"
-                  v-slot="{ active }"
-                  :value="childOption"
-                >
-                  <SearchItem
-                    :active="active"
-                    :item="childOption"
-                    child
-                    :last="isLastChildren(option.children, index)"
-                  />
-                </ComboboxOption>
-              </template>
-            </div>
+          <div v-for="(value, key) in options" :key="key" class="px-4 pb-4">
+            <h2 class="mt-2 pt-2 pb-1 capitalize text-sm font-bold text-gray-500 dark:text-gray-400">
+              {{ key }}
+            </h2>
+            <template v-for="option in value" :key="option.id">
+              <ComboboxOption
+                v-slot="{ active }"
+                :value="option"
+              >
+                <SearchItem
+                  :active="active"
+                  :item="option"
+                />
+              </ComboboxOption>
+              <ComboboxOption
+                v-for="(childOption, index) in option.children"
+                :key="childOption.id"
+                v-slot="{ active }"
+                :value="childOption"
+              >
+                <SearchItem
+                  :active="active"
+                  :item="childOption"
+                  child
+                  :last="isLastChildren(option.children, index)"
+                />
+              </ComboboxOption>
+            </template>
           </div>
         </template>
         <div v-else class="mt-12 flex flex-col gap-8 justify-center items-center">
