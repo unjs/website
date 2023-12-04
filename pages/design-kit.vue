@@ -30,7 +30,7 @@ useSeoMeta({
       <PageHeader :title="page.title" :description="page.description">
         <template #right>
           <div>
-            <AppColorModeImage light="/assets/header/light/design-kit.png" dark="/assets/header/design-kit.png" alt="Illustration" aria-hidden="true" class="absolute left-24 -top-12 w-80" />
+            <AppColorModeImage light="/assets/header/light/design-kit.png" dark="/assets/header/dark/design-kit.png" alt="Illustration" aria-hidden="true" class="absolute left-24 -top-12 w-80" />
           </div>
         </template>
       </PageHeader>

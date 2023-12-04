@@ -4,6 +4,17 @@ import { UButton } from '#components'
 import type { SearchDisplayItem } from '~/types/search'
 
 const route = useRoute()
+
+const { data: page, error } = await useAsyncData(route.path, () => queryContent(route.path).findOne())
+
+if (error.value) {
+  throw createError({
+    statusCode: 404,
+    message: 'Page not found',
+    fatal: true,
+  })
+}
+
 const query = ref<string>(route.query.q as string || '')
 const queryDebounced = ref<string>(query.value)
 watchDebounced(
@@ -101,7 +112,16 @@ function selectFirstOption() {
 </script>
 
 <template>
-  <Main>
+  <Main v-if="page">
+    <template #header>
+      <PageHeader :title="page.title" :description="page.description">
+        <template #right>
+          <div>
+            <AppColorModeImage light="/assets/header/light/search.png" dark="/assets/header/dark/search.png" alt="Illustration" aria-hidden="true" class="absolute left-24 top-0 opacity-70 w-80" />
+          </div>
+        </template>
+      </PageHeader>
+    </template>
     <Combobox as="div" class="flex flex-col flex-1 min-h-0 divide-y divide-gray-100 dark:divide-gray-800" @update:model-value="onSelection($event)">
       <div class="relative shrink-0 h-16 sm:h-auto">
         <ComboboxLabel class="h-full flex items-center gap-2 px-4 sm:py-4">
