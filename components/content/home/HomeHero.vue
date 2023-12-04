@@ -15,7 +15,7 @@ const { data } = await useAsyncData(' blog:latest', () => queryContent('/blog').
 </script>
 
 <template>
-  <section class="lg:h-[calc(100vh-4rem)] lg:pb-16 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-14 xl:gap-8">
+  <section class="lg:pt-40 lg:pb-52 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-14 xl:gap-8">
     <div class="max-w-screen-sm mx-auto lg:ml-6 lg:mr-auto lg:max-w-3xl flex flex-col items-center lg:items-start gap-6 text-center lg:text-start">
       <HomeHeroEyeBrow v-if="news" :prefix="news.prefix" :title="news.title" :path="news.path" />
       <HomeHeroEyeBrow v-else-if="data" prefix="What's new" :title="data.title" :path="data._path" />
