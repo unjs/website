@@ -14,6 +14,8 @@ const { data: packages } = await useFetch('/api/content/packages.json', {
 })
 
 const { data: followers } = await useFetch('/api/github/followers')
+
+console.log(packages, followers)
 </script>
 
 <template>
@@ -21,11 +23,11 @@ const { data: followers } = await useFetch('/api/github/followers')
     <h2 class="max-w-sm lg:max-w-none text-center lg:text-left text-2xl md:text-3xl lg:text-4xl text-gray-950 dark:text-gray-50 font-bold tracking-wide lg:leading-[3rem]">
       <ContentSlot :use="$slots.title" unwrap="p" />
     </h2>
-    <div v-if="packages && followers" class="grid grid-cols-1 sm:grid-cols-2 gap-8">
-      <HomeNumbersItem text="Packages" :value="packages?.packages" />
-      <HomeNumbersItem text="Stars" :value="packages?.stars" />
-      <HomeNumbersItem text="Monthly Downloads" :value="packages?.monthlyDownloads" />
-      <HomeNumbersItem text="Followers on GitHub" :value="followers" />
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+      <HomeNumbersItem v-if="packages" text="Packages" :value="packages?.packages" />
+      <HomeNumbersItem v-if="packages" text="Stars" :value="packages?.stars" />
+      <HomeNumbersItem v-if="packages" text="Monthly Downloads" :value="packages?.monthlyDownloads" />
+      <HomeNumbersItem v-if="followers" text="Followers on GitHub" :value="followers" />
     </div>
   </section>
 </template>

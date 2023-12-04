@@ -33,6 +33,11 @@ export default defineNuxtConfig({
       routes: ['/', '/blog', '/packages', '/api/search.txt', '/api/content/packages.json', '/rss.xml', '/rss.xml', '/blog/rss.xml', '/learn/rss.xml', '/explore/rss.xml', '/build/rss.xml', '/robots.txt', '/sitemap.xml'],
     },
     routeRules: {
+      '/api/content/**': {
+        cache: {
+          maxAge: 60 * 60 * 24 * 7, // 7 days
+        },
+      },
       '/api/github/**': {
         cache: {
           maxAge: 60 * 60 * 24 * 7, // 7 days
