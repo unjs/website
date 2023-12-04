@@ -14,8 +14,6 @@ const { data: packages } = await useFetch('/api/content/packages.json', {
 })
 
 const { data: followers } = await useFetch('/api/github/followers')
-
-console.log(packages, followers)
 </script>
 
 <template>
