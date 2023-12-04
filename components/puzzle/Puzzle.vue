@@ -15,7 +15,7 @@ const rows = computed(() => [
 
 const transforms = [
   ['', '-translate-x-[3.25rem] -translate-y-8 -rotate-[20deg]', '-translate-y-8', 'translate-x-7 -translate-y-7'],
-  ['translate-y-[14rem] -translate-x-[12.5rem] xl:translate-y-48 xl:-translate-x-[30rem] -rotate-[25deg]', '-translate-x-7', '', 'translate-x-7'],
+  ['translate-y-[14rem] -translate-x-[12.5rem] xl:translate-y-64 xl:-translate-x-[24rem] -rotate-[25deg]', '-translate-x-7', '', 'translate-x-7'],
   ['', '-translate-x-7 translate-y-8', 'translate-y-8', 'translate-x-7 translate-y-8'],
 ]
 </script>

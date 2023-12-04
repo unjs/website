@@ -15,7 +15,7 @@ const { data } = await useAsyncData(' blog:latest', () => queryContent('/blog').
 </script>
 
 <template>
-  <section class="flex flex-col lg:flex-row lg:justify-between gap-14 xl:gap-8">
+  <section class="h-[calc(100vh-4rem)] lg:pb-16 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-14 xl:gap-8">
     <div class="max-w-screen-sm mx-auto lg:ml-6 lg:mr-auto lg:max-w-3xl flex flex-col items-center lg:items-start gap-6 text-center lg:text-start">
       <HomeHeroEyeBrow v-if="news" :prefix="news.prefix" :title="news.title" :path="news.path" />
       <HomeHeroEyeBrow v-else-if="data" prefix="What's new" :title="data.title" :path="data._path" />
@@ -27,8 +27,8 @@ const { data } = await useAsyncData(' blog:latest', () => queryContent('/blog').
           <ContentSlot :use="$slots.subtitle" unwrap="p" />
         </p>
       </div>
-      <div class="lg:-ml-3.5">
-        <UButton to="/packages?utm_source=unjs.io&utm_medium=home-hero" size="xl" color="gray" variant="ghost" icon="i-heroicons-chevron-right-20-solid" trailing :ui="{ font: 'font-semibold' }">
+      <div class="mt-8">
+        <UButton to="/packages?utm_source=unjs.io&utm_medium=home-hero" size="lg" color="white" variant="solid" icon="i-heroicons-chevron-right-20-solid" trailing :ui="{ font: 'font-semibold' }">
           Explore the Universe
         </UButton>
       </div>

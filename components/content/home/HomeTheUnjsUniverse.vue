@@ -22,7 +22,7 @@ defineProps<{
       <HomeTheUnjsUniverseCarousel :parts="carousel" />
     </div>
     <div class="flex justify-center">
-      <UButton :to="`${cta.to}?utm_source=unjs.io&utm_medium=home-carousel`" size="xl" color="gray" variant="ghost" icon="i-heroicons-chevron-right-20-solid" trailing>
+      <UButton :to="`${cta.to}?utm_source=unjs.io&utm_medium=home-carousel`" size="lg" color="white" variant="solid" icon="i-heroicons-chevron-right-20-solid" trailing>
         {{ cta.text }}
       </UButton>
     </div>

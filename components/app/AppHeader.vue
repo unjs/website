@@ -43,7 +43,7 @@ function toDesignKit() {
 </script>
 
 <template>
-  <header class="px-3 md:px-6 py-3 grid grid-cols-2 lg:grid-cols-3" v-bind="$attrs">
+  <header class="h-16 px-3 md:px-6 grid grid-cols-2 lg:grid-cols-3 items-center" v-bind="$attrs">
     <div class="flex items-center">
       <NuxtLink to="/?utm_source=unjs.io&utm_medium=header-icon" @click.right.prevent="toDesignKit()">
         <AppLogo />
