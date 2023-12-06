@@ -3,7 +3,8 @@ import type { Package } from '~/types/package'
 
 const { page } = useContent()
 
-const { data: packages } = await useAsyncData('content:packages', () => queryContent<Package>('/packages/').only(['_path', 'title', 'description']).find())
+const fields = ['_path', 'title', 'description']
+const { data: packages } = await useAsyncData('content:packages', () => queryContent<Package>('/packages/').only(fields).find())
 
 if (!packages.value) {
   throw createError({
@@ -12,7 +13,17 @@ if (!packages.value) {
   })
 }
 
-const { search, searchResults } = useSimpleSearch(packages as Ref<Package[]>)
+const { search, searchResults } = useSimpleSearch(packages as Ref<Package[]>, {
+  idField: 'title',
+  fields,
+  storeFields: fields,
+  searchOptions: {
+    boost: {
+      title: 2,
+      description: 1,
+    },
+  },
+})
 
 const orderByOptions = [
   {
@@ -85,6 +96,11 @@ const results = sort(searchResults)
               {{ item.description }}
             </p>
           </UCard>
+        </li>
+        <li v-if="!results.length" class="col-span-full">
+          <p class="text-center text-zinc-500">
+            No packages found
+          </p>
         </li>
       </ol>
     </section>

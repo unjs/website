@@ -8,7 +8,8 @@ useSeoMeta({
 
 const { page } = useContent()
 
-const { data: blog } = await useAsyncData('blog', () => queryContent('/blog/').only(['_path', 'title', 'description', 'publishedAt', 'authors']).sort({ publishedAt: -1 }).find() as Promise<BlogPostCard[]>)
+const fields = ['_path', 'title', 'description', 'publishedAt', 'authors']
+const { data: blog } = await useAsyncData('blog', () => queryContent('/blog/').only(fields).sort({ publishedAt: -1 }).find() as Promise<BlogPostCard[]>)
 
 if (!blog.value) {
   throw createError({
@@ -17,7 +18,17 @@ if (!blog.value) {
   })
 }
 
-const { search, searchResults } = useSimpleSearch(blog as Ref<BlogPostCard[]>)
+const { search, searchResults } = useSimpleSearch(blog as Ref<BlogPostCard[]>, {
+  idField: 'title',
+  fields,
+  storeFields: fields,
+  searchOptions: {
+    boost: {
+      title: 2,
+      description: 1,
+    },
+  },
+})
 
 const orderByOptions = [
   {
@@ -116,6 +127,11 @@ const results = sort(searchResults)
               </dl>
             </template>
           </UCard>
+        </li>
+        <li v-if="!results.length" class="col-span-full">
+          <p class="text-center text-zinc-500">
+            No articles found
+          </p>
         </li>
       </ol>
     </section>
