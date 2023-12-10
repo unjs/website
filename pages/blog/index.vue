@@ -25,7 +25,8 @@ useSeoMeta({
   twitterImage: joinURL(site.url, '/og/blog.jpg'),
 })
 
-const { data: blog } = await useAsyncData('blog:articles', () => queryContent('/blog/').only(['_path', 'title', 'description', 'publishedAt', 'authors', 'packages']).sort({ publishedAt: -1 }).find(), { default: () => [] }) as { data: Ref<BlogPostCard[]> }
+const fields = ['_path', 'title', 'description', 'publishedAt', 'authors', 'packages']
+const { data: blog } = await useAsyncData('blog:articles', () => queryContent('/blog/').only(fields).sort({ publishedAt: -1 }).find(), { default: () => [] }) as { data: Ref<BlogPostCard[]> }
 
 const authors = computed(() => blog.value.flatMap(item => item.authors).reduce((acc, author) => {
   if (!acc.find(item => item.name === author.name))
@@ -57,7 +58,17 @@ const defaultOrder = -1
 const defaultOrderBy = 'publishedAt'
 const { order, orderBy, sort } = useSort<BlogPostCard>(defaultOrder, defaultOrderBy)
 
-const { search, searchResults } = useSimpleSearch<BlogPostCard>(blog)
+const { search, searchResults } = useSimpleSearch<BlogPostCard>(blog, {
+  idField: 'title',
+  fields,
+  storeFields: fields,
+  searchOptions: {
+    boost: {
+      title: 2,
+      description: 1,
+    },
+  },
+})
 
 const filtered = computed(() => {
   if (!selectedAuthors.value.length && !selectedPackages.value.length)

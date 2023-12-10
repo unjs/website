@@ -57,7 +57,7 @@ const defaultOrder = 1
 const defaultOrderBy = 'title'
 const { order, orderBy, sort } = useSort<Package>(defaultOrder, defaultOrderBy)
 
-const { search, searchResults } = useSimpleSearch<Package>(packages, { idField: 'title', fields: ['title', 'description'], storeFields: ['title', 'description', 'path', 'stars', 'monthlyDownloads', 'contributors'] })
+const { search, searchResults } = useSimpleSearch<Package>(packages, { idField: 'title', fields: ['title', 'description'], storeFields: ['title', 'description', 'path', 'stars', 'monthlyDownloads', 'contributors'], searchOptions: { title: 2, description: } })
 
 const results = sort(searchResults)
 
