@@ -14,7 +14,7 @@ function showNotification(title: string) {
 </script>
 
 <template>
-  <DesignKitGrid v-if="data">
+  <DesignKitGrid v-if="data" class="lg:grid-cols-5 xl:grid-cols-6">
     <DesignKitGridItem v-for="pkg in data" :key="pkg.title">
       <template #content>
         <div class="bg-gray-300/20 dark:bg-gray-700/20 h-full flex items-center justify-center p-4">
