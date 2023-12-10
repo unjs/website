@@ -35,8 +35,8 @@ const uiSocialButton = { color: { gray: { ghost: 'dark:text-gray-400 dark:hover:
         leave-to="opacity-0"
       >
         <DialogPanel class="z-20 fixed inset-0 bg-white dark:bg-gray-900 flex flex-col justify-between text-gray-950 dark:text-gray-50">
-          <div class="container mx-auto px-7 pt-4 flex flex-1 flex-col justify-between">
-            <div class="h-[3.75rem] flex justify-between items-center">
+          <div class="container mx-auto px-4 flex flex-1 flex-col justify-between">
+            <div class="h-16 flex justify-between items-center">
               <DialogTitle>
                 <AppLogo />
               </DialogTitle>
