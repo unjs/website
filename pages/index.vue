@@ -23,7 +23,7 @@ useSeoMeta({
 </script>
 
 <template>
-  <main v-if="page" class="mb-8 lg:mb-16">
+  <main v-if="page" class="mb-24 lg:mb-[10rem]">
     <ContentRenderer :value="page" />
   </main>
 </template>
