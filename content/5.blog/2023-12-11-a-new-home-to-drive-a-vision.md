@@ -21,7 +21,7 @@ My first mission was to build a new website, a new home that represents the ecos
 
 To explore it, you don't have to go far, you're already on it.
 
-![Screenshot of the new website](/assets/images/blog/2023-12-11-a-new-home-to-drive-a-vision/new-home.png)
+![Screenshot of the new website](/assets/images/blog/2023-12-11-a-new-home-to-drive-a-vision/new-home.webp)
 
 It took me months, but we now have a solid foundation on which to continue creating content. In 2024, expect a lot of exclusive content.
 
@@ -37,15 +37,15 @@ Dive into our blog space to stay in the loop with our latest updates about the U
 
 Explore our comprehensive list of packages, using a search bar, filters, and sorting. This will help you to navigate through the ecosystem and find the right package for your needs.
 
-![Screenshot of the package list](/assets/images/blog/2023-12-11-a-new-home-to-drive-a-vision/package-list.png)
+![Screenshot of the package list](/assets/images/blog/2023-12-11-a-new-home-to-drive-a-vision/package-list.webp)
 
 For each package, you will be able to access its documentation and discover some interesting stats like the number of downloads and the stars on GitHub.
 
-![Screenshot of a single package](/assets/images/blog/2023-12-11-a-new-home-to-drive-a-vision/single-package.png)
+![Screenshot of a single package](/assets/images/blog/2023-12-11-a-new-home-to-drive-a-vision/single-package.webp)
 
 Need to infuse your projects with UnJS aesthetics? Our design kit is your go-to resource, offering easy access to our colors, logos, and package visuals. If you do something cool with it, please share it with us [on X](https://x.com/unjsio)!
 
-![Screenshot of the design kit](/assets/images/blog/2023-12-11-a-new-home-to-drive-a-vision/design-kit.png)
+![Screenshot of the design kit](/assets/images/blog/2023-12-11-a-new-home-to-drive-a-vision/design-kit.webp)
 
 Additionally, we also build internal and external tools to help you and us understand and manage the ecosystem. We will share some of them with you in the future.
 
