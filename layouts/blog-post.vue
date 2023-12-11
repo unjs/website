@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 const { toc, page } = useContent()
 
-const { data: packages } = await useAsyncData(`packages:${page.value.packages.join(':')}`, () => queryContent('/packages/').only(['_path', 'title', 'icon', 'logo']).where({ _path: { $containsAny: page.value.packages } }).find(), { watch: [() => page.value.packages] })
+const { data: packages } = await useAsyncData(`packages:${page.value.packages?.join(':')}`, () => queryContent('/packages/').only(['_path', 'title', 'icon', 'logo']).where({ _path: { $containsAny: page.value.packages } }).find(), { watch: [() => page.value.packages] })
 
 // TODO: Waiting for Nuxt SEOKit v2
 useServerSeoMeta({
@@ -40,8 +40,10 @@ useServerSeoMeta({
       <slot />
 
       <template #nav>
-        <UDivider />
-        <ArticleProseNavGroupPackages :packages="packages" />
+        <template v-if="packages">
+          <UDivider />
+          <ArticleProseNavGroupPackages :packages="packages" />
+        </template>
         <UDivider />
         <ArticleProseNavGroupCommunity :filename="page._file" />
       </template>
