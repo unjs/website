@@ -51,11 +51,6 @@ Additionally, we also build internal and external tools to help you and us under
 
 ## Coming in 2024
 
-- presentation of what UnJS is
-- the 3 types of content
-- monthly updates
-- more stats on the evolution of UnJS
-
 In 2024, anticipate an engaging journey through various facets, starting with a presentation of our team. Week after week, we will present you the people behind UnJS, their stories, their ambitions, and their vision for the future.
 
 We will also write a comprehensive explanation about UnJS, from its origins to its future. We will explain what UnJS is, what its vision is, what its ambitions are, and how we think it can help you build any idea you have in mind.
