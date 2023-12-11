@@ -2,9 +2,9 @@
 title: A New Home to Drive a Vision
 description: Deep dive into the new theme for the UnJS website and discover what's coming in 2024
 authors:
-  - name: Estéban
+  - name: Estéban S
     picture: https://github.com/barbapapazes.png
-    twitter: barbapapazes
+    twitter: soubiran_
 categories:
   - website
 packages:
@@ -13,11 +13,11 @@ modifiedAt: 2023-12-11
 layout: blog-post # TODO: remove
 ---
 
-Hey, Estéban here ! 👋
+Hey, Estéban here! 👋
 
-Since August 2023, I’m in charge of the website and the marketing part of UnJS and today, I will share you some updates.
+Since August 2023, I'm in charge of the website and the marketing part of UnJS and today, I will share some updates with you.
 
-My first mission was to build a new website, a new home that represents the ecosystem, its ambitions and help you get the most out of UnJS. And today, after many iterations, all the teams is proud to announce you that this new home is here! 🎉
+My first mission was to build a new website, a new home that represents the ecosystem, its ambitions, and helps you get the most out of UnJS. And today, after many iterations, the entire team is proud to announce that this new home is here! 🎉
 
 To explore it, you don't have to go far, you're already on it.
 
@@ -25,7 +25,7 @@ To explore it, you don't have to go far, you're already on it.
 
 It took me months, but we now have a solid foundation on which to continue creating content. In 2024, expect a lot of exclusive content.
 
-_UnJS website is build with [Nuxt](https://nuxt.com) and [Nuxt UI](https://ui.nuxt.com/). It is [open-source](https://github.com/unjs/website) and you like it, give it a star!_
+_The UnJS website is built with [Nuxt](https://nuxt.com) and [Nuxt UI](https://ui.nuxt.com/). It is [open-source](https://github.com/unjs/website) and if you like it, give it a star!_
 
 ## Current Content
 
@@ -35,11 +35,11 @@ Our home page introduces you to the UnJS ecosystem with insightful numbers and i
 
 Dive into our blog space to stay in the loop with our latest updates about the UnJS ecosystem. We will share exciting stories, news, and insights. We've created some [RSS feeds](/rss) to help you stay up to date with our latest content.
 
-Explore our comprehensive list of packages, using a search bar, filters and sorting. This will help you to navigate through the ecosystem and find the right package for your needs.
+Explore our comprehensive list of packages, using a search bar, filters, and sorting. This will help you to navigate through the ecosystem and find the right package for your needs.
 
 ![Screenshot of the package list](/assets/images/blog/2023-12-11-a-new-home-to-drive-a-vision/package-list.png)
 
-For each package, you will be able to access their documentation and discover some interesting stats like the number of downloads and the stars on GitHub.
+For each package, you will be able to access its documentation and discover some interesting stats like the number of downloads and the stars on GitHub.
 
 ![Screenshot of a single package](/assets/images/blog/2023-12-11-a-new-home-to-drive-a-vision/single-package.png)
 
@@ -47,7 +47,7 @@ Need to infuse your projects with UnJS aesthetics? Our design kit is your go-to 
 
 ![Screenshot of the design kit](/assets/images/blog/2023-12-11-a-new-home-to-drive-a-vision/design-kit.png)
 
-With that, we also build internal and external tools to help you and us understand and manage the ecosystem. We will share some of them with you in the future.
+Additionally, we also build internal and external tools to help you and us understand and manage the ecosystem. We will share some of them with you in the future.
 
 ## Coming in 2024
 
@@ -56,22 +56,22 @@ With that, we also build internal and external tools to help you and us understa
 - monthly updates
 - more stats on the evolution of UnJS
 
-In 2024, anticipate an engaging journey through various facets, starting with a presentation of our team. Weeks after weeks, we will present you the people behind UnJS, their stories, their ambitions, and their vision for the future.
+In 2024, anticipate an engaging journey through various facets, starting with a presentation of our team. Week after week, we will present you the people behind UnJS, their stories, their ambitions, and their vision for the future.
 
-We will also write a comprehensive explanation about UnJS, from its origins to its future. We will explain you what is UnJS, what is its vision, what are its ambitions and how we think it can help you building any idea you have in mind.
+We will also write a comprehensive explanation about UnJS, from its origins to its future. We will explain what UnJS is, what its vision is, what its ambitions are, and how we think it can help you build any idea you have in mind.
 
-Then, I will create contents to help you understand the ecosystem. This will be done around three pillars:
+Then, I will create content to help you understand the ecosystem. This will be done around three pillars:
 
-- **Learn**, 101 tutoriel to get started with our packages
-- **Build**, create real world project by combining packages
-- **Explore**, deep dive into packages to discover how they are build
+- **Learn**, 101 tutorial to get started with our packages
+- **Build**, create real-world projects by combining packages
+- **Explore**, deep dive into packages to discover how they are built
 
-We will also share with you a monthly update, a reliable channel for staying informed about the latest developments, releases, and noteworthy achievements within the UnJS ecosystem. First one is expected in the beginning of February 2024.
+We will also share with you a monthly update, a reliable channel for staying informed about the latest developments, releases, and noteworthy achievements within the UnJS ecosystem. The first one is expected in the beginning of February 2024.
 
-We love numbers and we know you do too. Next year, we will share you a deeper understanding of the evolution of UnJS using numbers and statistical insights. You can already find the first one the website.
+We love numbers and we know you do too. Next year, we will share with you a deeper understanding of the evolution of UnJS using numbers and statistical insights. You can already find the first one on the website.
 
 ## Finally
 
-All of this is just the beginning of a bigger story. In 2024, you will do our best to allow you to master the UnJS ecosystem. 💛
+All of this is just the beginning of a bigger story. In 2024, we will do our best to allow you to master the UnJS ecosystem. 💛
 
 To make sure you don't miss out, follow us [on X](https://x.com/unjsio).
