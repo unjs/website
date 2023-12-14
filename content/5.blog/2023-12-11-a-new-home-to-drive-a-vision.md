@@ -51,19 +51,15 @@ Additionally, we also build internal and external tools to help you and us under
 
 ## Coming in 2024
 
-In 2024, anticipate an engaging journey through various facets, starting with a presentation of our team. Week after week, we will present you the people behind UnJS, their stories, their ambitions, and their vision for the future.
-
-We will also write a comprehensive explanation about UnJS, from its origins to its future. We will explain what UnJS is, what its vision is, what its ambitions are, and how we think it can help you build any idea you have in mind.
-
-Then, I will create content to help you understand the ecosystem. This will be done around three pillars:
+I will create content to help you understand the ecosystem. This will be done around three pillars:
 
 - **Learn**, 101 tutorial to get started with our packages
-- **Build**, create real-world projects by combining packages
-- **Explore**, deep dive into packages to discover how they are built
+- **Build**, to create real-world projects by combining packages
+- **Explore**, to deep dive into packages to discover how they are built
 
-We will also share with you a monthly update, a reliable channel for staying informed about the latest developments, releases, and noteworthy achievements within the UnJS ecosystem. The first one is expected in the beginning of February 2024.
+We will also share with you a monthly update on this blog for staying informed about the latest developments, releases, and achievements within the UnJS ecosystem. The first one is expected in the beginning of February 2024.
 
-We love numbers and we know you do too. Next year, we will share with you a deeper understanding of the evolution of UnJS using numbers and statistical insights. You can already find the first one on the website.
+And because I love numbers, I will share with you a deeper understanding of the evolution of UnJS. You can already find the first one on the website.
 
 ## Finally
 
