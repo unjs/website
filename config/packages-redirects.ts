@@ -168,6 +168,13 @@ export default {
     },
   },
 
+  '/nanotar': {
+    redirect: {
+      to: '/packages/nanotar',
+      statusCode: 302,
+    },
+  },
+
   '/nitro': {
     redirect: {
       to: '/packages/nitro',
