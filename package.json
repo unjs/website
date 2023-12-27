@@ -20,7 +20,7 @@
     "@nuxt/ui": "^2.11.1"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "2.4.4",
+    "@antfu/eslint-config": "2.6.1",
     "@headlessui/vue": "^1.7.16",
     "@iconify-json/heroicons": "^1.1.13",
     "@iconify-json/logos": "^1.1.37",
@@ -38,7 +38,7 @@
     "@vueuse/nuxt": "^10.5.0",
     "case-police": "^0.6.1",
     "consola": "^3.2.3",
-    "eslint": "^8.55.0",
+    "eslint": "^8.56.0",
     "jiti": "^1.21.0",
     "magicast": "^0.3.0",
     "markdownlint-cli": "^0.36.0",
