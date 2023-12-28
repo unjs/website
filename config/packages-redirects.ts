@@ -56,6 +56,13 @@ export default {
     },
   },
 
+  '/fontaine': {
+    redirect: {
+      to: '/packages/fontaine',
+      statusCode: 302,
+    },
+  },
+
   '/fs-memo': {
     redirect: {
       to: '/packages/fs-memo',
