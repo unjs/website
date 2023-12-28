@@ -147,6 +147,13 @@ export default {
     },
   },
 
+  '/magic-regexp': {
+    redirect: {
+      to: '/packages/magic-regexp',
+      statusCode: 302,
+    },
+  },
+
   '/magicast': {
     redirect: {
       to: '/packages/magicast',
