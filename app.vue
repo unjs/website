@@ -47,15 +47,13 @@ useSeoMeta({
     <Body class="font-sans dark:bg-gray-900">
       <NuxtLoadingIndicator color="#ECDC5A" />
 
-      <div class="border-b border-gray-100 dark:border-gray-800">
-        <AppHeader class="px-4 container mx-auto xl:max-w-7xl" />
-      </div>
+      <AppHeader />
+
       <div class="px-4 container mx-auto xl:max-w-7xl">
         <NuxtPage />
       </div>
-      <div class="border-t border-gray-100 dark:border-gray-800">
-        <AppFooter class="px-4 container mx-auto xl:max-w-7xl" />
-      </div>
+
+      <AppFooter />
 
       <UNotifications />
     </Body>
