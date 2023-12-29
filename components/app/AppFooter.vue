@@ -11,7 +11,7 @@ const uiButton = { color: { gray: { ghost: 'text-gray-500 hover:text-gray-800 da
 
 <template>
   <div class="border-t border-gray-100 dark:border-gray-800">
-    <footer class="container mx-auto max-w-7xl px-4 md:px-6 pt-20 pb-20 md:pb-30 flex flex-col gap-12 md:gap-20">
+    <footer class="container mx-auto xl:max-w-7xl px-4 md:px-6 pt-20 pb-20 md:pb-30 flex flex-col gap-12 md:gap-20">
       <div class="grid md:grid-cols-2 gap-y-6 gap-x-12 md:gap-x-25">
         <div class="grow flex flex-col gap-6 max-w-sm">
           <NuxtLink to="/" class="block">

@@ -44,7 +44,7 @@ function toDesignKit() {
 
 <template>
   <div class="h-16 border-b border-gray-100 dark:border-gray-800">
-    <header class="h-full px-4 container mx-auto max-w-7xl md:px-6 grid grid-cols-2 lg:grid-cols-3 items-center">
+    <header class="h-full px-4 container mx-auto xl:max-w-7xl md:px-6 grid grid-cols-2 lg:grid-cols-3 items-center">
       <div class="flex items-center">
         <NuxtLink to="/?utm_source=unjs.io&utm_medium=header-icon" @click.right.prevent="toDesignKit()">
           <AppLogo />
