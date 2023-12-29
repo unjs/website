@@ -56,6 +56,13 @@ export default {
     },
   },
 
+  '/fontaine': {
+    redirect: {
+      to: '/packages/fontaine',
+      statusCode: 302,
+    },
+  },
+
   '/fs-memo': {
     redirect: {
       to: '/packages/fs-memo',
@@ -140,6 +147,13 @@ export default {
     },
   },
 
+  '/magic-regexp': {
+    redirect: {
+      to: '/packages/magic-regexp',
+      statusCode: 302,
+    },
+  },
+
   '/magicast': {
     redirect: {
       to: '/packages/magicast',
@@ -164,6 +178,13 @@ export default {
   '/mongoz': {
     redirect: {
       to: '/packages/mongoz',
+      statusCode: 302,
+    },
+  },
+
+  '/nanotar': {
+    redirect: {
+      to: '/packages/nanotar',
       statusCode: 302,
     },
   },

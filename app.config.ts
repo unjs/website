@@ -1,100 +1,60 @@
 export default defineAppConfig({
   ui: {
     primary: 'yellow',
-    gray: 'zinc',
-    divider: {
-      border: {
-        base: 'flex border-zinc-200 dark:border-zinc-800',
-      },
-    },
-    badge: {
-      color: {
-        gray: {
-          solid: 'ring-1 ring-inset ring-zinc-300 dark:ring-zinc-700 text-zinc-700 dark:text-zinc-200 bg-zinc-50 dark:bg-zinc-800',
-        },
-      },
-    },
+    gray: 'cool',
     button: {
       base: 'transition ease-in',
       color: {
-        white: {
-          solid: 'shadow-sm ring-1 ring-inset ring-zinc-300 dark:ring-zinc-700 text-zinc-900 dark:text-white bg-white hover:bg-zinc-50 disabled:bg-white dark:bg-zinc-900 dark:hover:bg-zinc-800/50 dark:disabled:bg-zinc-900 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400',
-        },
         gray: {
-          solid: 'shadow-sm ring-1 ring-inset ring-zinc-300 dark:ring-zinc-700 text-zinc-700 dark:text-zinc-200 bg-zinc-50 hover:bg-zinc-100 disabled:bg-zinc-50 dark:bg-zinc-800 dark:hover:bg-zinc-700/50 dark:disabled:bg-zinc-800 focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400',
-          ghost: 'text-zinc-700 dark:text-zinc-200 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-50 dark:hover:bg-zinc-800 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400',
+          solid: 'shadow-none bg-gray-300/20 hover:bg-gray-300/40 dark:bg-gray-700/40 dark:hover:bg-gray-700/50',
         },
+      },
+    },
+    select: {
+      base: 'transition ease-in',
+      color: {
+        gray: { outline: 'shadow-none bg-gray-300/20 hover:bg-gray-300/40 dark:bg-gray-700/40 dark:hover:bg-gray-700/50' },
       },
     },
     buttonGroup: {
       shadow: 'shadow-none',
     },
-    tooltip: {
-      background: 'bg-white dark:bg-zinc-900',
-      color: 'text-zinc-900 dark:text-white',
-      ring: 'ring-1 ring-zinc-200 dark:ring-zinc-800',
-    },
-    kbd: {
-      base: 'inline-flex items-center justify-center text-zinc-900 dark:text-white',
-      background: 'bg-zinc-100 dark:bg-zinc-800',
-      ring: 'ring-1 ring-zinc-300 dark:ring-zinc-700 ring-inset',
-    },
     card: {
       base: 'transition ease-in duration-150',
-      background: 'bg-white dark:bg-zinc-900',
-      divide: 'divide-y divide-zinc-200 dark:divide-zinc-800',
-      ring: 'ring-1 ring-zinc-200 dark:ring-zinc-700',
+
     },
     input: {
+      base: 'transition ease-in',
       color: {
-        white: {
-          outline: 'shadow-none bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white ring-1 ring-inset ring-zinc-300 dark:ring-zinc-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400',
-        },
-        placeholder: 'placeholder-zinc-400 dark:placeholder-zinc-500',
-      },
-    },
-    select: {
-      placeholder: 'text-zinc-900 dark:text-white',
-      color: {
-        white: {
-          outline: 'shadow-none bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white ring-1 ring-inset ring-zinc-300 dark:ring-zinc-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400',
+        gray: {
+          outline: 'shadow-none bg-gray-300/20 hover:bg-gray-300/40 dark:bg-gray-700/40 dark:hover:bg-gray-700/50',
         },
       },
     },
     selectMenu: {
-      background: 'bg-white dark:bg-zinc-800',
-      ring: 'ring-1 ring-zinc-200 dark:ring-zinc-700',
       option: {
         base: 'cursor-pointer',
-        color: 'text-zinc-900 dark:text-white',
-        active: 'bg-zinc-100 dark:bg-zinc-900',
       },
-    },
-    avatar: {
-      background: 'bg-zinc-100 dark:bg-zinc-800',
-      rounded: 'rounded-full',
-      text: 'font-medium leading-none text-zinc-900 dark:text-white truncate',
-      placeholder: 'font-medium leading-none text-zinc-500 dark:text-zinc-400 truncate',
-    },
-    popover: {
-      background: 'bg-white dark:bg-zinc-900',
-      ring: 'ring-1 ring-zinc-200 dark:ring-zinc-800',
     },
   },
   website: {
     search: {
       groups: [
+        /**
+         * End / is very important since we use startsWith
+         * Without, page /blog will be in the wrong group
+         */
         {
           name: 'Articles',
-          path: '/resources',
+          path: '/resources/',
         },
         {
           name: 'Blog',
-          path: '/blog',
+          path: '/blog/',
         },
         {
           name: 'Packages',
-          path: '/packages',
+          path: '/packages/',
         },
       ],
     },
@@ -181,7 +141,6 @@ export default defineAppConfig({
             },
           ],
         },
-        {},
       ],
     },
     socials: {

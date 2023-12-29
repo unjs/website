@@ -18,6 +18,7 @@ export default defineNuxtConfig({
     '@nuxtjs/plausible',
     'nuxt-payload-analyzer',
     '@nuxtjs/fontaine',
+    '@nuxtjs/google-fonts',
   ],
   css: [
     '~/assets/app.css',
@@ -33,6 +34,11 @@ export default defineNuxtConfig({
       routes: ['/', '/blog', '/packages', '/api/search.txt', '/api/content/packages.json', '/rss.xml', '/rss.xml', '/blog/rss.xml', '/learn/rss.xml', '/explore/rss.xml', '/build/rss.xml', '/robots.txt', '/sitemap.xml'],
     },
     routeRules: {
+      '/api/content/**': {
+        cache: {
+          maxAge: 60 * 60 * 24 * 7, // 7 days
+        },
+      },
       '/api/github/**': {
         cache: {
           maxAge: 60 * 60 * 24 * 7, // 7 days
@@ -59,23 +65,31 @@ export default defineNuxtConfig({
     },
   },
   content: {
-    documentDriven: {
-      navigation: false,
-      surround: false,
-    },
-    navigation: {
-      fields: ['icon'],
-    },
+    documentDriven: false,
     highlight: {
-      theme: 'github-light',
+      theme: {
+        default: 'github-light',
+        dark: 'github-dark',
+      },
     },
   },
   colorMode: {
-    preference: 'light',
+    preference: 'dark',
+  },
+  fontMetrics: {
+    fonts: ['Nunito'],
+  },
+  googleFonts: {
+    display: 'swap',
+    download: true,
+    families: {
+      Nunito: [300, 400, 500, 600, 700, 800],
+    },
   },
   site: {
     defaultLocale: 'en',
     url: 'https://unjs.io',
+    separator: '·',
     name: 'UnJS',
     description: 'Agnostic Excellence: JavaScript Libraries, Tools, and Utilities, Crafted to Elevate Your Coding Journey.',
     identity: {
@@ -90,6 +104,6 @@ export default defineNuxtConfig({
     ...packagesRedirects as NitroConfig['routeRules'],
   },
   devtools: {
-    enable: true,
+    enabled: true,
   },
 })

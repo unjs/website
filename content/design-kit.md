@@ -2,7 +2,6 @@
 title: Design Kit
 description: Find all the design resources about UnJS.
 navigation: false
-layout: design-kit
 ---
 
 ## About UnJS
@@ -50,8 +49,8 @@ UnJS colors are based on the JavaScript logo colors with a yellow color as the m
 colors:
   - name: yellow
     hex: '#ECDC5A'
-  - name: black
-    hex: '#000000'
+  - name: deep black
+    hex: '#111827'
   - name: white
     hex: '#FFFFFF'
 ---
@@ -68,3 +67,9 @@ UnJS uses the [Nunito](https://fonts.google.com/specimen/Nunito) font for its ro
 Each package has its own logo. For most of them, the logo is an emoji from the [Noto collection](https://icones.js.org/collection/noto) that try to represent the package purpose.
 
 :design-kit-package-logos{.not-prose .mt-8}
+
+## Package Puzzle Parts
+
+Each package has its own puzzle part. The puzzle part is an important element of UnJS because it represents the idea that all packages can be used together to form a bigger picture, the UnJS ecosystem. In the meantime, each package can be used individually to solve a specific problem.
+
+:design-kit-package-puzzle-parts{.not-prose .mt-8}

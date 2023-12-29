@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss'
+import flattenColorPalette from 'tailwindcss/lib/util/flattenColorPalette'
 import { fontFamily } from 'tailwindcss/defaultTheme'
 
 export default <Partial<Config>> {
@@ -53,4 +54,12 @@ export default <Partial<Config>> {
       }),
     },
   },
+  plugins: [function ({ matchUtilities, theme }) {
+    matchUtilities(
+      {
+        highlight: value => ({ boxShadow: `inset 0 1px 0 0 ${value}` }),
+      },
+      { values: flattenColorPalette(theme('backgroundColor')), type: 'color' },
+    )
+  }],
 }

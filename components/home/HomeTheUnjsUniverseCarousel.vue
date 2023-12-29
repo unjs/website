@@ -15,15 +15,19 @@ const imageHeight = ref('auto')
 
 <template>
   <div class="slider">
-    <div class="absolute z-50 left-0 top-0 bottom-0 w-4 md:w-8 lg:w-16 bg-gradient-to-r from-primary via-primary to-primary/0" />
+    <div class="absolute z-50 left-0 top-0 bottom-0 w-4 md:w-8 lg:w-16 bg-gradient-to-r from-white via-white to-white/0 dark:from-gray-900 dark:via-gray-900 dark:to-gray-900/0" />
 
-    <div class="absolute z-50 right-0 top-0 bottom-0 w-4 md:w-8 lg:w-16 bg-gradient-to-l from-primary via-primary to-primary/0" />
+    <div class="absolute z-50 right-0 top-0 bottom-0 w-4 md:w-8 lg:w-16 bg-gradient-to-l from-white via-white to-white/0 dark:from-gray-900 dark:via-gray-900 dark:to-gray-900/0" />
 
     <div class="slide-track animation py-4">
       <template v-for="item in [...parts, ...parts]" :key="item.part">
         <div class="slide shrink-0" :style="`align-items:${item.align};`">
           <NuxtLink :to="`/packages/${item.name}?utm_source=unjs.io&utm_medium=home-carousel`">
-            <img :src="`/assets/puzzle/${item.name}.svg`" class="drop-shadow-sm hover:drop-shadow-xl transition ease-in duration-150">
+            <AppColorModeImage
+              :light="toPackagePuzzlePart(item.name)"
+              :dark="toPackagePuzzlePart(item.name, true)"
+              class="drop-shadow hover:drop-shadow-md transition ease-in duration-150"
+            />
           </NuxtLink>
         </div>
       </template>

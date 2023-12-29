@@ -10,8 +10,8 @@ const { copy, copied, isSupported } = useClipboard()
 </script>
 
 <template>
-  <div class="my-8 border border-zinc-300 rounded-xl overflow-hidden">
-    <div class="group relative p-4 bg-zinc-300/10">
+  <div class="my-8 ring-1 ring-gray-300 dark:ring-gray-700 rounded-lg overflow-hidden">
+    <div class="group relative p-4 bg-gray-300/20 dark:bg-gray-700/20">
       <span v-if="filename" class="absolute top-2 right-3 text-xs font-mono">
         {{ filename }}
       </span>
