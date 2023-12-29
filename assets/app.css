@@ -1,47 +1,26 @@
-@font-face {
-  font-family: "Nunito";
-  font-weight: 100 900;
-  font-display: swap;
-  font-style: normal;
-  src: url("/assets/fonts/nunito.ttf") format("truetype");
-}
-
 ::-webkit-scrollbar {
   width: 0.6em;
   height: 0.6em;
-  background: transparent;
+  @apply bg-transparent;
 }
 
 ::-webkit-scrollbar-track {
-  background-color: transparent
-}
-
-:is(.gray-scrollbar, pre)::-webkit-scrollbar-track {
- @apply bg-zinc-100 rounded-full
+  @apply bg-gray-100;
 }
 
 ::-webkit-scrollbar-thumb {
- @apply rounded-md bg-white
+  border-radius: 0.6em;
+  @apply bg-gray-300 hover:bg-gray-400;
 }
 
-:is(.gray-scrollbar, pre)::-webkit-scrollbar-thumb {
- @apply bg-zinc-400/20
-}
+.dark {
+  & ::-webkit-scrollbar-track {
+    @apply bg-gray-800;
+  }
 
-::-webkit-scrollbar-thumb:hover {
- @apply bg-zinc-100
-}
-
-:is(.gray-scrollbar, pre)::-webkit-scrollbar-thumb:hover {
- @apply bg-zinc-500/20
-}
-
-::-webkit-scrollbar-thumb:active {
- @apply bg-zinc-200
-}
-
-:is(.gray-scrollbar, pre)::-webkit-scrollbar-thumb:active {
- @apply bg-zinc-600/20
+  & ::-webkit-scrollbar-thumb {
+    @apply bg-gray-700 hover:bg-gray-600;
+  }
 }
 
 :is(h1, h2, h3, h4, h5, h6) {

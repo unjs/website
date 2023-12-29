@@ -1,6 +1,6 @@
 ---
-title: H3 1.8 - Towards the Edge of the Web!
-description: Announcing H3 1.8 Release
+title: H3 1.8 - Towards the Edge of the Web
+description: New h3 release with web and plain adapters, web streams support, object syntax event handlers, typed event handler requests and more!
 image:
   src: # Add asap a social image
   alt:
@@ -15,7 +15,6 @@ packages:
   - h3
 publishedAt: 2023-08-15
 modifiedAt: 2023-08-15
-layout: blog-post
 ---
 
 > [H3](/packages/h3) is a versatile H(TTP) framework written in TypeScript that powers both [Nitro](https://nitro.unjs.io/) and [Nuxt](https://nuxt.com/) today.

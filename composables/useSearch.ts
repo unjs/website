@@ -2,7 +2,7 @@ import type { ParsedContent } from '@nuxt/content/dist/runtime/types'
 import MiniSearch, { type Options as MiniSearchOptions, type SearchOptions } from 'minisearch'
 import type { SearchDisplay, SearchDisplayItem, SearchResult } from '~/types/search'
 
-export function useSimpleSearch(data: MaybeRefOrGetter<Partial<ParsedContent>[]>, options: { idField: string, fields: string[], storeFields: string[], searchOptions?: SearchOptions }) {
+export function useSimpleSearch<T extends Record<string, unknown>>(data: MaybeRefOrGetter<Partial<ParsedContent>[]>, options: { idField: string, fields: string[], storeFields: string[], searchOptions?: SearchOptions }) {
   const search = ref('')
   const searchDebounced = useDebounce(search, 150)
 
@@ -19,7 +19,7 @@ export function useSimpleSearch(data: MaybeRefOrGetter<Partial<ParsedContent>[]>
 
   const searchResults = computed(() => {
     return searchDebounced.value ? miniSearchResults.value : toValue(data)
-  })
+  }) as ComputedRef<(T & SearchResult)[]>
 
   return {
     search,
@@ -58,20 +58,19 @@ export async function useSearchResults(search: MaybeRefOrGetter<string>, options
   const searchResults = await useSearch(search, options)
 
   return computed(() => {
-    if (!searchResults.value)
-      return {}
+    return searchResults.value.reduce((acc, item) => {
+      const pathname = item.id.split('#')[0]
 
-    const grouped = searchResults.value.reduce((acc, item) => {
-      const group = website.value.search.groups.find(group => item.id.startsWith(group.path))
-
-      // Remove the top level page from the search results like `/packages` or `/blog`
-      if (!group || group.path === item.id)
-        return acc
+      const group = website.value.search.groups.find(group => pathname.startsWith(group.path)) ?? {
+        name: 'Pages',
+        path: '',
+      }
 
       if (!acc[group.name])
         acc[group.name] = []
 
       const groupItems = acc[group.name]
+
       const topLevelItem = groupItems.find(groupItem => item.id.startsWith(groupItem.id) && groupItem.level === 0)
 
       if (topLevelItem && topLevelItem.children) {
@@ -95,8 +94,6 @@ export async function useSearchResults(search: MaybeRefOrGetter<string>, options
 
       return acc
     }, {} as SearchDisplay)
-
-    return grouped
   })
 }
 

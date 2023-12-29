@@ -1,4 +1,6 @@
 title: Blog
-description: Never miss a package release with the UnJS blog. Stay up-to-date on the latest announcements and get access to cutting-edge news.
-navigation.icon: i-heroicons-newspaper-solid
-layout: blog
+description: Never miss a package release with the blog. Stay up-to-date on the latest announcements and get access to cutting-edge news.
+header:
+  image:
+    src: /assets/header/blog.svg
+    alt: Illustration of a browser with a blog article

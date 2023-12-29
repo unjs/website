@@ -8,7 +8,7 @@ defineProps<{
 </script>
 
 <template>
-  <HomeSection class="overflow-hidden">
+  <HomeSection>
     <template #eyebrow>
       <ContentSlot :use="$slots.eyebrow" unwrap="p" />
     </template>
@@ -18,11 +18,11 @@ defineProps<{
     <template #subtitle>
       <ContentSlot :use="$slots.subtitle" unwrap="p" />
     </template>
-    <div class="relative">
+    <div class="relative overflow-hidden">
       <HomeTheUnjsUniverseCarousel :parts="carousel" />
     </div>
     <div class="flex justify-center">
-      <UButton :to="`${cta.to}?utm_source=unjs.io&utm_medium=home-carousel`" size="md" color="white" :ui="{ color: { white: { solid: 'ring-0 shadow-none hover:shadow-md' } } }" icon="i-heroicons-chevron-right-20-solid" trailing>
+      <UButton :to="`${cta.to}?utm_source=unjs.io&utm_medium=home-carousel`" size="lg" color="white" variant="solid" icon="i-heroicons-chevron-right-20-solid" trailing>
         {{ cta.text }}
       </UButton>
     </div>

@@ -10,18 +10,18 @@ provide('toc', props.toc)
 </script>
 
 <template>
-  <article class="pt-6 md:pt-10 pb-10 md:pb-20 px-4 md:px-6 bg-white rounded-2xl grid grid-cols-1 md:grid-cols-[70%_1fr] xl:grid-cols-[75%_1fr] gap-y-12 md:gap-y-0 md:gap-x-8 items-start">
+  <article class="grid grid-cols-1 md:grid-cols-[70%_1fr] xl:grid-cols-[75%_1fr] gap-y-12 md:gap-y-0 md:gap-x-8 items-start">
     <div class="row-start-1">
       <slot name="header">
-        <header>
-          <h1 class="text-zinc-900 text-2xl md:text-3xl font-bold tracking-wide">
+        <header v-if="title">
+          <h1 class="text-gray-950 dark:text-gray-50 text-2xl md:text-3xl font-bold tracking-wide">
             {{ title }}
           </h1>
         </header>
       </slot>
     </div>
 
-    <ProseContent class="md:mt-8 col-start-1 row-start-3 md:row-start-2">
+    <ProseContent class="col-start-1 row-start-3 md:row-start-2" :class="{ 'md:mt-8': title || $slots.header }">
       <slot />
     </ProseContent>
 
