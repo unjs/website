@@ -1,0 +1,10 @@
+title: magic-regexp
+description: A compiled-away, type-safe, readable RegExp alternative
+github:
+  owner: unjs
+  repo: magic-regexp
+npm:
+  name: magic-regexp
+playgrounds:
+documentation: https://regexp.dev/
+layout: package

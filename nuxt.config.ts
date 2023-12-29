@@ -93,6 +93,6 @@ export default defineNuxtConfig({
     ...packagesRedirects as NitroConfig['routeRules'],
   },
   devtools: {
-    enable: true,
+    enabled: true,
   },
 })
