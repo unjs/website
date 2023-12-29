@@ -31,7 +31,7 @@ This latest release takes H3 even closer to offering native Web API compatibilit
 
 We have introduced a new built-in adapter with a [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)-compatible signature, with [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request) as input and [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) as the return value.
 
-What this signifies is that you can now seamlessly deploy your H3 applications on runtimes such as [Cloudflare Workers](https://workers.cloudflare.com/), [Deno Deploy](https://deno.com/deploy), [Bun](https://bun.sh/), and [Lagon](https://lagon.app/).
+What this signifies is that you can now seamlessly deploy your H3 applications on runtimes such as [Cloudflare Workers](https://workers.cloudflare.com/), [Deno Deploy](https://deno.com/deploy) and [Bun](https://bun.sh/).
 
 For practical examples and a demo, check out the [h3-on-edge](https://github.com/pi0/h3-on-edge) repository.
 
