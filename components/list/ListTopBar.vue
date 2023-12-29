@@ -59,8 +59,8 @@ function openFilter() {
       </UTooltip>
     </div>
   </div>
-  <UModal v-model="isFilterOpen">
-    <UCard>
+  <UModal v-model="isFilterOpen" :ui="{ base: 'overflow-visible' }">
+    <UCard :ui="{ base: 'overflow-visible' }">
       <h2 class="text-2xl font-bold mb-6">
         Filters
       </h2>
