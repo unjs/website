@@ -10,7 +10,6 @@ categories:
 packages:
 publishedAt: 2023-12-11
 modifiedAt: 2023-12-11
-layout: blog-post # TODO: remove
 ---
 
 Hey, Estéban here! 👋
