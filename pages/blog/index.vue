@@ -36,7 +36,7 @@ const authors = computed(() => blog.value.flatMap(item => item.authors).reduce((
 }, [] as Author[]))
 const selectedAuthors = ref<string[]>([])
 
-const packages = computed(() => blog.value.flatMap(item => item.packages).reduce((acc, pkg) => {
+const packages = computed(() => blog.value.flatMap(item => item.packages || []).reduce((acc, pkg) => {
   if (!acc.find(item => item === pkg))
     acc.push(pkg)
 
@@ -71,20 +71,32 @@ const { search, searchResults } = useSimpleSearch<BlogPostCard>(blog, {
 })
 
 const filtered = computed(() => {
-  if (!selectedAuthors.value.length && !selectedPackages.value.length)
-    return searchResults.value
+  let results: BlogPostCard[] = searchResults.value
 
-  return searchResults.value.filter((item) => {
-    let value = true
+  /**
+   * Authors
+   */
+  results = results.filter((item) => {
+    if (!selectedAuthors.value.length)
+      return true
 
-    if (value && selectedAuthors.value.length)
-      value = item.authors.some(author => selectedAuthors.value.includes(author.name))
-
-    if (value && selectedPackages.value.length)
-      value = item.packages.some(pkg => selectedPackages.value.includes(pkg))
-
-    return value
+    return item.authors.some(author => selectedAuthors.value.includes(author.name))
   })
+
+  /**
+   * Packages
+   */
+  results = results.filter((item) => {
+    if (!selectedPackages.value.length)
+      return true
+
+    if (!item.packages)
+      return false // Remove article that does not have packages when user filter on them
+
+    return item.packages.some(pkg => selectedPackages.value.includes(pkg))
+  })
+
+  return results
 })
 
 const results = sort(filtered)
