@@ -7,7 +7,7 @@ const props = defineProps<{
 
 if (props.error.statusCode === 404) {
   // @ts-expect-error URL exists
-  useTrackEvent('404', { props: { message: props.error.message, url: props.error.url } })
+  useTrackEvent('404', { props: { path: props.error.url } })
 }
 
 useSeoMeta({
