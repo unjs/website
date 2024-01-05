@@ -1,9 +1,14 @@
 <script setup lang="ts">
 import type { NuxtError } from '#app'
 
-defineProps<{
+const props = defineProps<{
   error: NuxtError
 }>()
+
+if (props.error.statusCode === 404) {
+  // @ts-expect-error URL exists
+  useTrackEvent('404', { props: { message: props.error.message, url: props.error.url } })
+}
 
 useSeoMeta({
   title: 'Page not found',
