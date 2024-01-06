@@ -5,10 +5,8 @@ const props = defineProps<{
   error: NuxtError
 }>()
 
-if (props.error.statusCode === 404) {
-  // @ts-expect-error URL exists
-  useTrackEvent('404', { props: { message: props.error.message, url: props.error.url } })
-}
+if (props.error.statusCode === 404)
+  useTrackEvent('404', { props: { path: document.location.pathname } })
 
 useSeoMeta({
   title: 'Page not found',
