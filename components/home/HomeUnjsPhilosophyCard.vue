@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { HomeUnjsPhilosophyCard } from '../../types/home'
+import type { HomeUnjsPhilosophyCard } from '~/types/home'
 
 defineProps<{
   card: HomeUnjsPhilosophyCard
@@ -7,13 +7,19 @@ defineProps<{
 </script>
 
 <template>
-  <div bg-white rounded-4 border border-light flex="~ col" gap-4>
-    <img aria-hidden="true" :src="card.image" aspect-video width="1920" height="1080">
-    <div px-6 pb-5 flex="~ col" gap-2>
-      <h3 md:text-xl text-gray-900 font-bold>
+  <div class="overflow-hidden bg-gray-300/20 ring-gray-300 dark:bg-gray-700/20 rounded-xl ring-1 dark:ring-gray-700 flex flex-col gap-4">
+    <AppColorModeImage
+      :light="card.image"
+      :dark="card.imageDark"
+      width="1920"
+      height="1080"
+      class="aspect-video"
+    />
+    <div class="px-6 pb-5 flex flex-col gap-2">
+      <h3 class="md:text-xl text-gray-950 dark:text-gray-50 font-bold">
         {{ card.title }}
       </h3>
-      <p text-gray-600>
+      <p class="text-gray-500 dark:text-gray-400">
         {{ card.description }}
       </p>
     </div>

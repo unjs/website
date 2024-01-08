@@ -1,0 +1,6 @@
+title: Blog
+description: Never miss a package release with the blog. Stay up-to-date on the latest announcements and get access to cutting-edge news.
+header:
+  image:
+    src: /assets/header/blog.svg
+    alt: Illustration of a browser with a blog article

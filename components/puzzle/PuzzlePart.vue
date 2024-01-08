@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { PuzzlePart } from 'types/puzzle'
+import type { PuzzlePart } from '~/types/puzzle'
 
 const props = defineProps<{
   part: PuzzlePart
@@ -10,8 +10,13 @@ const align = computed(() => props.part.align)
 </script>
 
 <template>
-  <div class="puzzle-part" flex transition-all ease-in duration-200>
-    <img v-if="part.name" :src="`/assets/puzzle/${part.name}.svg`">
+  <div class="puzzle-part flex transition-transform ease-in-out duration-200">
+    <template v-if="part.name">
+      <AppColorModeImage
+        :light="toPackagePuzzlePart(part.name)"
+        :dark="toPackagePuzzlePart(part.name, true)"
+      />
+    </template>
     <div v-else />
   </div>
 </template>

@@ -1,50 +1,47 @@
 <script lang="ts" setup>
-import type { BlogPostCard } from 'types/blog'
+import type { Author } from '~/types/blog'
 
 defineProps<{
-  post: BlogPostCard
+  path: string
+  title: string
+  description: string
+  publishedAt: string
+  authors: Author[]
 }>()
 </script>
 
 <template>
-  <article relative overflow-hidden bg="white" rounded="4" flex="~ col" gap-4 hover:shadow-lg transition="~ ease-in duration-150">
-    <img v-if="post.cover" :src="post.cover.src" :alt="post.cover.alt" width="1920" height="1080" aspect-video object-cover>
-    <div p="x-4 b-4" flex="~ col" gap-4>
-      <h2 text="gray-900 md:xl" font="semibold">
-        <NuxtLink :to="post._path">
-          {{ post.title }}
-          <span absolute inset-0 />
-        </NuxtLink>
-      </h2>
-      <p text="gray-600">
-        {{ post.description }}
-      </p>
-      <div>
-        <dl flex="~ justify-between" text="gray-700 sm">
-          <dt sr-only>
-            Published at
-          </dt>
-          <dd>
-            <time pubdate :datetime="toISODateString(post.publishedAt)">
-              {{ toLocaleDateString(post.publishedAt) }}
-            </time>
-          </dd>
-          <dt sr-only>
-            Authors
-          </dt>
-          <dd>
-            <ul flex="~" space-x--1>
-              <li v-for="(author, index) in post.authors" :key="author.name" relative :style="`z-index:${post.authors.length - index};`">
-                <address not-italic>
-                  <NuxtLink rel="author noopener" :to="`https://twitter.com/${author.twitter}`" target="_blank" relative z-1>
-                    <img :src="author.picture" :alt="`Profil picture of ${author.name}`" w-5 h-5 bg="white" rounded="full">
-                  </NuxtLink>
-                </address>
-              </li>
-            </ul>
-          </dd>
-        </dl>
-      </div>
-    </div>
-  </article>
+  <UCard as="article" :ui="{ base: 'h-full relative flex flex-col', background: 'bg-gray-300/20 hover:bg-gray-300/40 dark:bg-gray-700/40 hover:dark:bg-gray-700/60', divide: '', shadow: 'shadow-sm', ring: 'dark:highlight-white/10', rounded: 'rounded-lg', header: { base: 'flex gap-3 items-center', padding: 'py-0 pt-4 sm:px-4 sm:pt-4' }, body: { base: 'grow', padding: 'p-4 sm:p-4' }, footer: { padding: 'py-0 pb-4 sm:px-4 sm:pb-4' } }">
+    <template #header>
+      <h3 class="text-xl font-semibold dark:text-gray-50">
+        <NuxtLink :to="path" class="absolute inset-0" />
+        {{ title }}
+      </h3>
+    </template>
+
+    <p class="dark:text-zinc-400">
+      {{ description }}
+    </p>
+
+    <template #footer>
+      <dl class="dark:text-zinc-400 text-sm flex flex-row justify-between items-center">
+        <dt class="sr-only">
+          Published at
+        </dt>
+        <dd>
+          <time :datetime="toISODateString(publishedAt)">
+            {{ toLocaleDateString(publishedAt) }}
+          </time>
+        </dd>
+        <dt class="sr-only">
+          Authors
+        </dt>
+        <dd class="flex">
+          <UAvatarGroup size="2xs" :max="3" :ui="{ ring: '' }">
+            <UAvatar v-for="author in authors" :key="author.name" :src="author.picture" :alt="author.name" />
+          </UAvatarGroup>
+        </dd>
+      </dl>
+    </template>
+  </UCard>
 </template>

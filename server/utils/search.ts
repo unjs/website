@@ -17,12 +17,15 @@ export function splitPageIntoSections(page: ParsedContent) {
     level: 0,
   })
 
+  if (!page.body)
+    return sections
+
   // No section
   let section = 0
   let previousHeadingLevel = page.title ? 1 : 0
   const titles = page.title ? [page.title] : []
   for (const item of page.body.children) {
-    if (isHeading(item.tag)) {
+    if (item.tag && isHeading(item.tag)) {
       const currentHeadingLevel: number = Number(item.tag.match(HEADING)?.[1]) ?? 0
 
       const title = extractTextFromAst(item).trim()
@@ -41,7 +44,7 @@ export function splitPageIntoSections(page: ParsedContent) {
       }
 
       sections.push({
-        id: `${path}#${item.props.id}`,
+        id: `${path}#${item.props!.id}`,
         title,
         titles: [...titles],
         text: '',
@@ -55,7 +58,7 @@ export function splitPageIntoSections(page: ParsedContent) {
       section += 1
     }
 
-    if (!isHeading(item.tag))
+    if (item.tag && !isHeading(item.tag))
       sections[section].text += extractTextFromAst(item).trim()
   }
 

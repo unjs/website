@@ -3,10 +3,10 @@ name: CI
 on:
   push:
     branches:
-      - next
+      - main
   pull_request:
     branches:
-      - next
+      - main
 
 jobs:
   lint:
@@ -14,11 +14,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
       - run: corepack enable
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@b39b52d1213e96004bfcb1c61a8a6fa8ab84f3e8 # v4
         with:
-          node-version: 20
+          node-version: 20.5
           cache: pnpm
 
       - name: Install dependencies
@@ -32,11 +32,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
       - run: corepack enable
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@b39b52d1213e96004bfcb1c61a8a6fa8ab84f3e8 # v4
         with:
-          node-version: 20
+          node-version: 20.5
           cache: pnpm
 
       - name: Install dependencies
@@ -50,11 +50,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
       - run: corepack enable
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@b39b52d1213e96004bfcb1c61a8a6fa8ab84f3e8 # v4
         with:
-          node-version: 20
+          node-version: 20.5
           cache: pnpm
 
       - name: Install dependencies
@@ -62,3 +62,21 @@ jobs:
 
       - name: Generate files
         run: pnpm run generate
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+      - run: corepack enable
+      - uses: actions/setup-node@b39b52d1213e96004bfcb1c61a8a6fa8ab84f3e8 # v4
+        with:
+          node-version: 20.5
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build project
+        run: pnpm run build
