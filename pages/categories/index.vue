@@ -1,31 +1,63 @@
 <script lang="ts" setup>
-const { data: content } = await useAsyncData('blog-categories', () => queryContent('/blog/').only(['categories']).find())
+const { data, error } = await useAsyncData('blog:categories', () => queryContent('/blog/').only(['categories']).find())
+
+if (error.value) {
+  throw createError({
+    statusCode: 404,
+    message: 'Page not found',
+    fatal: true,
+  })
+}
+
+const title = 'Categories'
+const description = 'Blog\'s articles categories'
+useSeoMeta({
+  title,
+  ogTitle: title,
+  description,
+  ogDescription: description,
+})
 
 const categories = computed(() => {
-  const data = new Set<string>()
+  const dedupeCategories = new Set<string>()
 
-  if (content.value) {
-    for (const item of content.value) {
+  if (data.value) {
+    for (const item of data.value) {
       for (const category of item.categories)
-        data.add(category)
+        // Deduplicate categories
+        dedupeCategories.add(category)
     }
   }
 
-  return data
+  return Array.from(dedupeCategories).sort()
 })
 </script>
 
 <template>
-  <main>
-    <h1>
-      Categories
-    </h1>
-    <ul>
-      <li v-for="category in categories" :key="category">
-        <NuxtLink :to="`categories/${category}`">
-          {{ category }}
-        </NuxtLink>
-      </li>
-    </ul>
-  </main>
+  <Head>
+    <SchemaOrgWebPage :type="['CollectionPage']" />
+  </Head>
+  <Main v-if="data">
+    <template #header>
+      <PageHeader :title="title" :description="description" />
+    </template>
+
+    <section>
+      <h2 class="sr-only">
+        List of categories
+      </h2>
+      <ListGrid class="mt-8">
+        <ListGridItem v-for="category in categories" :key="category">
+          <UCard as="article" :ui="{ base: 'h-full relative flex flex-col', background: 'bg-gray-300/20 hover:bg-gray-300/40 dark:bg-gray-700/40 hover:dark:bg-gray-700/60', divide: '', shadow: 'shadow-sm', ring: 'dark:highlight-white/10', rounded: 'rounded-lg', header: { base: 'flex gap-3 items-center', padding: 'py-0 pt-4 pb-4 sm:px-4 sm:pt-4 sm:pb-4' }, body: { base: 'grow', padding: 'p-0 sm:p-0' } }">
+            <template #header>
+              <h3 class="text-xl font-semibold dark:text-gray-50">
+                <NuxtLink :to="`/categories/${category}`" class="absolute inset-0" />
+                {{ category }}
+              </h3>
+            </template>
+          </UCard>
+        </ListGridItem>
+      </ListGrid>
+    </section>
+  </Main>
 </template>
