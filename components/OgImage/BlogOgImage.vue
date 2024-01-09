@@ -20,9 +20,10 @@ const props = withDefaults(
 
 <template>
   <div
-    class="w-full h-full flex justify-between relative bg-gray-900 text-white"
+    class="w-full h-full flex justify-between relative text-white"
   >
-  <svg class="absolute top-0 right-0 w-[80%] h-[98%]" viewBox="0 0 1289 1036" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <img src="/og/og_bg.png" class="absolute inset-0 w-full h-full"/>
+  <!-- <svg class="absolute top-0 right-0 w-[80%] h-[98%]" viewBox="0 0 1289 1036" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g filter="url(#filter0_f_653_7294)">
       <ellipse cx="865.5" cy="328" rx="625.5" ry="468" fill="url(#paint0_linear_653_7294)" fill-opacity="0.9"/>
     </g>
@@ -37,13 +38,13 @@ const props = withDefaults(
         <stop offset="1" stop-color="#FBE84C" stop-opacity="0"/>
       </linearGradient>
     </defs>
-  </svg>
+  </svg> -->
 
-    <div class="p-[60px]" style="background: linear-gradient(to right, rgb(17, 24, 39, 1), rgb(17, 24, 39, 0.6), rgb(17, 24, 39, 0.1))">
+    <div class="p-[60px]">
       <div class="h-full w-full justify-between relative">
         <div class="flex flex-row justify-between items-start">
           <div class="flex flex-col w-full">
-            <h1 class="m-0 font-bold mb-[30px] text-[72px] text-white">{{ title.slice(0, 200) }}</h1>
+            <h1 class="m-0 font-bold mb-[30px] text-[72px] text-white">{{ title.slice(0, 120) }}</h1>
             <p
               v-if="description"
               class="text-[36px] text-white opacity-85"
