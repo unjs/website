@@ -25,7 +25,7 @@ useSeoMeta({
   twitterImage: joinURL(site.url, '/og/blog.jpg'),
 })
 
-const fields = ['_path', 'title', 'description', 'publishedAt', 'authors', 'packages']
+const fields = ['_path', 'title', 'description', 'publishedAt', 'authors', 'packages', 'categories']
 const { data: blog } = await useAsyncData('blog:articles', () => queryContent('/blog/').only(fields).sort({ publishedAt: -1 }).find(), { default: () => [] }) as { data: Ref<BlogPostCard[]> }
 
 const authors = computed(() => blog.value.flatMap(item => item.authors).reduce((acc, author) => {
@@ -43,6 +43,14 @@ const packages = computed(() => blog.value.flatMap(item => item.packages || []).
   return acc
 }, [] as string[]))
 const selectedPackages = ref<string[]>([])
+
+const categories = computed(() => blog.value.flatMap(item => item.categories || []).reduce((acc, category) => {
+  if (!acc.find(item => item === category))
+    acc.push(category)
+
+  return acc
+}, [] as string[]))
+const selectedCategories = ref<string[]>([])
 
 const orderByOptions: OrderByOption[] = [
   {
@@ -96,6 +104,16 @@ const filtered = computed(() => {
     return item.packages.some(pkg => selectedPackages.value.includes(pkg))
   })
 
+  /**
+   * Categories
+   */
+  results = results.filter((item) => {
+    if (!selectedCategories.value.length)
+      return true
+
+    return item.categories.some(category => selectedCategories.value.includes(category))
+  })
+
   return results
 })
 
@@ -105,6 +123,7 @@ function resetFilter() {
   search.value = ''
   selectedAuthors.value = []
   selectedPackages.value = []
+  selectedCategories.value = []
   order.value = defaultOrder
   orderBy.value = defaultOrderBy
 }
@@ -165,6 +184,22 @@ function resetFilter() {
               <UAvatar size="2xs" :src="`/assets/logos/${pkg}.svg`" :alt="`Icon of ${pkg}`" />
               <span class="truncate">
                 {{ pkg }}
+              </span>
+            </template>
+          </USelectMenu>
+          <USelectMenu
+            v-model="selectedCategories"
+            :options="categories"
+            color="gray"
+            variant="outline"
+            size="lg"
+            placeholder="Categories"
+            select-class="cursor-pointer"
+            multiple
+          >
+            <template #option="{ option: category }">
+              <span class="truncate capitalize">
+                {{ category }}
               </span>
             </template>
           </USelectMenu>
