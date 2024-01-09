@@ -17,7 +17,7 @@ if (error.value) {
 
 const site = useSiteConfig()
 
-const title = `${category} ${site.separator} Category`
+const title = `${category} ${site.separator} Categories`
 const description = `Blog's articles in the category ${category}`
 useSeoMeta({
   title,
