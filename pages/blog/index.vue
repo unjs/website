@@ -127,6 +127,14 @@ function resetFilter() {
   order.value = defaultOrder
   orderBy.value = defaultOrderBy
 }
+
+// Track search to analytics
+watchDebounced(search, () => {
+  if (!search.value)
+    return
+
+  useTrackEvent('Blog Search', { props: { query: search.value } })
+}, { debounce: 500 })
 </script>
 
 <template>
