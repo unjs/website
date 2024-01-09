@@ -46,7 +46,8 @@ function getLength(data: SearchDisplayItem): number {
   return value
 }
 
-watch(options, (value) => {
+// Debounce the event to avoid to send too many events
+watchDebounced(options, (value) => {
   if (!query.value)
     return
 
@@ -60,7 +61,7 @@ watch(options, (value) => {
   }
 
   useTrackEvent('Search', { props: { query: `${query.value} - ${length} results` } })
-})
+}, { debounce: 500 })
 
 function isLastChildren(children: SearchDisplayItem[] | null, index: number) {
   if (!children)
@@ -73,6 +74,7 @@ function onSelection(value: SearchDisplayItem | null) {
   if (!value)
     return
 
+  sendSelectionMetric(value)
   close()
   navigateTo(value.id)
 }
@@ -83,6 +85,11 @@ function close() {
     query.value = ''
     selected.value = null
   }, 200)
+}
+
+function sendSelectionMetric(value: SearchDisplayItem) {
+  const selection = value.titles.length > 0 ? `${value.titles.join(' - ')} - ${value.title}` : value.title
+  useTrackEvent('Search', { props: { selection } })
 }
 
 const comboboxInput = ref<ComponentPublicInstance<HTMLElement>>()
@@ -141,11 +148,12 @@ const isXs = breakpoints.smaller('mobile')
               <ComboboxOption
                 v-slot="{ active }"
                 :value="option"
-                @click="close"
+                @click="close()"
               >
                 <SearchItem
                   :active="active"
                   :item="option"
+                  @click="sendSelectionMetric(option)"
                 />
               </ComboboxOption>
               <ComboboxOption
@@ -153,13 +161,14 @@ const isXs = breakpoints.smaller('mobile')
                 :key="childOption.id"
                 v-slot="{ active }"
                 :value="childOption"
-                @click="close"
+                @click="close()"
               >
                 <SearchItem
                   :active="active"
                   :item="childOption"
                   child
                   :last="isLastChildren(option.children, index)"
+                  @click="sendSelectionMetric(childOption)"
                 />
               </ComboboxOption>
             </template>
