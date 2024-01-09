@@ -28,6 +28,13 @@ if (page.value?.packages) {
   if (data.value)
     packages.value = data.value
 }
+
+defineOgImageComponent("BlogOgImage", {
+  title: page.value?.title,
+  description: page.value?.description,
+  url: route.fullPath,
+  coverImage: '',
+});
 </script>
 
 <template>

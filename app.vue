@@ -42,7 +42,6 @@ useSeoMeta({
         ]"
       />
       <SchemaOrgWebSite :potential-action="[defineSearchAction({ target: '/search?q={search_term_string}' })]" />
-      <RobotMeta />
     </Head>
     <Body class="font-sans dark:bg-gray-900">
       <NuxtLoadingIndicator color="#ECDC5A" />

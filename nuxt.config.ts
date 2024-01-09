@@ -10,7 +10,7 @@ export default defineNuxtConfig({
     },
   },
   modules: [
-    '@nuxtseo/module',
+    '@nuxtjs/seo',
     '@nuxt/content',
     '@nuxt/ui',
     '@vueuse/nuxt',
