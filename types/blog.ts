@@ -21,4 +21,4 @@ export interface BlogPost extends ParsedContent {
   modifiedAt: Date
 }
 
-export type BlogPostCard = Pick<BlogPost, '_path' | 'cover' | 'title' | 'description' | 'publishedAt' | 'authors' | 'packages'>
+export type BlogPostCard = Pick<BlogPost, '_path' | 'cover' | 'title' | 'description' | 'publishedAt' | 'authors' | 'packages' | 'categories'>

@@ -17,7 +17,7 @@
     "packages:redirects": "jiti scripts/generate-packages-redirects && pnpm run lint:fix"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "2.6.1",
+    "@antfu/eslint-config": "2.6.2",
     "@headlessui/vue": "^1.7.16",
     "@iconify-json/heroicons": "^1.1.19",
     "@iconify-json/logos": "^1.1.42",
