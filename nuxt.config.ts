@@ -10,7 +10,7 @@ export default defineNuxtConfig({
     },
   },
   modules: [
-    '@nuxtseo/module',
+    '@nuxtjs/seo',
     '@nuxt/content',
     '@nuxt/ui',
     '@vueuse/nuxt',
@@ -85,6 +85,12 @@ export default defineNuxtConfig({
     families: {
       Nunito: [300, 400, 500, 600, 700, 800],
     },
+  },
+  ogImage: {
+    fonts: [
+      'Nunito:400',
+      'Nunito:700',
+    ],
   },
   site: {
     defaultLocale: 'en',
