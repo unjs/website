@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { joinURL } from 'ufo'
-
 const site = useSiteConfig()
 
 useHead({
@@ -21,13 +19,9 @@ useHead({
 
 useSeoMeta({
   ogSiteName: site.name,
-  ogImage: joinURL(site.url, '/og/home.jpg'),
-  ogImageWidth: 1440,
-  ogImageHeight: 810,
   ogType: 'website',
   twitterCard: 'summary_large_image',
   twitterSite: '@unjsio',
-  twitterImage: joinURL(site.url, '/og/home.jpg'),
 })
 </script>
 
