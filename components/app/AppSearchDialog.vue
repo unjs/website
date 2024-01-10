@@ -81,10 +81,8 @@ function onSelection(value: SearchDisplayItem | null) {
 
 function close() {
   emits('update:open', false)
-  setTimeout(() => {
-    query.value = ''
-    selected.value = null
-  }, 200)
+  query.value = ''
+  selected.value = null
 }
 
 function sendSelectionMetric(value: SearchDisplayItem) {
@@ -148,7 +146,7 @@ const isXs = breakpoints.smaller('mobile')
               <ComboboxOption
                 v-slot="{ active }"
                 :value="option"
-                @click="close()"
+                @click="close"
               >
                 <SearchItem
                   :active="active"
@@ -161,7 +159,7 @@ const isXs = breakpoints.smaller('mobile')
                 :key="childOption.id"
                 v-slot="{ active }"
                 :value="childOption"
-                @click="close()"
+                @click="close"
               >
                 <SearchItem
                   :active="active"
