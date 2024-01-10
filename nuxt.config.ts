@@ -86,6 +86,13 @@ export default defineNuxtConfig({
       Nunito: [300, 400, 500, 600, 700, 800],
     },
   },
+  ogImage: {
+    fonts: [
+      // will load the Noto Sans font from Google fonts
+      'Nunito:400',
+      'Nunito:700',
+    ],
+  },
   site: {
     defaultLocale: 'en',
     url: 'https://unjs.io',
