@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 const props = defineProps<{
   link: string
-  text: string
+  text?: string
 }>()
 
 const { data: article } = await useAsyncData(`article:${props.link}`, () => queryContent(`${props.link}`).only(['_path', 'title', 'description', 'image']).findOne())
