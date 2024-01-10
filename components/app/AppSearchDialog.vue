@@ -3,7 +3,7 @@ import { Combobox, ComboboxButton, ComboboxInput, ComboboxLabel, ComboboxOption,
 import { UButton } from '#components'
 import type { SearchDisplayItem } from '~/types/search'
 
-defineProps<{
+const props = defineProps<{
   open: boolean
 }>()
 
@@ -71,7 +71,7 @@ function isLastChildren(children: SearchDisplayItem[] | null, index: number) {
 }
 
 function onSelection(value: SearchDisplayItem | null) {
-  if (!value)
+  if (!value || !props.open)
     return
 
   sendSelectionMetric(value)
@@ -80,9 +80,9 @@ function onSelection(value: SearchDisplayItem | null) {
 }
 
 function close() {
-  emits('update:open', false)
   query.value = ''
   selected.value = null
+  emits('update:open', false)
 }
 
 function sendSelectionMetric(value: SearchDisplayItem) {
