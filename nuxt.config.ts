@@ -88,7 +88,6 @@ export default defineNuxtConfig({
   },
   ogImage: {
     fonts: [
-      // will load the Noto Sans font from Google fonts
       'Nunito:400',
       'Nunito:700',
     ],

@@ -14,7 +14,7 @@ defineProps<{
     <div class="pt-[120px] px-[60px] pb-[60px]">
       <div class="h-full w-full justify-between relative">
         <div class="flex flex-row justify-between items-start">
-          <div class="flex flex-col gap-3 ">
+          <div class="flex flex-col gap-3">
             <h1 class="my-0 font-bold text-[56px] text-white">
               {{ title }}
             </h1>
