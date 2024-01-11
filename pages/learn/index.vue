@@ -30,7 +30,7 @@ const categories = [{
   label: 'Intermediate',
   description: 'Dive into more advanced UnJS concepts and techniques',
 }, {
-  id: 'advanced',
+  id: 'build',
   label: 'Build',
   description: 'Create real-world projects by assambling UnJS packages',
 }, {
@@ -41,6 +41,7 @@ const categories = [{
 </script>
 
 <template>
+  <!-- Once ready, create components -->
   <Main v-if="page">
     <template #header>
       <PageHeader :title="page.title" :description="page.descriptions" />
