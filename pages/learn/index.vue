@@ -22,9 +22,9 @@ const { data: latestBlog } = await useAsyncData('blog:latest', () => queryConten
 const latestArticles = []
 
 const categories = [{
-  id: 'basics',
-  label: 'Basics',
-  description: 'Get started with the UnJS ecosystem',
+  id: 'getting-started',
+  label: 'Getting Started',
+  description: 'Start by the basics of the UnJS ecosystem',
 }, {
   id: 'intermediate',
   label: 'Intermediate',
