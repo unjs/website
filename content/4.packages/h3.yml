@@ -6,4 +6,5 @@ github:
 npm:
   name: h3
 documentation: https://h3.unjs.io
+examples: https://github.com/unjs/h3/blob/main/examples
 layout: package

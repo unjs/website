@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 defineProps<{
+  title?: string
   packages: {
     _path: string
     title: string
@@ -10,7 +11,7 @@ defineProps<{
 <template>
   <ProseNavGroup icon="i-heroicons-cube-solid">
     <template #title>
-      Packages
+      {{ title ?? 'Packages' }}
     </template>
     <template #links>
       <ol>
