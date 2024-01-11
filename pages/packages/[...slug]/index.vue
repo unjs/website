@@ -110,7 +110,6 @@ defineShortcuts({
             <template #title>
               Resources
             </template>
-            <!-- TODO: add link to examples -->
             <template #links>
               <ProseNavGroupLink v-if="page.npm" :to="toNpmPackage(page.npm.name)" target="_blank" icon="i-simple-icons-npm">
                 Discover on npm
@@ -120,6 +119,9 @@ defineShortcuts({
               </ProseNavGroupLink>
               <ProseNavGroupLink v-if="page.playgrounds?.codesandbox" :to="page.playgrounds.codesandbox" target="_blank" icon="i-simple-icons-codesandbox">
                 Open on CodeSandbox
+              </ProseNavGroupLink>
+              <ProseNavGroupLink v-if="page.examples" :to="`/packages/${page.title}/examples?utm_source=unjs.io&utm_medium=package-nav`" icon="i-heroicons-code-bracket">
+                Explore examples
               </ProseNavGroupLink>
             </template>
           </ProseNavGroup>

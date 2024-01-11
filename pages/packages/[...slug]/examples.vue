@@ -4,7 +4,7 @@ import type { ParsedContent } from '@nuxt/content/dist/runtime/types'
 const route = useRoute()
 const slug = route.params.slug as string
 
-const { data: unjsPackage, error: unjsPackageError } = await useAsyncData(`packages:${slug}`, () => queryContent(`/packages/${slug}`).only(['_path', 'title', 'description', 'examples']).findOne(), { default: () => {} })
+const { data: unjsPackage, error: unjsPackageError } = await useAsyncData(`packages:${slug}`, () => queryContent(`/packages/${slug}`).only(['_path', 'title', 'description', 'examples', 'github']).findOne(), { default: () => {} })
 
 if (unjsPackageError.value) {
   throw createError({
@@ -88,6 +88,24 @@ const toc = computed(() => {
           <UDivider />
           <ArticleProseNavGroupPackages :packages="[unjsPackage]" title="Package" />
         </template>
+        <UDivider />
+
+        <ProseNavGroup icon="i-simple-icons-github">
+          <template #title>
+            GitHub
+          </template>
+          <template #links>
+            <ProseNavGroupLink v-if="unjsPackage.examples" :to="unjsPackage.examples" target="_blank" icon="i-simple-icons-github">
+              Examples
+            </ProseNavGroupLink>
+            <ProseNavGroupLink
+              :to="toGitHubIssue(unjsPackage.github.owner, unjsPackage.github.repo)" target="_blank"
+              icon="i-simple-icons-github"
+            >
+              Report an issue
+            </ProseNavGroupLink>
+          </template>
+        </ProseNavGroup>
         <UDivider />
         <ArticleProseNavGroupCommunity />
       </template>
