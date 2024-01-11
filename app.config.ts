@@ -92,6 +92,7 @@ export default defineAppConfig({
           ],
         },
         {
+          // TODO: add a link to a page examples
           title: 'Content',
           items: [
           //   {

@@ -110,6 +110,7 @@ defineShortcuts({
             <template #title>
               Resources
             </template>
+            <!-- TODO: add link to examples -->
             <template #links>
               <ProseNavGroupLink v-if="page.npm" :to="toNpmPackage(page.npm.name)" target="_blank" icon="i-simple-icons-npm">
                 Discover on npm
