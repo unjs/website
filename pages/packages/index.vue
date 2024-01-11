@@ -19,6 +19,7 @@ const site = useSiteConfig()
 
 useSeoMeta({
   title: page.value?.title,
+  ogTitle: page.value?.title,
   description: page.value?.description,
   ogDescription: page.value?.description,
   ogImage: joinURL(site.url, '/og/packages.jpg'),

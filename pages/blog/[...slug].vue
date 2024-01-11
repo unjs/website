@@ -13,8 +13,10 @@ if (error.value) {
 
 const site = useSiteConfig()
 
+const title = `${page.value?.title} ${site.separator} Blog`
 useSeoMeta({
-  title: `${page.value?.title} ${site.separator} Blog`,
+  title,
+  ogTitle: title,
   description: page.value?.description,
   ogDescription: page.value?.description,
 })
