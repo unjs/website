@@ -80,3 +80,24 @@ jobs:
 
       - name: Build project
         run: pnpm run build
+
+  check:
+    name: Check Content
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+      - run: corepack enable
+      - uses: actions/setup-node@b39b52d1213e96004bfcb1c61a8a6fa8ab84f3e8 # v4
+        with:
+          node-version: 20.5
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Check puzzle parts
+        run: pnpm run cli check puzzle
+
+      - name: Check logos
+        run: pnpm run cli check logos
