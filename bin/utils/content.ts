@@ -14,6 +14,12 @@ export function getPackagesPath() {
   return join(contentPath, '4.packages')
 }
 
+export function getBlogPath() {
+  const contentPath = getContentPath()
+
+  return join(contentPath, '5.blog')
+}
+
 export function getPackages() {
   const packagesPath = getPackagesPath()
 
