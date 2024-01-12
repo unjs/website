@@ -1,42 +1,44 @@
-import process from 'node:process'
 import { execSync } from 'node:child_process'
-import { consola } from 'consola'
+import { env, exit } from 'node:process'
+import { join } from 'node:path'
+import { defineCommand } from 'citty'
+import consola from 'consola'
 import { ofetch } from 'ofetch'
-import { fetchRepos } from './utils/github'
-import { createPackage, generatePackagesRedirections, getContentPackages, getPackagesWithoutRepo, getReposWithoutPackage, removePackage } from './utils/packages'
-import type { GitHubRepo } from './types'
+import { fetchRepos } from '../../utils/github'
+import { addPackage, getPackages, getPackagesPath, removePackage } from '../../utils/content'
+import { getPackagesRedirectsPath } from '../../utils/config'
+import type { GitHubRepo } from '../../types'
 
-const owner = 'unjs'
-const repo = 'website'
+export const syncPackages = defineCommand({
+  meta: {
+    name: 'Sync Packages',
+    description: 'Sync packages from repositories by creating PR (1 per diff)',
+  },
+  async run() {
+    const repos = await fetchRepos()
+    const packages = getPackages()
 
-/**
- * This script is used in a CI to automatically add or remove new UnJS packages to the website.
- */
-async function main() {
-  const orgRepos = await fetchRepos()
-  const packages = getContentPackages()
+    // Repositories without a package (will create a PR to ADD)
+    const reposWithoutPackage = repos.filter(repo => !packages.includes(repo.name))
 
-  // Repos that does not have a package
-  const reposWithoutPackage = getReposWithoutPackage(orgRepos, packages) // Must then add a file
-  // Package that does not have a repo
-  const packagesWithoutRepo = getPackagesWithoutRepo(packages, orgRepos) // Must then remove a file
+    // Packages without a repository (will create a PR to REMOVE
+    const packagesWithoutRepo = packages.filter(package_ => !repos.find(repo => repo.name === package_))
 
-  execSync('git config user.name "barbapapazes"')
-  execSync('git config user.email "e.soubiran25@gmail.com"')
+    execSync('git config user.name "barbapapazes"')
+    execSync('git config user.email "e.soubiran25@gmail.com"')
 
-  for (const repo of reposWithoutPackage)
-    await createPR(repo.name, orgRepos, 'add')
+    for (const repo of reposWithoutPackage)
+      await createPR(repo.name, repos, 'add')
 
-  for (const package_ of packagesWithoutRepo)
-    await createPR(package_, orgRepos, 'remove')
-}
-
-main().catch((err) => {
-  consola.error(err)
-  process.exit(1)
+    for (const package_ of packagesWithoutRepo)
+      await createPR(package_, repos, 'remove')
+  },
 })
 
 async function createPR(package_: string, repos: GitHubRepo[], operation: 'add' | 'remove') {
+  const owner = 'unjs'
+  const repo = 'website'
+
   let branch: string = ''
   let type: string = ''
   let title: string = ''
@@ -66,26 +68,28 @@ async function createPR(package_: string, repos: GitHubRepo[], operation: 'add' 
     const repo = repos.find(repo => repo.name === package_)
     if (!repo) {
       consola.fatal(`Repo ${package_} not found.`)
-      process.exit(1)
+      exit(1)
     }
-    createPackage(repo)
+    addPackage(repo)
   }
   else if (operation === 'remove') {
     removePackage(package_)
   }
 
-  await generatePackagesRedirections()
+  execSync('pnpm run cli sync packages-redirects --format')
 
-  execSync('pnpm run lint:fix')
-
-  execSync('git add ./config/packages-redirects.ts')
-  execSync(`git add ./content/4.packages/${package_}.yml`)
+  const packagesRedirectsPath = getPackagesRedirectsPath()
+  // Add redirects
+  execSync(`git add ${packagesRedirectsPath}`)
+  const packagesPath = getPackagesPath()
+  // Add packages file
+  execSync(`git add ${join(packagesPath, `${package_}.yml`)}`)
   try {
     execSync(`git commit -m "${type}: ${title}"`)
   }
   catch (err) {
     consola.info('No changes to commit.')
-    process.exit(0)
+    exit(0)
   }
   execSync(`git push -u origin ${branch} --force`)
 
@@ -97,7 +101,7 @@ async function createPR(package_: string, repos: GitHubRepo[], operation: 'add' 
     return await ofetch(`https://api.github.com/repos/${owner}/${repo}/pulls`, {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+        Authorization: `Bearer ${env.GITHUB_TOKEN}`,
       },
       body: {
         title: `${type}: ${title}`,
