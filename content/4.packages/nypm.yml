@@ -6,4 +6,3 @@ github:
 npm:
   name: nypm
 documentation: https://github.com/unjs/nypm
-layout: package

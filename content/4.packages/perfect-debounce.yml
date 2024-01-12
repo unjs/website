@@ -6,4 +6,3 @@ github:
 npm:
   name: perfect-debounce
 documentation: https://github.com/unjs/perfect-debounce
-layout: package

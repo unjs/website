@@ -8,4 +8,3 @@ github:
 npm:
   name: pkg-types
 documentation: https://github.com/unjs/pkg-types
-layout: package
