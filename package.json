@@ -13,8 +13,7 @@
     "lint:md:fix": "markdownlint --fix ./content && case-police --fix content/**/*",
     "prepare": "nuxt prepare",
     "preview": "nuxt preview",
-    "cli": "jiti bin",
-    "packages:redirects": "jiti scripts/generate-packages-redirects && pnpm run lint:fix"
+    "cli": "jiti bin"
   },
   "devDependencies": {
     "@antfu/eslint-config": "2.6.2",
