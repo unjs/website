@@ -9,6 +9,7 @@ const main = defineCommand({
     check: () => import('./commands/check').then(m => m.check),
     generate: () => import('./commands/generate').then(m => m.generate),
     sync: () => import('./commands/sync').then(m => m.sync),
+    github: () => import('./commands/github').then(m => m.github),
   },
 })
 

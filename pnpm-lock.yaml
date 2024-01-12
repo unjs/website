@@ -86,6 +86,9 @@ devDependencies:
   nuxt-payload-analyzer:
     specifier: ^0.1.4
     version: 0.1.4
+  ofetch:
+    specifier: ^1.3.3
+    version: 1.3.3
   unstorage:
     specifier: ^1.10.1
     version: 1.10.1
@@ -6196,7 +6199,7 @@ packages:
       defu: 6.1.3
       https-proxy-agent: 7.0.2
       mri: 1.2.0
-      node-fetch-native: 1.4.1
+      node-fetch-native: 1.6.1
       pathe: 1.1.1
       tar: 6.2.0
     transitivePeerDependencies:
@@ -9025,7 +9028,7 @@ packages:
     resolution: {integrity: sha512-s1ZCMmQWXy4b5K/TW9i/DtiN8Ku+xCiHcjQ6/J/nDdssirrQNOoB165Zu8EqLMA2lln1JUth9a0aW9Ap2ctrUg==}
     dependencies:
       destr: 2.0.2
-      node-fetch-native: 1.4.1
+      node-fetch-native: 1.6.1
       ufo: 1.3.2
     dev: true
 
@@ -11186,7 +11189,7 @@ packages:
       consola: 3.2.3
       defu: 6.1.3
       mime: 3.0.0
-      node-fetch-native: 1.4.1
+      node-fetch-native: 1.6.1
       pathe: 1.1.1
     dev: true
 
