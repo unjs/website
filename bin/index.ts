@@ -7,6 +7,7 @@ const main = defineCommand({
   },
   subCommands: {
     check: () => import('./commands/check').then(m => m.check),
+    generate: () => import('./commands/generate').then(m => m.generate),
   },
 })
 
