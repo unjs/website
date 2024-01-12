@@ -101,3 +101,6 @@ jobs:
 
       - name: Check logos
         run: pnpm run cli check logos
+
+      - name: Check Package Redirects
+        run: pnpm run cli check packages-redirects

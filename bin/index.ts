@@ -2,7 +2,7 @@ import { defineCommand, runMain } from 'citty'
 
 const main = defineCommand({
   meta: {
-    name: 'unjs/website',
+    name: 'jiti bin', // Not the name but useful when printing the usage
     description: 'Interact with the website',
   },
   subCommands: {
