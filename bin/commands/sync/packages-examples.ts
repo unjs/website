@@ -1,7 +1,5 @@
 import { defineCommand } from 'citty'
-import { ofetch } from 'ofetch'
-import { getPackages, loadPackageContent, writePackageContent } from '../../utils/content'
-import type { GitHubFile } from '../../types'
+import { getExamplesLink, getPackages, loadPackageContent, writePackageContent } from '../../utils/content'
 
 export const packagesExamples = defineCommand({
   meta: {
@@ -15,6 +13,8 @@ export const packagesExamples = defineCommand({
     for (const package_ of packages) {
       const content = loadPackageContent(package_)
 
+      // Could be added a force argument to force the update
+      // This allow use to add examples link manually (or null, if the repo is not in the root of the repo or if the examples are not appropriate)
       if (content.examples)
         continue
 
@@ -23,16 +23,16 @@ export const packagesExamples = defineCommand({
 
     // We assume that examples will be in the root of the repo in the examples directory
     const examples = await Promise.all(packagesContents.map(async (content) => {
-      const files = await ofetch<{ files: GitHubFile[] }>(`https://ungh.cc/repos/${content.github.owner}/${content.github.repo}/files/main`)
+      const examplesLink = await getExamplesLink(content.title)
 
-      const hasExamples = files.files.some(f => f.path.startsWith('examples/'))
-
-      if (!hasExamples)
+      if (!examplesLink) {
+        // Remove examples link
+        delete content.examples
         return content
+      }
 
       // Add examples link
-      content.examples = `https://github.com/${content.github.owner}/${content.github.repo}/blob/main/examples`
-
+      content.examples = examplesLink
       return content
     }))
 

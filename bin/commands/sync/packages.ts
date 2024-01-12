@@ -1,7 +1,7 @@
 import { defineCommand } from 'citty'
 import { consola } from 'consola'
 import { fetchRepos } from '../../utils/github'
-import { addPackage, getPackages, removePackage } from '../../utils/content'
+import { addPackage, getExamplesLink, getPackages, removePackage } from '../../utils/content'
 
 export const packages = defineCommand({
   meta: {
@@ -14,9 +14,14 @@ export const packages = defineCommand({
     // Repositories without a package
     const reposWithoutPackage = repos.filter(repo => !packages.includes(repo.name))
 
-    for (const repo of reposWithoutPackage) {
+    for await (const repo of reposWithoutPackage) {
       consola.info(`Creating ${repo.name}`)
-      addPackage(repo)
+      const examplesLinks = await getExamplesLink(repo.name)
+      addPackage({
+        name: repo.name,
+        description: repo.description,
+        examples: examplesLinks,
+      })
     }
 
     // Packages without a repository

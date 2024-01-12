@@ -5,7 +5,7 @@ import { defineCommand } from 'citty'
 import consola from 'consola'
 import { ofetch } from 'ofetch'
 import { fetchRepos } from '../../utils/github'
-import { addPackage, getPackages, getPackagesPath, removePackage } from '../../utils/content'
+import { addPackage, getExamplesLink, getPackages, getPackagesPath, removePackage } from '../../utils/content'
 import { getPackagesRedirectsPath } from '../../utils/config'
 import type { GitHubRepo } from '../../types'
 
@@ -70,7 +70,12 @@ async function createPR(package_: string, repos: GitHubRepo[], operation: 'add' 
       consola.fatal(`Repo ${package_} not found.`)
       exit(1)
     }
-    addPackage(repo)
+    const examplesLink = await getExamplesLink(repo.name)
+    addPackage({
+      name: repo.name,
+      description: repo.description,
+      examples: examplesLink,
+    })
   }
   else if (operation === 'remove') {
     removePackage(package_)

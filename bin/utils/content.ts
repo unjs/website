@@ -2,7 +2,8 @@ import { readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { cwd } from 'node:process'
 import yaml from 'js-yaml'
-import type { ContentPackage, GitHubRepo } from '../types'
+import { ofetch } from 'ofetch'
+import type { ContentPackage, GitHubFile } from '../types'
 
 export function getContentPath() {
   const currentPath = cwd()
@@ -36,8 +37,10 @@ export function getPackages() {
   return readdirSync(packagesPath).filter(p => p.endsWith('.yml') && !p.startsWith('.')).map(p => p.replace('.yml', ''))
 }
 
-export function addPackage(repo: GitHubRepo) {
+export function addPackage(repo: { name: string, description: string, examples: string | null }) {
   const packagesPath = getPackagesPath()
+
+  // TODO: load examples from github
 
   const template = readFileSync(join(packagesPath, '.template.yml'), 'utf-8')
 
@@ -46,6 +49,7 @@ export function addPackage(repo: GitHubRepo) {
     .replace('package_description', repo.description)
     .replace('repo_name', repo.name)
     .replace('npm_name', repo.name)
+    .replace('docs_link', repo.examples || 'null')
     .replace('docs_link', `https://github.com/unjs/${repo.name}`))
 }
 
@@ -53,4 +57,12 @@ export function removePackage(name: string) {
   const packagesPath = getPackagesPath()
 
   rmSync(join(packagesPath, `${name}.yml`))
+}
+
+export async function getExamplesLink(name: string) {
+  const files = await ofetch<{ files: GitHubFile[] }>(`https://ungh.cc/repos/unjs/${name}/files/main`)
+
+  const hasExamples = files.files.some(f => f.path.startsWith('examples/'))
+
+  return hasExamples ? `https://github.com/unjs/${name}/blob/main/examples` : null
 }
