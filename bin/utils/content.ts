@@ -1,7 +1,8 @@
 import { readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { cwd } from 'node:process'
-import type { GitHubRepo } from '../types'
+import yaml from 'js-yaml'
+import type { ContentPackage, GitHubRepo } from '../types'
 
 export function getContentPath() {
   const currentPath = cwd()
@@ -19,6 +20,14 @@ export function getBlogPath() {
   const contentPath = getContentPath()
 
   return join(contentPath, '5.blog')
+}
+
+export function loadPackageContent(name: string) {
+  return yaml.load(readFileSync(join(getPackagesPath(), `${name}.yml`), 'utf-8')) as ContentPackage
+}
+
+export function writePackageContent(package_: ContentPackage) {
+  writeFileSync(join(getPackagesPath(), `${package_.title}.yml`), yaml.dump(package_))
 }
 
 export function getPackages() {

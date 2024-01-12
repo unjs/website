@@ -6,6 +6,7 @@ export const sync = defineCommand({
   },
   subCommands: {
     'packages-redirects': () => import('./sync/packages-redirects').then(m => m.packagesRedirects),
+    'packages-examples': () => import('./sync/packages-examples').then(m => m.packagesExamples),
     'packages': () => import('./sync/packages').then(m => m.packages),
   },
 })

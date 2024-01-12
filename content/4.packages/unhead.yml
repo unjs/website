@@ -7,3 +7,4 @@ npm:
   name: unhead
 documentation: https://github.com/unjs/unhead
 layout: package
+examples: https://github.com/unjs/unhead/blob/main/examples

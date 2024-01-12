@@ -1,5 +1,7 @@
 title: pkg-types
-description: Node.js utilities and TypeScript definitions for package.json and tsconfig.json
+description: >-
+  Node.js utilities and TypeScript definitions for package.json and
+  tsconfig.json
 github:
   owner: unjs
   repo: pkg-types

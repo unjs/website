@@ -47,6 +47,9 @@ devDependencies:
   '@nuxtjs/seo':
     specifier: 2.0.0-rc.4
     version: 2.0.0-rc.4(@nuxt/devtools@1.0.6)(@unhead/shared@1.8.9)(@vue/compiler-core@3.4.7)(h3@1.10.0)(nuxt@3.9.1)(postcss@8.4.33)(unhead@1.8.9)(vite@5.0.11)(vue@3.4.7)(webpack@5.89.0)
+  '@types/js-yaml':
+    specifier: ^4.0.9
+    version: 4.0.9
   '@types/node':
     specifier: ^20.10.8
     version: 20.10.8
@@ -71,6 +74,9 @@ devDependencies:
   jiti:
     specifier: ^1.21.0
     version: 1.21.0
+  js-yaml:
+    specifier: ^4.1.0
+    version: 4.1.0
   magicast:
     specifier: ^0.3.2
     version: 0.3.2
@@ -2888,6 +2894,10 @@ packages:
     resolution: {integrity: sha512-SSrD0c1OQzlFX7pGu1eXxSEjemej64aaNPRhhVYUGqXh0BtldAAx37MG8btcumvpgKyZp1F5Gn3JkktdxiFv6w==}
     dependencies:
       '@types/node': 20.10.8
+    dev: true
+
+  /@types/js-yaml@4.0.9:
+    resolution: {integrity: sha512-k4MGaQl5TGo/iipqb2UDG2UwjXziSWkh0uysQelTlJpX1qGlpUZYm8PnO4DxG1qBomtJUdYJ6qR6xdIah10JLg==}
     dev: true
 
   /@types/json-schema@7.0.14:

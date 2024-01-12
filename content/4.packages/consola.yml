@@ -7,3 +7,4 @@ npm:
   name: consola
 documentation: https://github.com/unjs/consola#-consola
 layout: package
+examples: https://github.com/unjs/consola/blob/main/examples
