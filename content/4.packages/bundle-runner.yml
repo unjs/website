@@ -6,4 +6,3 @@ github:
 npm:
   name: bundle-runner
 documentation: https://github.com/unjs/bundle-runner
-layout: package

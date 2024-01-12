@@ -6,4 +6,3 @@ github:
 npm:
   name: unpdf
 documentation: https://github.com/unjs/unpdf
-layout: package

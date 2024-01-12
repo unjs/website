@@ -7,4 +7,3 @@ npm:
   name: magic-regexp
 playgrounds:
 documentation: https://regexp.dev/
-layout: package

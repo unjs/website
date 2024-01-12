@@ -6,4 +6,3 @@ github:
 npm:
   name: changelogen
 documentation: https://github.com/unjs/changelogen#changelogen
-layout: package
