@@ -6,4 +6,6 @@ github:
 npm:
   name: citty
 documentation: https://github.com/unjs/citty#-citty
-layout: package
+examples:
+  link: null
+  page: false

@@ -6,4 +6,6 @@ github:
 npm:
   name: mlly
 documentation: https://github.com/unjs/mlly
-layout: package
+examples:
+  link: null
+  page: false

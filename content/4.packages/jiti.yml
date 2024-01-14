@@ -6,4 +6,6 @@ github:
 npm:
   name: jiti
 documentation: https://github.com/unjs/jiti
-layout: package
+examples:
+  link: null
+  page: false

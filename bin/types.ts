@@ -25,3 +25,29 @@ export interface GithubRelease {
   markdown: string
   html: string
 }
+
+// https://github.com/unjs/ungh#reposownernamefilesbranch
+export interface GitHubFile {
+  path: string
+  mode: string
+  sha: string
+  size: number
+}
+
+export interface ContentPackage {
+  title: string
+  description: string
+  github: {
+    owner: string
+    repo: string
+  }
+  npm?: {
+    name: string
+  }
+  documentation: string
+  examples?: {
+    link: string | null
+    page: boolean
+  }
+  playgrounds?: Record<string, string>
+}

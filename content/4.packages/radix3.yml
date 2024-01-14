@@ -6,4 +6,6 @@ github:
 npm:
   name: radix3
 documentation: https://github.com/unjs/radix3
-layout: package
+examples:
+  link: null
+  page: false

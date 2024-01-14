@@ -1,54 +1,60 @@
-import { exit } from 'node:process'
-import fs from 'node:fs'
-import { consola } from 'consola'
-import { fetchReleases, fetchRepos } from './utils/github'
-import type { GithubRelease } from './types'
+import { writeFileSync } from 'node:fs'
+import { defineCommand } from 'citty'
+import { fetchReleases, fetchRepos } from '../../utils/github'
+import { getCurrentMonth, getCurrentYear } from '../../utils/date'
+import { getBlogPath } from '../../utils/content'
+import type { GithubRelease } from '../../types'
 
-/**
- * This script is used to fetch all releases from UnJS packages to create a draft for an article to publish on our blog.
- */
-async function main() {
-  const repos = await fetchRepos()
+export const releasesArticle = defineCommand({
+  meta: {
+    name: 'releases-article',
+    description: 'Generate an article with all releases of the current month',
+  },
+  async run() {
+    const blogPath = getBlogPath()
 
-  const releases = await fetchReleases(repos)
+    const currentMonth = getCurrentMonth()
+    const currentYear = getCurrentYear()
 
-  const today = new Date()
-  const currentYear = today.getFullYear()
-  const currentMonth = today.getMonth() + 1
-  // Filter releases to only keep the ones from the current year and month
-  const releasesFromCurrentMonth = releases.reduce((acc, releases) => {
-    const filtered = releases.releases.filter((release) => {
-      const releaseDate = new Date(release.publishedAt)
-      const releaseYear = releaseDate.getFullYear()
-      const releaseMonth = releaseDate.getMonth() + 1
+    /**
+     * Retrieve correct data
+     */
 
-      return releaseYear === currentYear && releaseMonth === currentMonth && release.prerelease === false && release.draft === false
-    })
+    const repos = await fetchRepos()
+    const releases = await fetchReleases(repos)
 
-    if (filtered.length > 0) {
-      acc.push({
-        ...releases,
-        releases: filtered,
-      })
-    }
+    const currentReleases = releases.reduce((acc, _releases) => {
+      const filtered = getMonthReleases(_releases.releases, currentYear, currentMonth)
 
-    return acc
-  }, [] as { name: string, releases: GithubRelease[] }[]).sort((a, b) => a.name.localeCompare(b.name))
+      if (filtered.length) {
+        acc.push({
+          ..._releases,
+          releases: filtered,
+        })
+      }
 
-  const numberOfReleases = releasesFromCurrentMonth.reduce((acc, releases) => acc + releases.releases.length, 0)
+      return acc
+    }, [] as { name: string, releases: GithubRelease[] }[]).sort((a, b) => a.name.localeCompare(b.name))
 
-  // Create the article (draft)
-  const currentMonthName = today.toLocaleString('default', { month: 'long' })
-  const currentDay = today.getDate()
-  const filename = `${currentYear}-${currentMonth}-${currentDay}-${currentMonthName.toLocaleLowerCase()}-monthly-updates.md`
-  const title = `Monthly updates (${currentMonthName} ${currentYear})`
+    const numberOfReleases = currentReleases.reduce((acc, releases) => acc + releases.releases.length, 0)
 
-  const article = /* md */`---
+    /**
+     * Create the article
+     */
+    const today = new Date()
+    const currentMonthName = today.toLocaleString('default', { month: 'long' })
+    const currentDay = today.getDate()
+    const filename = `${currentYear}-${currentMonth.toLocaleString('en-US', {
+    minimumIntegerDigits: 2,
+    useGrouping: false,
+  })}-${currentDay.toLocaleString('en-US', {
+    minimumIntegerDigits: 2,
+    useGrouping: false,
+  })}-${currentMonthName.toLocaleLowerCase()}-monthly-updates.md`
+    const title = `Monthly updates (${currentMonthName} ${currentYear})`
+    const article = /* md */`---
 title: ${title}
 description: ${numberOfReleases} releases this month! What's new in the UnJS ecosystem?
-image:
-  src:
-  alt:
 authors:
   - name:
     picture:
@@ -56,18 +62,30 @@ authors:
 category:
   - releases
 packages:
-  - ${releasesFromCurrentMonth.map(releases => releases.name).join('\n  - ')}
+  - ${currentReleases.map(releases => releases.name).join('\n  - ')}
 publishedAt: ${today.toISOString()}
 modifiedAt: ${today.toISOString()}
-layout: blog-post
 ---
 
-${releasesFromCurrentMonth.map(releases => `## ${releases.name}\n\nThis month, we release ${releases.releases.length} new ${releases.releases.length > 1 ? 'releases' : 'release'} (${logReleasesTypes(releases.releases)}):\n\n${releases.releases.map(release => `- [${release.tag}](https://github.com/unjs/${releases.name}/releases/tag/${release.tag})`).join('\n')}\n\n${formatReleasesMarkdown(releases.releases)}`).join('\n\n')}`
+${currentReleases.map(releases => `## ${releases.name}\n\nThis month, we release ${releases.releases.length} new ${releases.releases.length > 1 ? 'releases' : 'release'} (${logReleasesTypes(releases.releases)}):\n\n${releases.releases.map(release => `- [${release.tag}](https://github.com/unjs/${releases.name}/releases/tag/${release.tag})`).join('\n')}\n\n${formatReleasesMarkdown(releases.releases)}`).join('\n\n')}`
 
-  fs.writeFileSync(`./content/5.blog/${filename}`, article)
+    // An article is a list of repo where each repo have a list releases and then, the changelog of each release.
+    writeFileSync(`${blogPath}/${filename}`, article)
+  },
+})
+
+/**
+ * Extract releases from a specific month and year
+ */
+function getMonthReleases(releases: GithubRelease[], year: number, month: number): GithubRelease[] {
+  return releases.filter((release) => {
+    const releaseDate = new Date(release.publishedAt)
+    const releaseYear = releaseDate.getFullYear()
+    const releaseMonth = releaseDate.getMonth() + 1
+
+    return releaseYear === year && releaseMonth === month && release.prerelease === false && release.draft === false
+  })
 }
-
-main().then(() => exit(0)).catch(consola.error)
 
 function logReleasesTypes(releases: GithubRelease[]): string {
   const majorReleases = releases.filter(release => release.tag.endsWith('.0.0'))
@@ -154,7 +172,7 @@ function formatLine(line: string): string {
  * Standardize title using h3, removing emoji like 🚀 and lowercase
  */
 function formatTitle(line: string): string {
-  return `### ${line.replace(/#+\s*/, '').replace(/[🚀🚨🐞🩹📖]/u, '').toLowerCase().trim()}`
+  return `### ${line.replace(/#+\s*/, '').replace(/[🚀🚨🐞🩹📖💅🌊]/u, '').toLowerCase().trim()}`
 }
 
 /**

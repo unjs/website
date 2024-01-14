@@ -6,4 +6,6 @@ github:
 npm:
   name: mongoz
 documentation: https://github.com/unjs/mongoz
-layout: package
+examples:
+  link: null
+  page: false

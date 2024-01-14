@@ -6,4 +6,6 @@ github:
 npm:
   name: unplugin
 documentation: https://github.com/unjs/unplugin
-layout: package
+examples:
+  link: null
+  page: false
