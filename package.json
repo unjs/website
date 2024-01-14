@@ -13,6 +13,7 @@
     "lint:md:fix": "markdownlint --fix ./content && case-police --fix content/**/*",
     "prepare": "nuxt prepare",
     "preview": "nuxt preview",
+    "test": "nuxt test",
     "cli": "jiti bin"
   },
   "devDependencies": {
@@ -24,6 +25,7 @@
     "@iconify-json/simple-icons": "^1.1.87",
     "@iconify-json/vscode-icons": "^1.1.32",
     "@nuxt/content": "^2.10.0",
+    "@nuxt/test-utils": "^3.9.0",
     "@nuxt/ui": "^2.12.0",
     "@nuxthq/studio": "^1.0.6",
     "@nuxtjs/fontaine": "^0.4.1",
@@ -32,12 +34,14 @@
     "@nuxtjs/seo": "2.0.0-rc.4",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^20.10.8",
+    "@vue/test-utils": "^2.4.3",
     "@vueuse/core": "^10.7.1",
     "@vueuse/nuxt": "^10.7.1",
     "case-police": "^0.6.1",
     "citty": "^0.1.5",
     "consola": "^3.2.3",
     "eslint": "^8.56.0",
+    "happy-dom": "^13.1.0",
     "jiti": "^1.21.0",
     "js-yaml": "^4.1.0",
     "magicast": "^0.3.2",
@@ -46,6 +50,7 @@
     "nuxt": "^3.9.1",
     "nuxt-payload-analyzer": "^0.1.4",
     "ofetch": "^1.3.3",
-    "unstorage": "^1.10.1"
+    "unstorage": "^1.10.1",
+    "vitest": "^1.2.0"
   }
 }
