@@ -6,3 +6,6 @@ github:
 npm:
   name: unstorage
 documentation: https://github.com/unjs/unstorage#-unstorage
+examples:
+  link: null
+  page: false

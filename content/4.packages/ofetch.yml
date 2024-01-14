@@ -6,3 +6,6 @@ github:
 npm:
   name: ofetch
 documentation: https://github.com/unjs/ofetch#ofetch
+examples:
+  link: https://github.com/unjs/ofetch/blob/main/examples
+  page: false

@@ -6,3 +6,6 @@ github:
 npm:
   name: changelogen
 documentation: https://github.com/unjs/changelogen#changelogen
+examples:
+  link: null
+  page: false

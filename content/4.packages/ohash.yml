@@ -6,3 +6,6 @@ github:
 npm:
   name: ohash
 documentation: https://github.com/unjs/ohash
+examples:
+  link: null
+  page: false

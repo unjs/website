@@ -6,3 +6,6 @@ github:
 npm:
   name: cookie-es
 documentation: https://github.com/unjs/cookie-es
+examples:
+  link: null
+  page: false

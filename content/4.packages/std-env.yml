@@ -6,3 +6,6 @@ github:
 npm:
   name: std-env
 documentation: https://github.com/unjs/std-env
+examples:
+  link: null
+  page: false

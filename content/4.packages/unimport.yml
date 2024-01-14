@@ -6,3 +6,6 @@ github:
 npm:
   name: unimport
 documentation: https://github.com/unjs/unimport
+examples:
+  link: null
+  page: false

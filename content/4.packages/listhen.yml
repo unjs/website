@@ -6,3 +6,6 @@ github:
 npm:
   name: listhen
 documentation: https://github.com/unjs/listhen
+examples:
+  link: null
+  page: false

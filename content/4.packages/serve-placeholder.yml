@@ -6,3 +6,6 @@ github:
 npm:
   name: serve-placeholder
 documentation: https://github.com/unjs/serve-placeholder
+examples:
+  link: null
+  page: false

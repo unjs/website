@@ -6,3 +6,6 @@ github:
 npm:
   name: consola
 documentation: https://github.com/unjs/consola#-consola
+examples:
+  link: https://github.com/unjs/consola/blob/main/examples
+  page: false

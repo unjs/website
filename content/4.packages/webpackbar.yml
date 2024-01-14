@@ -6,3 +6,6 @@ github:
 npm:
   name: webpackbar
 documentation: https://github.com/unjs/webpackbar
+examples:
+  link: null
+  page: false

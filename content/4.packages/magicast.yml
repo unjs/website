@@ -6,3 +6,6 @@ github:
 npm:
   name: magicast
 documentation: https://github.com/unjs/magicast
+examples:
+  link: null
+  page: false

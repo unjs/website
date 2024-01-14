@@ -6,3 +6,6 @@ github:
 npm:
   name: nypm
 documentation: https://github.com/unjs/nypm
+examples:
+  link: null
+  page: false

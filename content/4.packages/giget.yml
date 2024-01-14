@@ -6,3 +6,6 @@ github:
 npm:
   name: giget
 documentation: https://github.com/unjs/giget
+examples:
+  link: null
+  page: false

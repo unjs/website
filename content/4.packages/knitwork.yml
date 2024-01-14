@@ -6,3 +6,6 @@ github:
 npm:
   name: knitwork
 documentation: https://github.com/unjs/knitwork
+examples:
+  link: null
+  page: false

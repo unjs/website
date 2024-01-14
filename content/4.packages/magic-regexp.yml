@@ -5,5 +5,8 @@ github:
   repo: magic-regexp
 npm:
   name: magic-regexp
-playgrounds:
+playgrounds: null
 documentation: https://regexp.dev/
+examples:
+  link: null
+  page: false
