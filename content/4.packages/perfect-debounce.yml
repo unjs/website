@@ -6,3 +6,6 @@ github:
 npm:
   name: perfect-debounce
 documentation: https://github.com/unjs/perfect-debounce
+examples:
+  link: null
+  page: false

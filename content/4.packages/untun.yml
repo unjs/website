@@ -8,3 +8,6 @@ github:
 npm:
   name: untun
 documentation: https://github.com/unjs/untun
+examples:
+  link: null
+  page: false

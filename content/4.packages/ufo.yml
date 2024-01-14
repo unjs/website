@@ -6,3 +6,6 @@ github:
 npm:
   name: ufo
 documentation: https://github.com/unjs/ufo#-ufo
+examples:
+  link: null
+  page: false

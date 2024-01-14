@@ -6,3 +6,6 @@ github:
 npm:
   name: get-port-please
 documentation: https://github.com/unjs/get-port-please
+examples:
+  link: null
+  page: false

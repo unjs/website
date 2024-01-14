@@ -22,11 +22,9 @@ export const packagesExamples = defineCommand({
 
       if (!examplesLink) {
         // Remove examples link
-        if (content.examples) {
-          content.examples = {
-            link: null,
-            page: false,
-          }
+        content.examples = {
+          link: null,
+          page: false,
         }
 
         return content

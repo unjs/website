@@ -6,3 +6,6 @@ github:
 npm:
   name: uqr
 documentation: https://github.com/unjs/uqr
+examples:
+  link: null
+  page: false

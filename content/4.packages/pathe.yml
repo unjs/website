@@ -8,3 +8,6 @@ github:
 npm:
   name: pathe
 documentation: https://github.com/unjs/pathe
+examples:
+  link: null
+  page: false

@@ -6,3 +6,6 @@ github:
 npm:
   name: fs-memo
 documentation: https://github.com/unjs/fs-memo
+examples:
+  link: null
+  page: false

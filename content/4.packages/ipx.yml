@@ -8,3 +8,6 @@ github:
 npm:
   name: ipx
 documentation: https://github.com/unjs/ipx
+examples:
+  link: null
+  page: false

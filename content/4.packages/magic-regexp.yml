@@ -7,3 +7,6 @@ npm:
   name: magic-regexp
 playgrounds: null
 documentation: https://regexp.dev/
+examples:
+  link: null
+  page: false

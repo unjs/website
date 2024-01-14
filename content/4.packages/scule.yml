@@ -6,3 +6,6 @@ github:
 npm:
   name: scule
 documentation: https://github.com/unjs/scule
+examples:
+  link: null
+  page: false

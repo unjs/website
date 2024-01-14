@@ -6,3 +6,6 @@ github:
 npm:
   name: bundle-runner
 documentation: https://github.com/unjs/bundle-runner
+examples:
+  link: null
+  page: false

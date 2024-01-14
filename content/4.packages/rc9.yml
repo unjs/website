@@ -6,3 +6,6 @@ github:
 npm:
   name: rc9
 documentation: https://github.com/unjs/rc9
+examples:
+  link: null
+  page: false

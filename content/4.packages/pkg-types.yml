@@ -8,3 +8,6 @@ github:
 npm:
   name: pkg-types
 documentation: https://github.com/unjs/pkg-types
+examples:
+  link: null
+  page: false

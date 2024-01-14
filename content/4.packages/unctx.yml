@@ -6,3 +6,6 @@ github:
 npm:
   name: unctx
 documentation: https://github.com/unjs/unctx
+examples:
+  link: null
+  page: false

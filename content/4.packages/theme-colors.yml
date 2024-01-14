@@ -6,3 +6,6 @@ github:
 npm:
   name: theme-colors
 documentation: https://github.com/unjs/theme-colors
+examples:
+  link: null
+  page: false

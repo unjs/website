@@ -6,3 +6,6 @@ github:
 npm:
   name: mkdist
 documentation: https://github.com/unjs/mkdist
+examples:
+  link: null
+  page: false

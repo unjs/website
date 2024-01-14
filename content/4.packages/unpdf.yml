@@ -6,3 +6,6 @@ github:
 npm:
   name: unpdf
 documentation: https://github.com/unjs/unpdf
+examples:
+  link: null
+  page: false
