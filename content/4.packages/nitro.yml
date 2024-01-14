@@ -11,4 +11,4 @@ playgrounds:
 documentation: https://nitro.unjs.io
 examples:
   link: https://github.com/unjs/nitro/blob/main/examples
-  page: false
+  page: false # use sub directory

@@ -22,9 +22,7 @@ if (!unjsPackage.value?.examples) {
   })
 }
 
-const { data: page, error } = await useFetch<{ path: string, name: string, filename: string, id: string, content: ParsedContent }[]>(`/api/github/unjs/${slug}/examples`, { query: {
-  examples: unjsPackage.value?.examples.link,
-}, default: () => [] })
+const { data: page, error } = await useFetch<{ path: string, name: string, filename: string, id: string, content: ParsedContent }[]>(`/api/github/unjs/${slug}/examples`, { default: () => [] })
 
 if (error.value) {
   throw createError({
@@ -76,9 +74,9 @@ const toc = computed(() => {
               {{ example.name }}
             </NuxtLink>
           </h2>
-          <UButton class="not-prose" color="white" variant="solid" icon="i-simple-icons-github" label="GitHub" :to="`${unjsPackage.examples}/${example.filename}`" target="_blank" />
+          <UButton class="not-prose" color="white" variant="solid" icon="i-simple-icons-github" label="GitHub" :to="`${unjsPackage.examples.link}/${example.filename}`" target="_blank" />
         </div>
-        <ContentRendererMarkdown :value="example.content" />
+        <ContentRendererMarkdown :value="example.content" data-example />
       </template>
 
       <template #nav>
@@ -116,5 +114,9 @@ const toc = computed(() => {
 :deep(h2) {
   margin-bottom: 0;
   text-transform: capitalize;
+}
+
+:deep([data-example]:last-of-type > div) {
+  margin-bottom: 0;
 }
 </style>
