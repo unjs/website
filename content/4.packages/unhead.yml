@@ -6,4 +6,6 @@ github:
 npm:
   name: unhead
 documentation: https://github.com/unjs/unhead
-examples: https://github.com/unjs/unhead/blob/main/examples
+examples:
+  link: https://github.com/unjs/unhead/blob/main/examples
+  page: false

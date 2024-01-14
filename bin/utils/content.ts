@@ -40,8 +40,6 @@ export function getPackages() {
 export function addPackage(repo: { name: string, description: string, examples: string | null }) {
   const packagesPath = getPackagesPath()
 
-  // TODO: load examples from github
-
   const template = readFileSync(join(packagesPath, '.template.yml'), 'utf-8')
 
   writeFileSync(join(packagesPath, `/${repo.name}.yml`), template
@@ -49,7 +47,7 @@ export function addPackage(repo: { name: string, description: string, examples: 
     .replace('package_description', repo.description)
     .replace('repo_name', repo.name)
     .replace('npm_name', repo.name)
-    .replace('docs_link', repo.examples || 'null')
+    .replace('examples_link', repo.examples || 'null')
     .replace('docs_link', `https://github.com/unjs/${repo.name}`))
 }
 

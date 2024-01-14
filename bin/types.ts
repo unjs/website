@@ -45,6 +45,9 @@ export interface ContentPackage {
     name: string
   }
   documentation: string
-  examples?: string
+  examples?: {
+    link: string
+    page: boolean
+  }
   playgrounds?: Record<string, string>
 }

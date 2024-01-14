@@ -32,7 +32,10 @@ export const packagesExamples = defineCommand({
       }
 
       // Add examples link
-      content.examples = examplesLink
+      content.examples = {
+        link: examplesLink,
+        page: false,
+      }
       return content
     }))
 
