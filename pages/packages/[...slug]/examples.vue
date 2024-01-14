@@ -23,7 +23,7 @@ if (!unjsPackage.value?.examples) {
 }
 
 const { data: page, error } = await useFetch<{ path: string, name: string, filename: string, id: string, content: ParsedContent }[]>(`/api/github/unjs/${slug}/examples`, { query: {
-  examples: unjsPackage.value?.examples,
+  examples: unjsPackage.value?.examples.link,
 }, default: () => [] })
 
 if (error.value) {
@@ -82,7 +82,6 @@ const toc = computed(() => {
       </template>
 
       <template #nav>
-        <!-- TODO: add resources to view examples -->
         <!-- TODO: add resources to add a link to stackblitz -->
         <template v-if="unjsPackage">
           <UDivider />
@@ -95,7 +94,7 @@ const toc = computed(() => {
             GitHub
           </template>
           <template #links>
-            <ProseNavGroupLink v-if="unjsPackage.examples" :to="unjsPackage.examples" target="_blank" icon="i-simple-icons-github">
+            <ProseNavGroupLink v-if="unjsPackage.examples.link" :to="unjsPackage.examples.link" target="_blank" icon="i-simple-icons-github">
               Examples
             </ProseNavGroupLink>
             <ProseNavGroupLink
@@ -114,7 +113,7 @@ const toc = computed(() => {
 </template>
 
 <style scoped>
-:deep h2 {
+:deep(h2) {
   margin-bottom: 0;
   text-transform: capitalize;
 }

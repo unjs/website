@@ -42,6 +42,13 @@ const hasResources = computed(() => {
   return page.value?.npm || page.value?.playgrounds
 })
 
+const examplesLink = computed(() => {
+  if (page.value?.examples.link && page.value?.examples.page)
+    return `/packages/${route.params.slug}/examples?utm_source=unjs.io&utm_medium=package-nav`
+
+  return null
+})
+
 defineShortcuts({
   meta_g: {
     handler: () => {
@@ -93,7 +100,7 @@ defineShortcuts({
             <ProseNavGroupLink :to="toGitHubRepo(page.github.owner, page.github.repo)" target="_blank" icon="i-simple-icons-github">
               View source
             </ProseNavGroupLink>
-            <ProseNavGroupLink v-if="page.examples" :to="page.examples" target="_blank" icon="i-simple-icons-github">
+            <ProseNavGroupLink v-if="page.examples.link" :to="page.examples.link" target="_blank" icon="i-simple-icons-github">
               Examples
             </ProseNavGroupLink>
             <ProseNavGroupLink
@@ -120,7 +127,7 @@ defineShortcuts({
               <ProseNavGroupLink v-if="page.playgrounds?.codesandbox" :to="page.playgrounds.codesandbox" target="_blank" icon="i-simple-icons-codesandbox">
                 Open on CodeSandbox
               </ProseNavGroupLink>
-              <ProseNavGroupLink v-if="page.examples" :to="`/packages/${page.title}/examples?utm_source=unjs.io&utm_medium=package-nav`" icon="i-heroicons-code-bracket">
+              <ProseNavGroupLink v-if="examplesLink" :to="examplesLink" icon="i-heroicons-code-bracket">
                 Explore examples
               </ProseNavGroupLink>
             </template>

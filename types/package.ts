@@ -23,5 +23,9 @@ export interface PackageContent extends ParsedContent {
   npm: {
     name: string
   }
+  examples: {
+    link: string | null
+    page: boolean
+  }
   documentation: string
 }
