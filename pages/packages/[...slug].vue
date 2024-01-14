@@ -93,7 +93,7 @@ defineShortcuts({
             <ProseNavGroupLink :to="toGitHubRepo(page.github.owner, page.github.repo)" target="_blank" icon="i-simple-icons-github">
               View source
             </ProseNavGroupLink>
-            <ProseNavGroupLink v-if="page.examples" :to="page.examples" target="_blank" icon="i-simple-icons-github">
+            <ProseNavGroupLink v-if="page.examples.link" :to="page.examples.link" target="_blank" icon="i-simple-icons-github">
               Examples
             </ProseNavGroupLink>
             <ProseNavGroupLink
