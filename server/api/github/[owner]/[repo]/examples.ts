@@ -37,8 +37,6 @@ export default defineLazyEventHandler(() => {
       const id = filename.substring(0, filename.lastIndexOf('.'))
       const name = filename.substring(0, filename.lastIndexOf('.')).replace(/-/g, ' ').split('.').join(' ')
 
-      console.log(data)
-
       return {
         id,
         path: file.path,
