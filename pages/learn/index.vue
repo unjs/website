@@ -26,17 +26,9 @@ const categories = [{
   label: 'Getting Started',
   description: 'Start by the basics of the UnJS ecosystem',
 }, {
-  id: 'intermediate',
-  label: 'Intermediate',
-  description: 'Dive into more advanced UnJS concepts and techniques',
-}, {
-  id: 'build',
-  label: 'Build',
-  description: 'Create real-world projects by assambling UnJS packages',
-}, {
-  id: 'explore',
-  label: 'Explore',
-  description: 'Discover how to integrate UnJS with other tools',
+  id: 'building-blocks',
+  label: 'Building Blocks',
+  description: 'Assemble packages and tools to build an app',
 }]
 </script>
 
@@ -44,7 +36,7 @@ const categories = [{
   <!-- Once ready, create components -->
   <Main v-if="page">
     <template #header>
-      <PageHeader :title="page.title" :description="page.descriptions" />
+      <PageHeader :title="page.title" :description="page.description" />
     </template>
 
     <section class="grid grid-cols-1 lg:grid-cols-2 items-center gap-4 lg:gap-16">
@@ -63,7 +55,7 @@ const categories = [{
         </div>
       </div>
       <ol class="grid grid-cols-2 gap-4 lg:gap-8">
-        <li v-for="category in categories" :key="category.label" class="relative p-4 rounded-lg ring-1 ring-gray-300 dark:ring-gray-700 shadow-sm hover:shadow-none hover:ring-primary transition ease-in">
+        <li v-for="category in categories" :key="category.label" class="relative p-4 rounded-lg ring-1 ring-gray-300 dark:ring-gray-700 shadow-sm hover:shadow-none hover:ring-primary dark:hover:ring-primary transition ease-in">
           <h3 class="md:text-xl font-semibold dark:text-gray-50">
             <NuxtLink class="absolute inset-0" :to="`/learn/articles?category=${category.id}`" />
             {{ category.label }}
