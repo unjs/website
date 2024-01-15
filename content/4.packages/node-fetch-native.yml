@@ -6,4 +6,6 @@ github:
 npm:
   name: node-fetch-native
 documentation: https://github.com/unjs/node-fetch-native
-layout: package
+examples:
+  link: null
+  page: false

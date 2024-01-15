@@ -6,4 +6,6 @@ github:
 npm:
   name: httpxy
 documentation: https://github.com/unjs/httpxy
-layout: package
+examples:
+  link: null
+  page: false

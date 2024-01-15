@@ -5,6 +5,8 @@ github:
   repo: nanotar
 npm:
   name: nanotar
-playgrounds:
+playgrounds: null
 documentation: https://github.com/unjs/nanotar
-layout: package
+examples:
+  link: null
+  page: false

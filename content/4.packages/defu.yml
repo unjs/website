@@ -6,4 +6,6 @@ github:
 npm:
   name: defu
 documentation: https://github.com/unjs/defu#-defu
-layout: package
+examples:
+  link: null
+  page: false

@@ -6,4 +6,6 @@ github:
 npm:
   name: unenv
 documentation: https://github.com/unjs/unenv
-layout: package
+examples:
+  link: null
+  page: false

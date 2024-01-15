@@ -1,4 +1,4 @@
-/** Generated using a ./scripts/generate-packages-redirects. */
+/** Do not edit manually. Use `jiti bin generate packages-redirects`. */
 export default {
   '/bundle-runner': {
     redirect: {

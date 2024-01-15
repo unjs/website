@@ -6,4 +6,6 @@ github:
 npm:
   name: unbuild
 documentation: https://github.com/unjs/unbuild#unbuild
-layout: package
+examples:
+  link: null
+  page: false
