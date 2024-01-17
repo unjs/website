@@ -1,8 +1,9 @@
+import { useStorage } from '@vueuse/core'
 import type { Order, OrderByOption } from '~/types/order'
 
 export function useSort<T extends Record<string, unknown>>(orderInit: Order, orderByInit: OrderByOption['id']) {
-  const order = ref<1 | -1>(orderInit)
-  const orderBy = ref(orderByInit)
+  const order = useStorage<1 | -1>('sort-order', orderInit)
+  const orderBy = useStorage('sort-orderBy', orderByInit)
 
   const sort = (data: Ref<T[]>) => {
     return computed(() => {
