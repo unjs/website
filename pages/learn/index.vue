@@ -36,7 +36,13 @@ const categories = [{
   <!-- Once ready, create components -->
   <Main v-if="page">
     <template #header>
-      <PageHeader :title="page.title" :description="page.description" />
+      <PageHeader :title="page.title" :description="page.description">
+<template #right>
+          <div>
+            <AppColorModeImage light="/assets/header/light/learn.png" dark="/assets/header/dark/learn.png" alt="Illustration" aria-hidden="true" class="absolute left-24 top-0 opacity-70 w-80" />
+          </div>
+        </template>
+      </PageHeader>
     </template>
 
     <section class="grid grid-cols-1 lg:grid-cols-2 items-center gap-4 lg:gap-16">
