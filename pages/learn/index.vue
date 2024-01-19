@@ -37,7 +37,7 @@ const categories = [{
   <Main v-if="page">
     <template #header>
       <PageHeader :title="page.title" :description="page.description">
-<template #right>
+        <template #right>
           <div>
             <AppColorModeImage light="/assets/header/light/learn.png" dark="/assets/header/dark/learn.png" alt="Illustration" aria-hidden="true" class="absolute left-24 top-0 opacity-70 w-80" />
           </div>
