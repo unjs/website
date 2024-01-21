@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { joinURL } from 'ufo'
-
 const route = useRoute()
 
 const { data: page, error } = await useAsyncData(route.path, () => queryContent(route.path).findOne())
