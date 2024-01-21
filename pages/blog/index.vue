@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { joinURL } from 'ufo'
 import type { Author, BlogPostCard } from '~/types/blog'
 import type { OrderByOption } from '~/types/order'
 
@@ -15,15 +14,17 @@ if (error.value) {
   })
 }
 
-const site = useSiteConfig()
-
 useSeoMeta({
   title: page.value?.title,
   ogTitle: page.value?.title,
   description: page.value?.description,
   ogDescription: page.value?.description,
-  ogImage: joinURL(site.url, '/og/blog.jpg'),
-  twitterImage: joinURL(site.url, '/og/blog.jpg'),
+})
+
+defineOgImageComponent('OgImagePage', {
+  title: page.value?.title,
+  description: page.value?.description,
+  illustration: '/assets/header/dark/blog.png',
 })
 
 const fields = ['_path', 'title', 'description', 'publishedAt', 'authors', 'packages', 'categories']
