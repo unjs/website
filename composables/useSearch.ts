@@ -2,8 +2,7 @@ import type { ParsedContent } from '@nuxt/content/dist/runtime/types'
 import MiniSearch, { type Options as MiniSearchOptions, type SearchOptions } from 'minisearch'
 import type { SearchDisplay, SearchDisplayItem, SearchResult } from '~/types/search'
 
-export function useSimpleSearch<T extends Record<string, unknown>>(data: MaybeRefOrGetter<Partial<ParsedContent>[]>, options: { idField: string, fields: string[], storeFields: string[], searchOptions?: SearchOptions }) {
-  const search = ref('')
+export function useSimpleSearch<T extends Record<string, unknown>>(search: Ref<string>, data: MaybeRefOrGetter<Partial<ParsedContent>[]>, options: { idField: string, fields: string[], storeFields: string[], searchOptions?: SearchOptions }) {
   const searchDebounced = useDebounce(search, 150)
 
   const miniSearchResults = useMiniSearch(searchDebounced, data, {
@@ -21,10 +20,7 @@ export function useSimpleSearch<T extends Record<string, unknown>>(data: MaybeRe
     return searchDebounced.value ? miniSearchResults.value : toValue(data)
   }) as ComputedRef<(T & SearchResult)[]>
 
-  return {
-    search,
-    searchResults,
-  }
+  return searchResults
 }
 
 export async function useSearchDefaultResults(): Promise<ComputedRef<SearchDisplay>> {

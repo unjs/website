@@ -1,7 +1,5 @@
 <script lang="ts" setup>
 import { joinURL } from 'ufo'
-import type { OrderByOption } from '~/types/order'
-import type { Package } from '~/types/package'
 
 const route = useRoute()
 
@@ -26,54 +24,26 @@ useSeoMeta({
   twitterImage: joinURL(site.url, '/og/packages.jpg'),
 })
 
-const { data: packages } = await useFetch('/api/content/packages.json', { default: () => [] }) as { data: Ref<Package[]> }
+const {
+  fetchPackages,
+  reset,
+  packages,
+  q,
+  order,
+  orderBy,
+  orderByOptions,
+  numberOfPackages,
+  monthlyDownloads,
+} = usePackages()
 
-const monthlyDownloads = computed(() => packages.value.reduce((acc, pkg) => {
-  if (!pkg.monthlyDownloads)
-    return acc
-
-  acc += pkg.monthlyDownloads
-  return acc
-}, 0))
-
-const orderByOptions: OrderByOption[] = [
-  {
-    id: 'title',
-    label: 'Name',
-  },
-  {
-    id: 'stars',
-    label: 'Stars',
-  },
-  {
-    id: 'monthlyDownloads',
-    label: 'Monthly Downloads',
-  },
-  {
-    id: 'contributors',
-    label: 'Contributors',
-  },
-]
-const defaultOrder = 1
-const defaultOrderBy = 'title'
-const { order, orderBy, sort } = useSort<Package>(defaultOrder, defaultOrderBy)
-
-const { search, searchResults } = useSimpleSearch<Package>(packages, { idField: 'title', fields: ['title', 'description'], storeFields: ['title', 'description', 'path', 'stars', 'monthlyDownloads', 'contributors'], searchOptions: { boost: { title: 2, description: 1 } } })
-
-const results = sort(searchResults)
-
-function resetFilter() {
-  search.value = ''
-  order.value = defaultOrder
-  orderBy.value = defaultOrderBy
-}
+await fetchPackages()
 
 // Track search to analytics
-watchDebounced(search, () => {
-  if (!search.value)
+watchDebounced(q, () => {
+  if (!q.value)
     return
 
-  useTrackEvent('Packages Search', { props: { query: search.value } })
+  useTrackEvent('Packages Search', { props: { query: q.value } })
 }, { debounce: 500 })
 </script>
 
@@ -88,7 +58,7 @@ watchDebounced(search, () => {
           <div class="flex justify-end gap-12 text-gray-500 dark:text-gray-400 font-medium text-xl">
             <div class="flex flex-col gap-2">
               <span class="text-gray-950 dark:text-gray-50 text-8xl font-extrabold">
-                {{ packages!.length }}
+                {{ numberOfPackages }}
               </span>
               <span>
                 Packages
@@ -112,10 +82,10 @@ watchDebounced(search, () => {
         List of packages
       </h2>
 
-      <ListTopBar v-model:search="search" v-model:order="order" v-model:order-by="orderBy" search-placeholder="Search a package" :order-by-options="orderByOptions" @reset="resetFilter" />
+      <ListTopBar v-model:search="q" v-model:order="order" v-model:order-by="orderBy" search-placeholder="Search a package" :order-by-options="orderByOptions" @reset="reset" />
 
       <ListGrid class="mt-8">
-        <ListGridItem v-for="item in results" :key="item._path">
+        <ListGridItem v-for="item in packages" :key="item._path">
           <PackageCard
             v-if="item.title && item.path"
             :title="item.title"
@@ -126,7 +96,7 @@ watchDebounced(search, () => {
             :contributors="item.contributors"
           />
         </ListGridItem>
-        <ListGridEmpty v-if="results && results.length === 0">
+        <ListGridEmpty v-if="packages && packages.length === 0">
           No packages found
         </ListGridEmpty>
       </ListGrid>
