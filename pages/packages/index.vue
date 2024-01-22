@@ -85,7 +85,7 @@ watchDebounced(q, () => {
       <ListTopBar v-model:search="q" v-model:order="order" v-model:order-by="orderBy" search-placeholder="Search a package" :order-by-options="orderByOptions" @reset="reset" />
 
       <ListGrid class="mt-8">
-        <ListGridItem v-for="item in packages" :key="item._path">
+        <ListGridItem v-for="item in packages" :key="item.title">
           <PackageCard
             v-if="item.title && item.path"
             :title="item.title"
