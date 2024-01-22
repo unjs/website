@@ -30,8 +30,8 @@ export function useBlog() {
 
   const defaultQ: string = ''
   const q = computed(() => {
-      return route.query.q as LocationQueryValue || defaultQ
-    })
+    return route.query.q as LocationQueryValue || defaultQ
+  })
 
   const categoriesOptions = computed(() => {
     const categories = data.value.flatMap(item => item.categories || [])
@@ -41,10 +41,10 @@ export function useBlog() {
   })
   const defaultCategories: string[] = []
   const categories = computed(() => {
-      const categories = route.query['categories[]'] as LocationQueryValue[] || defaultCategories
+    const categories = route.query['categories[]'] as LocationQueryValue[] || defaultCategories
 
-      return (Array.isArray(categories) ? categories : [categories]) as string[]
-    })
+    return (Array.isArray(categories) ? categories : [categories]) as string[]
+  })
 
   const packagesOptions = computed(() => {
     const packages = data.value.flatMap(item => item.packages || [])
@@ -54,10 +54,10 @@ export function useBlog() {
   })
   const defaultPackages: string[] = []
   const packages = computed(() => {
-      const packages = route.query['packages[]'] || defaultPackages
+    const packages = route.query['packages[]'] || defaultPackages
 
-      return (Array.isArray(packages) ? packages : [packages]) as string[]
-    })
+    return (Array.isArray(packages) ? packages : [packages]) as string[]
+  })
 
   const authorsOptions = computed(() => {
     const authors = data.value.flatMap(item => item.authors || [])
@@ -72,10 +72,10 @@ export function useBlog() {
   })
   const defaultAuthors: string[] = []
   const authors = computed(() => {
-      const authors = route.query['authors[]'] || defaultAuthors
+    const authors = route.query['authors[]'] || defaultAuthors
 
-      return (Array.isArray(authors) ? authors : [authors]) as string[]
-    })
+    return (Array.isArray(authors) ? authors : [authors]) as string[]
+  })
 
   const defaultOrder: Order = -1
   const order = computed(() => {
@@ -110,7 +110,7 @@ export function useBlog() {
     },
   })
 
-  const articles = ref<BlogPostCard[]>(getArticles())
+  const articles = ref<BlogPostCard[]>()
   const fetchBlogArticles = async () => {
     if (data.value.length) {
       miniSearch.addAll(data.value)
@@ -230,6 +230,8 @@ export function useBlog() {
   })
 
   onMounted(() => {
+    // Avoid hydration error when prerendering.
+    articles.value = getArticles()
     // No query? Create one using stored data.
     if (!hasQuery.value) {
       navigateTo({
