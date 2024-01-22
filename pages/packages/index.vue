@@ -26,6 +26,7 @@ useSeoMeta({
 
 const {
   fetchPackages,
+  updateQuery,
   reset,
   packages,
   q,
@@ -82,12 +83,14 @@ watchDebounced(q, () => {
         List of packages
       </h2>
 
-      <ListTopBar v-model:search="q" v-model:order="order" v-model:order-by="orderBy" search-placeholder="Search a package" :order-by-options="orderByOptions" @reset="reset" />
+      <ListTopBar
+        :search="q" :order="order" :order-by="orderBy" search-placeholder="Search a package" :order-by-options="orderByOptions" @reset="reset"
+        @update:search="updateQuery({ q: $event })" @update:order="updateQuery({ order: $event })" @update:order-by="updateQuery({ orderBy: $event })"
+      />
 
       <ListGrid class="mt-8">
         <ListGridItem v-for="item in packages" :key="item.title">
           <PackageCard
-            v-if="item.title && item.path"
             :title="item.title"
             :description="item.description"
             :path="item.path"

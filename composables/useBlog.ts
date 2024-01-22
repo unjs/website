@@ -7,7 +7,7 @@ import type { Author, BlogPostCard } from '~/types/blog'
 export function useBlog() {
   const fields = ['_path', 'title', 'description', 'publishedAt', 'authors', 'packages', 'categories']
   const miniSearch = new MiniSearch({
-    idField: '_path',
+    idField: 'title',
     fields: ['title', 'description'],
     storeFields: fields,
     searchOptions: {
@@ -100,26 +100,14 @@ export function useBlog() {
   })
 
   const articles = ref<BlogPostCard[]>()
-  const fetchBlogArticles = async () => {
-    if (data.value.length) {
-      miniSearch.addAll(data.value)
-      // Do not update articles list on client side to avoid hydration error
-      return
-    }
 
-    try {
-      const res = await queryContent('/blog/').only(fields).find()
-      data.value = res as BlogPostCard[]
-      miniSearch.addAll(res)
-      articles.value = getArticles()
-    }
-    catch (error) {
-      throw createError({
-        statusCode: 500,
-        statusMessage: 'Server Error',
-        fatal: true,
-      })
-    }
+  const updateQuery = (query?: { q?: string, 'categories[]'?: string[], 'packages[]'?: string[], 'authors[]'?: string[], order?: Order, orderBy?: string }) => {
+    navigateTo({
+      query: {
+        ...route.query,
+        ...query,
+      },
+    })
   }
 
   const reset = () => {
@@ -134,16 +122,7 @@ export function useBlog() {
     updateQuery(defaultQuery)
   }
 
-  function updateQuery(query?: { q?: string, 'categories[]'?: string[], 'packages[]'?: string[], 'authors[]'?: string[], order?: Order, orderBy?: string }) {
-    navigateTo({
-      query: {
-        ...route.query,
-        ...query,
-      },
-    })
-  }
-
-  function filter(data: (BlogPostCard & SearchResult)[]) {
+  const filter = (data: (BlogPostCard & SearchResult)[]) => {
     data = data.filter((item) => {
       if (!categories.value.length)
         return true
@@ -171,19 +150,41 @@ export function useBlog() {
     return data
   }
 
-  function search(data: BlogPostCard[]) {
+  const search = (data: BlogPostCard[]) => {
     if (!q.value)
       return data as (BlogPostCard & SearchResult)[]
 
     return miniSearch.search(q.value) as (BlogPostCard & SearchResult)[]
   }
 
-  function getArticles() {
+  const getArticles = () => {
     const searched = search(data.value)
     const filtered = filter(searched)
     const sorted = sort(filtered, order.value, orderBy.value)
 
     return sorted
+  }
+
+  const fetchBlogArticles = async () => {
+    if (data.value.length) {
+      miniSearch.addAll(data.value)
+      // Do not update articles list on client side to avoid hydration error
+      return
+    }
+
+    try {
+      const res = await queryContent('/blog/').only(fields).find()
+      data.value = res as BlogPostCard[]
+      miniSearch.addAll(res)
+      articles.value = getArticles()
+    }
+    catch (error) {
+      throw createError({
+        statusCode: 500,
+        statusMessage: 'Server Error',
+        fatal: true,
+      })
+    }
   }
 
   const storage = useStorage('blog', {

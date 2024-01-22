@@ -1,27 +1,44 @@
 import { useStorage } from '@vueuse/core'
+import MiniSearch, { type SearchResult } from 'minisearch'
 import type { Package } from '~/types/package'
 import type { LocationQueryValue } from '#vue-router'
 import type { Order } from '~/types/order'
 
 export function usePackages() {
+  const fields = ['path', 'title', 'description', 'stars', 'monthlyDownloads', 'contributors']
+  const miniSearch = new MiniSearch({
+    idField: 'title',
+    fields: ['title', 'description'],
+    storeFields: fields,
+    searchOptions: {
+      prefix: true,
+      fuzzy: 0.4,
+      boost: {
+        title: 2,
+        description: 1,
+      },
+    },
+  })
+
   const data = useState<Package[]>('content:packages', () => [])
+  const route = useRoute()
 
-  const fetchPackages = async () => {
-    if (data.value.length)
-      return
+  // This is important to avoid a merge the URL and some data in storage for each missing query in URL. We cannot directly check for query to avoid having UTM breaking the system.
+  const hasQuery = computed(() => {
+    return route.query.q || route.query.order || route.query.orderby
+  })
 
-    try {
-      const res = await $fetch('/api/content/packages.json')
-      data.value = res as Package[]
-    }
-    catch (error) {
-      throw createError({
-        statusCode: 500,
-        statusMessage: 'Server Error',
-        fatal: true,
-      })
-    }
-  }
+  const defaultQ: string = ''
+  const q = computed(() => {
+    return route.query.q as LocationQueryValue || defaultQ
+  })
+
+  const defaultOrder: Order = 1
+  const order = computed(() => {
+    const value = route.query.order as LocationQueryValue || defaultOrder
+
+    return Number(value) as Order
+  })
 
   const orderByOptions = [
     {
@@ -41,113 +58,98 @@ export function usePackages() {
       label: 'Contributors',
     },
   ]
-
-  const route = useRoute()
-  const storage = useStorage('packages', {
-    q: '',
-    order: 1,
-    orderBy: orderByOptions[0].id,
+  const defaultOrderBy: string = orderByOptions[0].id
+  const orderBy = computed(() => {
+    return route.query.orderBy as LocationQueryValue || defaultOrderBy
   })
 
-  // This is important to avoid a merge the URL and some data in storage for each missing query in URL. We cannot directly check for query to avoid having UTM breaking the system.
-  const hasQuery = computed(() => {
-    return route.query.q || route.query.order || route.query.orderby
-  })
+  const packages = ref<Package[]>()
 
-  /**
-   * Navigate to correct query using storage.
-   *
-   * Since we use the URL as state of the application, we can't use directly data from storage. If so, it add complexity (need to extract data from query or from storage in every filters) and break when user start to interact with the application since a query appears.
-   */
-  onMounted(() => {
-    // If there is a query, do nothing.
-    if (hasQuery.value)
-      return
-
-    // Navigate using storage value (even default) to keep state in URL
+  const updateQuery = (query?: { q?: string, order?: Order, orderBy?: string }) => {
     navigateTo({
-      query: storage.value,
+      query: {
+        ...route.query,
+        ...query,
+      },
     })
-  })
-
-  const q = computed({
-    get: () => {
-      return route.query.q as LocationQueryValue || ''
-    },
-    set: (value) => {
-      // Update URL
-      navigateTo({
-        query: {
-          ...route.query,
-          q: value,
-        },
-      })
-      // Update storage
-      storage.value.q = value
-    },
-  })
-
-  const order = computed({
-    get: () => {
-      const value = route.query.order as LocationQueryValue || ''
-
-      return Number(value) as Order
-    },
-    set: (value) => {
-      // Update URL
-      navigateTo({
-        query: {
-          ...route.query,
-          order: value,
-        },
-      })
-      // Update storage
-      storage.value.order = value
-    },
-  })
-
-  const orderBy = computed({
-    get: () => {
-      return route.query.orderBy as LocationQueryValue || orderByOptions[0].id
-    },
-    set: (value) => {
-      // Update URL
-      navigateTo({
-        query: {
-          ...route.query,
-          orderBy: value,
-        },
-      })
-      // Update storage
-      storage.value.orderBy = value
-    },
-  })
+  }
 
   const reset = () => {
-    const query = {
-      q: null,
-      order: 1,
-      orderBy: orderByOptions[0].id,
+    const defaultQuery = {
+      q: defaultQ,
+      order: defaultOrder,
+      orderBy: defaultOrderBy,
     }
-    navigateTo({
-      query,
-    })
-    storage.value = {
-      q: '',
-      order: 1,
-      orderBy: orderByOptions[0].id,
+    updateQuery(defaultQuery)
+  }
+
+  const search = (data: Package[]) => {
+    if (!q.value)
+      return data as (Package & SearchResult)[]
+
+    return miniSearch.search(q.value) as (Package & SearchResult)[]
+  }
+
+  const getPackages = () => {
+    const searched = search(data.value)
+    const sorted = sort(searched, order.value, orderBy.value)
+
+    return sorted
+  }
+
+  const fetchPackages = async () => {
+    if (data.value.length) {
+      miniSearch.addAll(data.value)
+      return
+    }
+
+    try {
+      const res = await $fetch('/api/content/packages.json')
+      data.value = res as Package[]
+      miniSearch.addAll(data.value)
+      packages.value = getPackages()
+    }
+    catch (error) {
+      console.error(error)
+      throw createError({
+        statusCode: 500,
+        statusMessage: 'Server Error',
+        fatal: true,
+      })
     }
   }
 
-  const packagesSearched = useSimpleSearch<Package>(q, data, {
-    idField: 'title',
-    fields: ['title', 'description'],
-    storeFields: ['title', 'description', 'path', 'stars', 'monthlyDownloads', 'contributors'],
-    searchOptions: { boost: { title: 2, description: 1 } },
+  const storage = useStorage('packages', {
+    q: '' as null | string,
+    order: 1 as null | Order,
+    orderBy: orderByOptions[0].id as null | string,
   })
 
-  const packages = computed(() => {
-    return sort(packagesSearched.value, order.value, orderBy.value)
+  watch(() => route.query, () => {
+    packages.value = getPackages()
+
+    const query = route.query
+
+    const q = query.q as LocationQueryValue
+    const order = Number(query.order as LocationQueryValue) as Order
+    const orderBy = query.orderBy as LocationQueryValue as string
+
+    storage.value = {
+      q,
+      order,
+      orderBy,
+    }
+  })
+
+  onMounted(() => {
+    // Because of prerendering
+    packages.value = getPackages()
+    // No query? Create one using stored data.
+    if (!hasQuery.value) {
+      navigateTo({
+        query: storage.value,
+      }, { replace: true }) // Replace to avoid infinite loop on back button
+    }
   })
 
   const numberOfPackages = computed(() => data.value.length)
@@ -162,6 +164,7 @@ export function usePackages() {
 
   return {
     fetchPackages,
+    updateQuery,
     reset,
     packages,
     q,
