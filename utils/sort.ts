@@ -1,6 +1,6 @@
 import type { Order } from '~/types/order'
 
-export const sort = function<T extends Record<string, string>>(data: T[], order: Order, orderBy: string) {
+export const sort = function<T extends Record<string, unknown>>(data: T[], order: Order, orderBy: string) {
   if (!orderBy)
     return data
 
