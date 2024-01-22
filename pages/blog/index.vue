@@ -26,6 +26,7 @@ defineOgImageComponent('OgImagePage', {
 
 const {
   fetchBlogArticles,
+  updateQuery,
   reset,
   articles,
   q,
@@ -71,10 +72,14 @@ watchDebounced(q, () => {
         List of blog posts
       </h2>
 
-      <ListTopBar v-model:search="q" v-model:order="order" v-model:order-by="orderBy" search-placeholder="Search an article" :order-by-options="orderByOptions" @reset="reset">
+      <ListTopBar
+        :search="q" :order="order" :order-by="orderBy" search-placeholder="Search an article" :order-by-options="orderByOptions"
+        @update:search="updateQuery({ q: $event })" @update:order="updateQuery({ order: $event })" @update:order-by="updateQuery({ orderBy: $event })"
+        @reset="reset"
+      >
         <template #right>
           <USelectMenu
-            v-model="authors"
+            :model-value="authors"
             :options="authorsOptions"
             color="gray"
             variant="outline"
@@ -84,6 +89,7 @@ watchDebounced(q, () => {
             value-attribute="name"
             option-attribute="name"
             multiple
+            @update:model-value="updateQuery({ 'authors[]': $event })"
           >
             <template #option="{ option: author }">
               <UAvatar size="2xs" :src="author.picture" :alt="`Avatar of ${author.name}`" />
@@ -93,7 +99,7 @@ watchDebounced(q, () => {
             </template>
           </USelectMenu>
           <USelectMenu
-            v-model="packages"
+            :model-value="packages"
             :options="packagesOptions"
             color="gray"
             variant="outline"
@@ -101,6 +107,7 @@ watchDebounced(q, () => {
             placeholder="Packages"
             select-class="cursor-pointer"
             multiple
+            @update:model-value="updateQuery({ 'packages[]': $event })"
           >
             <template #option="{ option: pkg }">
               <UAvatar size="2xs" :src="`/assets/logos/${pkg}.svg`" :alt="`Icon of ${pkg}`" />
@@ -110,7 +117,7 @@ watchDebounced(q, () => {
             </template>
           </USelectMenu>
           <USelectMenu
-            v-model="categories"
+            :model-value="categories"
             :options="categoriesOptions"
             color="gray"
             variant="outline"
@@ -118,6 +125,7 @@ watchDebounced(q, () => {
             placeholder="Categories"
             select-class="cursor-pointer"
             multiple
+            @update:model-value="updateQuery({ 'categories[]': $event })"
           >
             <template #option="{ option: category }">
               <span class="truncate capitalize">

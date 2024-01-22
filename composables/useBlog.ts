@@ -29,20 +29,9 @@ export function useBlog() {
   })
 
   const defaultQ: string = ''
-  const q = computed({
-    get: () => {
+  const q = computed(() => {
       return route.query.q as LocationQueryValue || defaultQ
-    },
-    set: (value) => {
-      // Update URL
-      navigateTo({
-        query: {
-          ...route.query,
-          q: value,
-        },
-      })
-    },
-  })
+    })
 
   const categoriesOptions = computed(() => {
     const categories = data.value.flatMap(item => item.categories || [])
@@ -51,21 +40,11 @@ export function useBlog() {
     return Array.from(dedupe).sort()
   })
   const defaultCategories: string[] = []
-  const categories = computed({
-    get: () => {
+  const categories = computed(() => {
       const categories = route.query['categories[]'] as LocationQueryValue[] || defaultCategories
 
       return (Array.isArray(categories) ? categories : [categories]) as string[]
-    },
-    set: (value: string[]) => {
-      navigateTo({
-        query: {
-          ...route.query,
-          'categories[]': value,
-        },
-      })
-    },
-  })
+    })
 
   const packagesOptions = computed(() => {
     const packages = data.value.flatMap(item => item.packages || [])
@@ -74,22 +53,11 @@ export function useBlog() {
     return Array.from(dedupe).sort()
   })
   const defaultPackages: string[] = []
-  const packages = computed({
-    get: () => {
+  const packages = computed(() => {
       const packages = route.query['packages[]'] || defaultPackages
 
       return (Array.isArray(packages) ? packages : [packages]) as string[]
-    },
-    set: (value: string[]) => {
-      // Update URL
-      navigateTo({
-        query: {
-          ...route.query,
-          'packages[]': value,
-        },
-      })
-    },
-  })
+    })
 
   const authorsOptions = computed(() => {
     const authors = data.value.flatMap(item => item.authors || [])
@@ -103,39 +71,17 @@ export function useBlog() {
     return Array.from(dedupe.values()).sort((a, b) => a.name.localeCompare(b.name))
   })
   const defaultAuthors: string[] = []
-  const authors = computed({
-    get: () => {
+  const authors = computed(() => {
       const authors = route.query['authors[]'] || defaultAuthors
 
       return (Array.isArray(authors) ? authors : [authors]) as string[]
-    },
-    set: (value: string[]) => {
-      // Update URL
-      navigateTo({
-        query: {
-          ...route.query,
-          'authors[]': value,
-        },
-      })
-    },
-  })
+    })
 
   const defaultOrder: Order = -1
-  const order = computed({
-    get: () => {
-      const value = route.query.order as LocationQueryValue || defaultOrder
+  const order = computed(() => {
+    const value = route.query.order as LocationQueryValue || defaultOrder
 
-      return Number(value) as Order
-    },
-    set: (value) => {
-      // Update URL
-      navigateTo({
-        query: {
-          ...route.query,
-          order: value,
-        },
-      })
-    },
+    return Number(value) as Order
   })
 
   const orderByOptions = [
@@ -147,8 +93,8 @@ export function useBlog() {
       id: 'title',
       label: 'Name',
     },
-  ] as const
-  const defaultOrderBy: typeof orderByOptions[number]['id'] = orderByOptions[0].id
+  ]
+  const defaultOrderBy: string = orderByOptions[0].id
   const orderBy = computed({
     get: () => {
       return route.query.orderBy as LocationQueryValue || defaultOrderBy
@@ -188,7 +134,7 @@ export function useBlog() {
   }
 
   const reset = () => {
-    const query = {
+    const defaultQuery = {
       'q': defaultQ,
       'categories[]': defaultCategories,
       'packages[]': defaultPackages,
@@ -196,8 +142,15 @@ export function useBlog() {
       'order': defaultOrder,
       'orderBy': defaultOrderBy,
     }
+    updateQuery(defaultQuery)
+  }
+
+  function updateQuery(query?: { q?: string, 'categories[]'?: string[], 'packages[]'?: string[], 'authors[]'?: string[], order?: Order, orderBy?: string }) {
     navigateTo({
-      query,
+      query: {
+        ...route.query,
+        ...query,
+      },
     })
   }
 
@@ -244,42 +197,27 @@ export function useBlog() {
     return sorted
   }
 
-  watchDebounced(q, (query, oldQuery) => {
-    // Do not update if query is the same
-    if (query === oldQuery)
-      return
-
-    articles.value = getArticles()
-  }, { debounce: 150 })
-
-  watch([categories, packages, authors], (filters, oldFilters) => {
-    // Do not update if filters are the same
-    if (filters.every((filter, index) => filter.join('') === oldFilters[index].join('')))
-      return
-
-    articles.value = getArticles()
-  })
-
   const storage = useStorage('blog', {
     'q': '' as null | string,
     'categories[]': [] as null | string | (string | null)[],
     'packages[]': [] as null | string | (string | null)[],
     'authors[]': [] as null | string | (string | null)[],
     'order': -1 as null | Order,
-    'orderBy': orderByOptions[0].id as null | typeof orderByOptions[number]['id'],
+    'orderBy': orderByOptions[0].id as null | string,
   })
 
-  // Update storage on query change
+  // Update articles and storage on query change
   watch(() => route.query, () => {
-    const query = route.query
+    articles.value = getArticles()
 
+    const query = route.query
     // Do not define default value. Must be defined in the query.
     const q = query.q as LocationQueryValue
     const categories = query['categories[]'] as LocationQueryValue[]
     const packages = query['packages[]'] as LocationQueryValue[]
     const authors = query['authors[]'] as LocationQueryValue[]
     const order = Number(query.order as LocationQueryValue) as Order
-    const orderBy = query.orderBy as LocationQueryValue as typeof orderByOptions[number]['id']
+    const orderBy = query.orderBy as LocationQueryValue as string
 
     storage.value = {
       q,
@@ -302,6 +240,7 @@ export function useBlog() {
 
   return {
     fetchBlogArticles,
+    updateQuery,
     reset,
     articles,
     q,
