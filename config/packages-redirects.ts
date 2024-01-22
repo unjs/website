@@ -56,6 +56,13 @@ export default {
     },
   },
 
+  '/docs': {
+    redirect: {
+      to: '/packages/docs',
+      statusCode: 302,
+    },
+  },
+
   '/fontaine': {
     redirect: {
       to: '/packages/fontaine',

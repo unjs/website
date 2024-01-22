@@ -1,0 +1,12 @@
+title: docs
+description: Minimal Documentation theme and CLI for shared usage across unjs projects.
+github:
+  owner: unjs
+  repo: docs
+npm:
+  name: docs
+playgrounds:
+examples:
+  link: null
+  page: false # Used to create a page using the examples
+documentation: https://github.com/unjs/docs
