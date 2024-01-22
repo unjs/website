@@ -95,26 +95,15 @@ export function useBlog() {
     },
   ]
   const defaultOrderBy: string = orderByOptions[0].id
-  const orderBy = computed({
-    get: () => {
-      return route.query.orderBy as LocationQueryValue || defaultOrderBy
-    },
-    set: (value) => {
-      // Update URL
-      navigateTo({
-        query: {
-          ...route.query,
-          orderBy: value,
-        },
-      })
-    },
+  const orderBy = computed(() => {
+    return route.query.orderBy as LocationQueryValue || defaultOrderBy
   })
 
   const articles = ref<BlogPostCard[]>()
   const fetchBlogArticles = async () => {
     if (data.value.length) {
       miniSearch.addAll(data.value)
-      articles.value = getArticles()
+      // Do not update articles list on client side to avoid hydration error
       return
     }
 
@@ -230,7 +219,7 @@ export function useBlog() {
   })
 
   onMounted(() => {
-    // Avoid hydration error when prerendering.
+    // Because of prerendering
     articles.value = getArticles()
     // No query? Create one using stored data.
     if (!hasQuery.value) {
