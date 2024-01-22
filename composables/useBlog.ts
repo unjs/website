@@ -225,7 +225,7 @@ export function useBlog() {
     if (!hasQuery.value) {
       navigateTo({
         query: storage.value,
-      })
+      }, { replace: true }) // Replace to avoid infinite loop on back button
     }
   })
 
