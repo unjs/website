@@ -92,27 +92,32 @@ export default defineAppConfig({
           ],
         },
         {
-          // TODO: add a link to a page examples
           title: 'Content',
           items: [
-          //   {
-          //     title: 'Learn',
-          //     url: '/learn',
-          //     rel: null,
-          //     target: null,
-          //   },
-          //   {
-          //     title: 'Build',
-          //     url: '/build',
-          //     rel: null,
-          //     target: null,
-          //   },
-          //   {
-          //     title: 'Explore',
-          //     url: '/explore',
-          //     rel: null,
-          //     target: null,
-          //   },
+            {
+              title: 'Examples',
+              url: '/examples',
+              rel: null,
+              target: null,
+            },
+            //   {
+            //     title: 'Learn',
+            //     url: '/learn',
+            //     rel: null,
+            //     target: null,
+            //   },
+            //   {
+            //     title: 'Build',
+            //     url: '/build',
+            //     rel: null,
+            //     target: null,
+            //   },
+            //   {
+            //     title: 'Explore',
+            //     url: '/explore',
+            //     rel: null,
+            //     target: null,
+            //   },
             {
               title: 'Search',
               url: '/search',

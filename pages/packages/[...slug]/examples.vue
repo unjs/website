@@ -32,15 +32,15 @@ if (error.value) {
   })
 }
 
-const site = useSiteConfig()
-
-const title = `Examples for ${unjsPackage.value?.title} ${site.separator} Packages`
-const description = `Learn usage of ${unjsPackage.value?.title} through a complete set of examples.`
+useHead({
+  templateParams: {
+    subtitle: 'Packages',
+  },
+  titleTemplate: '%s %separator %subtitle %separator %siteName',
+})
 useSeoMeta({
-  title,
-  ogTitle: title,
-  description,
-  ogDescription: description,
+  title: `Examples for ${unjsPackage.value?.title}`,
+  description: `Learn usage of ${unjsPackage.value?.title} through a complete set of examples.`,
 })
 
 const toc = computed(() => {
