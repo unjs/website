@@ -12,9 +12,10 @@ if (error.value) {
 
 useSeoMeta({
   title: page.value?.title,
-  ogTitle: page.value?.title,
   description: page.value?.description,
-  ogDescription: page.value?.description,
+})
+defineOgImageComponent('OgImagePage', {
+  illustration: '/assets/header/dark/learn.png',
 })
 
 const { data: latestBlog } = await useAsyncData('blog:latest', () => queryContent('/blog/').only(['_path', 'title', 'description', 'publishedAt', 'authors', 'packages', 'categories']).sort({ publishedAt: -1 }).limit(3).find(), { default: () => [] }) as { data: Ref<BlogPostCard[]> }
