@@ -22,6 +22,7 @@ useSeoMeta({
   description: page.value?.description,
   ogDescription: page.value?.description,
 })
+useTrackPageview()
 
 // TODO: Add og-image
 

@@ -14,6 +14,7 @@ useSeoMeta({
   description: page.value?.description,
   ogDescription: page.value?.description,
 })
+useTrackPageview()
 
 defineOgImageComponent('OgImagePage', {
   title: 'UnJS',

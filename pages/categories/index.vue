@@ -17,6 +17,7 @@ useSeoMeta({
   description,
   ogDescription: description,
 })
+useTrackPageview()
 
 const categories = computed(() => {
   const dedupeCategories = new Set<string>()

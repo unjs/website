@@ -25,6 +25,7 @@ useSeoMeta({
   description,
   ogDescription: description,
 })
+useTrackPageview()
 </script>
 
 <template>

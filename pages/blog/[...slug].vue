@@ -20,6 +20,7 @@ useSeoMeta({
   description: page.value?.description,
   ogDescription: page.value?.description,
 })
+useTrackPageview()
 
 const packages = ref<{ _path: string, title: string }[] | null>()
 if (page.value?.packages) {

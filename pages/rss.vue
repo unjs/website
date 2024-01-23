@@ -23,6 +23,7 @@ useSeoMeta({
   ogImage: joinURL(site.url, '/og/rss.jpg'),
   twitterImage: joinURL(site.url, '/og/rss.jpg'),
 })
+useTrackPageview()
 </script>
 
 <template>

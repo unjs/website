@@ -25,6 +25,7 @@ useSeoMeta({
   ogImage: joinURL(site.url, '/og/packages.jpg'),
   twitterImage: joinURL(site.url, '/og/packages.jpg'),
 })
+useTrackPageview()
 
 const { data: packages } = await useFetch('/api/content/packages.json', { default: () => [] }) as { data: Ref<Package[]> }
 
