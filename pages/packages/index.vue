@@ -18,6 +18,11 @@ useSeoMeta({
   title: page.value?.title,
   description: page.value?.description,
 })
+useSchemaOrg([
+  defineWebPage({
+    '@type': 'CollectionPage',
+  }),
+])
 
 const { data: packages } = await useFetch('/api/content/packages.json', { default: () => [] }) as { data: Ref<Package[]> }
 
@@ -62,8 +67,6 @@ function resetFilter() {
 }
 
 defineOgImageComponent('OgImagePackages', {
-  title: page.value?.title,
-  description: page.value?.description,
   packages: packages.value.length,
   monthlyDownloads: monthlyDownloads.value,
 })
@@ -78,9 +81,6 @@ watchDebounced(search, () => {
 </script>
 
 <template>
-  <Head>
-    <SchemaOrgWebPage :type="['CollectionPage']" />
-  </Head>
   <Main v-if="page">
     <template #header>
       <PageHeader :title="page.title" :description="page.description">

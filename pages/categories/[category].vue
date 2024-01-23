@@ -26,6 +26,12 @@ useSeoMeta({
   title: category,
   description,
 })
+useSchemaOrg([
+  defineWebPage({
+    '@type': 'CollectionPage',
+  }),
+])
+defineOgImageComponent('OgImagePage')
 </script>
 
 <template>

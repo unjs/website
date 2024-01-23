@@ -15,12 +15,15 @@ useSeoMeta({
   title: page.value?.title,
   description: page.value?.description,
 })
+useSchemaOrg([
+  defineWebPage({
+    '@type': 'CollectionPage',
+  }),
+])
+defineOgImageComponent('OgImagePage')
 </script>
 
 <template>
-  <Head>
-    <SchemaOrgWebPage :type="['CollectionPage']" />
-  </Head>
   <Main v-if="page">
     <Prose :toc="page.body?.toc">
       <template #header>

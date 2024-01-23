@@ -15,6 +15,12 @@ useSeoMeta({
   title,
   description,
 })
+useSchemaOrg([
+  defineWebPage({
+    '@type': 'CollectionPage',
+  }),
+])
+defineOgImageComponent('OgImagePage')
 
 const categories = computed(() => {
   const dedupeCategories = new Set<string>()
@@ -32,9 +38,6 @@ const categories = computed(() => {
 </script>
 
 <template>
-  <Head>
-    <SchemaOrgWebPage :type="['CollectionPage']" />
-  </Head>
   <Main v-if="data">
     <template #header>
       <PageHeader :title="title" :description="description" />
