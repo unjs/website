@@ -3,7 +3,7 @@ defineProps<{
   title: string
   description: string
   path: string
-  stars: number
+  stars?: number
   monthlyDownloads?: number
   contributors?: number
 }>()
@@ -23,11 +23,11 @@ defineProps<{
       {{ description }}
     </p>
 
-    <template #footer>
+    <template v-if="stars || monthlyDownloads || contributors" #footer>
       <dl class="grid grid-cols-3 text-sm text-gray-400 font-semibold">
-        <div>
+        <div v-if="stars">
           <dt class="sr-only">
-            Stars
+            Starse=
           </dt>
           <dd class="flex items-center gap-1">
             <span class="i-heroicons-star-20-solid h-[0.875rem] w-[0.875rem]" />
