@@ -13,17 +13,16 @@ if (error.value) {
   })
 }
 
-const site = useSiteConfig()
-
-const title = `${page.value?.title} ${site.separator} Packages`
-useSeoMeta({
-  title,
-  ogTitle: title,
-  description: page.value?.description,
-  ogDescription: page.value?.description,
+useHead({
+  templateParams: {
+    subtitle: 'Packages',
+  },
+  titleTemplate: '%s %separator %subtitle %separator %siteName',
 })
-
-// TODO: Add og-image
+useSeoMeta({
+  title: page.value?.title,
+  description: page.value?.description,
+})
 
 const { data: readme } = await useFetch<ParsedContent>(`/api/github/${page.value?.github.owner}/${page.value?.github.repo}/readme`, { default: () => {
   return { _id: '', body: null }
@@ -56,6 +55,13 @@ defineShortcuts({
         window.open(toGitHubRepo(page.value.github.owner, page.value.github.repo), '_blank')
     },
   },
+})
+
+defineOgImageComponent('OgImagePackage', {
+  title: page.value?.title,
+  description: page.value?.description,
+  stars: metadata.value.stars,
+  monthlyDownloads,
 })
 </script>
 

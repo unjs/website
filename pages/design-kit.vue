@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { joinURL } from 'ufo'
-
 const route = useRoute()
 
 const { data: page, error } = await useAsyncData(route.path, () => queryContent(route.path).findOne())
@@ -13,15 +11,15 @@ if (error.value) {
   })
 }
 
-const site = useSiteConfig()
-
 useSeoMeta({
   title: page.value?.title,
-  ogTitle: page.value?.title,
   description: page.value?.description,
-  ogDescription: page.value?.description,
-  ogImage: joinURL(site.url, '/og/design-kit.jpg'),
-  twitterImage: joinURL(site.url, '/og/design-kit.jpg'),
+})
+
+defineOgImageComponent('OgImagePage', {
+  title: page.value?.title,
+  description: page.value?.description,
+  illustration: '/assets/header/dark/design-kit.png',
 })
 </script>
 

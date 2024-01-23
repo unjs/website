@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { joinURL } from 'ufo'
 import type { OrderByOption } from '~/types/order'
 import type { Package } from '~/types/package'
 
@@ -15,15 +14,9 @@ if (error.value) {
   })
 }
 
-const site = useSiteConfig()
-
 useSeoMeta({
   title: page.value?.title,
-  ogTitle: page.value?.title,
   description: page.value?.description,
-  ogDescription: page.value?.description,
-  ogImage: joinURL(site.url, '/og/packages.jpg'),
-  twitterImage: joinURL(site.url, '/og/packages.jpg'),
 })
 
 const { data: packages } = await useFetch('/api/content/packages.json', { default: () => [] }) as { data: Ref<Package[]> }
@@ -67,6 +60,13 @@ function resetFilter() {
   order.value = defaultOrder
   orderBy.value = defaultOrderBy
 }
+
+defineOgImageComponent('OgImagePackages', {
+  title: page.value?.title,
+  description: page.value?.description,
+  packages: packages.value.length,
+  monthlyDownloads: monthlyDownloads.value,
+})
 
 // Track search to analytics
 watchDebounced(search, () => {

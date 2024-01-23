@@ -13,9 +13,7 @@ const title = 'Categories'
 const description = 'Blog\'s articles categories'
 useSeoMeta({
   title,
-  ogTitle: title,
   description,
-  ogDescription: description,
 })
 
 const categories = computed(() => {
