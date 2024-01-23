@@ -10,7 +10,7 @@ export default defineNuxtConfig({
     },
   },
   experimental: {
-    headNext: true
+    headNext: true,
   },
   modules: [
     '@nuxtjs/seo',
