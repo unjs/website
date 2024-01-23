@@ -3,6 +3,9 @@ import flattenColorPalette from 'tailwindcss/lib/util/flattenColorPalette'
 import { fontFamily } from 'tailwindcss/defaultTheme'
 
 export default <Partial<Config>> {
+  content: [
+    './nuxt.config.ts',
+  ],
   theme: {
     extend: {
       colors: {
