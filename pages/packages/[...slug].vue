@@ -13,14 +13,15 @@ if (error.value) {
   })
 }
 
-const site = useSiteConfig()
-
-const title = `${page.value?.title} ${site.separator} Packages`
+useHead({
+  templateParams: {
+    subtitle: 'Packages',
+  },
+  titleTemplate: '%s %separator %subtitle %separator %siteName',
+})
 useSeoMeta({
-  title,
-  ogTitle: title,
+  title: page.value?.title,
   description: page.value?.description,
-  ogDescription: page.value?.description,
 })
 
 const { data: readme } = await useFetch<ParsedContent>(`/api/github/${page.value?.github.owner}/${page.value?.github.repo}/readme`, { default: () => {

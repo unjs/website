@@ -4,6 +4,13 @@ import packagesRedirects from './config/packages-redirects'
 export default defineNuxtConfig({
   app: {
     head: {
+      htmlAttrs: {
+        dir: 'ltr',
+        class: 'scroll-smooth',
+      },
+      meta: [
+        { name: 'theme-color', content: '#ECDC5A' },
+      ],
       templateParams: {
         separator: '·',
       },
