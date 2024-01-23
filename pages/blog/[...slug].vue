@@ -11,14 +11,15 @@ if (error.value) {
   })
 }
 
-const site = useSiteConfig()
-
-const title = `${page.value?.title} ${site.separator} Blog`
+useHead({
+  templateParams: {
+    subtitle: 'Blog',
+  },
+  titleTemplate: '%s %separator %subtitle %separator %siteName',
+})
 useSeoMeta({
-  title,
-  ogTitle: title,
+  title: page.value?.title,
   description: page.value?.description,
-  ogDescription: page.value?.description,
 })
 
 const packages = ref<{ _path: string, title: string }[] | null>()

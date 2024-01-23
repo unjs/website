@@ -15,15 +15,16 @@ if (error.value) {
   })
 }
 
-const site = useSiteConfig()
-
-const title = `${category} ${site.separator} Categories`
 const description = `Blog's articles in the category ${category}`
+useHead({
+  templateParams: {
+    subtitle: 'Categories',
+  },
+  titleTemplate: '%s %separator %subtitle %separator %siteName',
+})
 useSeoMeta({
-  title,
-  ogTitle: title,
+  title: category,
   description,
-  ogDescription: description,
 })
 </script>
 

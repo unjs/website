@@ -10,9 +10,9 @@ if (error.value) {
 }
 
 useSeoMeta({
-  title: null,
+  titleTemplate: '%siteName: %pageTitle',
+  title: 'Unleash JavaScript\'s Potential',
   description: page.value?.description,
-  ogDescription: page.value?.description,
 })
 
 defineOgImageComponent('OgImagePage', {
