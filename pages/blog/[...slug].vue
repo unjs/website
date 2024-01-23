@@ -20,7 +20,16 @@ useHead({
 useSeoMeta({
   title: page.value?.title,
   description: page.value?.description,
+  articlePublishedTime: page.value?.publishedAt,
+  articleModifiedTime: page.value?.modifiedAt,
 })
+useSchemaOrg([
+  defineArticle({
+    '@type': 'BlogPosting',
+    'datePublished': page.value?.publishedAt,
+    'dateModified': page.value?.modifiedAt,
+  }),
+])
 
 const packages = ref<{ _path: string, title: string }[] | null>()
 if (page.value?.packages) {
