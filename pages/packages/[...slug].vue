@@ -23,8 +23,6 @@ useSeoMeta({
   ogDescription: page.value?.description,
 })
 
-// TODO: Add og-image
-
 const { data: readme } = await useFetch<ParsedContent>(`/api/github/${page.value?.github.owner}/${page.value?.github.repo}/readme`, { default: () => {
   return { _id: '', body: null }
 } })
@@ -49,6 +47,13 @@ defineShortcuts({
         window.open(toGitHubRepo(page.value.github.owner, page.value.github.repo), '_blank')
     },
   },
+})
+
+defineOgImageComponent('OgImagePackage', {
+  title: page.value?.title,
+  description: page.value?.description,
+  stars: metadata.value.stars,
+  monthlyDownloads,
 })
 </script>
 
