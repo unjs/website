@@ -18,10 +18,12 @@ useSeoMeta({
   title: page.value?.title,
   description: page.value?.description,
 })
-
+useSchemaOrg([
+  defineWebPage({
+    '@type': 'CollectionPage',
+  }),
+])
 defineOgImageComponent('OgImagePage', {
-  title: page.value?.title,
-  description: page.value?.description,
   illustration: '/assets/header/dark/blog.png',
 })
 
@@ -138,9 +140,6 @@ watchDebounced(search, () => {
 </script>
 
 <template>
-  <Head>
-    <SchemaOrgWebPage :type="['CollectionPage']" />
-  </Head>
   <Main v-if="page">
     <template #header>
       <PageHeader :title="page.title" :description="page.description">

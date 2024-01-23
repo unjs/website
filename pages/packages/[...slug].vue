@@ -23,6 +23,11 @@ useSeoMeta({
   title: page.value?.title,
   description: page.value?.description,
 })
+useSchemaOrg([
+  defineWebPage({
+    '@type': 'ItemPage',
+  }),
+])
 
 const { data: readme } = await useFetch<ParsedContent>(`/api/github/${page.value?.github.owner}/${page.value?.github.repo}/readme`, { default: () => {
   return { _id: '', body: null }

@@ -28,8 +28,13 @@ useSchemaOrg([
     '@type': 'BlogPosting',
     'datePublished': page.value?.publishedAt,
     'dateModified': page.value?.modifiedAt,
+    'author': page.value?.authors?.map(author => ({
+      name: author.name,
+      url: `https://x.com/${author.twitter}`,
+    })),
   }),
 ])
+defineOgImageComponent('OgImageBlog')
 
 const packages = ref<{ _path: string, title: string }[] | null>()
 if (page.value?.packages) {
@@ -38,11 +43,6 @@ if (page.value?.packages) {
   if (data.value)
     packages.value = data.value
 }
-
-defineOgImageComponent('OgImageBlog', {
-  title: page.value?.title,
-  description: page.value?.description,
-})
 </script>
 
 <template>

@@ -15,10 +15,7 @@ useSeoMeta({
   title: page.value?.title,
   description: page.value?.description,
 })
-
 defineOgImageComponent('OgImagePage', {
-  title: page.value?.title,
-  description: page.value?.description,
   illustration: '/assets/header/dark/design-kit.png',
 })
 </script>

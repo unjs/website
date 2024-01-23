@@ -14,10 +14,8 @@ useSeoMeta({
   title: 'Unleash JavaScript\'s Potential',
   description: page.value?.description,
 })
-
 defineOgImageComponent('OgImagePage', {
   title: 'UnJS',
-  description: page.value?.description,
   illustration: '/assets/header/dark/home.png',
 })
 </script>
