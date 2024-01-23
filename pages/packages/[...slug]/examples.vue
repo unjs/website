@@ -38,9 +38,13 @@ useHead({
   },
   titleTemplate: '%s %separator %subtitle %separator %siteName',
 })
+const description = `Learn usage of ${unjsPackage.value?.title} through a complete set of examples.`
 useSeoMeta({
   title: `Examples for ${unjsPackage.value?.title}`,
-  description: `Learn usage of ${unjsPackage.value?.title} through a complete set of examples.`,
+  description,
+})
+defineOgImageComponent('OgImageExamples', {
+  packageName: unjsPackage.value.title,
 })
 
 const toc = computed(() => {
