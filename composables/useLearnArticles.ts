@@ -1,39 +1,36 @@
 import { useStorage } from '@vueuse/core'
 import type { ParsedContent } from '@nuxt/content/dist/runtime/types'
+import MiniSearch, { type SearchResult } from 'minisearch'
 import type { LocationQueryValue } from '#vue-router'
 import type { Order } from '~/types/order'
 
 export function useLearnArticles() {
-  const data = useState<Pick<ParsedContent, string>[]>('content:learn-articles', () => [])
-
   const fields = ['title', 'description', '_path', 'packages', 'category']
-  const fetchArticles = async () => {
-    if (data.value.length)
-      return
-
-    try {
-      const res = await queryContent('/learn/').only(fields).find()
-      data.value = res
-    }
-    catch (error) {
-      throw createError({
-        statusCode: 500,
-        statusMessage: 'Server Error',
-        fatal: true,
-      })
-    }
-  }
-
-  const orderByOptions = [
-    {
-      id: 'publishedAt',
-      label: 'Published At',
+  const miniSearch = new MiniSearch({
+    idField: 'title',
+    fields: ['title', 'description'],
+    storeFields: fields,
+    searchOptions: {
+      prefix: true,
+      fuzzy: 0.4,
+      boost: {
+        title: 2,
+        description: 1,
+      },
     },
-    {
-      id: 'title',
-      label: 'Title',
-    },
-  ]
+  })
+
+  const data = useState<Pick<ParsedContent, string>[]>('content:learn-articles', () => [])
+  const route = useRoute()
+  // This is important to avoid a merge the URL and some data in storage for each missing query in URL. We cannot directly check for query to avoid having UTM breaking the system.
+  const hasQuery = computed(() => {
+    return route.query.q || route.query['categories[]'] || route.query['packages[]'] || route.query['authors[]'] || route.query.order || route.query.orderby
+  })
+
+  const defaultQ: string = ''
+  const q = computed(() => {
+    return route.query.q as LocationQueryValue || defaultQ
+  })
 
   const categoriesOptions = [
     {
@@ -45,187 +42,193 @@ export function useLearnArticles() {
       label: 'Building Blocks',
     },
   ]
+  const defaultCategories: string[] = []
+  const categories = computed(() => {
+    const categories = route.query['categories[]'] as LocationQueryValue[] || defaultCategories
+
+    return (Array.isArray(categories) ? categories : [categories]) as string[]
+  })
 
   const packagesOptions = computed(() => {
-    const packages = data.value.map(p => p.packages).flat()
-    const dedupe = new Set(packages)
-    return Array.from(dedupe)
+    const packages = data.value.flatMap(p => p.packages || [])
+    const dedupe = new Set<string>(packages)
+
+    return Array.from(dedupe).sort()
+  })
+  const defaultPackages: string[] = []
+  const packages = computed(() => {
+    const packages = route.query['packages[]'] || defaultPackages
+
+    return (Array.isArray(packages) ? packages : [packages]) as string[]
   })
 
-  const route = useRoute()
-  const storage = useStorage('learn-articles', {
-    'q': '',
-    'categories[]': [] as string[],
-    'packages[]': [] as string[],
-    'order': -1,
-    'orderBy': orderByOptions[0].id,
+  const authorsOptions = computed(() => {
+    const authors = data.value.flatMap(p => p.authors || [])
+    const dedupe = new Set<string>(authors)
+
+    return Array.from(dedupe).sort()
+  })
+  const defaultAuthors: string[] = []
+  const authors = computed(() => {
+    const authors = route.query['authors[]'] || defaultAuthors
+
+    return (Array.isArray(authors) ? authors : [authors]) as string[]
   })
 
-  // This is important to avoid a merge the URL and some data in storage for each missing query in URL. We cannot directly check for query to avoid having UTM breaking the system.
-  const hasQuery = computed(() => {
-    return route.query.q || route.query['categories[]'] || route.query['packages[]'] || route.query.order || route.query.orderby
+  const defaultOrder: Order = -1
+  const order = computed(() => {
+    const value = route.query.order as LocationQueryValue || defaultOrder
+
+    return Number(value) as Order
   })
 
-  /**
-   * Navigate to correct query using storage.
-   *
-   * Since we use the URL as state of the application, we can't use directly data from storage. If so, it add complexity (need to extract data from query or from storage in every filters) and break when user start to interact with the application since a query appears.
-   */
-  onMounted(() => {
-    // If there is a query, do nothing.
-    if (hasQuery.value)
-      return
+  const orderByOptions = [
+    {
+      id: 'publishedAt',
+      label: 'Published At',
+    },
+    {
+      id: 'title',
+      label: 'Title',
+    },
+  ]
+  const defaultOrderBy: string = orderByOptions[0].id
+  const orderBy = computed(() => {
+    return route.query.orderBy as LocationQueryValue || defaultOrderBy
+  })
 
-    // Navigate using storage value (even default) to keep state in URL
+  const articles = ref<Pick<ParsedContent, string>[]>([])
+
+  const updateQuery = (query?: { q?: string, 'categories[]'?: string[], 'packages[]'?: string[], 'authors[]'?: string[], order?: Order, orderBy?: string }) => {
     navigateTo({
-      query: storage.value,
+      query: {
+        ...route.query,
+        ...query,
+      },
     })
-  })
-
-  const q = computed({
-    get: () => {
-      return route.query.q as LocationQueryValue || ''
-    },
-    set: (value) => {
-      // Update URL
-      navigateTo({
-        query: {
-          ...route.query,
-          q: value,
-        },
-      })
-      // Update storage
-      storage.value.q = value
-    },
-  })
-
-  const categories = computed({
-    get: () => {
-      const categories = route.query['categories[]'] as LocationQueryValue[] || []
-
-      return (Array.isArray(categories) ? categories : [categories]) as string[]
-    },
-    set: (value: string[]) => {
-      // Update URL
-      navigateTo({
-        query: {
-          ...route.query,
-          'categories[]': value,
-        },
-      })
-      // Update storage
-      storage.value['categories[]'] = value
-    },
-  })
-
-  const packages = computed({
-    get: () => {
-      const packages = route.query['packages[]'] || []
-
-      return (Array.isArray(packages) ? packages : [packages]) as string[]
-    },
-    set: (value: string[]) => {
-      // Update URL
-      navigateTo({
-        query: {
-          ...route.query,
-          'packages[]': value,
-        },
-      })
-      // Update storage
-      storage.value['packages[]'] = value
-    },
-  })
-
-  const order = computed({
-    get: () => {
-      const value = route.query.order as LocationQueryValue || ''
-
-      return Number(value) as Order
-    },
-    set: (value) => {
-      // Update URL
-      navigateTo({
-        query: {
-          ...route.query,
-          order: value,
-        },
-      })
-      // Update storage
-      storage.value.order = value
-    },
-  })
-
-  const orderBy = computed({
-    get: () => {
-      return route.query.orderBy as LocationQueryValue || orderByOptions[0].id
-    },
-    set: (value) => {
-      // Update URL
-      navigateTo({
-        query: {
-          ...route.query,
-          orderBy: value,
-        },
-      })
-      // Update storage
-      storage.value.orderBy = value
-    },
-  })
-
-  const reset = () => {
-    const query = {
-      q: null,
-      category: null,
-    }
-    navigateTo({
-      query,
-    })
-    storage.value = {
-      'q': '',
-      'categories[]': [],
-      'packages[]': [],
-      'order': -1,
-      'orderBy': orderByOptions[0].id,
-    }
   }
 
-  const selectedOrderBy = computed(() => {
-    return orderByOptions.find(option => option.id === orderBy.value)
-  })
+  const reset = () => {
+    const defaultQuery = {
+      'q': defaultQ,
+      'categories[]': defaultCategories,
+      'packages[]': defaultPackages,
+      'authors[]': defaultAuthors,
+      'order': defaultOrder,
+      'orderBy': defaultOrderBy,
+    }
+    updateQuery(defaultQuery)
+  }
 
-  const articlesSearched = useSimpleSearch(q, data, {
-    idField: 'title',
-    fields: ['title', 'description'],
-    storeFields: fields,
-  })
-
-  const articlesFiltered = computed(() => {
-    let results = articlesSearched.value
-
-    results = results.filter((item) => {
+  const filter = (data: (Pick<ParsedContent, string> & SearchResult)[]) => {
+    data = data.filter((item) => {
       if (!categories.value.length)
         return true
 
-      return categories.value.includes(item.category)
+      return categories.value.some(category => item.categories.includes(category))
     })
 
-    results = results.filter((item) => {
+    data = data.filter((item) => {
       if (!packages.value.length)
         return true
+
+      if (!item.packages)
+        return false
 
       return item.packages.some(pkg => packages.value.includes(pkg))
     })
 
-    return results
+    data = data.filter((item) => {
+      if (!authors.value.length)
+        return true
+
+      return item.authors.some(author => authors.value.includes(author.name))
+    })
+
+    return data
+  }
+
+  const search = (data: Pick<ParsedContent, string>[]) => {
+    if (!q.value)
+      return data as (Pick<ParsedContent, string> & SearchResult)[]
+
+    return miniSearch.search(q.value) as (Pick<ParsedContent, string> & SearchResult)[]
+  }
+
+  const getArticles = () => {
+    const searched = search(data.value)
+    const filtered = filter(searched)
+    const sorted = sort(filtered, order.value, orderBy.value)
+
+    return sorted
+  }
+
+  const fetchArticles = async () => {
+    if (data.value.length) {
+      miniSearch.addAll(data.value)
+      return
+    }
+
+    try {
+      const res = await queryContent('/learn/').only(fields).find()
+      data.value = res
+      miniSearch.addAll(data.value)
+      articles.value = getArticles()
+    }
+    catch (error) {
+      throw createError({
+        statusCode: 500,
+        statusMessage: 'Server Error',
+        fatal: true,
+      })
+    }
+  }
+
+  const storage = useStorage('learn-articles', {
+    'q': '' as null | string,
+    'categories[]': [] as null | string | (string | null)[],
+    'packages[]': [] as null | string | (string | null)[],
+    'authors[]': [] as null | string | (string | null)[],
+    'order': -1 as null | Order,
+    'orderBy': orderByOptions[0].id as null | string,
+  })
+  // Update articles and storage on query change
+  watch(() => route.query, () => {
+    articles.value = getArticles()
+
+    const query = route.query
+    // Do not define default value. Must be defined in the query.
+    const q = query.q as LocationQueryValue
+    const categories = query['categories[]'] as LocationQueryValue[]
+    const packages = query['packages[]'] as LocationQueryValue[]
+    const authors = query['authors[]'] as LocationQueryValue[]
+    const order = Number(query.order as LocationQueryValue) as Order
+    const orderBy = query.orderBy as LocationQueryValue as string
+
+    storage.value = {
+      q,
+      'categories[]': categories,
+      'packages[]': packages,
+      'authors[]': authors,
+      order,
+      orderBy,
+    }
   })
 
-  const articles = computed(() => {
-    return sort(articlesFiltered.value, order.value, orderBy.value)
+  onMounted(() => {
+    // Because of prerendering
+    articles.value = getArticles()
+    // No query? Create one using stored data.
+    if (!hasQuery.value) {
+      navigateTo({
+        query: storage.value,
+      }, { replace: true }) // Replace to avoid infinite loop on back button
+    }
   })
 
   return {
     fetchArticles,
+    updateQuery,
     reset,
     articles,
     q,
@@ -233,9 +236,10 @@ export function useLearnArticles() {
     categoriesOptions,
     packages,
     packagesOptions,
+    authors,
+    authorsOptions,
     order,
     orderBy,
     orderByOptions,
-    selectedOrderBy,
   }
 }

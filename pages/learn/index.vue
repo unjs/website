@@ -33,7 +33,6 @@ const categories = [{
 </script>
 
 <template>
-  <!-- Once ready, create components -->
   <Main v-if="page">
     <template #header>
       <PageHeader :title="page.title" :description="page.description">
@@ -55,7 +54,7 @@ const categories = [{
         </p>
 
         <div class="mt-6 flex ">
-          <UButton to="/articles?utm_source=unjs.io&utm_medium=learn-article-you-need" color="white" variant="solid" size="lg" trailing-icon="i-heroicons-chevron-right-20-solid">
+          <UButton to="/learn/articles?utm_source=unjs.io&utm_medium=learn-article-you-need" color="white" variant="solid" size="lg" trailing-icon="i-heroicons-chevron-right-20-solid">
             All articles
           </UButton>
         </div>
@@ -63,7 +62,7 @@ const categories = [{
       <ol class="grid grid-cols-2 gap-4 lg:gap-8">
         <li v-for="category in categories" :key="category.label" class="relative p-4 rounded-lg ring-1 ring-gray-300 dark:ring-gray-700 shadow-sm hover:shadow-none hover:ring-primary dark:hover:ring-primary transition ease-in">
           <h3 class="md:text-xl font-semibold dark:text-gray-50">
-            <NuxtLink class="absolute inset-0" :to="`/learn/articles?category=${category.id}&utm_source=unjs.io&utm_medium=learn-category`" />
+            <NuxtLink class="absolute inset-0" :to="`/learn/articles?categories[]=${category.id}&utm_source=unjs.io&utm_medium=learn-category`" />
             {{ category.label }}
           </h3>
           <p class="mt-1 dark:text-zinc-400">
@@ -75,7 +74,7 @@ const categories = [{
 
     <section class="mt-8 lg:mt-16">
       <h2 class="text-gray-950 dark:text-gray-50 text-xl font-semibold">
-        <NuxtLink class="flex items-center" to="/learn/articles?utm_source=unjs.io&utm_medium=learn-latest-articles">
+        <NuxtLink class="flex items-center" to="/learn/articles?order=-1&orderBy=publishedAt&utm_source=unjs.io&utm_medium=learn-latest-articles">
           <span>
             Latest articles
           </span>
@@ -100,7 +99,7 @@ const categories = [{
 
     <section class="mt-8 lg:mt-16">
       <h2 class="text-gray-950 dark:text-gray-50 text-xl font-semibold">
-        <NuxtLink class="flex items-center" to="/blog?utm_source=unjs.io&utm_medium=learn-latest-blog">
+        <NuxtLink class="flex items-center" to="/blog?order=-1&orderBy=publishedAt&utm_source=unjs.io&utm_medium=learn-latest-blog">
           <span>
             Stay up to date
           </span>
@@ -131,8 +130,8 @@ const categories = [{
       </p>
 
       <div class="mt-12">
-        <!-- randomize to get one 101 -->
-        <UButton to="/?utm_source=unjs.io&utm_medium=learn-start-now" color="primary" variant="solid" size="lg" :ui="{ variant: { solid: 'text-gray-950 bg-primary/60 hover:bg-primary/40 dark:text-gray-50 dark:bg-primary/40 dark:hover:bg-primary/30' } }" trailing-icon="i-heroicons-chevron-right-20-solid">
+        <!-- TODO: randomize to get one 101 (or just the latest one) -->
+        <UButton to="/?utm_source=unjs.io&utm_medium=learn-start-now" color="primary" variant="solid" size="lg" :ui="{ variant: { solid: 'text-gray-950 dark:text-gray-50 bg-primary bg-opacity-40 dark:bg-opacity-30  hover:bg-primary/60 dark:hover:bg-primary/40' } }" trailing-icon="i-heroicons-chevron-right-20-solid">
           Read an article
         </UButton>
       </div>
