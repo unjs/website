@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { joinURL } from 'ufo'
-
 const { data: page, error } = await useAsyncData('index', () => queryContent('/').findOne())
 
 if (error.value) {
@@ -11,14 +9,14 @@ if (error.value) {
   })
 }
 
-const site = useSiteConfig()
-
 useSeoMeta({
-  title: null,
+  titleTemplate: '%siteName: %pageTitle',
+  title: 'Unleash JavaScript\'s Potential',
   description: page.value?.description,
-  ogDescription: page.value?.description,
-  ogImage: joinURL(site.url, '/og/home.jpg'),
-  twitterImage: joinURL(site.url, '/og/home.jpg'),
+})
+defineOgImageComponent('OgImagePage', {
+  title: 'UnJS',
+  illustration: '/assets/header/dark/home.png',
 })
 </script>
 

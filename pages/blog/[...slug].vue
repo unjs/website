@@ -11,15 +11,30 @@ if (error.value) {
   })
 }
 
-const site = useSiteConfig()
-
-const title = `${page.value?.title} ${site.separator} Blog`
-useSeoMeta({
-  title,
-  ogTitle: title,
-  description: page.value?.description,
-  ogDescription: page.value?.description,
+useHead({
+  templateParams: {
+    subtitle: 'Blog',
+  },
+  titleTemplate: '%s %separator %subtitle %separator %siteName',
 })
+useSeoMeta({
+  title: page.value?.title,
+  description: page.value?.description,
+  articlePublishedTime: page.value?.publishedAt,
+  articleModifiedTime: page.value?.modifiedAt,
+})
+useSchemaOrg([
+  defineArticle({
+    '@type': 'BlogPosting',
+    'datePublished': page.value?.publishedAt,
+    'dateModified': page.value?.modifiedAt,
+    'author': page.value?.authors?.map(author => ({
+      name: author.name,
+      url: `https://x.com/${author.twitter}`,
+    })),
+  }),
+])
+defineOgImageComponent('OgImageBlog')
 
 const packages = ref<{ _path: string, title: string }[] | null>()
 if (page.value?.packages) {
@@ -28,11 +43,6 @@ if (page.value?.packages) {
   if (data.value)
     packages.value = data.value
 }
-
-defineOgImageComponent('OgImageBlog', {
-  title: page.value?.title,
-  description: page.value?.description,
-})
 </script>
 
 <template>

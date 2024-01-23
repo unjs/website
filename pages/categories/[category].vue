@@ -15,16 +15,23 @@ if (error.value) {
   })
 }
 
-const site = useSiteConfig()
-
-const title = `${category} ${site.separator} Categories`
 const description = `Blog's articles in the category ${category}`
-useSeoMeta({
-  title,
-  ogTitle: title,
-  description,
-  ogDescription: description,
+useHead({
+  templateParams: {
+    subtitle: 'Categories',
+  },
+  titleTemplate: '%s %separator %subtitle %separator %siteName',
 })
+useSeoMeta({
+  title: category,
+  description,
+})
+useSchemaOrg([
+  defineWebPage({
+    '@type': 'CollectionPage',
+  }),
+])
+defineOgImageComponent('OgImagePage')
 </script>
 
 <template>

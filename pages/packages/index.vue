@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { joinURL } from 'ufo'
 import type { OrderByOption } from '~/types/order'
 import type { Package } from '~/types/package'
 
@@ -15,16 +14,15 @@ if (error.value) {
   })
 }
 
-const site = useSiteConfig()
-
 useSeoMeta({
   title: page.value?.title,
-  ogTitle: page.value?.title,
   description: page.value?.description,
-  ogDescription: page.value?.description,
-  ogImage: joinURL(site.url, '/og/packages.jpg'),
-  twitterImage: joinURL(site.url, '/og/packages.jpg'),
 })
+useSchemaOrg([
+  defineWebPage({
+    '@type': 'CollectionPage',
+  }),
+])
 
 const { data: packages } = await useFetch('/api/content/packages.json', { default: () => [] }) as { data: Ref<Package[]> }
 
@@ -68,6 +66,11 @@ function resetFilter() {
   orderBy.value = defaultOrderBy
 }
 
+defineOgImageComponent('OgImagePackages', {
+  packages: packages.value.length,
+  monthlyDownloads: monthlyDownloads.value,
+})
+
 // Track search to analytics
 watchDebounced(search, () => {
   if (!search.value)
@@ -78,9 +81,6 @@ watchDebounced(search, () => {
 </script>
 
 <template>
-  <Head>
-    <SchemaOrgWebPage :type="['CollectionPage']" />
-  </Head>
   <Main v-if="page">
     <template #header>
       <PageHeader :title="page.title" :description="page.description">

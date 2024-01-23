@@ -15,6 +15,14 @@ if (error.value) {
   })
 }
 
+useSeoMeta({
+  title: page.value?.title,
+  description: page.value?.description,
+})
+defineOgImageComponent('OgImagePage', {
+  illustration: '/assets/header/dark/search.png',
+})
+
 const query = ref<string>(route.query.q as string || '')
 const queryDebounced = ref<string>(query.value)
 watchDebounced(

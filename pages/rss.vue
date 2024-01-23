@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { joinURL } from 'ufo'
-
 const route = useRoute()
 
 const { data: page, error } = await useAsyncData(route.path, () => queryContent(route.path).findOne())
@@ -13,22 +11,19 @@ if (error.value) {
   })
 }
 
-const site = useSiteConfig()
-
 useSeoMeta({
   title: page.value?.title,
-  ogTitle: page.value?.title,
   description: page.value?.description,
-  ogDescription: page.value?.description,
-  ogImage: joinURL(site.url, '/og/rss.jpg'),
-  twitterImage: joinURL(site.url, '/og/rss.jpg'),
 })
+useSchemaOrg([
+  defineWebPage({
+    '@type': 'CollectionPage',
+  }),
+])
+defineOgImageComponent('OgImagePage')
 </script>
 
 <template>
-  <Head>
-    <SchemaOrgWebPage :type="['CollectionPage']" />
-  </Head>
   <Main v-if="page">
     <Prose :toc="page.body?.toc">
       <template #header>

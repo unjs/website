@@ -4,6 +4,13 @@ import packagesRedirects from './config/packages-redirects'
 export default defineNuxtConfig({
   app: {
     head: {
+      htmlAttrs: {
+        dir: 'ltr',
+        class: 'scroll-smooth',
+      },
+      meta: [
+        { name: 'theme-color', content: '#ECDC5A' },
+      ],
       templateParams: {
         separator: '·',
       },
@@ -93,15 +100,17 @@ export default defineNuxtConfig({
     ],
   },
   site: {
-    defaultLocale: 'en',
     url: 'https://unjs.io',
-    separator: '·',
     name: 'UnJS',
     description: 'Agnostic Excellence: JavaScript Libraries, Tools, and Utilities, Crafted to Elevate Your Coding Journey.',
     identity: {
       type: 'Organization',
+      logo: 'https://unjs.io/favicon.svg',
+      sameAs: [
+        'https://github.com/unjs',
+        'https://twitter.com/unjsio',
+      ],
     },
-    trailingSlash: false,
   },
   linkChecker: {
     enabled: false,
