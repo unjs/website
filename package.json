@@ -16,7 +16,7 @@
     "cli": "jiti bin"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "2.6.2",
+    "@antfu/eslint-config": "2.6.3",
     "@headlessui/vue": "^1.7.17",
     "@iconify-json/heroicons": "^1.1.19",
     "@iconify-json/logos": "^1.1.42",
