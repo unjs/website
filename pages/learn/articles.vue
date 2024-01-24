@@ -111,7 +111,6 @@ watchDebounced(q, () => {
               </span>
             </template>
           </USelectMenu>
-          {{ categories }}
           <USelectMenu
             :model-value="categories"
             :options="categoriesOptions"
