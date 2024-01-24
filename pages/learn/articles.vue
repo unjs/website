@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const { data: page, error } = await useAsyncData('content:learn', () => queryContent('/learn').findOne())
+const route = useRoute()
+
+const { data: page, error } = await useAsyncData(route.path, () => queryContent('/learn/').findOne())
 
 if (error.value) {
   throw createError({
@@ -82,7 +84,7 @@ watchDebounced(q, () => {
             value-attribute="name"
             option-attribute="name"
             multiple
-            @update:model-value="updateQuery({ authors: $event })"
+            @update:model-value="updateQuery({ 'authors[]': $event })"
           >
             <template #option="{ option: author }">
               <UAvatar size="2xs" :src="author.picture" :alt="`Avatar of ${author.name}`" />
@@ -100,7 +102,7 @@ watchDebounced(q, () => {
             placeholder="Packages"
             select-class="cursor-pointer"
             multiple
-            @update:model-value="updateQuery({ packages: $event })"
+            @update:model-value="updateQuery({ 'packages[]': $event })"
           >
             <template #option="{ option: pkg }">
               <UAvatar size="2xs" :src="`/assets/logos/${pkg}.svg`" :alt="`Icon of ${pkg}`" />
@@ -109,6 +111,7 @@ watchDebounced(q, () => {
               </span>
             </template>
           </USelectMenu>
+          {{ categories }}
           <USelectMenu
             :model-value="categories"
             :options="categoriesOptions"
@@ -127,8 +130,14 @@ watchDebounced(q, () => {
 
       <ListGrid class="mt-8">
         <ListGridItem v-for="item in articles" :key="item._path">
-          {{ item }}
-          <!-- TODO: create card -->
+          <LearnCard
+            :path="item._path"
+            :title="item.title"
+            :description="item.description"
+            :category="item.category"
+            :published-at="item.publishedAt"
+            :authors="item.authors"
+          />
         </ListGridItem>
         <ListGridEmpty v-if="articles && articles.length === 0">
           No articles found

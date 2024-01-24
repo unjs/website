@@ -5,7 +5,7 @@ import type { LocationQueryValue } from '#vue-router'
 import type { Order } from '~/types/order'
 
 export function useLearnArticles() {
-  const fields = ['title', 'description', '_path', 'packages', 'category']
+  const fields = ['title', 'description', '_path', 'packages', 'category', 'publishedAt', 'authors']
   const miniSearch = new MiniSearch({
     idField: 'title',
     fields: ['title', 'description'],
@@ -20,7 +20,7 @@ export function useLearnArticles() {
     },
   })
 
-  const data = useState<Pick<ParsedContent, string>[]>('content:learn-articles', () => [])
+  const data = useState<Pick<ParsedContent, string>[]>('content:learn-articles-data', () => [])
   const route = useRoute()
   // This is important to avoid a merge the URL and some data in storage for each missing query in URL. We cannot directly check for query to avoid having UTM breaking the system.
   const hasQuery = computed(() => {
@@ -97,7 +97,7 @@ export function useLearnArticles() {
     return route.query.orderBy as LocationQueryValue || defaultOrderBy
   })
 
-  const articles = ref<Pick<ParsedContent, string>[]>([])
+  const articles = useState<Pick<ParsedContent, string>[]>('content:learn-articles', () => [])
 
   const updateQuery = (query?: { q?: string, 'categories[]'?: string[], 'packages[]'?: string[], 'authors[]'?: string[], order?: Order, orderBy?: string }) => {
     navigateTo({
@@ -125,7 +125,10 @@ export function useLearnArticles() {
       if (!categories.value.length)
         return true
 
-      return categories.value.some(category => item.categories.includes(category))
+      if (!item.category)
+        return false
+
+      return categories.value.includes(item.category)
     })
 
     data = data.filter((item) => {
