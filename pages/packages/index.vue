@@ -37,7 +37,7 @@ const {
 await fetchPackages()
 
 defineOgImageComponent('OgImagePackages', {
-  packages: packages.value.length,
+  packages: packages.value?.length,
   monthlyDownloads: monthlyDownloads.value,
 })
 
