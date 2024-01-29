@@ -22,6 +22,7 @@ useSeoMeta({
 defineOgImageComponent('OgImagePage', {
   illustration: '/assets/header/dark/search.png',
 })
+useTrackPageview()
 
 const query = ref<string>(route.query.q as string || '')
 const queryDebounced = ref<string>(query.value)

@@ -23,6 +23,7 @@ useSchemaOrg([
     '@type': 'CollectionPage',
   }),
 ])
+useTrackPageview()
 
 const { data: packages } = await useFetch('/api/content/packages.json', { default: () => [] }) as { data: Ref<Package[]> }
 

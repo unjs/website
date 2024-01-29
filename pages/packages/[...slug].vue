@@ -28,6 +28,7 @@ useSchemaOrg([
     '@type': 'ItemPage',
   }),
 ])
+useTrackPageview()
 
 const { data: readme } = await useFetch<ParsedContent>(`/api/github/${page.value?.github.owner}/${page.value?.github.repo}/readme`, { default: () => {
   return { _id: '', body: null }

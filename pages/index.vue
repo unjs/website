@@ -18,6 +18,7 @@ defineOgImageComponent('OgImagePage', {
   title: 'UnJS',
   illustration: '/assets/header/dark/home.png',
 })
+useTrackPageview()
 </script>
 
 <template>

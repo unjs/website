@@ -21,6 +21,7 @@ useSchemaOrg([
   }),
 ])
 defineOgImageComponent('OgImagePage')
+useTrackPageview()
 
 const categories = computed(() => {
   const dedupeCategories = new Set<string>()

@@ -115,6 +115,9 @@ export default defineNuxtConfig({
   linkChecker: {
     enabled: false,
   },
+  plausible: {
+    autoPageviews: false,
+  },
   routeRules: {
     ...packagesRedirects as NitroConfig['routeRules'],
   },

@@ -21,6 +21,7 @@ useSchemaOrg([
   }),
 ])
 defineOgImageComponent('OgImagePage')
+useTrackPageview()
 </script>
 
 <template>

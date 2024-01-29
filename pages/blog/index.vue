@@ -26,6 +26,7 @@ useSchemaOrg([
 defineOgImageComponent('OgImagePage', {
   illustration: '/assets/header/dark/blog.png',
 })
+useTrackPageview()
 
 const fields = ['_path', 'title', 'description', 'publishedAt', 'authors', 'packages', 'categories']
 const { data: blog } = await useAsyncData('blog:articles', () => queryContent('/blog/').only(fields).sort({ publishedAt: -1 }).find(), { default: () => [] }) as { data: Ref<BlogPostCard[]> }
