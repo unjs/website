@@ -63,7 +63,7 @@ export function usePackages() {
     return route.query.orderBy as LocationQueryValue || defaultOrderBy
   })
 
-  const packages = ref<Package[]>()
+  const packages = useState<Package[]>('packages', () => [])
 
   const updateQuery = (query?: { q?: string, order?: Order, orderBy?: string }) => {
     navigateTo({
