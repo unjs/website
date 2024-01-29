@@ -15,6 +15,7 @@ export const internalRepos = new Set([
   'lmify',
   'governance',
   'docs',
+  'community',
   '.github',
   // These are not internal but less maintained
   'create-require',
