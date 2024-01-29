@@ -28,6 +28,13 @@ export default {
     },
   },
 
+  '/community': {
+    redirect: {
+      to: '/packages/community',
+      statusCode: 302,
+    },
+  },
+
   '/consola': {
     redirect: {
       to: '/packages/consola',
