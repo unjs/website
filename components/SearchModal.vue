@@ -148,7 +148,7 @@ const isXs = breakpoints.smaller('mobile')
                 :value="option"
                 @click="close"
               >
-                <SearchItem
+                <AppSearchItem
                   :active="active"
                   :item="option"
                   @click="sendSelectionMetric(option)"
@@ -161,7 +161,7 @@ const isXs = breakpoints.smaller('mobile')
                 :value="childOption"
                 @click="close"
               >
-                <SearchItem
+                <AppSearchItem
                   :active="active"
                   :item="childOption"
                   child

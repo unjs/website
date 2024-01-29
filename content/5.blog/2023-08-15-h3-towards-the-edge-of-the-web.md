@@ -1,9 +1,6 @@
 ---
 title: H3 1.8 - Towards the Edge of the Web
 description: New h3 release with web and plain adapters, web streams support, object syntax event handlers, typed event handler requests and more!
-image:
-  src: # Add asap a social image
-  alt:
 authors:
   - name: Pooya Parsa
     picture: https://github.com/pi0.png
@@ -136,7 +133,7 @@ const userSchema = z.object({
 })
 
 export default defineEventHandler(async (event) => {
-  const result = await readValidatedBody(event, body => userSchema.safeParse(body).data) // or `.parse` to directly throw an error
+  const result = await readValidatedBody(event, body => userSchema.safeParse(body)) // or `.parse` to directly throw an error
 
   if (!result.success)
     throw result.error.issues

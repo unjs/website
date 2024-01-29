@@ -15,16 +15,23 @@ if (error.value) {
   })
 }
 
-const site = useSiteConfig()
-
-const title = `${category} ${site.separator} Categories`
 const description = `Blog's articles in the category ${category}`
-useSeoMeta({
-  title,
-  ogTitle: title,
-  description,
-  ogDescription: description,
+useHead({
+  templateParams: {
+    subtitle: 'Categories',
+  },
+  titleTemplate: '%s %separator %subtitle %separator %siteName',
 })
+useSeoMeta({
+  title: category,
+  description,
+})
+useSchemaOrg([
+  defineWebPage({
+    '@type': 'CollectionPage',
+  }),
+])
+defineOgImageComponent('OgImagePage')
 useTrackPageview()
 </script>
 
@@ -42,8 +49,8 @@ useTrackPageview()
         </template>
       </PageHeader>
     </template>
-    <ListGrid class="mt-8">
-      <ListGridItem v-for="item in data" :key="item._path">
+    <AppListGrid class="mt-8">
+      <AppListGridItem v-for="item in data" :key="item._path">
         <BlogCard
           :path="item._path!"
           :title="item.title"
@@ -51,7 +58,7 @@ useTrackPageview()
           :published-at="item.publishedAt"
           :authors="item.authors"
         />
-      </ListGridItem>
-    </ListGrid>
+      </AppListGridItem>
+    </AppListGrid>
   </Main>
 </template>

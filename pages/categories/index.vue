@@ -13,10 +13,14 @@ const title = 'Categories'
 const description = 'Blog\'s articles categories'
 useSeoMeta({
   title,
-  ogTitle: title,
   description,
-  ogDescription: description,
 })
+useSchemaOrg([
+  defineWebPage({
+    '@type': 'CollectionPage',
+  }),
+])
+defineOgImageComponent('OgImagePage')
 useTrackPageview()
 
 const categories = computed(() => {
@@ -35,9 +39,6 @@ const categories = computed(() => {
 </script>
 
 <template>
-  <Head>
-    <SchemaOrgWebPage :type="['CollectionPage']" />
-  </Head>
   <Main v-if="data">
     <template #header>
       <PageHeader :title="title" :description="description" />
@@ -47,8 +48,8 @@ const categories = computed(() => {
       <h2 class="sr-only">
         List of categories
       </h2>
-      <ListGrid class="mt-8">
-        <ListGridItem v-for="category in categories" :key="category">
+      <AppListGrid class="mt-8">
+        <AppListGridItem v-for="category in categories" :key="category">
           <UCard as="article" :ui="{ base: 'h-full relative flex flex-col', background: 'bg-gray-300/20 hover:bg-gray-300/40 dark:bg-gray-700/40 hover:dark:bg-gray-700/60', divide: '', shadow: 'shadow-sm', ring: 'dark:highlight-white/10', rounded: 'rounded-lg', header: { base: 'flex gap-3 items-center', padding: 'py-0 pt-4 pb-4 sm:px-4 sm:pt-4 sm:pb-4' }, body: { base: 'grow', padding: 'p-0 sm:p-0' } }">
             <template #header>
               <h3 class="text-xl font-semibold dark:text-gray-50">
@@ -57,8 +58,8 @@ const categories = computed(() => {
               </h3>
             </template>
           </UCard>
-        </ListGridItem>
-      </ListGrid>
+        </AppListGridItem>
+      </AppListGrid>
     </section>
   </Main>
 </template>

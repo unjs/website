@@ -23,6 +23,12 @@ export function getBlogPath() {
   return join(contentPath, '5.blog')
 }
 
+export function getBlogTemplatePath() {
+  const blogPath = getBlogPath()
+
+  return join(blogPath, '.template.md')
+}
+
 export function loadPackageContent(name: string) {
   return yaml.load(readFileSync(join(getPackagesPath(), `${name}.yml`), 'utf-8')) as ContentPackage
 }

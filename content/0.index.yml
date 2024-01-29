@@ -1,0 +1,88 @@
+title: Unleash JavaScript's Potential
+description: 'Agnostic Excellence: JavaScript Libraries, Tools, and Utilities, Crafted to Elevate Your Coding Journey.'
+hero:
+  title: Unleash JavaScript's Potential with the UnJS Ecosystem
+  subtitle: 'Agnostic Excellence: JavaScript Libraries, Tools, and Utilities, Crafted to Elevate Your Coding Journey.'
+  puzzle:
+    - name: nitro
+      justify: end
+      align: start
+    - name: citty
+      justify: center
+      align: end
+    - name:
+      justify:
+      align:
+    - name: destr
+      justify: center
+      align: start
+    - name: consola
+      justify: center
+      align: center
+    - name: ofetch
+      justify: center
+      align: start
+    - name: changelogen
+      justify: center
+      align: end
+    - name: unbuild
+      justify: end
+      align: start
+    - name:
+      justify:
+      align:
+  away:
+    name: defu
+    justify: end
+    align: start
+philosophy:
+  eyebrow: A unified JavaScript ecosystem
+  title: The UnJS Philosophy
+  subtitle: A robust ecosystem, driven by the UNIX Philosophy, housing purpose-built, high-quality JavaScript utilities, libraries, and tools, upheld by a collaborative community.
+  cards:
+    - title: High-quality & Single-Purpose
+      description: Every package is finely crafted and focused on specific functionalities making them easy to understand and efficient.
+      image: /assets/images/home/unjs-philosophy/high-quality-and-single-purpose.svg
+      imageDark: /assets/images/home/unjs-philosophy/dark/high-quality-and-single-purpose.svg
+    - title: Collaborative & Welcoming
+      description: A community where developers unite to innovate embracing fresh ideas, feedback, and code contributions with open arms.
+      image: /assets/images/home/unjs-philosophy/collaborative-and-welcoming.svg
+      imageDark: /assets/images/home/unjs-philosophy/dark/collaborative-and-welcoming.svg
+    - title: Consistency & Compatibility
+      description: Sliced into low level functions and following best practices, every package ensures smooth compatibility across various JS environments.
+      image: /assets/images/home/unjs-philosophy/consistency-and-compatibility.svg
+      imageDark: /assets/images/home/unjs-philosophy/dark/consistency-and-compatibility.svg
+universe:
+  eyebrow: A new world opens up
+  title: The UnJS Universe
+  subtitle: Embrace the harmony of consistent, independent solutions that work together and enrich the entire JavaScript ecosystem, empowering developers.
+  cta:
+    label: Explore the Universe
+    to: /packages
+  carousel:
+    - name: nitro
+      justify: start
+      align: start
+    - name: citty
+      justify: start
+      align: end
+    - name: destr
+      justify: start
+      align: center
+    - name: consola
+      justify: start
+      align: center
+    - name: defu
+      justify: start
+      align: start
+    - name: ofetch
+      justify: start
+      align: start
+    - name: changelogen
+      justify: start
+      align: end
+    - name: unbuild
+      justify: start
+      align: center
+numbers:
+  title: Trusted by the Community for its Quality and its Simplicity

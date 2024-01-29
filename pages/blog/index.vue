@@ -16,17 +16,17 @@ if (error.value) {
 
 useSeoMeta({
   title: page.value?.title,
-  ogTitle: page.value?.title,
   description: page.value?.description,
-  ogDescription: page.value?.description,
 })
-useTrackPageview()
-
+useSchemaOrg([
+  defineWebPage({
+    '@type': 'CollectionPage',
+  }),
+])
 defineOgImageComponent('OgImagePage', {
-  title: page.value?.title,
-  description: page.value?.description,
   illustration: '/assets/header/dark/blog.png',
 })
+useTrackPageview()
 
 const fields = ['_path', 'title', 'description', 'publishedAt', 'authors', 'packages', 'categories']
 const { data: blog } = await useAsyncData('blog:articles', () => queryContent('/blog/').only(fields).sort({ publishedAt: -1 }).find(), { default: () => [] }) as { data: Ref<BlogPostCard[]> }
@@ -141,9 +141,6 @@ watchDebounced(search, () => {
 </script>
 
 <template>
-  <Head>
-    <SchemaOrgWebPage :type="['CollectionPage']" />
-  </Head>
   <Main v-if="page">
     <template #header>
       <PageHeader :title="page.title" :description="page.description">
@@ -160,7 +157,7 @@ watchDebounced(search, () => {
         List of blog posts
       </h2>
 
-      <ListTopBar v-model:search="search" v-model:order="order" v-model:order-by="orderBy" search-placeholder="Search an article" :order-by-options="orderByOptions" @reset="resetFilter">
+      <AppListTopBar v-model:search="search" v-model:order="order" v-model:order-by="orderBy" search-placeholder="Search an article" :order-by-options="orderByOptions" @reset="resetFilter">
         <template #right>
           <USelectMenu
             v-model="selectedAuthors"
@@ -215,10 +212,10 @@ watchDebounced(search, () => {
             </template>
           </USelectMenu>
         </template>
-      </ListTopBar>
+      </AppListTopBar>
 
-      <ListGrid class="mt-8">
-        <ListGridItem v-for="item in results" :key="item._path">
+      <AppListGrid class="mt-8">
+        <AppListGridItem v-for="item in results" :key="item._path">
           <BlogCard
             :path="item._path!"
             :title="item.title"
@@ -226,11 +223,11 @@ watchDebounced(search, () => {
             :published-at="item.publishedAt"
             :authors="item.authors"
           />
-        </ListGridItem>
-        <ListGridEmpty v-if="results && results.length === 0">
+        </AppListGridItem>
+        <AppListGridEmpty v-if="results && results.length === 0">
           No articles found
-        </ListGridEmpty>
-      </ListGrid>
+        </AppListGridEmpty>
+      </AppListGrid>
     </section>
   </Main>
 </template>

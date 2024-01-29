@@ -13,17 +13,12 @@ if (error.value) {
 
 useSeoMeta({
   title: page.value?.title,
-  ogTitle: page.value?.title,
   description: page.value?.description,
-  ogDescription: page.value?.description,
 })
-useTrackPageview()
-
 defineOgImageComponent('OgImagePage', {
-  title: page.value?.title,
-  description: page.value?.description,
   illustration: '/assets/header/dark/design-kit.png',
 })
+useTrackPageview()
 </script>
 
 <template>

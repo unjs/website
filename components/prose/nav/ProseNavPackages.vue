@@ -10,7 +10,7 @@ defineProps<{
 <template>
   <ProseNavGroup icon="i-heroicons-cube-solid">
     <template #title>
-      Packages
+      {{ packages.length > 1 ? 'Packages' : 'Package' }}
     </template>
     <template #links>
       <ol>
