@@ -71,7 +71,7 @@ defineOgImageComponent('OgImagePackage', {
   <Main v-if="page">
     <Prose>
       <template #header>
-        <PackageHeader v-if="page.title" :name="page.title" :description="page.description" />
+        <PackagesHeader v-if="page.title" :name="page.title" :description="page.description" />
       </template>
 
       <ContentRendererMarkdown v-if="readme" :value="readme" />

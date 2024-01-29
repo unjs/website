@@ -112,11 +112,11 @@ watchDebounced(search, () => {
         List of packages
       </h2>
 
-      <ListTopBar v-model:search="search" v-model:order="order" v-model:order-by="orderBy" search-placeholder="Search a package" :order-by-options="orderByOptions" @reset="resetFilter" />
+      <AppListTopBar v-model:search="search" v-model:order="order" v-model:order-by="orderBy" search-placeholder="Search a package" :order-by-options="orderByOptions" @reset="resetFilter" />
 
-      <ListGrid class="mt-8">
-        <ListGridItem v-for="item in results" :key="item._path">
-          <PackageCard
+      <AppListGrid class="mt-8">
+        <AppListGridItem v-for="item in results" :key="item._path">
+          <PackagesCard
             v-if="item.title && item.path"
             :title="item.title"
             :description="item.description"
@@ -125,11 +125,11 @@ watchDebounced(search, () => {
             :monthly-downloads="item.monthlyDownloads"
             :contributors="item.contributors"
           />
-        </ListGridItem>
-        <ListGridEmpty v-if="results && results.length === 0">
+        </AppListGridItem>
+        <AppListGridEmpty v-if="results && results.length === 0">
           No packages found
-        </ListGridEmpty>
-      </ListGrid>
+        </AppListGridEmpty>
+      </AppListGrid>
     </section>
   </Main>
 </template>

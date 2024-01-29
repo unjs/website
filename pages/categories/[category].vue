@@ -48,8 +48,8 @@ defineOgImageComponent('OgImagePage')
         </template>
       </PageHeader>
     </template>
-    <ListGrid class="mt-8">
-      <ListGridItem v-for="item in data" :key="item._path">
+    <AppListGrid class="mt-8">
+      <AppListGridItem v-for="item in data" :key="item._path">
         <BlogCard
           :path="item._path!"
           :title="item.title"
@@ -57,7 +57,7 @@ defineOgImageComponent('OgImagePage')
           :published-at="item.publishedAt"
           :authors="item.authors"
         />
-      </ListGridItem>
-    </ListGrid>
+      </AppListGridItem>
+    </AppListGrid>
   </Main>
 </template>

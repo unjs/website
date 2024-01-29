@@ -155,7 +155,7 @@ function selectFirstOption() {
                 v-slot="{ active }"
                 :value="option"
               >
-                <SearchItem
+                <AppSearchItem
                   :active="active"
                   :item="option"
                 />
@@ -166,7 +166,7 @@ function selectFirstOption() {
                 v-slot="{ active }"
                 :value="childOption"
               >
-                <SearchItem
+                <AppSearchItem
                   :active="active"
                   :item="childOption"
                   child
