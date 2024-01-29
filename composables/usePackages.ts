@@ -110,7 +110,6 @@ export function usePackages() {
       packages.value = getPackages()
     }
     catch (error) {
-      console.error(error)
       throw createError({
         statusCode: 500,
         statusMessage: 'Server Error',
