@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 defineProps<{
   value: number
-  text: string
+  label: string
 }>()
 </script>
 
@@ -11,7 +11,7 @@ defineProps<{
       {{ formatNumber(value, 0) }}
     </div>
     <div class="text-center lg:text-start text-gray-500 dark:text-gray-400">
-      {{ text }}
+      {{ label }}
     </div>
   </div>
 </template>
