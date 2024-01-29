@@ -28,7 +28,7 @@ function openFilter() {
 <template>
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-8">
     <div class="flex flex-row">
-      <ListTopBarSearch class="grow md:grow-0 lg:grow" :model-value="search" :placeholder="searchPlaceholder" @update:model-value="$emit('update:search', $event)" />
+      <AppListTopBarSearch class="grow md:grow-0 lg:grow" :model-value="search" :placeholder="searchPlaceholder" @update:model-value="$emit('update:search', $event)" />
 
       <UButton
         v-model="isFilterOpen"
@@ -45,7 +45,7 @@ function openFilter() {
     <div class="hidden lg:flex lg:col-span-2 items-center flex-wrap justify-end gap-3">
       <slot name="right" />
 
-      <ListTopBarSort :order="order" :order-by="orderBy" :order-by-options="orderByOptions" @update:order="$emit('update:order', $event)" @update:order-by="$emit('update:orderBy', $event)" />
+      <AppListTopBarSort :order="order" :order-by="orderBy" :order-by-options="orderByOptions" @update:order="$emit('update:order', $event)" @update:order-by="$emit('update:orderBy', $event)" />
 
       <UTooltip text="Reset filter">
         <UButton
@@ -68,7 +68,7 @@ function openFilter() {
       <div class="grid grid-cols-2 gap-4">
         <slot name="right" />
 
-        <ListTopBarSort :order="order" :order-by="orderBy" :order-by-options="orderByOptions" @update:order="$emit('update:order', $event)" @update:order-by="$emit('update:orderBy', $event)" />
+        <AppListTopBarSort :order="order" :order-by="orderBy" :order-by-options="orderByOptions" @update:order="$emit('update:order', $event)" @update:order-by="$emit('update:orderBy', $event)" />
       </div>
 
       <div class="mt-6 flex flex-row justify-end gap-4">

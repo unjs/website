@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { joinURL } from 'ufo'
-
 const route = useRoute()
 
 const { data: page, error } = await useAsyncData(route.path, () => queryContent(route.path).findOne())
@@ -13,16 +11,15 @@ if (error.value) {
   })
 }
 
-const site = useSiteConfig()
-
 useSeoMeta({
   title: page.value?.title,
-  ogTitle: page.value?.title,
   description: page.value?.description,
-  ogDescription: page.value?.description,
-  ogImage: joinURL(site.url, '/og/packages.jpg'),
-  twitterImage: joinURL(site.url, '/og/packages.jpg'),
 })
+useSchemaOrg([
+  defineWebPage({
+    '@type': 'CollectionPage',
+  }),
+])
 
 const {
   fetchPackages,
@@ -39,6 +36,11 @@ const {
 
 await fetchPackages()
 
+defineOgImageComponent('OgImagePackages', {
+  packages: packages.value.length,
+  monthlyDownloads: monthlyDownloads.value,
+})
+
 // Track search to analytics
 watchDebounced(q, () => {
   if (!q.value)
@@ -49,9 +51,6 @@ watchDebounced(q, () => {
 </script>
 
 <template>
-  <Head>
-    <SchemaOrgWebPage :type="['CollectionPage']" />
-  </Head>
   <Main v-if="page">
     <template #header>
       <PageHeader :title="page.title" :description="page.description">
@@ -83,14 +82,14 @@ watchDebounced(q, () => {
         List of packages
       </h2>
 
-      <ListTopBar
+      <AppListTopBar
         :search="q" :order="order" :order-by="orderBy" search-placeholder="Search a package" :order-by-options="orderByOptions" @reset="reset"
         @update:search="updateQuery({ q: $event })" @update:order="updateQuery({ order: $event })" @update:order-by="updateQuery({ orderBy: $event })"
       />
 
-      <ListGrid class="mt-8">
-        <ListGridItem v-for="item in packages" :key="item.title">
-          <PackageCard
+      <AppListGrid class="mt-8">
+        <AppListGridItem v-for="item in packages" :key="item.title">
+          <PackagesCard
             :title="item.title"
             :description="item.description"
             :path="item.path"
@@ -98,11 +97,11 @@ watchDebounced(q, () => {
             :monthly-downloads="item.monthlyDownloads"
             :contributors="item.contributors"
           />
-        </ListGridItem>
-        <ListGridEmpty v-if="packages && packages.length === 0">
+        </AppListGridItem>
+        <AppListGridEmpty v-if="packages && packages.length === 0">
           No packages found
-        </ListGridEmpty>
-      </ListGrid>
+        </AppListGridEmpty>
+      </AppListGrid>
     </section>
   </Main>
 </template>

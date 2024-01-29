@@ -6,6 +6,8 @@ const toggleTheme = function () {
   colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
 }
 
+const { data } = await useAsyncData('content:footer-license', () => queryContent('/_footer-license').only('body').findOne())
+
 const uiButton = { color: { gray: { ghost: 'text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 hover:bg-primary/60 dark:hover:bg-primary/40' } } }
 </script>
 
@@ -51,7 +53,7 @@ const uiButton = { color: { gray: { ghost: 'text-gray-500 hover:text-gray-800 da
           </ClientOnly>
         </div>
       </div>
-      <AppFooterLicense class="text-sm dark:text-gray-400 text-center" />
+      <ContentRenderer v-if="data" class="text-sm dark:text-gray-400 text-center" :value="data" />
     </footer>
   </div>
 </template>

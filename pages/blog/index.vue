@@ -13,14 +13,14 @@ if (error.value) {
 
 useSeoMeta({
   title: page.value?.title,
-  ogTitle: page.value?.title,
   description: page.value?.description,
-  ogDescription: page.value?.description,
 })
-
+useSchemaOrg([
+  defineWebPage({
+    '@type': 'CollectionPage',
+  }),
+])
 defineOgImageComponent('OgImagePage', {
-  title: page.value?.title,
-  description: page.value?.description,
   illustration: '/assets/header/dark/blog.png',
 })
 
@@ -53,9 +53,6 @@ watchDebounced(q, () => {
 </script>
 
 <template>
-  <Head>
-    <SchemaOrgWebPage :type="['CollectionPage']" />
-  </Head>
   <Main v-if="page">
     <template #header>
       <PageHeader :title="page.title" :description="page.description">
@@ -72,7 +69,7 @@ watchDebounced(q, () => {
         List of blog posts
       </h2>
 
-      <ListTopBar
+      <AppListTopBar
         :search="q" :order="order" :order-by="orderBy" search-placeholder="Search an article" :order-by-options="orderByOptions"
         @update:search="updateQuery({ q: $event })" @update:order="updateQuery({ order: $event })" @update:order-by="updateQuery({ orderBy: $event })"
         @reset="reset"
@@ -134,10 +131,10 @@ watchDebounced(q, () => {
             </template>
           </USelectMenu>
         </template>
-      </ListTopBar>
+      </AppListTopBar>
 
-      <ListGrid class="mt-8">
-        <ListGridItem v-for="item in articles" :key="item._path">
+      <AppListGrid class="mt-8">
+        <AppListGridItem v-for="item in articles" :key="item._path">
           <BlogCard
             :path="item._path!"
             :title="item.title"
@@ -145,11 +142,11 @@ watchDebounced(q, () => {
             :published-at="item.publishedAt"
             :authors="item.authors"
           />
-        </ListGridItem>
-        <ListGridEmpty v-if="articles && articles.length === 0">
+        </AppListGridItem>
+        <AppListGridEmpty v-if="articles && articles.length === 0">
           No articles found
-        </ListGridEmpty>
-      </ListGrid>
+        </AppListGridEmpty>
+      </AppListGrid>
     </section>
   </Main>
 </template>

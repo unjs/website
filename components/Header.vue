@@ -98,6 +98,6 @@ function toDesignKit() {
       </div>
     </header>
   </div>
-  <AppNavigationDialog v-if="navigation" v-model:open="openNavigation" :navigation="navigation" />
-  <AppSearchDialog v-model:open="openSearch" />
+  <NavigationModal v-if="navigation" v-model:open="openNavigation" :navigation="navigation" />
+  <SearchModal v-model:open="openSearch" />
 </template>

@@ -15,8 +15,8 @@ defineEmits<{
 
 <template>
   <UButtonGroup size="lg" orientation="horizontal">
-    <ListTopBarOrder :model-value="order" @update:model-value="$emit('update:order', $event)" />
+    <AppListTopBarOrder :model-value="order" @update:model-value="$emit('update:order', $event)" />
 
-    <ListTopBarOrderBy :model-value="orderBy" :options="orderByOptions" @update:model-value="$emit('update:orderBy', $event)" />
+    <AppListTopBarOrderBy :model-value="orderBy" :options="orderByOptions" @update:model-value="$emit('update:orderBy', $event)" />
   </UButtonGroup>
 </template>

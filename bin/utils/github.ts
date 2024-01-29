@@ -14,6 +14,8 @@ export const internalRepos = new Set([
   'renovate-config',
   'lmify',
   'governance',
+  'docs',
+  'community',
   '.github',
   // These are not internal but less maintained
   'create-require',

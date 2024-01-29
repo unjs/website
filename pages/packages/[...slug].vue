@@ -13,17 +13,21 @@ if (error.value) {
   })
 }
 
-const site = useSiteConfig()
-
-const title = `${page.value?.title} ${site.separator} Packages`
-useSeoMeta({
-  title,
-  ogTitle: title,
-  description: page.value?.description,
-  ogDescription: page.value?.description,
+useHead({
+  templateParams: {
+    subtitle: 'Packages',
+  },
+  titleTemplate: '%s %separator %subtitle %separator %siteName',
 })
-
-// TODO: Add og-image
+useSeoMeta({
+  title: page.value?.title,
+  description: page.value?.description,
+})
+useSchemaOrg([
+  defineWebPage({
+    '@type': 'ItemPage',
+  }),
+])
 
 const { data: readme } = await useFetch<ParsedContent>(`/api/github/${page.value?.github.owner}/${page.value?.github.repo}/readme`, { default: () => {
   return { _id: '', body: null }
@@ -50,6 +54,13 @@ defineShortcuts({
     },
   },
 })
+
+defineOgImageComponent('OgImagePackage', {
+  title: page.value?.title,
+  description: page.value?.description,
+  stars: metadata.value.stars,
+  monthlyDownloads,
+})
 </script>
 
 <template>
@@ -60,7 +71,7 @@ defineShortcuts({
   <Main v-if="page">
     <Prose>
       <template #header>
-        <PackageHeader v-if="page.title" :name="page.title" :description="page.description" />
+        <PackagesHeader v-if="page.title" :name="page.title" :description="page.description" />
       </template>
 
       <ContentRendererMarkdown v-if="readme" :value="readme" />

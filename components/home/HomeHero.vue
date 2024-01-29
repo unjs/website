@@ -2,6 +2,8 @@
 import type { PuzzlePart } from '~/types/puzzle'
 
 defineProps<{
+  title?: string
+  subtitle?: string
   news?: {
     prefix: string
     title: string
@@ -21,10 +23,10 @@ const { data } = await useAsyncData(' blog:latest', () => queryContent('/blog').
       <HomeHeroEyeBrow v-else-if="data" prefix="What's new" :title="data.title" :path="data._path" />
       <div class="flex flex-col gap-2">
         <h1 class="text-gray-950 dark:text-gray-50 text-[2rem] md:text-4xl lg:text-5xl font-extrabold tracking-wide leading-normal lg:leading-normal">
-          <ContentSlot :use="$slots.title" unwrap="p" />
+          {{ title }}
         </h1>
         <p class="text-gray-500 dark:text-gray-400 text-2xl md:text-[1.75rem] leading-normal md:leading-normal">
-          <ContentSlot :use="$slots.subtitle" unwrap="p" />
+          {{ subtitle }}
         </p>
       </div>
       <div class="mt-8">
@@ -34,7 +36,7 @@ const { data } = await useAsyncData(' blog:latest', () => queryContent('/blog').
       </div>
     </div>
     <div class="puzzle shrink-0 relative transform -translate-x-1/2 left-1/2 lg:translate-x-0 lg:left-0 flex justify-center items-center">
-      <Puzzle :parts="puzzle" :away="away" />
+      <HomePuzzle :parts="puzzle" :away="away" />
     </div>
   </section>
 </template>
