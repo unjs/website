@@ -2,10 +2,51 @@
 const website = useWebsite()
 
 const colorMode = useColorMode()
-const toggleTheme = function () {
-  colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
-}
+function toggleTheme({ x, y }: MouseEvent) {
+  const isDark = colorMode.value === 'dark'
+  // check if the current browser supports viewtransition API
+  const isAppearanceTransition
+    // @ts-expect-error: Transition API
+    = document.startViewTransition
+    && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
+  // if it is not supported, just toggle the class directly
+  if (!isAppearanceTransition) {
+    colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+  }
+  else {
+    // if it is supported, use the transition API to animate the theme change
+    const endRadius = Math.hypot(
+      Math.max(x, innerWidth - x),
+      Math.max(y, innerHeight - y),
+    )
+
+    // @ts-expect-error: Transition API
+    const transition = document.startViewTransition(() => {
+      colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+    })
+    transition.ready.then(() => {
+      const clipPath = [
+      `circle(0px at ${x}px ${y}px)`,
+      `circle(${endRadius}px at ${x}px ${y}px)`,
+      ]
+      const _c = !isDark ? clipPath : [...clipPath].reverse()
+      const pseudoElement = !isDark
+        ? '::view-transition-new(root)'
+        : '::view-transition-old(root)'
+      document.documentElement.animate(
+        {
+          clipPath: _c,
+        },
+        {
+          duration: 600,
+          easing: 'ease-in',
+          pseudoElement,
+        },
+      )
+    })
+  }
+}
 const uiButton = { color: { gray: { ghost: 'text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 hover:bg-primary/60 dark:hover:bg-primary/40' } } }
 </script>
 
@@ -55,3 +96,27 @@ const uiButton = { color: { gray: { ghost: 'text-gray-500 hover:text-gray-800 da
     </footer>
   </div>
 </template>
+
+<style>
+ ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
+
+  .dark::view-transition-old(root) {
+    z-index: 1;
+  }
+
+  .dark::view-transition-new(root) {
+    z-index: 999;
+  }
+
+  ::view-transition-old(root) {
+    z-index: 999;
+  }
+
+  ::view-transition-new(root) {
+    z-index: 1;
+  }
+</style>
