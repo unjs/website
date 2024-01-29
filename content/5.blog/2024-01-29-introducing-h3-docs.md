@@ -23,6 +23,8 @@ If you can't wait to see it, go to [h3.unjs.io](https://h3.unjs.io)!
 
 Until now, the way to learn H3 was reading the little README on the [GitHub repository](https://github.com/unjs/h3j), the [JSDoc comments](https://www.jsdocs.io/package/h3) or the code itself. Terrible right?
 
+But now, you can learn H3 with a dedicated documentation website.
+
 ## Complete Documentation
 
 <!-- TODO: add images from the home -->
