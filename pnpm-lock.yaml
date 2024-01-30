@@ -20,6 +20,9 @@ devDependencies:
   '@iconify-json/noto':
     specifier: ^1.1.18
     version: 1.1.18
+  '@iconify-json/ph':
+    specifier: ^1.1.10
+    version: 1.1.10
   '@iconify-json/simple-icons':
     specifier: ^1.1.90
     version: 1.1.90
@@ -1089,6 +1092,12 @@ packages:
 
   /@iconify-json/noto@1.1.18:
     resolution: {integrity: sha512-1yA0n/oAbzZ8KWAu71Qzz1mSylfZ5j9lXgAR5iRwrpSo2SxB3NtHPAfYTbW4l6JsjkNXbpfYE/s9uUTWmfF9xQ==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
+  /@iconify-json/ph@1.1.10:
+    resolution: {integrity: sha512-e7owJfx9BgnUVGXKk/243iFV4tHH1UiBDl5mWYkwKoPf4nN2rzPGdD7ISfvwr3SB25VvOteSC5DOVWxjs56Ywg==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true
