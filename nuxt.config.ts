@@ -79,12 +79,12 @@ export default defineNuxtConfig({
   },
   content: {
     documentDriven: false,
-    // highlight: {
-    //   theme: {
-    //     default: 'github-light',
-    //     dark: 'github-dark',
-    //   },
-    // },
+    highlight: {
+      theme: {
+        default: 'github-light',
+        dark: 'github-dark',
+      },
+    },
   },
   colorMode: {
     preference: 'dark',
