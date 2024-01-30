@@ -28,13 +28,12 @@ export default defineEventHandler(async (event) => {
 
     // Handle GitHub flavoured markdown blockquotes
     // https://github.com/orgs/community/discussions/16925
-     if (child.tag === 'blockquote' && // blockquotes > p x 2 > span > text
-          ['!NOTE', '!TIP', '!IMPORTANT', '!WARNING', '!CAUTION'].includes(child.children?.[0]?.children?.[0]?.children?.[0]?.value!)) {
-        child.type = 'element'
-        child.tag = child.children?.[0]?.children?.[0]?.children?.[0]?.value!.slice(1).toLowerCase()
-        console.log(child.children?.[0]?.children?.[0])
-        child.children?.[0]?.children!.shift()
-      }
+    if (child.tag === 'blockquote' // blockquotes > p x 2 > span > text
+      && ['!NOTE', '!TIP', '!IMPORTANT', '!WARNING', '!CAUTION'].includes(child.children?.[0]?.children?.[0]?.children?.[0]?.value || '')) {
+      child.type = 'element'
+      child.tag = child.children?.[0]?.children?.[0]?.children?.[0]?.value!.slice(1).toLowerCase()
+      child.children?.[0]?.children!.shift()
+    }
 
     content.body.children.push(child)
   }

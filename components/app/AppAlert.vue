@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { NuxtLink } from '#components'
 
-const props =defineProps<{
-  title: 'Tip' | 'Note' | 'Important' | 'Warning' |  'Caution'
+const props = defineProps<{
+  title: 'Tip' | 'Note' | 'Important' | 'Warning' | 'Caution'
   to?: string
 }>()
 
@@ -56,9 +56,9 @@ const hoverBorderColor = computed(() => {
     case 'Tip':
       return 'dark:hover:border-green-600/50 hover:border-green-400/50'
     case 'Note':
-        return 'hover:border-blue-400/50 dark:hover:border-blue-600/50'
+      return 'hover:border-blue-400/50 dark:hover:border-blue-600/50'
     case 'Important':
-        return 'dark:hover:border-violet-600/50 hover:border-violet-400/50'
+      return 'dark:hover:border-violet-600/50 hover:border-violet-400/50'
     case 'Warning':
       return 'dark:hover:border-amber-600/50 hover:border-amber-400/50'
     case 'Caution':
@@ -68,8 +68,8 @@ const hoverBorderColor = computed(() => {
 </script>
 
 <template>
-  <component :is="to ? NuxtLink : 'div'" :to="to" class="not-prose block my-4 px-4 py-3 focus:outline-none border rounded-md text-sm text-gray-950 dark:text-white" :class="[{ 'border-dashed hover:border-solid': to, hoverBorderColor: to }, borderColor]">
-    <span :class="[icon, iconColor]" class="w-4 h-4 inline-flex items-center align-sub mr-2" aria-hidden="true"></span>
+  <component :is="to ? NuxtLink : 'div'" :to="to" class="not-prose block my-4 px-4 py-3 focus:outline-none border rounded-md text-sm text-gray-950 dark:text-white" :class="[{ 'border-dashed hover:border-solid': to }, borderColor, to ? hoverBorderColor : '']">
+    <span :class="[icon, iconColor]" class="w-4 h-4 inline-flex items-center align-sub mr-2" aria-hidden="true" />
     <slot />
   </component>
 </template>
