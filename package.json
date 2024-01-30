@@ -31,7 +31,7 @@
     "@nuxtjs/plausible": "^0.2.4",
     "@nuxtjs/seo": "2.0.0-rc.4",
     "@types/js-yaml": "^4.0.9",
-    "@types/node": "^20.11.10",
+    "@types/node": "^20.11.13",
     "@vueuse/core": "^10.7.2",
     "@vueuse/nuxt": "^10.7.2",
     "case-police": "^0.6.1",
