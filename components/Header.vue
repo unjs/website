@@ -19,7 +19,13 @@ const { data: navigation } = await useAsyncData('content:navigation', () => fetc
     return filteredData
   },
 })
-const { data: stars } = await useFetch('/api/github/stars')
+const { data: stars } = await useFetch('/api/content/packages.json', {
+  transform: (data) => {
+    const stars: number = data.reduce((acc, curr) => acc + curr.stars, 0)
+
+    return stars
+  },
+})
 
 const openNavigation = ref(false)
 const openSearch = ref(false)
