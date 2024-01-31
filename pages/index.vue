@@ -1,13 +1,5 @@
 <script lang="ts" setup>
-const { data: page, error } = await useAsyncData('home', () => queryContent('/').findOne())
-
-if (error.value) {
-  throw createError({
-    statusCode: 404,
-    message: 'Page not found',
-    fatal: true,
-  })
-}
+const { data: page } = await useAsyncData('index', () => queryContent('/').findOne())
 
 useSeoMeta({
   titleTemplate: '%siteName: %pageTitle',
