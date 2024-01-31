@@ -3,8 +3,13 @@ defineProps<{
   title?: string
 }>()
 
-const { data: packages } = await useFetch('/api/content/packages.json', {
-  transform: (data) => {
+const { data: packages } = await useAsyncData('home:numbers', () => {
+  return Promise.all([
+    $fetch('/api/content/packages.json'),
+    $fetch('/api/github/followers'),
+  ])
+}, {
+  transform: ([data, followers]) => {
     const packages: number = data.length
     const stars: number = data.reduce((acc, curr) => acc + curr.stars, 0)
     const monthlyDownloads: number = data.reduce((acc, curr) => acc + (curr.monthlyDownloads ?? 0), 0)
@@ -13,11 +18,10 @@ const { data: packages } = await useFetch('/api/content/packages.json', {
       packages,
       stars,
       monthlyDownloads,
+      followers,
     }
   },
 })
-
-const { data: followers } = await useFetch('/api/github/followers')
 </script>
 
 <template>
@@ -29,7 +33,7 @@ const { data: followers } = await useFetch('/api/github/followers')
       <HomeNumbersItem v-if="packages" label="Packages" :value="packages?.packages" />
       <HomeNumbersItem v-if="packages" label="Stars" :value="packages?.stars" />
       <HomeNumbersItem v-if="packages" label="Monthly Downloads" :value="packages?.monthlyDownloads" />
-      <HomeNumbersItem v-if="followers" label="Followers on GitHub" :value="followers" />
+      <HomeNumbersItem v-if="packages" label="Followers on GitHub" :value="packages?.followers" />
     </div>
   </section>
 </template>
