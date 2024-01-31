@@ -42,7 +42,7 @@ defineProps<{
             <dd class="capitalize">
               <ul class="categories flex gap-1">
                 <li v-for="(category, index) in categories" :key="category" class="flex">
-                  <NuxtLink :to="`/categories/${category}`">
+                  <NuxtLink :to="`/blog/categories/${category}`">
                     {{ category }}
                   </NuxtLink>
                   <span v-if="index !== categories.length - 1">,</span>
