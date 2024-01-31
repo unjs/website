@@ -11,18 +11,11 @@ const rel = computed(() => {
 
   return 'noopener noreferrer'
 })
-
-const to = computed(() => {
-  if (props.href.includes('.unjs.io'))
-    return `${props.href}?utm_source=unjs.io&utm_medium=referral&utm_campaign=unjs.io`
-
-  return props.href
-})
 </script>
 
 <template>
   <NuxtLink
-    :to="to"
+    :href="href"
     :target="target"
     :rel="rel"
   >
