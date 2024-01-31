@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const { data: page, error } = await useAsyncData('index', () => queryContent('/').findOne())
+const { data: page, error } = await useAsyncData('home', () => queryContent('/').findOne())
 
 if (error.value) {
   throw createError({
