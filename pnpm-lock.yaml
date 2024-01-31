@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  '@nuxt/content@2.10.0':
+    hash: jzdfd6ssf2nfqm3h6gh2hxzo7q
+    path: patches/@nuxt__content@2.10.0.patch
+
 devDependencies:
   '@antfu/eslint-config':
     specifier: 2.6.3
@@ -31,7 +36,7 @@ devDependencies:
     version: 1.1.33
   '@nuxt/content':
     specifier: ^2.10.0
-    version: 2.10.0(nuxt@3.9.1)(vue@3.4.7)
+    version: 2.10.0(patch_hash=jzdfd6ssf2nfqm3h6gh2hxzo7q)(nuxt@3.9.1)(vue@3.4.7)
   '@nuxt/ui':
     specifier: ^2.12.0
     version: 2.12.0(nuxt@3.9.1)(vite@5.0.11)(vue@3.4.7)
@@ -1578,7 +1583,7 @@ packages:
       - supports-color
     dev: true
 
-  /@nuxt/content@2.10.0(nuxt@3.9.1)(vue@3.4.7):
+  /@nuxt/content@2.10.0(patch_hash=jzdfd6ssf2nfqm3h6gh2hxzo7q)(nuxt@3.9.1)(vue@3.4.7):
     resolution: {integrity: sha512-HZ+1RJJc2SZc/FPYvbsME7b8++a2uf6g9JlMm+qUMDjnCWJaF38pbrsmYq2b9whXx/3WjpBmCRkWCJy6bjSP+g==}
     dependencies:
       '@nuxt/kit': 3.9.1
@@ -1629,6 +1634,7 @@ packages:
       - utf-8-validate
       - vue
     dev: true
+    patched: true
 
   /@nuxt/devalue@2.0.2:
     resolution: {integrity: sha512-GBzP8zOc7CGWyFQS6dv1lQz8VVpz5C2yRszbXufwG/9zhStTIH50EtD87NmWbTMwXDvZLNg8GIpb1UFdH93JCA==}
