@@ -44,7 +44,7 @@ export default defineNuxtConfig({
     prerender: {
       failOnError: false,
       crawlLinks: true,
-      routes: ['/', '/blog', '/packages', '/blog/categories', '/api/search.txt', '/api/content/packages.json', '/rss.xml', '/blog/rss.xml'],
+      routes: ['/', '/blog', '/packages', '/categories', '/api/search.txt', '/api/content/packages.json', '/rss.xml', '/blog/rss.xml'],
     },
     routeRules: {
       '/api/content/**': {
