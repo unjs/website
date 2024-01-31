@@ -112,6 +112,8 @@ export default defineNuxtConfig({
     url: 'https://unjs.io',
     name: 'UnJS',
     description: 'Agnostic Excellence: JavaScript Libraries, Tools, and Utilities, Crafted to Elevate Your Coding Journey.',
+  },
+  schemaOrg: {
     identity: {
       type: 'Organization',
       logo: 'https://unjs.io/favicon.svg',
