@@ -36,7 +36,7 @@ export function useBlog() {
   })
 
   const categoriesOptions = computed(() => {
-    const categories = articles.value.flatMap(item => item.categories || [])
+    const categories = allArticles.value.flatMap(item => item.categories || [])
     const dedupe = new Set<string>(categories)
 
     return Array.from(dedupe).sort()
@@ -49,7 +49,7 @@ export function useBlog() {
   })
 
   const packagesOptions = computed(() => {
-    const packages = articles.value.flatMap(item => item.packages || [])
+    const packages = allArticles.value.flatMap(item => item.packages || [])
     const dedupe = new Set<string>(packages)
 
     return Array.from(dedupe).sort()
@@ -62,7 +62,7 @@ export function useBlog() {
   })
 
   const authorsOptions = computed(() => {
-    const authors = articles.value.flatMap(item => item.authors || [])
+    const authors = allArticles.value.flatMap(item => item.authors || [])
     const dedupe = new Map<string, Author>()
 
     authors.forEach((author) => {
