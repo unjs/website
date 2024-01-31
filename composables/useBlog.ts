@@ -20,9 +20,10 @@ export function useBlog() {
     },
   })
 
+  const route = useRoute()
+
   const allArticles = ref<BlogPostCard[]>([])
   const articles = ref<BlogPostCard[]>([])
-  const route = useRoute()
 
   // This is important to avoid a merge the URL and some data in storage for each missing query in URL. We cannot directly check for query to avoid having UTM breaking the system.
   const hasQuery = computed(() => {

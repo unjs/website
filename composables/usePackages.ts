@@ -20,8 +20,10 @@ export function usePackages() {
     },
   })
 
-  const data = useState<Package[]>('content:use-packages:data', () => [])
   const route = useRoute()
+
+  const allPackages = ref<Package[]>([])
+  const packages = ref<Package[]>([])
 
   // This is important to avoid a merge the URL and some data in storage for each missing query in URL. We cannot directly check for query to avoid having UTM breaking the system.
   const hasQuery = computed(() => {
@@ -63,8 +65,6 @@ export function usePackages() {
     return route.query.orderBy as LocationQueryValue || defaultOrderBy
   })
 
-  const packages = useState<Package[]>('content:use-packages:packages', () => [])
-
   const updateQuery = (query?: { q?: string, order?: Order, orderBy?: string }) => {
     navigateTo({
       query: {
@@ -83,39 +83,34 @@ export function usePackages() {
     updateQuery(defaultQuery)
   }
 
-  const search = (data: Package[]) => {
-    if (!q.value)
+  const search = (data: Package[], q: string) => {
+    if (!q)
       return data as (Package & SearchResult)[]
 
-    return miniSearch.search(q.value) as (Package & SearchResult)[]
+    return miniSearch.search(q) as (Package & SearchResult)[]
   }
 
   const getPackages = () => {
-    const searched = search(data.value)
+    const searched = search(allPackages.value, q.value)
     const sorted = sort(searched, order.value, orderBy.value)
 
     return sorted
   }
 
   const fetchPackages = async () => {
-    if (data.value.length) {
-      miniSearch.addAll(data.value)
-      return
-    }
+    const { data: res, error } = await useAsyncData('content:use-packages:data', () => $fetch('/api/content/packages.json'))
 
-    try {
-      const res = await $fetch('/api/content/packages.json')
-      data.value = res as Package[]
-      miniSearch.addAll(data.value)
-      packages.value = getPackages()
-    }
-    catch (error) {
+    if (error.value) {
       throw createError({
-        statusCode: 500,
-        statusMessage: 'Server Error',
+        statusCode: error.value?.statusCode,
+        statusMessage: error.value?.statusMessage,
         fatal: true,
       })
     }
+
+    miniSearch.addAll(res.value as Package[])
+    allPackages.value = res.value as Package[]
+    packages.value = res.value as Package[]
   }
 
   const storage = useStorage('packages', {
@@ -151,9 +146,9 @@ export function usePackages() {
     }
   })
 
-  const numberOfPackages = computed(() => data.value.length)
+  const numberOfPackages = computed(() => allPackages.value.length)
 
-  const monthlyDownloads = computed(() => data.value.reduce((acc, pkg) => {
+  const monthlyDownloads = computed(() => allPackages.value.reduce((acc, pkg) => {
     if (!pkg.monthlyDownloads)
       return acc
 
