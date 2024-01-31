@@ -20,8 +20,10 @@ export function useBlog() {
     },
   })
 
-  const data = useState<BlogPostCard[]>('content:blog', () => [])
   const route = useRoute()
+
+  const allArticles = ref<BlogPostCard[]>([])
+  const articles = ref<BlogPostCard[]>([])
 
   // This is important to avoid a merge the URL and some data in storage for each missing query in URL. We cannot directly check for query to avoid having UTM breaking the system.
   const hasQuery = computed(() => {
@@ -34,7 +36,7 @@ export function useBlog() {
   })
 
   const categoriesOptions = computed(() => {
-    const categories = data.value.flatMap(item => item.categories || [])
+    const categories = allArticles.value.flatMap(item => item.categories || [])
     const dedupe = new Set<string>(categories)
 
     return Array.from(dedupe).sort()
@@ -47,7 +49,7 @@ export function useBlog() {
   })
 
   const packagesOptions = computed(() => {
-    const packages = data.value.flatMap(item => item.packages || [])
+    const packages = allArticles.value.flatMap(item => item.packages || [])
     const dedupe = new Set<string>(packages)
 
     return Array.from(dedupe).sort()
@@ -60,7 +62,7 @@ export function useBlog() {
   })
 
   const authorsOptions = computed(() => {
-    const authors = data.value.flatMap(item => item.authors || [])
+    const authors = allArticles.value.flatMap(item => item.authors || [])
     const dedupe = new Map<string, Author>()
 
     authors.forEach((author) => {
@@ -98,8 +100,6 @@ export function useBlog() {
   const orderBy = computed(() => {
     return route.query.orderBy as LocationQueryValue || defaultOrderBy
   })
-
-  const articles = useState<BlogPostCard[]>('articles', () => [])
 
   const updateQuery = (query?: { q?: string, 'categories[]'?: string[], 'packages[]'?: string[], 'authors[]'?: string[], order?: Order, orderBy?: string }) => {
     navigateTo({
@@ -150,15 +150,15 @@ export function useBlog() {
     return data
   }
 
-  const search = (data: BlogPostCard[]) => {
-    if (!q.value)
+  const search = (data: BlogPostCard[], q: string) => {
+    if (!q)
       return data as (BlogPostCard & SearchResult)[]
 
-    return miniSearch.search(q.value) as (BlogPostCard & SearchResult)[]
+    return miniSearch.search(q) as (BlogPostCard & SearchResult)[]
   }
 
   const getArticles = () => {
-    const searched = search(data.value)
+    const searched = search(allArticles.value, q.value)
     const filtered = filter(searched)
     const sorted = sort(filtered, order.value, orderBy.value)
 
@@ -166,25 +166,19 @@ export function useBlog() {
   }
 
   const fetchBlogArticles = async () => {
-    if (data.value.length) {
-      miniSearch.addAll(data.value)
-      // Do not update articles list on client side to avoid hydration error
-      return
-    }
+    const { data: res, error } = await useAsyncData('content:use-blog:data', () => queryContent('/blog/').only(fields).sort({ publishedAt: -1 }).find())
 
-    try {
-      const res = await queryContent('/blog/').only(fields).find()
-      data.value = res as BlogPostCard[]
-      miniSearch.addAll(res)
-      articles.value = getArticles()
-    }
-    catch (error) {
+    if (error.value) {
       throw createError({
-        statusCode: 500,
-        statusMessage: 'Server Error',
+        statusCode: error.value?.statusCode,
+        statusMessage: error.value?.statusMessage,
         fatal: true,
       })
     }
+
+    miniSearch.addAll(res.value as BlogPostCard[])
+    allArticles.value = res.value as BlogPostCard[]
+    articles.value = res.value as BlogPostCard[]
   }
 
   const storage = useStorage('blog', {
