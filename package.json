@@ -50,5 +50,10 @@
     "scule": "^1.2.0",
     "slugify": "^1.6.6",
     "unstorage": "^1.10.1"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "@nuxt/content@2.10.0": "patches/@nuxt__content@2.10.0.patch"
+    }
   }
 }
