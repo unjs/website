@@ -2,11 +2,15 @@
 import { NuxtLink } from '#components'
 
 const props = defineProps<{
-  title: 'Tip' | 'Note' | 'Important' | 'Warning' | 'Caution'
+  title?: 'Tip' | 'Note' | 'Important' | 'Warning' | 'Caution'
+  icon?: string
   to?: string
 }>()
 
 const icon = computed(() => {
+  if (props.icon)
+    return props.icon
+
   switch (props.title) {
     case 'Tip':
       return 'i-ph-lightbulb'
@@ -33,6 +37,8 @@ const iconColor = computed(() => {
       return 'text-amber-600 dark:text-amber-400'
     case 'Caution':
       return 'text-red-600 dark:text-red-400'
+    default:
+      return 'text-gray-800 dark:text-gray-200'
   }
 })
 
@@ -48,6 +54,8 @@ const borderColor = computed(() => {
       return 'dark:bg-amber-800/40 dark:border-amber-800/40 bg-amber-200/30 border-amber-400/30'
     case 'Caution':
       return 'dark:bg-red-800/40 bg-red-200/40 dark:border-red-600/30 border-red-400/30'
+    default:
+      return 'border-gray-300 bg-gray-300/20 dark:border-gray-700 dark:bg-gray-700/20'
   }
 })
 
@@ -63,6 +71,8 @@ const hoverBorderColor = computed(() => {
       return 'dark:hover:border-amber-600/50 hover:border-amber-400/50'
     case 'Caution':
       return 'dark:hover:border-blue-600/50 hover:border-blue-400/50'
+    default:
+      return 'hover:bg-gray-300/40 hover:dark:border-gray-400 hover:dark:bg-gray-700/50'
   }
 })
 </script>
