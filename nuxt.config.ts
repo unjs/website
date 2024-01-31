@@ -87,7 +87,7 @@ export default defineNuxtConfig({
     },
     experimental: {
       cacheContents: false,
-    }
+    },
   },
   colorMode: {
     preference: 'dark',
