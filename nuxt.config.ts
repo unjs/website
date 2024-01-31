@@ -85,6 +85,9 @@ export default defineNuxtConfig({
         dark: 'github-dark',
       },
     },
+    experimental: {
+      cacheContents: false,
+    }
   },
   colorMode: {
     preference: 'dark',
