@@ -20,7 +20,7 @@ export function usePackages() {
     },
   })
 
-  const data = useState<Package[]>('content:packages', () => [])
+  const data = useState<Package[]>('content:use-packages:data', () => [])
   const route = useRoute()
 
   // This is important to avoid a merge the URL and some data in storage for each missing query in URL. We cannot directly check for query to avoid having UTM breaking the system.
@@ -63,7 +63,7 @@ export function usePackages() {
     return route.query.orderBy as LocationQueryValue || defaultOrderBy
   })
 
-  const packages = useState<Package[]>('packages', () => [])
+  const packages = useState<Package[]>('content:use-packages:packages', () => [])
 
   const updateQuery = (query?: { q?: string, order?: Order, orderBy?: string }) => {
     navigateTo({

@@ -20,7 +20,7 @@ export function useBlog() {
     },
   })
 
-  const data = useState<BlogPostCard[]>('content:blog', () => [])
+  const data = useState<BlogPostCard[]>('content:use-blog:data', () => [])
   const route = useRoute()
 
   // This is important to avoid a merge the URL and some data in storage for each missing query in URL. We cannot directly check for query to avoid having UTM breaking the system.
@@ -99,7 +99,7 @@ export function useBlog() {
     return route.query.orderBy as LocationQueryValue || defaultOrderBy
   })
 
-  const articles = useState<BlogPostCard[]>('articles', () => [])
+  const articles = useState<BlogPostCard[]>('content:use-blog:articles', () => [])
 
   const updateQuery = (query?: { q?: string, 'categories[]'?: string[], 'packages[]'?: string[], 'authors[]'?: string[], order?: Order, orderBy?: string }) => {
     navigateTo({
