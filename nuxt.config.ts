@@ -27,7 +27,6 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@nuxt/ui',
     '@vueuse/nuxt',
-    '@nuxthq/studio',
     '@nuxtjs/plausible',
     'nuxt-payload-analyzer',
     '@nuxtjs/fontaine',
