@@ -2,12 +2,6 @@ import type { NitroConfig } from 'nitropack'
 import packagesRedirects from './config/packages-redirects'
 
 export default defineNuxtConfig({
-  vite: {
-    define: {
-    // enable hydration mismatch details in production build
-      __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: 'true',
-    },
-  },
   app: {
     head: {
       htmlAttrs: {
