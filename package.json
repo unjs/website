@@ -15,6 +15,9 @@
     "preview": "nuxt preview",
     "cli": "jiti bin"
   },
+  "dependencies": {
+    "@nuxt/content": "^2.11.0"
+  },
   "devDependencies": {
     "@antfu/eslint-config": "2.6.3",
     "@headlessui/vue": "^1.7.17",
@@ -49,8 +52,5 @@
     "scule": "^1.2.0",
     "slugify": "^1.6.6",
     "unstorage": "^1.10.1"
-  },
-  "dependencies": {
-    "@nuxt/content": "^2.11.0"
   }
 }
