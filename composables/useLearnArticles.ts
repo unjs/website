@@ -1,12 +1,12 @@
 import { useStorage } from '@vueuse/core'
 import MiniSearch, { type SearchResult } from 'minisearch'
-import type { Order } from '~/types/order'
 import type { LocationQueryValue } from '#vue-router'
-import type { BlogPostCard } from '~/types/blog'
+import type { Order } from '~/types/order'
+import type { LearnArticleCard } from '~/types/learn'
 import type { Author } from '~/types/author'
 
-export function useBlog() {
-  const fields = ['_path', 'title', 'description', 'publishedAt', 'authors', 'packages', 'categories']
+export function useLearnArticles() {
+  const fields = ['title', 'description', '_path', 'packages', 'category', 'publishedAt', 'authors']
   const miniSearch = new MiniSearch({
     idField: 'title',
     fields: ['title', 'description'],
@@ -23,9 +23,8 @@ export function useBlog() {
 
   const route = useRoute()
 
-  const allArticles = ref<BlogPostCard[]>([])
-  const articles = ref<BlogPostCard[]>([])
-
+  const allArticles = ref<LearnArticleCard[]>([])
+  const articles = ref<LearnArticleCard[]>([])
   // This is important to avoid a merge the URL and some data in storage for each missing query in URL. We cannot directly check for query to avoid having UTM breaking the system.
   const hasQuery = computed(() => {
     return route.query.q || route.query['categories[]'] || route.query['packages[]'] || route.query['authors[]'] || route.query.order || route.query.orderby
@@ -36,12 +35,16 @@ export function useBlog() {
     return route.query.q as LocationQueryValue || defaultQ
   })
 
-  const categoriesOptions = computed(() => {
-    const categories = allArticles.value.flatMap(item => item.categories || [])
-    const dedupe = new Set<string>(categories)
-
-    return Array.from(dedupe).sort()
-  })
+  const categoriesOptions = [
+    {
+      id: 'getting-started',
+      label: 'Getting Started',
+    },
+    {
+      id: 'building-blocks',
+      label: 'Building Blocks',
+    },
+  ]
   const defaultCategories: string[] = []
   const categories = computed(() => {
     const categories = route.query['categories[]'] as LocationQueryValue[] || defaultCategories
@@ -50,7 +53,7 @@ export function useBlog() {
   })
 
   const packagesOptions = computed(() => {
-    const packages = allArticles.value.flatMap(item => item.packages || [])
+    const packages = allArticles.value.flatMap(p => p.packages || [])
     const dedupe = new Set<string>(packages)
 
     return Array.from(dedupe).sort()
@@ -94,7 +97,7 @@ export function useBlog() {
     },
     {
       id: 'title',
-      label: 'Name',
+      label: 'Title',
     },
   ]
   const defaultOrderBy: string = orderByOptions[0].id
@@ -123,12 +126,15 @@ export function useBlog() {
     updateQuery(defaultQuery)
   }
 
-  const filter = (data: (BlogPostCard & SearchResult)[]) => {
+  const filter = (data: (LearnArticleCard & SearchResult)[]) => {
     data = data.filter((item) => {
       if (!categories.value.length)
         return true
 
-      return categories.value.some(category => item.categories.includes(category))
+      if (!item.category)
+        return false
+
+      return categories.value.includes(item.category)
     })
 
     data = data.filter((item) => {
@@ -151,11 +157,11 @@ export function useBlog() {
     return data
   }
 
-  const search = (data: BlogPostCard[], q: string) => {
+  const search = (data: LearnArticleCard[], q: string) => {
     if (!q)
-      return data as (BlogPostCard & SearchResult)[]
+      return data as (LearnArticleCard & SearchResult)[]
 
-    return miniSearch.search(q) as (BlogPostCard & SearchResult)[]
+    return miniSearch.search(q) as (LearnArticleCard & SearchResult)[]
   }
 
   const getArticles = () => {
@@ -166,8 +172,8 @@ export function useBlog() {
     return sorted
   }
 
-  const fetchBlogArticles = async () => {
-    const { data: res, error } = await useAsyncData('content:use-blog:data', () => queryContent('/blog/').only(fields).sort({ publishedAt: -1 }).find())
+  const fetchArticles = async () => {
+    const { data: res, error } = await useAsyncData('content:use-learn-articles:data', () => queryContent('/learn/').only(fields).sort({ publishedAt: -1 }).find())
 
     if (error.value) {
       throw createError({
@@ -177,12 +183,12 @@ export function useBlog() {
       })
     }
 
-    miniSearch.addAll(res.value as BlogPostCard[])
-    allArticles.value = res.value as BlogPostCard[]
-    articles.value = res.value as BlogPostCard[]
+    miniSearch.addAll(res.value as LearnArticleCard[])
+    allArticles.value = res.value as LearnArticleCard[]
+    articles.value = res.value as LearnArticleCard[]
   }
 
-  const storage = useStorage('blog', {
+  const storage = useStorage('learn-articles', {
     'q': '' as null | string,
     'categories[]': [] as null | string | (string | null)[],
     'packages[]': [] as null | string | (string | null)[],
@@ -190,7 +196,6 @@ export function useBlog() {
     'order': -1 as null | Order,
     'orderBy': orderByOptions[0].id as null | string,
   })
-
   // Update articles and storage on query change
   watch(() => route.query, () => {
     articles.value = getArticles()
@@ -226,7 +231,7 @@ export function useBlog() {
   })
 
   return {
-    fetchBlogArticles,
+    fetchArticles,
     updateQuery,
     reset,
     articles,
