@@ -14,13 +14,13 @@ export function getContentPath() {
 export function getPackagesPath() {
   const contentPath = getContentPath()
 
-  return join(contentPath, '4.packages')
+  return join(contentPath, 'packages')
 }
 
 export function getBlogPath() {
   const contentPath = getContentPath()
 
-  return join(contentPath, '5.blog')
+  return join(contentPath, 'blog')
 }
 
 export function getBlogTemplatePath() {

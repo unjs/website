@@ -1,15 +1,12 @@
 <script lang="ts" setup>
-import type { Author, BlogPostCard } from '~/types/blog'
-import type { OrderByOption } from '~/types/order'
-
 const route = useRoute()
 
 const { data: page, error } = await useAsyncData(route.path, () => queryContent(route.path).findOne())
 
 if (error.value) {
   throw createError({
-    statusCode: 404,
-    message: 'Page not found',
+    statusCode: error.value.statusCode,
+    message: error.value.message,
     fatal: true,
   })
 }
@@ -26,116 +23,33 @@ useSchemaOrg([
 defineOgImageComponent('OgImagePage', {
   illustration: '/assets/header/dark/blog.png',
 })
+useTrackPageview()
 
-const fields = ['_path', 'title', 'description', 'publishedAt', 'authors', 'packages', 'categories']
-const { data: blog } = await useAsyncData('blog:articles', () => queryContent('/blog/').only(fields).sort({ publishedAt: -1 }).find(), { default: () => [] }) as { data: Ref<BlogPostCard[]> }
+const {
+  fetchBlogArticles,
+  updateQuery,
+  reset,
+  articles,
+  q,
+  categories,
+  categoriesOptions,
+  packages,
+  packagesOptions,
+  authors,
+  authorsOptions,
+  order,
+  orderBy,
+  orderByOptions,
+} = useBlog()
 
-const authors = computed(() => blog.value.flatMap(item => item.authors).reduce((acc, author) => {
-  if (!acc.find(item => item.name === author.name))
-    acc.push(author)
-
-  return acc
-}, [] as Author[]))
-const selectedAuthors = ref<string[]>([])
-
-const packages = computed(() => blog.value.flatMap(item => item.packages || []).reduce((acc, pkg) => {
-  if (!acc.find(item => item === pkg))
-    acc.push(pkg)
-
-  return acc
-}, [] as string[]))
-const selectedPackages = ref<string[]>([])
-
-const categories = computed(() => blog.value.flatMap(item => item.categories || []).reduce((acc, category) => {
-  if (!acc.find(item => item === category))
-    acc.push(category)
-
-  return acc
-}, [] as string[]))
-const selectedCategories = ref<string[]>([])
-
-const orderByOptions: OrderByOption[] = [
-  {
-    id: 'title',
-    label: 'Name',
-  },
-  {
-    id: 'publishedAt',
-    label: 'Published at',
-  },
-]
-const defaultOrder = -1
-const defaultOrderBy = 'publishedAt'
-const { order, orderBy, sort } = useSort<BlogPostCard>(defaultOrder, defaultOrderBy)
-
-const { search, searchResults } = useSimpleSearch<BlogPostCard>(blog, {
-  idField: 'title',
-  fields,
-  storeFields: fields,
-  searchOptions: {
-    boost: {
-      title: 2,
-      description: 1,
-    },
-  },
-})
-
-const filtered = computed(() => {
-  let results: BlogPostCard[] = searchResults.value
-
-  /**
-   * Authors
-   */
-  results = results.filter((item) => {
-    if (!selectedAuthors.value.length)
-      return true
-
-    return item.authors.some(author => selectedAuthors.value.includes(author.name))
-  })
-
-  /**
-   * Packages
-   */
-  results = results.filter((item) => {
-    if (!selectedPackages.value.length)
-      return true
-
-    if (!item.packages)
-      return false // Remove article that does not have packages when user filter on them
-
-    return item.packages.some(pkg => selectedPackages.value.includes(pkg))
-  })
-
-  /**
-   * Categories
-   */
-  results = results.filter((item) => {
-    if (!selectedCategories.value.length)
-      return true
-
-    return item.categories.some(category => selectedCategories.value.includes(category))
-  })
-
-  return results
-})
-
-const results = sort(filtered)
-
-function resetFilter() {
-  search.value = ''
-  selectedAuthors.value = []
-  selectedPackages.value = []
-  selectedCategories.value = []
-  order.value = defaultOrder
-  orderBy.value = defaultOrderBy
-}
+await fetchBlogArticles()
 
 // Track search to analytics
-watchDebounced(search, () => {
-  if (!search.value)
+watchDebounced(q, () => {
+  if (!q.value)
     return
 
-  useTrackEvent('Blog Search', { props: { query: search.value } })
+  useTrackEvent('Blog Search', { props: { query: q.value } })
 }, { debounce: 500 })
 </script>
 
@@ -156,11 +70,15 @@ watchDebounced(search, () => {
         List of blog posts
       </h2>
 
-      <ListTopBar v-model:search="search" v-model:order="order" v-model:order-by="orderBy" search-placeholder="Search an article" :order-by-options="orderByOptions" @reset="resetFilter">
+      <AppListTopBar
+        :search="q" :order="order" :order-by="orderBy" search-placeholder="Search an article" :order-by-options="orderByOptions"
+        @update:search="updateQuery({ q: $event })" @update:order="updateQuery({ order: $event })" @update:order-by="updateQuery({ orderBy: $event })"
+        @reset="reset"
+      >
         <template #right>
           <USelectMenu
-            v-model="selectedAuthors"
-            :options="authors"
+            :model-value="authors"
+            :options="authorsOptions"
             color="gray"
             variant="outline"
             size="lg"
@@ -169,6 +87,7 @@ watchDebounced(search, () => {
             value-attribute="name"
             option-attribute="name"
             multiple
+            @update:model-value="updateQuery({ 'authors[]': $event })"
           >
             <template #option="{ option: author }">
               <UAvatar size="2xs" :src="author.picture" :alt="`Avatar of ${author.name}`" />
@@ -178,14 +97,15 @@ watchDebounced(search, () => {
             </template>
           </USelectMenu>
           <USelectMenu
-            v-model="selectedPackages"
-            :options="packages"
+            :model-value="packages"
+            :options="packagesOptions"
             color="gray"
             variant="outline"
             size="lg"
             placeholder="Packages"
             select-class="cursor-pointer"
             multiple
+            @update:model-value="updateQuery({ 'packages[]': $event })"
           >
             <template #option="{ option: pkg }">
               <UAvatar size="2xs" :src="`/assets/logos/${pkg}.svg`" :alt="`Icon of ${pkg}`" />
@@ -195,14 +115,15 @@ watchDebounced(search, () => {
             </template>
           </USelectMenu>
           <USelectMenu
-            v-model="selectedCategories"
-            :options="categories"
+            :model-value="categories"
+            :options="categoriesOptions"
             color="gray"
             variant="outline"
             size="lg"
             placeholder="Categories"
             select-class="cursor-pointer"
             multiple
+            @update:model-value="updateQuery({ 'categories[]': $event })"
           >
             <template #option="{ option: category }">
               <span class="truncate capitalize">
@@ -211,10 +132,10 @@ watchDebounced(search, () => {
             </template>
           </USelectMenu>
         </template>
-      </ListTopBar>
+      </AppListTopBar>
 
-      <ListGrid class="mt-8">
-        <ListGridItem v-for="item in results" :key="item._path">
+      <AppListGrid class="mt-8">
+        <AppListGridItem v-for="item in articles" :key="item._path">
           <BlogCard
             :path="item._path!"
             :title="item.title"
@@ -222,11 +143,11 @@ watchDebounced(search, () => {
             :published-at="item.publishedAt"
             :authors="item.authors"
           />
-        </ListGridItem>
-        <ListGridEmpty v-if="results && results.length === 0">
+        </AppListGridItem>
+        <AppListGridEmpty v-if="articles && articles.length === 0">
           No articles found
-        </ListGridEmpty>
-      </ListGrid>
+        </AppListGridEmpty>
+      </AppListGrid>
     </section>
   </Main>
 </template>

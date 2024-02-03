@@ -1,51 +1,30 @@
 <script lang="ts" setup>
-import { Combobox, ComboboxInput, ComboboxLabel, ComboboxOption, ComboboxOptions } from '@headlessui/vue'
+import { Combobox, ComboboxButton, ComboboxInput, ComboboxLabel, ComboboxOption, ComboboxOptions } from '@headlessui/vue'
 import { UButton } from '#components'
 import type { SearchDisplayItem } from '~/types/search'
 
-const route = useRoute()
+const props = defineProps<{
+  open: boolean
+}>()
 
-const { data: page, error } = await useAsyncData(route.path, () => queryContent(route.path).findOne())
+const emits = defineEmits<{
+  'update:open': [boolean]
+}>()
 
-if (error.value) {
-  throw createError({
-    statusCode: 404,
-    message: 'Page not found',
-    fatal: true,
-  })
-}
+const selected = ref<SearchDisplayItem | null>(null)
 
-useSeoMeta({
-  title: page.value?.title,
-  description: page.value?.description,
-})
-defineOgImageComponent('OgImagePage', {
-  illustration: '/assets/header/dark/search.png',
-})
-useTrackPageview()
-
-const query = ref<string>(route.query.q as string || '')
-const queryDebounced = ref<string>(query.value)
+const query = ref('')
+const queryDebounced = ref('')
 watchDebounced(
   query,
   () => {
-    if (!query.value)
-      return navigateTo({})
-
-    navigateTo({
-      query: {
-        q: query.value,
-      },
-    })
+    queryDebounced.value = query.value
+    selectFirstOption()
   },
   { debounce: 100, maxWait: 300 },
 )
-watch(() => route.query, (value) => {
-  queryDebounced.value = value.q as string | undefined || ''
-  selectFirstOption()
-})
 
-const resultsOptions = await useSearchResults(queryDebounced)
+const resultsOptions = await useSearchResults(queryDebounced, { lazy: true, server: false }) // Options to avoid to add `/api/search.txt` to the payload
 const defaultOptions = await useSearchDefaultResults()
 const options = computed(() => {
   if (Object.keys(resultsOptions.value).length > 0)
@@ -67,7 +46,8 @@ function getLength(data: SearchDisplayItem): number {
   return value
 }
 
-watch(options, (value) => {
+// Debounce the event to avoid to send too many events
+watchDebounced(options, (value) => {
   if (!query.value)
     return
 
@@ -81,7 +61,7 @@ watch(options, (value) => {
   }
 
   useTrackEvent('Search', { props: { query: `${query.value} - ${length} results` } })
-})
+}, { debounce: 500 })
 
 function isLastChildren(children: SearchDisplayItem[] | null, index: number) {
   if (!children)
@@ -91,21 +71,30 @@ function isLastChildren(children: SearchDisplayItem[] | null, index: number) {
 }
 
 function onSelection(value: SearchDisplayItem | null) {
-  if (!value)
+  if (!value || !props.open)
     return
 
+  sendSelectionMetric(value)
+  close()
   navigateTo(value.id)
 }
 
-const comboboxInput = ref<ComponentPublicInstance<HTMLElement> | null>(null)
+function close() {
+  query.value = ''
+  selected.value = null
+  emits('update:open', false)
+}
+
+function sendSelectionMetric(value: SearchDisplayItem) {
+  const selection = value.titles.length > 0 ? `${value.titles.join(' - ')} - ${value.title}` : value.title
+  useTrackEvent('Search', { props: { selection } })
+}
+
+const comboboxInput = ref<ComponentPublicInstance<HTMLElement>>()
 
 function resetQuery() {
   query.value = ''
   queryDebounced.value = ''
-
-  if (!comboboxInput.value)
-    return
-
   comboboxInput.value?.$el.focus()
   selectFirstOption()
 }
@@ -113,24 +102,16 @@ function resetQuery() {
 function selectFirstOption() {
   setTimeout(() => {
     // https://github.com/tailwindlabs/headlessui/blob/6fa6074cd5d3a96f78a2d965392aa44101f5eede/packages/%40headlessui-vue/src/components/combobox/combobox.ts#L804
-    if (!comboboxInput.value)
-      return
     comboboxInput.value?.$el.dispatchEvent(new KeyboardEvent('keydown', { key: 'PageUp' }))
   }, 0)
 }
+
+const breakpoints = useBreakpoints({ mobile: 640 })
+const isXs = breakpoints.smaller('mobile')
 </script>
 
 <template>
-  <Main v-if="page">
-    <template #header>
-      <PageHeader :title="page.title" :description="page.description">
-        <template #right>
-          <div>
-            <AppColorModeImage light="/assets/header/light/search.png" dark="/assets/header/dark/search.png" alt="Illustration" aria-hidden="true" class="absolute left-24 top-0 opacity-70 w-80" />
-          </div>
-        </template>
-      </PageHeader>
-    </template>
+  <UModal :model-value="open" :overlay="!isXs" :transition="!isXs" :ui="{ height: 'h-screen sm:h-[28rem]', width: 'sm:max-w-3xl', padding: 'p-0 sm:p-4', rounded: 'rounded-none sm:rounded-lg' }" @update:model-value="close">
     <Combobox as="div" class="flex flex-col flex-1 min-h-0 divide-y divide-gray-100 dark:divide-gray-800" @update:model-value="onSelection($event)">
       <div class="relative shrink-0 h-16 sm:h-auto">
         <ComboboxLabel class="h-full flex items-center gap-2 px-4 sm:py-4">
@@ -144,21 +125,33 @@ function selectFirstOption() {
             @change="query = $event.target.value"
           />
         </ComboboxLabel>
+        <ComboboxButton
+          :as="UButton"
+          icon="i-heroicons-x-mark"
+          color="gray"
+          variant="ghost"
+          square
+          size="xs"
+          class="absolute top-1/2 transform -translate-y-1/2 right-4"
+          @click="close"
+        />
       </div>
-      <ComboboxOptions static class="divide-y divide-gray-200 dark:divide-gray-800" as="ul">
+      <ComboboxOptions static class="relative flex-1 overflow-y-auto divide-y divide-gray-100 dark:divide-gray-800 scroll-py-10" as="ul">
         <template v-if="options">
           <div v-for="(value, key) in options" :key="key" class="px-4 pb-4">
-            <h2 class="mt-2 pt-2 pb-1 capitalize text-sm font-bold text-gray-500 dark:text-gray-400">
+            <h2 class="pt-4 pb-1 sticky top-0 bg-white dark:bg-gray-900 w-full z-10 capitalize text-sm font-bold text-gray-500 dark:text-gray-400">
               {{ key }}
             </h2>
             <template v-for="option in value" :key="option.id">
               <ComboboxOption
                 v-slot="{ active }"
                 :value="option"
+                @click="close"
               >
                 <AppSearchItem
                   :active="active"
                   :item="option"
+                  @click="sendSelectionMetric(option)"
                 />
               </ComboboxOption>
               <ComboboxOption
@@ -166,18 +159,20 @@ function selectFirstOption() {
                 :key="childOption.id"
                 v-slot="{ active }"
                 :value="childOption"
+                @click="close"
               >
                 <AppSearchItem
                   :active="active"
                   :item="childOption"
                   child
                   :last="isLastChildren(option.children, index)"
+                  @click="sendSelectionMetric(childOption)"
                 />
               </ComboboxOption>
             </template>
           </div>
         </template>
-        <div v-else class="mt-12 flex flex-col gap-8 justify-center items-center">
+        <div v-else class="w-full h-full flex flex-col gap-8 justify-center items-center">
           <span class="text-gray-950 dark:text-gray-50">
             No results found
           </span>
@@ -188,5 +183,5 @@ function selectFirstOption() {
         </div>
       </ComboboxOptions>
     </Combobox>
-  </Main>
+  </UModal>
 </template>

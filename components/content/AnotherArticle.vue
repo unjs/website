@@ -12,8 +12,7 @@ const { data: article } = await useAsyncData(`article:${props.link}`, () => quer
     <p class="text-gray-500 dark:text-gray-400">
       {{ text ?? 'Read more:' }}
     </p>
-    <article v-if="article" class="group relative rounded-lg ring-1 ring-gray-300 bg-gray-300/20 hover:bg-gray-300/40 dark:ring-gray-700 hover:dark:ring-gray-400  dark:bg-gray-700/20 hover:dark:bg-gray-700/50 transition ease-in">
-      <!-- TODO: handle image -->
+    <article v-if="article" class="group relative rounded-lg border border-dashed hover:border-solid border-gray-300 bg-gray-300/20 hover:bg-gray-300/40 dark:border-gray-700 hover:dark:border-gray-400 dark:bg-gray-700/20 hover:dark:bg-gray-700/50">
       <div class="p-4">
         <h1 class="text-gray-800 dark:text-gray-200 font-bold">
           <NuxtLink :to="article._path">

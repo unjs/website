@@ -20,6 +20,18 @@ export function getLogosPath() {
   return join(publicPath, 'assets', 'logos')
 }
 
+export function getImagesPath() {
+  const publicPath = getPublicPath()
+
+  return join(publicPath, 'assets', 'images')
+}
+
+export function getBlogImagesPath() {
+  const imagesPath = getImagesPath()
+
+  return join(imagesPath, 'blog')
+}
+
 /**
  * Get list of puzzle parts, without directory or the extension
  */

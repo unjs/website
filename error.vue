@@ -16,7 +16,7 @@ useSeoMeta({
 
 <template>
   <Body class="font-sans dark:bg-gray-900">
-    <AppHeader />
+    <Header />
 
     <div class="px-4 container mx-auto xl:max-w-7xl">
       <Main class="flex flex-col items-center justify-center">
@@ -32,6 +32,6 @@ useSeoMeta({
       </Main>
     </div>
 
-    <AppFooter />
+    <Footer />
   </Body>
 </template>
