@@ -68,7 +68,7 @@ watchDebounced(q, () => {
         List of learn articles
       </h2>
 
-      <ListTopBar
+      <AppListTopBar
         :search="q" :order="order" :order-by="orderBy" search-placeholder="Search an article" :order-by-options="orderByOptions" @reset="reset"
         @update:search="updateQuery({ q: $event })" @update:order="updateQuery({ order: $event })" @update:order-by="updateQuery({ orderBy: $event })"
       >
@@ -125,10 +125,10 @@ watchDebounced(q, () => {
             @update:model-value="updateQuery({ 'categories[]': $event })"
           />
         </template>
-      </ListTopBar>
+      </AppListTopBar>
 
-      <ListGrid class="mt-8">
-        <ListGridItem v-for="item in articles" :key="item._path">
+      <AppListGrid class="mt-8">
+        <AppListGridItem v-for="item in articles" :key="item._path">
           <LearnCard
             :path="item._path"
             :title="item.title"
@@ -137,11 +137,11 @@ watchDebounced(q, () => {
             :published-at="item.publishedAt"
             :authors="item.authors"
           />
-        </ListGridItem>
-        <ListGridEmpty v-if="articles && articles.length === 0">
+        </AppListGridItem>
+        <AppListGridEmpty v-if="articles && articles.length === 0">
           No articles found
-        </ListGridEmpty>
-      </ListGrid>
+        </AppListGridEmpty>
+      </AppListGrid>
     </section>
   </Main>
 </template>

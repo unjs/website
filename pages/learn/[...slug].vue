@@ -63,7 +63,7 @@ if (page.value?.packages) {
       <template #nav>
         <template v-if="packages">
           <UDivider />
-          <ArticleProseNavGroupPackages :packages="packages" />
+          <ProseNavPackages :packages="packages" />
         </template>
         <UDivider />
         <template v-if="page.resources">
@@ -79,7 +79,7 @@ if (page.value?.packages) {
           </ProseNavGroup>
           <UDivider />
         </template>
-        <ArticleProseNavGroupCommunity :filename="page._file" />
+        <ProseNavCommunity :filename="page._file" />
       </template>
     </Prose>
   </Main>

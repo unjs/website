@@ -2,7 +2,8 @@ import { useStorage } from '@vueuse/core'
 import MiniSearch, { type SearchResult } from 'minisearch'
 import type { Order } from '~/types/order'
 import type { LocationQueryValue } from '#vue-router'
-import type { Author, BlogPostCard } from '~/types/blog'
+import type { BlogPostCard } from '~/types/blog'
+import type { Author } from '~/types/author'
 
 export function useBlog() {
   const fields = ['_path', 'title', 'description', 'publishedAt', 'authors', 'packages', 'categories']

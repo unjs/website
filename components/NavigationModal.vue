@@ -1,10 +1,12 @@
 <script lang="ts" setup>
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
-import type { NavItem } from '@nuxt/content/dist/runtime/types'
 
 defineProps<{
   open: boolean
-  navigation: NavItem[]
+  navigation: {
+    path: string
+    title: string
+  }[]
 }>()
 
 defineEmits<{
@@ -47,12 +49,12 @@ const uiSocialButton = { color: { gray: { ghost: 'dark:text-gray-400 dark:hover:
                 aria-labelledby="Navigation mobile"
                 class="flex flex-col gap-2 text-2xl font-semibold"
               >
-                <li v-for="item in navigation" :key="item._path">
+                <li v-for="item in navigation" :key="item.path">
                   <UButton
                     size="xl"
                     color="gray"
                     variant="ghost"
-                    :to="item._path" :icon="item.icon" :ui="{ ...uiButton }" :active-class="activeClassButton"
+                    :to="item.path" :ui="{ ...uiButton }" :active-class="activeClassButton"
                     @click="$emit('update:open', false)"
                   >
                     {{ item.title }}

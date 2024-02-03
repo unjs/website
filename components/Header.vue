@@ -1,24 +1,23 @@
 <script lang="ts" setup>
+const runtimeConfig = useRuntimeConfig()
 const website = useWebsite()
 const github = website.value.socials.github
 
-const { data: navigation } = await useAsyncData('content:navigation', () => fetchContentNavigation(queryContent('/')), {
-  transform: (data) => {
-    const filteredData = data.filter(item => item._path !== '/').map((item) => {
-      if (item._path !== '/resources')
-        delete item.children
-
-      return {
-        title: item.title,
-        _path: item._path,
-        icon: item.icon,
-        children: item.children,
-      }
-    })
-
-    return filteredData
+const navigation = [
+  {
+    path: '/packages',
+    title: 'Packages',
   },
-})
+  runtimeConfig.public.learn && {
+    path: '/learn',
+    title: 'Learn',
+  },
+  {
+    path: '/blog',
+    title: 'Blog',
+  }
+].filter(Boolean) as { path: string, title: string }[]
+
 const { data: stars } = await useFetch('/api/content/packages.json', {
   transform: (data) => {
     const stars: number = data.reduce((acc, curr) => acc + curr.stars, 0)
@@ -59,8 +58,8 @@ function toDesignKit() {
 
       <nav v-if="navigation" class="hidden lg:flex justify-center">
         <ol class="text-[1.125rem] flex gap-4 leading-5">
-          <li v-for="item in navigation" :key="item._path">
-            <UPopover v-if="item.children" mode="hover" :ui="{ width: 'max-w-[18rem]' }">
+          <li v-for="item in navigation" :key="item.path">
+            <!-- <UPopover v-if="item.children" mode="hover" :ui="{ width: 'max-w-[18rem]' }">
               <UButton size="md" variant="ghost" color="gray" :to="item._path" :icon="item.icon" :ui="{ size: { md: 'text-base' }, ...uiButton }" :active-class="activeClassButton">
                 {{ item.title }}
               </UButton>
@@ -79,8 +78,8 @@ function toDesignKit() {
                   </li>
                 </ol>
               </template>
-            </UPopover>
-            <UButton v-else size="md" variant="ghost" color="gray" :to="item._path" :ui="{ size: { md: 'text-base' }, ...uiButton }" :active-class="activeClassButton">
+            </UPopover> -->
+            <UButton size="md" variant="ghost" color="gray" :to="item.path" :ui="{ size: { md: 'text-base' }, ...uiButton }" :active-class="activeClassButton">
               {{ item.title }}
             </UButton>
           </li>

@@ -1,4 +1,7 @@
 <script lang="ts" setup>
+import type { LearnArticleCard } from '~/types/learn'
+import type { BlogPostCard } from '~/types/blog'
+
 const route = useRoute()
 const { data: page, error } = await useAsyncData(route.path, () => queryContent(route.path).findOne())
 
@@ -20,7 +23,7 @@ defineOgImageComponent('OgImagePage', {
 
 const { data: latestBlog } = await useAsyncData('blog:latest', () => queryContent('/blog/').only(['_path', 'title', 'description', 'publishedAt', 'authors', 'packages', 'categories']).sort({ publishedAt: -1 }).limit(3).find(), { default: () => [] }) as { data: Ref<BlogPostCard[]> }
 
-const latestArticles = []
+const latestArticles: LearnArticleCard[] = []
 
 const categories = [{
   id: 'getting-started',
@@ -83,8 +86,8 @@ const categories = [{
         </NuxtLink>
       </h2>
 
-      <ListGrid class="mt-3">
-        <ListGridItem v-for="item in latestArticles" :key="item._path">
+      <AppListGrid class="mt-3">
+        <AppListGridItem v-for="item in latestArticles" :key="item._path">
           <ArticlesCard
             :path="item._path!"
             :title="item.title"
@@ -92,8 +95,8 @@ const categories = [{
             :published-at="item.publishedAt"
             :authors="item.authors"
           />
-        </ListGridItem>
-      </ListGrid>
+        </AppListGridItem>
+      </AppListGrid>
     </section>
 
     <!-- Find by packages with list of most used packages -->
@@ -107,8 +110,8 @@ const categories = [{
           <span class="i-heroicons-chevron-right text-primary h-5 w-5" />
         </NuxtLink>
       </h2>
-      <ListGrid class="mt-3">
-        <ListGridItem v-for="item in latestBlog" :key="item._path">
+      <AppListGrid class="mt-3">
+        <AppListGridItem v-for="item in latestBlog" :key="item._path">
           <BlogCard
             :path="`${item._path!}?utm_source=unjs.io&utm_medium=learn-latest-blog`"
             :title="item.title"
@@ -116,8 +119,8 @@ const categories = [{
             :published-at="item.publishedAt"
             :authors="item.authors"
           />
-        </ListGridItem>
-      </ListGrid>
+        </AppListGridItem>
+      </AppListGrid>
     </section>
 
     <!-- TODO: testimonials (later) -->

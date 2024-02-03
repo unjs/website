@@ -3,6 +3,8 @@ import type { ParsedContent } from '@nuxt/content/dist/runtime/types'
 import MiniSearch, { type SearchResult } from 'minisearch'
 import type { LocationQueryValue } from '#vue-router'
 import type { Order } from '~/types/order'
+import type { LearnArticleCard } from '~/types/learn'
+import type { Author } from '~/types/author'
 
 export function useLearnArticles() {
   const fields = ['title', 'description', '_path', 'packages', 'category', 'publishedAt', 'authors']
@@ -20,8 +22,10 @@ export function useLearnArticles() {
     },
   })
 
-  const data = useState<Pick<ParsedContent, string>[]>('content:learn-articles-data', () => [])
   const route = useRoute()
+
+  const allArticles = ref<LearnArticleCard[]>([])
+  const articles = ref<LearnArticleCard[]>([])
   // This is important to avoid a merge the URL and some data in storage for each missing query in URL. We cannot directly check for query to avoid having UTM breaking the system.
   const hasQuery = computed(() => {
     return route.query.q || route.query['categories[]'] || route.query['packages[]'] || route.query['authors[]'] || route.query.order || route.query.orderby
@@ -50,7 +54,7 @@ export function useLearnArticles() {
   })
 
   const packagesOptions = computed(() => {
-    const packages = data.value.flatMap(p => p.packages || [])
+    const packages = allArticles.value.flatMap(p => p.packages || [])
     const dedupe = new Set<string>(packages)
 
     return Array.from(dedupe).sort()
@@ -63,10 +67,15 @@ export function useLearnArticles() {
   })
 
   const authorsOptions = computed(() => {
-    const authors = data.value.flatMap(p => p.authors || [])
-    const dedupe = new Set<string>(authors)
+    const authors = allArticles.value.flatMap(item => item.authors || [])
+    const dedupe = new Map<string, Author>()
 
-    return Array.from(dedupe).sort()
+    authors.forEach((author) => {
+      if (!dedupe.has(author.name))
+        dedupe.set(author.name, author)
+    })
+
+    return Array.from(dedupe.values()).sort((a, b) => a.name.localeCompare(b.name))
   })
   const defaultAuthors: string[] = []
   const authors = computed(() => {
@@ -97,8 +106,6 @@ export function useLearnArticles() {
     return route.query.orderBy as LocationQueryValue || defaultOrderBy
   })
 
-  const articles = useState<Pick<ParsedContent, string>[]>('content:learn-articles', () => [])
-
   const updateQuery = (query?: { q?: string, 'categories[]'?: string[], 'packages[]'?: string[], 'authors[]'?: string[], order?: Order, orderBy?: string }) => {
     navigateTo({
       query: {
@@ -120,7 +127,7 @@ export function useLearnArticles() {
     updateQuery(defaultQuery)
   }
 
-  const filter = (data: (Pick<ParsedContent, string> & SearchResult)[]) => {
+  const filter = (data: (LearnArticleCard & SearchResult)[]) => {
     data = data.filter((item) => {
       if (!categories.value.length)
         return true
@@ -151,15 +158,15 @@ export function useLearnArticles() {
     return data
   }
 
-  const search = (data: Pick<ParsedContent, string>[]) => {
-    if (!q.value)
-      return data as (Pick<ParsedContent, string> & SearchResult)[]
+  const search = (data: LearnArticleCard[], q: string) => {
+    if (!q)
+      return data as (LearnArticleCard & SearchResult)[]
 
-    return miniSearch.search(q.value) as (Pick<ParsedContent, string> & SearchResult)[]
+    return miniSearch.search(q) as (LearnArticleCard & SearchResult)[]
   }
 
   const getArticles = () => {
-    const searched = search(data.value)
+    const searched = search(allArticles.value, q.value)
     const filtered = filter(searched)
     const sorted = sort(filtered, order.value, orderBy.value)
 
@@ -167,24 +174,19 @@ export function useLearnArticles() {
   }
 
   const fetchArticles = async () => {
-    if (data.value.length) {
-      miniSearch.addAll(data.value)
-      return
-    }
+    const { data: res, error } = await useAsyncData('content:use-learn-articles:data', () => queryContent('/learn/').only(fields).sort({ publishedAt: -1 }).find())
 
-    try {
-      const res = await queryContent('/learn/').only(fields).find()
-      data.value = res
-      miniSearch.addAll(data.value)
-      articles.value = getArticles()
-    }
-    catch (error) {
+    if (error.value) {
       throw createError({
-        statusCode: 500,
-        statusMessage: 'Server Error',
+        statusCode: error.value?.statusCode,
+        statusMessage: error.value?.statusMessage,
         fatal: true,
       })
     }
+
+    miniSearch.addAll(res.value as LearnArticleCard[])
+    allArticles.value = res.value as LearnArticleCard[]
+    articles.value = res.value as LearnArticleCard[]
   }
 
   const storage = useStorage('learn-articles', {
