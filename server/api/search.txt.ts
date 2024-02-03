@@ -7,6 +7,8 @@ export default defineEventHandler(async (event) => {
   const sections = (await Promise.all(
     files
       .filter(file => !file?._draft && !file?.empty && !file?._partial)
+      // TODO: Related to public.learn flag
+      .filter(file => !file?._path?.startsWith('/learn'))
       .map(page => splitPageIntoSections(page)),
   ))
     .flat()
