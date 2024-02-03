@@ -5,8 +5,13 @@ const props = defineProps<{
   rel?: string
 }>()
 
+const whiteList = [
+  'unjs.io',
+  'nuxt.com',
+]
+
 const rel = computed(() => {
-  if (props.href.includes('.unjs.io'))
+  if (whiteList.some((domain) => props.href.includes(domain)))
     return 'noopener'
 
   return 'noopener noreferrer'
