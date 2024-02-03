@@ -36,9 +36,14 @@ export default defineNuxtConfig({
   nitro: {
     static: true,
     prerender: {
-      failOnError: false,
+      failOnError: true,
       crawlLinks: true,
       routes: ['/', '/blog', '/packages', '/blog/categories', '/api/search.txt', '/api/content/packages.json', '/rss.xml', '/blog/rss.xml'],
+      ignore: [
+        '/packages/</span',
+        '/packages/template',
+        '/packages/src/runtime',
+      ],
     },
     routeRules: {
       '/api/content/**': {
