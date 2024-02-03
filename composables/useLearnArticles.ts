@@ -1,5 +1,4 @@
 import { useStorage } from '@vueuse/core'
-import type { ParsedContent } from '@nuxt/content/dist/runtime/types'
 import MiniSearch, { type SearchResult } from 'minisearch'
 import type { LocationQueryValue } from '#vue-router'
 import type { Order } from '~/types/order'

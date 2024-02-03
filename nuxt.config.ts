@@ -5,8 +5,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       // Use a flag to merge the PRs quickly without pushing it to the production
-      learn: false
-    }
+      learn: false,
+    },
   },
   app: {
     head: {
@@ -124,7 +124,7 @@ export default defineNuxtConfig({
     },
   },
   seo: {
-    splash: false
+    splash: false,
   },
   linkChecker: {
     enabled: false,
