@@ -11,7 +11,7 @@ const whiteList = [
 ]
 
 const rel = computed(() => {
-  if (whiteList.some((domain) => props.href.includes(domain)))
+  if (whiteList.some(domain => props.href.includes(domain)))
     return 'noopener'
 
   return 'noopener noreferrer'
