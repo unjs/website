@@ -25,4 +25,4 @@ const legend = [{
       </template>
     </UCard>
   </div>
-  </template>
+</template>

@@ -2,7 +2,7 @@
 import { useStorage } from '@vueuse/core'
 
 definePageMeta({
-  layout: 'full'
+  layout: 'full',
 })
 
 const route = useRoute()
@@ -37,7 +37,6 @@ if (packagesError.value) {
 // chargement des unjs packages et mis en place dans la payload
 // pour la suite, bah c'est en full client side
 
-
 // False by default to avoid flickering if the user has a preference in the storage
 const openMenu = ref(false)
 const openLegend = ref(false)
@@ -51,13 +50,13 @@ onMounted(() => {
 })
 
 defineShortcuts({
-  'meta_m': {
+  meta_m: {
     handler: () => {
       openMenu.value = !openMenu.value
       menuOpenStorage.value = openMenu.value
     },
   },
-  'meta_l': {
+  meta_l: {
     handler: () => {
       openLegend.value = !openLegend.value
       legendOpenStorage.value = openLegend.value
@@ -71,6 +70,6 @@ defineShortcuts({
     <RelationsMenu v-if="openMenu" v-model:menu="openMenu" v-model:legend="openLegend" class="z-20" />
     <RelationsLegend v-if="openLegend" class="z-20" />
 
-    <RelationsGraph/>
+    <RelationsGraph />
   </div>
 </template>

@@ -9,7 +9,7 @@ const { metaSymbol } = useShortcuts()
 const menu = ref<HTMLElement | null>(null)
 const menuHandle = ref<HTMLElement | null>(null)
 
-const defaultPosition = { x: 16 , y: 64 + 16 } // 64 is the header height
+const defaultPosition = { x: 16, y: 64 + 16 } // 64 is the header height
 const storage = useStorage('unjs-relations-menu-position', defaultPosition)
 
 const { style, position } = useDraggable(menu, {
@@ -27,36 +27,32 @@ interface Settings {
   showChildren: boolean
 }
 
-
 const settings = ref<Settings>({
   showDependencies: true,
   showDevDependencies: false,
   showChildren: false,
 })
 const settingsItems = computed(() => [[{
- label: settings.value.showDependencies ? 'Hide Dependencies' : 'Show Dependencies',
- icon: 'i-ph-graph',
+  label: settings.value.showDependencies ? 'Hide Dependencies' : 'Show Dependencies',
+  icon: 'i-ph-graph',
   click: () => {
     settings.value.showDependencies = !settings.value.showDependencies
   },
 
-},
-{
+}, {
   label: settings.value.showDevDependencies ? 'Hide Dev Dependencies' : 'Show Dev Dependencies',
   icon: 'i-ph-line-segments',
   click: () => {
     settings.value.showDevDependencies = !settings.value.showDevDependencies
   },
 
-},
-{
+}, {
   label: settings.value.showChildren ? 'Hide Children' : 'Show Children',
   icon: 'i-ph-tree-structure',
   click: () => {
     settings.value.showChildren = !settings.value.showChildren
   },
-},
-], [
+}], [
   {
     label: openMenu.value ? 'Hide Menu' : 'Show Menu',
     icon: 'i-ph-house',
@@ -74,14 +70,12 @@ const settingsItems = computed(() => [[{
       openLegend.value = !openLegend.value
       legendOpenStorage.value = openLegend.value
     },
-  }
+  },
 ], [
- { label: 'Reset Menu Position',
-  icon: 'i-heroicons-arrow-path-20-solid',
-  click: () => {
+  { label: 'Reset Menu Position', icon: 'i-heroicons-arrow-path-20-solid', click: () => {
     position.value = defaultPosition
     storage.value = defaultPosition
-  },}
+  } },
 ]])
 </script>
 
