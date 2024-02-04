@@ -17,13 +17,9 @@ useSchemaOrg([
     <Body class="font-sans dark:bg-gray-900">
       <NuxtLoadingIndicator color="#ECDC5A" />
 
-      <Header />
-
-      <div class="px-4 container mx-auto xl:max-w-7xl">
+      <NuxtLayout>
         <NuxtPage />
-      </div>
-
-      <Footer />
+      </NuxtLayout>
 
       <UNotifications />
     </Body>

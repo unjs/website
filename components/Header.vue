@@ -16,6 +16,10 @@ const navigation = [
     path: '/blog',
     title: 'Blog',
   },
+  {
+    path: '/relations',
+    title: 'Relations',
+  },
 ].filter(Boolean) as { path: string, title: string }[]
 
 const { data: stars } = await useFetch('/api/content/packages.json', {
