@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { useStorage } from '@vueuse/core'
+import type { RelationPackage } from '~/types/package';
 
 definePageMeta({
   layout: 'full',
@@ -24,19 +25,13 @@ useSeoMeta({
 defineOgImageComponent('OgImagePage')
 useTrackPageview()
 
-const { data, error: packagesError } = await useAsyncData('content:relations:packages', () => $fetch('/api/content/packages.json'))
+const { data } = await useRelationsUnJSRepositories()
 
-if (packagesError.value) {
-  throw createError({
-    statusCode: packagesError.value.statusCode,
-    message: packagesError.value.message,
-    fatal: true,
-  })
-}
+const loading = ref(true)
 
-// chargement des unjs packages et mis en place dans la payload
-// pour la suite, bah c'est en full client side
+const selection = ref<RelationPackage[]>([])
 
+const openRepositories = ref(false)
 // False by default to avoid flickering if the user has a preference in the storage
 const openMenu = ref(false)
 const openLegend = ref(false)
@@ -44,9 +39,21 @@ const openLegend = ref(false)
 const menuOpenStorage = useStorage('unjs-relations-menu-open', true)
 const legendOpenStorage = useStorage('unjs-relations-legend-open', true)
 
+const settings = useRelationsSettings()
+
 onMounted(() => {
   openMenu.value = menuOpenStorage.value
   openLegend.value = legendOpenStorage.value
+
+  // Use query params and then storage to update the settings
+  settings.updateQuery({
+    showDependencies: settings.showDependencies.value ?? settings.storage.value.showDependencies,
+    showDevDependencies: settings.showDevDependencies.value ?? settings.storage.value.showDevDependencies,
+    showChildren: settings.showChildren.value ?? settings.storage.value.showChildren,
+  })
+
+  // TODO: use query params to update the selection
+  selection.value = [...data.value]
 })
 
 defineShortcuts({
@@ -67,9 +74,28 @@ defineShortcuts({
 
 <template>
   <div class="w-full h-screen relative overflow-hidden">
-    <RelationsMenu v-if="openMenu" v-model:menu="openMenu" v-model:legend="openLegend" class="z-20" />
+    <RelationsMenu v-if="openMenu" v-model:menu="openMenu" v-model:legend="openLegend" class="z-20" @open-repositories="openRepositories = $event" />
     <RelationsLegend v-if="openLegend" class="z-20" />
 
-    <RelationsGraph />
+    <RelationsModalPackages v-model:open="openRepositories" v-model:selection="selection" :packages="data" />
+
+    <RelationsGraph :packages="data" :selection="selection" class="w-full h-full" @loading="loading = $event" />
+    <div v-if="loading || !selection.length" class="absolute z-0 inset-0 flex items-center justify-center font-medium bg-white/40 backdrop-blur-sm dark:bg-gray-900/60">
+      <span class="flex flex-row items-center">
+        <template v-if="loading">
+          <span class="i-heroicons-arrow-path animate-spin" />
+          <span class="ml-2">
+            Loading...
+          </span>
+        </template>
+        <template v-else>
+          <!-- TODO: make this a button that open the explanation modal -->
+          <span class="i-heroicons-information-circle" />
+          <span class="ml-2">
+            Select a package to start
+          </span>
+        </template>
+      </span>
+    </div>
   </div>
 </template>

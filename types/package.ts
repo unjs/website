@@ -25,3 +25,12 @@ export interface PackageContent extends ParsedContent {
   }
   documentation: string
 }
+
+export type RelationPackageSource = 'npm' | 'unjs'
+export interface RelationPackage {
+  name: string
+  description?: string
+  dependencies: string[]
+  devDependencies: string[]
+  source: RelationPackageSource
+}

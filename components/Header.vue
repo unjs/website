@@ -53,7 +53,7 @@ function toDesignKit() {
 
 <template>
   <div class="h-16 border-b border-gray-100 dark:border-gray-800">
-    <header class="h-full px-4 container mx-auto xl:max-w-7xl md:px-6 grid grid-cols-2 lg:grid-cols-3 items-center">
+    <header class="h-full px-4 container mx-auto xl:max-w-7xl md:px-6 grid grid-cols-2 lg:grid-cols-3 items-center bg-white/40 backdrop-blur-sm dark:bg-gray-900/60">
       <div class="flex items-center">
         <NuxtLink to="/?utm_source=unjs.io&utm_medium=header-icon" @click.right.prevent="toDesignKit()">
           <AppLogo />
@@ -91,15 +91,15 @@ function toDesignKit() {
       </nav>
 
       <div class="flex justify-end items-center">
-        <UTooltip text="Open Search" :shortcuts="[metaSymbol, 'K']">
+        <UTooltip text="Open Search" :shortcuts="[metaSymbol, 'K']" :popper="{ adaptative: false, placement: 'bottom', strategy: 'absolute' }">
           <UButton size="md" icon="i-heroicons-magnifying-glass" color="gray" variant="ghost" :ui="{ size: { md: 'text-base' }, ...uiButton }" aria-label="Open Search" square @click="openSearch = true" />
         </UTooltip>
 
-        <UTooltip class="ml-1 lg:hidden" text="Open Navigation">
+        <UTooltip class="ml-1 lg:hidden" text="Open Navigation" :popper="{ adaptative: false, placement: 'bottom', strategy: 'absolute' }">
           <UButton square size="md" variant="ghost" color="gray" icon="i-heroicons-bars-3-bottom-right" :ui="uiButton" aria-label="Open Navigation" @click="openNavigation = true" />
         </UTooltip>
 
-        <UTooltip class="ml-1 hidden lg:flex" text="GitHub Stars">
+        <UTooltip class="ml-1 hidden lg:flex" text="GitHub Stars" :popper="{ adaptative: false, placement: 'bottom', strategy: 'absolute' }">
           <UButton size="md" variant="ghost" color="gray" :icon="github.icon" :to="github.url" :target="github.target" :aria-label="`Follow us on ${github.name}`" :ui="{ size: { md: 'text-base' }, ...uiButton }">
             {{ stars ? formatNumber(stars) : '' }}
           </UButton>
