@@ -1,7 +1,10 @@
-import { useStorage } from '@vueuse/core'
 import type { RelationPackage } from '~/types/package'
 
 export const useRelationsStore = defineStore('relations', () => {
+  /**
+   * Do not use `useStorage` from VueUse inside a store since it will trigger the storage and set the default instead of the value from the storage.
+   */
+
   const route = useRoute()
 
   const _packages = ref({
@@ -15,11 +18,6 @@ export const useRelationsStore = defineStore('relations', () => {
   /**
    * Settings
    */
-  const settingsStorage = useStorage('unjs-relations-settings', {
-    showDependencies: true,
-    showDevDependencies: false,
-    showChildren: false,
-  })
   const hasSettingsQuery = computed(() => {
     return route.query.showDependencies || route.query.showDevDependencies || route.query.showChildren
   })
@@ -30,7 +28,7 @@ export const useRelationsStore = defineStore('relations', () => {
     if (hasSettingsQuery.value && !route.query.showDependencies)
       return false
 
-    return settingsStorage.value.showDependencies
+    return null
   })
   const showDevDependencies = computed(() => {
     if (hasSettingsQuery.value && route.query.showDevDependencies)
@@ -39,7 +37,7 @@ export const useRelationsStore = defineStore('relations', () => {
     if (hasSettingsQuery.value && !route.query.showDevDependencies)
       return false
 
-    return settingsStorage.value.showDevDependencies
+    return null
   })
   const showChildren = computed(() => {
     if (hasSettingsQuery.value && route.query.showChildren)
@@ -48,7 +46,7 @@ export const useRelationsStore = defineStore('relations', () => {
     if (hasSettingsQuery.value && !route.query.showChildren)
       return false
 
-    return settingsStorage.value.showChildren
+    return null
   })
   function updateSettings(query: { showDependencies?: boolean, showDevDependencies?: boolean, showChildren?: boolean }) {
     navigateTo({
@@ -60,24 +58,10 @@ export const useRelationsStore = defineStore('relations', () => {
       },
     })
   }
-  /**
-   * Maintain storage in sync with the query
-   */
-  watch([showDependencies, showDevDependencies, showChildren], () => {
-    settingsStorage.value = {
-      showDependencies: showDependencies.value,
-      showDevDependencies: showDevDependencies.value,
-      showChildren: showChildren.value,
-    }
-  })
 
   /**
    * Selection
    */
-  const selectionStorage = useStorage('unjs-relations-selection', {
-    unjs: null as null | string[],
-    npm: null as null | string[],
-  })
   const hasSelectionQuery = computed(() => {
     return route.query['u[]'] || route.query['n[]']
   })
@@ -127,15 +111,6 @@ export const useRelationsStore = defineStore('relations', () => {
       },
     })
   }
-  /**
-   * Maintain storage in sync with the query
-   */
-  watch([unjs, npm], () => {
-    selectionStorage.value = {
-      unjs: unjs.value ?? [],
-      npm: npm.value ?? [],
-    }
-  })
 
   /**
    * Packages
@@ -191,14 +166,12 @@ export const useRelationsStore = defineStore('relations', () => {
     npmPackages,
     fetchUnJSPackages,
 
-    settingsStorage,
     hasSettingsQuery,
     showDependencies,
     showDevDependencies,
     showChildren,
     updateSettings,
 
-    selectionStorage,
     hasSelectionQuery,
     unjs,
     npm,

@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { useStorage } from '@vueuse/core'
+
 definePageMeta({
   layout: 'full',
 })
@@ -32,15 +34,42 @@ const openLegend = useRelationsLegend()
 const relationsStore = useRelationsStore()
 await relationsStore.fetchUnJSPackages()
 
+/**
+ * Storage can't be used inside a store
+ */
+const selectionStorage = useStorage('unjs-relations-selection', {
+  unjs: null as null | string[],
+  npm: null as null | string[],
+})
+watch(() => relationsStore.unjsSelection, (value) => {
+  selectionStorage.value.unjs = value.map(pkg => pkg.name)
+})
+watch(() => relationsStore.npmSelection, (value) => {
+  selectionStorage.value.npm = value.map(pkg => pkg.name)
+})
+
+const settingsStorage = useStorage('unjs-relations-settings', {
+  showDependencies: true,
+  showDevDependencies: false,
+  showChildren: false,
+})
+watch([relationsStore.showDependencies, relationsStore.showDevDependencies, relationsStore.showChildren], ([dep, devDep, children]) => {
+  settingsStorage.value = {
+    showDependencies: dep || false,
+    showDevDependencies: devDep || false,
+    showChildren: children || false,
+  }
+})
+
 // Update query
-onMounted(() => {
+onBeforeMount(() => {
   navigateTo({
     query: {
-      'u[]': relationsStore.unjs || relationsStore.selectionStorage.unjs || relationsStore.unjsPackages.map(pkg => pkg.name),
-      'n[]': relationsStore.npm || relationsStore.selectionStorage.npm,
-      'showDependencies': String(relationsStore.showDependencies),
-      'showDevDependencies': String(relationsStore.showDevDependencies),
-      'showChildren': String(relationsStore.showChildren),
+      'u[]': relationsStore.unjs || selectionStorage.value.unjs || relationsStore.unjsPackages.map(pkg => pkg.name),
+      'n[]': relationsStore.npm || selectionStorage.value.npm,
+      'showDependencies': String(relationsStore.showDependencies || settingsStorage.value.showDependencies),
+      'showDevDependencies': String(relationsStore.showDevDependencies || settingsStorage.value.showDevDependencies),
+      'showChildren': String(relationsStore.showChildren || settingsStorage.value.showChildren),
     },
   })
 })
