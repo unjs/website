@@ -3,6 +3,7 @@ const emits = defineEmits<{
   openRepositories: [boolean]
 }>()
 
+const openAbout = defineModel<boolean>('about', { required: true })
 const openMenu = defineModel<boolean>('menu', { required: true })
 const openLegend = defineModel<boolean>('legend', { required: true })
 
@@ -48,6 +49,22 @@ const settingsItems = computed(() => [[{
       openLegend.value = !openLegend.value
     },
   },
+], [
+  {
+    label: 'About',
+    icon: 'i-heroicons-information-circle',
+    shortcuts: [metaSymbol.value, 'i'],
+    click: () => {
+      openAbout.value = !openAbout.value
+    },
+  },
+  {
+    label: 'Help & Feedback',
+    icon: 'i-simple-icons-github',
+    shortcuts: [metaSymbol.value, 'h'],
+    to: 'https://github.com/unjs/community/discussions',
+    target: '_blank',
+  },
 ]])
 </script>
 
@@ -70,7 +87,7 @@ const settingsItems = computed(() => [[{
           <template #leading>
             <UAvatar src="/favicon.svg" alt="UnJS Logo" size="2xs" :ui="{ rounded: 'rounded-sm' }" />
           </template>
-          UnJS Repositories
+          UnJS Packages
         </UButton>
       </div>
     </UCard>

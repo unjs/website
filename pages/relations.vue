@@ -27,6 +27,7 @@ useTrackPageview()
 const loading = ref(true)
 
 const openRepositories = ref(false)
+const openAbout = ref(false)
 
 const openMenu = useRelationsMenu()
 const openLegend = useRelationsLegend()
@@ -72,14 +73,33 @@ onBeforeMount(() => {
     },
   })
 })
+
+defineShortcuts({
+  meta_i: {
+    handler: () => {
+      openAbout.value = !openAbout.value
+    },
+  },
+  meta_h: {
+    handler: () => {
+      navigateTo({
+        path: 'https://github.com/unjs/community/discussions',
+      }, { external: true, open: { target: '_blank' } })
+    },
+  },
+})
+
+// TODO: send a custom event when about is open (with the location)
+// TODO: send a custom event with number of items of the selection, a base 64 encoded string of the selection and the settings
 </script>
 
 <template>
   <div class="w-full h-screen relative overflow-hidden">
-    <RelationsMenu v-if="openMenu" v-model:menu="openMenu" v-model:legend="openLegend" class="absolute left-4 top-20 z-10" @open-repositories="openRepositories = $event" />
+    <RelationsMenu v-if="openMenu" v-model:about="openAbout" v-model:menu="openMenu" v-model:legend="openLegend" class="absolute left-4 top-20 z-10" @open-repositories="openRepositories = $event" />
     <RelationsLegend v-if="openLegend" class="absolute z-30 bottom-4 left-4" />
 
     <RelationsModalPackages v-model:open="openRepositories" />
+    <RelationsModalAbout v-model:open="openAbout" />
 
     <RelationsGraph v-if="relationsStore.hasQuery" class="w-full h-full" @loading="loading = $event" />
     <div v-if="loading || !relationsStore.selection.length" class="absolute z-0 inset-0 flex items-center justify-center font-medium bg-white/40 backdrop-blur-sm dark:bg-gray-900/60">
@@ -91,13 +111,14 @@ onBeforeMount(() => {
           </span>
         </template>
         <template v-else>
-          <!-- TODO: make this a button that open the explanation modal -->
-          <span class="i-heroicons-information-circle" />
+          <UButton square aria-label="Open About Panel" icon="i-heroicons-information-circle" color="gray" variant="ghost" @click="openAbout = true" />
           <span class="ml-2">
             Select a package to start
           </span>
         </template>
       </span>
     </div>
+
+    <UButton square aria-label="Open About" icon="i-heroicons-information-circle" color="gray" variant="ghost" size="xl" :ui="{ base: 'absolute z-20 bottom-4 right-4', rounded: 'rounded-full', color: { gray: { ghost: 'bg-white/40 backdrop-blur-sm dark:bg-gray-900/60 ring-1 ring-gray-200 dark:ring-gray-800' } } }" @click="openAbout = true" />
   </div>
 </template>
