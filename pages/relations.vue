@@ -76,8 +76,8 @@ onBeforeMount(() => {
 
 <template>
   <div class="w-full h-screen relative overflow-hidden">
-    <RelationsMenu v-if="openMenu" v-model:menu="openMenu" v-model:legend="openLegend" class="z-20" @open-repositories="openRepositories = $event" />
-    <RelationsLegend v-if="openLegend" class="z-20" />
+    <RelationsMenu v-if="openMenu" v-model:menu="openMenu" v-model:legend="openLegend" class="absolute left-4 top-20 z-10" @open-repositories="openRepositories = $event" />
+    <RelationsLegend v-if="openLegend" class="absolute z-30 bottom-4 left-4" />
 
     <RelationsModalPackages v-model:open="openRepositories" />
 

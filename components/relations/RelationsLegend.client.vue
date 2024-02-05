@@ -15,8 +15,8 @@ const legend = [{
 </script>
 
 <template>
-  <div class="absolute bottom-4 left-4">
-    <UCard :ui="{ background: 'bg-white/40 backdrop-blur-sm dark:bg-gray-900/60', divide: '', shadow: 'shadow-sm', rounded: 'rounded-lg', body: { padding: 'p-4 sm:p-4' } }">
+  <div>
+    <UCard :ui="{ background: 'bg-white/40 backdrop-blur-sm dark:bg-gray-900/60', divide: '', shadow: 'shadow-sm', rounded: 'rounded-lg', body: { base: 'grid grid-cols-2', padding: 'p-4 sm:p-4' } }">
       <template v-for="item in legend" :key="item.text">
         <div class="flex items-center gap-2">
           <span class="block rounded-full w-2 h-2 ring-1" :class="item.color" />
