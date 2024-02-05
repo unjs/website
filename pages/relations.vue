@@ -47,17 +47,16 @@ watch(() => relationsStore.unjsSelection, (value) => {
 watch(() => relationsStore.npmSelection, (value) => {
   selectionStorage.value.npm = value.map(pkg => pkg.name)
 })
-
 const settingsStorage = useStorage('unjs-relations-settings', {
   showDependencies: true,
   showDevDependencies: false,
   showChildren: false,
 })
-watch([relationsStore.showDependencies, relationsStore.showDevDependencies, relationsStore.showChildren], ([dep, devDep, children]) => {
+watch([() => relationsStore.showDependencies, () => relationsStore.showDevDependencies, () => relationsStore.showChildren], ([dep, devDep, children]) => {
   settingsStorage.value = {
-    showDependencies: dep || false,
-    showDevDependencies: devDep || false,
-    showChildren: children || false,
+    showDependencies: dep ?? false,
+    showDevDependencies: devDep ?? false,
+    showChildren: children ?? false,
   }
 })
 
@@ -65,11 +64,11 @@ watch([relationsStore.showDependencies, relationsStore.showDevDependencies, rela
 onBeforeMount(() => {
   navigateTo({
     query: {
-      'u[]': relationsStore.unjs || selectionStorage.value.unjs || relationsStore.unjsPackages.map(pkg => pkg.name),
-      'n[]': relationsStore.npm || selectionStorage.value.npm,
-      'showDependencies': String(relationsStore.showDependencies || settingsStorage.value.showDependencies),
-      'showDevDependencies': String(relationsStore.showDevDependencies || settingsStorage.value.showDevDependencies),
-      'showChildren': String(relationsStore.showChildren || settingsStorage.value.showChildren),
+      'u[]': relationsStore.unjs ?? selectionStorage.value.unjs ?? relationsStore.unjsPackages.map(pkg => pkg.name),
+      'n[]': relationsStore.npm ?? selectionStorage.value.npm,
+      'showDependencies': String(relationsStore.showDependencies ?? settingsStorage.value.showDependencies),
+      'showDevDependencies': String(relationsStore.showDevDependencies ?? settingsStorage.value.showDevDependencies),
+      'showChildren': String(relationsStore.showChildren ?? settingsStorage.value.showChildren),
     },
   })
 })
