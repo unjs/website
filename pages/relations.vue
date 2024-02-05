@@ -22,8 +22,6 @@ useSeoMeta({
 defineOgImageComponent('OgImagePage')
 useTrackPageview()
 
-const { data } = await useRelationsUnJSRepositories()
-
 const loading = ref(true)
 
 const openRepositories = ref(false)
@@ -31,7 +29,21 @@ const openRepositories = ref(false)
 const openMenu = useRelationsMenu()
 const openLegend = useRelationsLegend()
 
-const { selection, updateSelection } = useRelations(data.value)
+const relationsStore = useRelationsStore()
+await relationsStore.fetchUnJSPackages()
+
+// Update query
+onMounted(() => {
+  navigateTo({
+    query: {
+      'u[]': relationsStore.unjs || relationsStore.selectionStorage.unjs || relationsStore.unjsPackages.map((pkg) => pkg.name),
+      'n[]': relationsStore.npm || relationsStore.selectionStorage.npm,
+      'showDependencies': String(relationsStore.showDependencies),
+      'showDevDependencies': String(relationsStore.showDevDependencies),
+      'showChildren': String(relationsStore.showChildren),
+    },
+  })
+})
 </script>
 
 <template>
@@ -39,10 +51,10 @@ const { selection, updateSelection } = useRelations(data.value)
     <RelationsMenu v-if="openMenu" v-model:menu="openMenu" v-model:legend="openLegend" class="z-20" @open-repositories="openRepositories = $event" />
     <RelationsLegend v-if="openLegend" class="z-20" />
 
-    <RelationsModalPackages v-model:open="openRepositories" :selection="selection" :packages="data" @update:selection="updateSelection" />
+    <RelationsModalPackages v-model:open="openRepositories" />
 
-    <RelationsGraph :packages="data" :selection="selection" class="w-full h-full" @loading="loading = $event" />
-    <div v-if="loading || !selection.length" class="absolute z-0 inset-0 flex items-center justify-center font-medium bg-white/40 backdrop-blur-sm dark:bg-gray-900/60">
+    <RelationsGraph v-if="relationsStore.hasQuery" class="w-full h-full" @loading="loading = $event" />
+    <div v-if="loading || !relationsStore.selection.length" class="absolute z-0 inset-0 flex items-center justify-center font-medium bg-white/40 backdrop-blur-sm dark:bg-gray-900/60">
       <span class="flex flex-row items-center">
         <template v-if="loading">
           <span class="i-heroicons-arrow-path animate-spin" />

@@ -8,27 +8,28 @@ const openLegend = defineModel<boolean>('legend', { required: true })
 
 const { metaSymbol } = useShortcuts()
 
-const settings = useRelationsSettings()
+const relationsStore = useRelationsStore()
 
 const settingsItems = computed(() => [[{
-  label: settings.showDependencies.value ? 'Hide Dependencies' : 'Show Dependencies',
+  label: relationsStore.showDependencies ? 'Hide Dependencies' : 'Show Dependencies',
   icon: 'i-ph-graph',
   click: () => {
-    settings.update({ showDependencies: !settings.showDependencies.value })
+    relationsStore.updateSettings({ showDependencies: !relationsStore.showDependencies })
   },
 
 }, {
-  label: settings.showDevDependencies.value ? 'Hide Dev Dependencies' : 'Show Dev Dependencies',
+  label: relationsStore.showDevDependencies ? 'Hide Dev Dependencies' : 'Show Dev Dependencies',
   icon: 'i-ph-line-segments',
   click: () => {
-    settings.update({ showDevDependencies: !settings.showDevDependencies.value })
+    relationsStore.updateSettings({ showDevDependencies: !relationsStore.showDevDependencies })
   },
 
-}, {
-  label: settings.showChildren.value ? 'Hide Children' : 'Show Children',
+}], [{
+  // Children can be dependencies or devDependencies. It's not standalone but related to the previous
+  label: relationsStore.showChildren ? 'Hide Children' : 'Show Children',
   icon: 'i-ph-tree-structure',
   click: () => {
-    settings.update({ showChildren: !settings.showChildren.value })
+    relationsStore.updateSettings({ showChildren: !relationsStore.showChildren })
   },
 }], [
   {

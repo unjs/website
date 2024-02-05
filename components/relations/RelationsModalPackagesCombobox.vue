@@ -55,7 +55,7 @@ const rows = computed(() => {
           </li>
         </ComboboxOption>
       </template>
-      <div v-else class="text-center xl:col-span-3">
+      <div v-else class="text-center col-span-1 md:col-span-3 xl:col-span-5">
         <span>
           No results
         </span>

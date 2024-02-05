@@ -1,14 +1,13 @@
 <script lang="ts" setup>
-import type { RelationPackage } from '~/types/package'
-
-defineProps<{
-  packages: RelationPackage[]
-}>()
-
-const selectionModel = defineModel<RelationPackage[]>('selection', { required: true })
 const open = defineModel<boolean>('open', { required: true })
 
-const selection = ref([...selectionModel.value])
+const relationsStore = useRelationsStore()
+
+const selection = ref([...relationsStore.unjsSelection])
+// Update selection when store change
+watch(() => relationsStore.unjsSelection, (value) => {
+  selection.value = [...value]
+})
 
 function clear() {
   selection.value = []
@@ -19,7 +18,7 @@ function cancel() {
 }
 
 function validate() {
-  selectionModel.value = selection.value
+  relationsStore.updateSelection([...selection.value])
   open.value = false
 }
 </script>
@@ -36,7 +35,7 @@ function validate() {
         </div>
       </template>
 
-      <RelationsModalPackagesCombobox v-model:selection="selection" :packages="packages" />
+      <RelationsModalPackagesCombobox v-model:selection="selection" :packages="relationsStore.unjsPackages" />
 
       <template #footer>
         <div class="flex flex-row justify-between items-center">

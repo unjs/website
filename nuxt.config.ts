@@ -31,6 +31,7 @@ export default defineNuxtConfig({
     'nuxt-payload-analyzer',
     '@nuxtjs/fontaine',
     '@nuxtjs/google-fonts',
+    '@pinia/nuxt',
   ],
   css: [
     '~/assets/app.css',

@@ -4,11 +4,6 @@ import { Network } from 'vis-network'
 import { _black, _cyan, _pink, _violet, _white, _yellow } from '#tailwind-config/theme/colors'
 import type { RelationPackage } from '~/types/package'
 
-const props = defineProps<{
-  packages: RelationPackage[]
-  selection: RelationPackage[]
-}>()
-
 const emits = defineEmits<{
   loading: [boolean]
   selectNode: [RelationPackage]
@@ -18,17 +13,17 @@ const colorMode = useColorMode()
 
 const container = ref<HTMLElement | null>(null)
 
-const { showDependencies, showDevDependencies, showChildren } = useRelationsSettings()
+const relationsStore = useRelationsStore()
 
 const selectionNames = computed<string[]>(() => {
-  return props.selection.map((select) => {
+  return relationsStore.selection.map((select) => {
     return select.name
   })
 })
 
 const data = computed<Data>(() => {
   /** Selection */
-  const selectionNodes: Data['nodes'] = props.selection.map((select) => {
+  const selectionNodes: Data['nodes'] = relationsStore.selection.map((select) => {
     return {
       id: select.name,
       label: select.name,
@@ -40,12 +35,12 @@ const data = computed<Data>(() => {
   // Use a condition to avoid unnecessary computation
   const selectionChildrenPackages: RelationPackage[] = []
   const selectionChildrenPackagesName: string[] = []
-  if (showChildren.value) {
+  if (relationsStore.showChildren) {
   /** Children */
-    selectionChildrenPackages.push(...props.packages
+    selectionChildrenPackages.push(...relationsStore.packages
     // Filter out packages that have not selected packages as dependencies or devDependencies
       .filter((pkg) => {
-        if (showDependencies.value) {
+        if (relationsStore.showDependencies) {
           // Check if current package use any of the selected packages
           const hasUsedBy = pkg.dependencies.some((dep) => {
             return selectionNames.value.includes(dep)
@@ -55,7 +50,7 @@ const data = computed<Data>(() => {
             return true
         }
 
-        if (showDependencies.value) {
+        if (relationsStore.showDependencies) {
           // Check if current package use any of the selected packages
           const hasUsedBy = pkg.devDependencies.some((dep) => {
             return selectionNames.value.includes(dep)
@@ -86,16 +81,16 @@ const data = computed<Data>(() => {
   }
 
   /** Dependencies and Dev Dependencies */
-  const allDependencies = [...props.selection, ...selectionChildrenPackages].flatMap((pkg) => {
+  const allDependencies = [...relationsStore.selection, ...selectionChildrenPackages].flatMap((pkg) => {
     const deps = []
 
     // Add current package for selection children packages
     deps.push(pkg.name)
 
-    if (showDependencies.value)
+    if (relationsStore.showDependencies)
       deps.push(...pkg.dependencies)
 
-    if (showDevDependencies.value)
+    if (relationsStore.showDevDependencies)
       deps.push(...pkg.devDependencies)
 
     return deps
@@ -110,7 +105,7 @@ const data = computed<Data>(() => {
   })
 
   const allDependenciesNodes: Data['nodes'] = dedupedWithoutSelectionAllDependencies.flatMap((dep) => {
-    const logo = props.packages.find((pkg) => {
+    const logo = relationsStore.packages.find((pkg) => {
       return pkg.name === dep
     })?.name
 
@@ -128,7 +123,7 @@ const data = computed<Data>(() => {
   ]
 
   // Order matters since we want to show the dependencies and devDependencies of the selected packages first (otherwise, some packages will not have all their dependencies shown)
-  const dedupePackages = [...props.selection, ...selectionChildrenPackages].reduce((acc, pkg) => {
+  const dedupePackages = [...relationsStore.selection, ...selectionChildrenPackages].reduce((acc, pkg) => {
     const index = acc.findIndex((p) => {
       return p.name === pkg.name
     })
@@ -143,7 +138,7 @@ const data = computed<Data>(() => {
     ...dedupePackages.flatMap((pkg) => {
       const data: Edge[] = []
 
-      if (showDependencies.value) {
+      if (relationsStore.showDependencies) {
         const color = colorMode.preference === 'light' ? _pink[300] : _pink[900]
         const highlight = colorMode.preference === 'light' ? _pink[500] : _pink[800]
         data.push(...pkg.dependencies.map((dep) => {
@@ -160,7 +155,7 @@ const data = computed<Data>(() => {
         }))
       }
 
-      if (showDevDependencies.value) {
+      if (relationsStore.showDevDependencies) {
         const color = colorMode.preference === 'light' ? _violet[300] : _violet[900]
         const highlight = colorMode.preference === 'light' ? _violet[500] : _violet[800]
         data.push(...pkg.devDependencies.map((dep) => {
@@ -292,15 +287,15 @@ onMounted(() => {
   })
 
   // So if the selection is empty, we do not show the loading
-  if (props.selection.length === 0)
+  if (relationsStore.selection.length === 0)
     emits('loading', false)
 
-  network.on('doubleClick', ({ nodes }) => {
+  // network.on('doubleClick', ({ nodes }) => {
     // const package_ = [...props.packages, ...props.selection].find((pkg) => {
     //   return pkg.name === nodes[0]
     // }) as RelationPackage
     // emits('selectNode', package_)
-  })
+  // })
 
   watch(data, () => {
     if (data.value.nodes?.length)
