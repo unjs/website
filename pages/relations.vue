@@ -36,7 +36,7 @@ await relationsStore.fetchUnJSPackages()
 onMounted(() => {
   navigateTo({
     query: {
-      'u[]': relationsStore.unjs || relationsStore.selectionStorage.unjs || relationsStore.unjsPackages.map((pkg) => pkg.name),
+      'u[]': relationsStore.unjs || relationsStore.selectionStorage.unjs || relationsStore.unjsPackages.map(pkg => pkg.name),
       'n[]': relationsStore.npm || relationsStore.selectionStorage.npm,
       'showDependencies': String(relationsStore.showDependencies),
       'showDevDependencies': String(relationsStore.showDevDependencies),

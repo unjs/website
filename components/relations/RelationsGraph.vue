@@ -291,10 +291,10 @@ onMounted(() => {
     emits('loading', false)
 
   // network.on('doubleClick', ({ nodes }) => {
-    // const package_ = [...props.packages, ...props.selection].find((pkg) => {
-    //   return pkg.name === nodes[0]
-    // }) as RelationPackage
-    // emits('selectNode', package_)
+  // const package_ = [...props.packages, ...props.selection].find((pkg) => {
+  //   return pkg.name === nodes[0]
+  // }) as RelationPackage
+  // emits('selectNode', package_)
   // })
 
   watch(data, () => {
