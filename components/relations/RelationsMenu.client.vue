@@ -14,21 +14,21 @@ const settingsItems = computed(() => [[{
   label: settings.showDependencies.value ? 'Hide Dependencies' : 'Show Dependencies',
   icon: 'i-ph-graph',
   click: () => {
-    settings.updateQuery({ showDependencies: !settings.showDependencies.value })
+    settings.update({ showDependencies: !settings.showDependencies.value })
   },
 
 }, {
   label: settings.showDevDependencies.value ? 'Hide Dev Dependencies' : 'Show Dev Dependencies',
   icon: 'i-ph-line-segments',
   click: () => {
-    settings.updateQuery({ showDevDependencies: !settings.showDevDependencies.value })
+    settings.update({ showDevDependencies: !settings.showDevDependencies.value })
   },
 
 }, {
   label: settings.showChildren.value ? 'Hide Children' : 'Show Children',
   icon: 'i-ph-tree-structure',
   click: () => {
-    settings.updateQuery({ showChildren: !settings.showChildren.value })
+    settings.update({ showChildren: !settings.showChildren.value })
   },
 }], [
   {
