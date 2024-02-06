@@ -62,6 +62,9 @@ watch([() => relationsStore.showDependencies, () => relationsStore.showDevDepend
   }
 })
 
+/**
+ * Populate the store with the packages needed.
+ */
 if (import.meta.client) {
   const npm = relationsStore.npm ?? selectionStorage.value.npm
 
@@ -78,7 +81,6 @@ if (import.meta.client) {
   ])
 }
 
-const canLoadGraph = ref(false)
 // Update query
 onBeforeMount(() => {
   navigateTo({
@@ -90,10 +92,6 @@ onBeforeMount(() => {
       'showChildren': String(relationsStore.showChildren ?? settingsStorage.value.showChildren),
     },
   })
-})
-
-onMounted(() => {
-  canLoadGraph.value = true
 })
 
 defineShortcuts({
@@ -124,7 +122,7 @@ defineShortcuts({
     <RelationsModalNpm v-model:open="openNpm" />
     <RelationsModalAbout v-model:open="openAbout" />
 
-    <RelationsGraph v-if="canLoadGraph" class="w-full h-full" @loading="loading = $event" />
+    <RelationsGraph v-if="relationsStore.hasQuery" class="w-full h-full" @loading="loading = $event" />
     <div v-if="loading || !relationsStore.selection.length" class="absolute z-0 inset-0 flex items-center justify-center font-medium bg-white/40 backdrop-blur-sm dark:bg-gray-900/60">
       <span class="flex flex-row items-center">
         <template v-if="loading">

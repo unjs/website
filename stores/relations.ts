@@ -172,6 +172,13 @@ export const useRelationsStore = defineStore('relations', () => {
   }
 
   /**
+   * Used to know if we can mount the graph. While there's no query, we don't mount the graph (this is why we do not rely on the storage as a fallback of the query).
+   */
+  const hasQuery = computed(() => {
+    return (route.query['u[]'] || route.query['n[]']) && route.query.showDependencies && route.query.showDevDependencies && route.query.showChildren
+  })
+
+  /**
    * Returns
    */
   return {
@@ -199,6 +206,8 @@ export const useRelationsStore = defineStore('relations', () => {
     unjsSelection,
     npmSelection,
     updateSelection,
+
+    hasQuery
   }
 })
 
