@@ -181,12 +181,12 @@ function validate() {
         <div class="flex flex-row justify-between items-center">
           <div class="flex gap-2">
             <UButton type="button" variant="ghost" color="red" @click="clear">
-            Clear selection
-          </UButton>
-          <UButton type="button" variant="ghost" color="red" @click="removeAll">
-            Remove all
-          </UButton>
-        </div>
+              Clear selection
+            </UButton>
+            <UButton type="button" variant="ghost" color="red" @click="removeAll">
+              Remove all
+            </UButton>
+          </div>
           <div class="flex justify-end gap-2">
             <UButton type="button" variant="ghost" color="gray" @click="cancel">
               Cancel
