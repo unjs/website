@@ -1,3 +1,4 @@
+import type { PackageJson } from 'pkg-types'
 import type { RelationPackage } from '~/types/package'
 
 export const useRelationsStore = defineStore('relations', () => {
@@ -97,6 +98,7 @@ export const useRelationsStore = defineStore('relations', () => {
   const selection = computed(() => {
     return [
       ...unjsSelection.value,
+      ...npmSelection.value,
     ]
   })
   function updateSelection(packages: RelationPackage[]) {
@@ -145,6 +147,31 @@ export const useRelationsStore = defineStore('relations', () => {
 
     _packages.value.unjs = data.value
   }
+  async function fetchNpmPackage(name: string) {
+    const npmPackage = await $fetch<PackageJson>(`https://registry.npmjs.com/${name}/latest`)
+
+    const relationsPackage = toRelationsPackage(npmPackage, unjsPackages.value.map(pkg => pkg.name))
+
+    if (_packages.value.npm.find(pkg => pkg.name === relationsPackage.name)) {
+      throw createError({
+        message: `Package ${relationsPackage.name} already exists in the list of npm packages`,
+      })
+    }
+
+    if (_packages.value.unjs.find(pkg => pkg.name === relationsPackage.name)) {
+      throw createError({
+        message: `Package ${relationsPackage.name} already exists in the list of UnJS packages`,
+      })
+    }
+
+    _packages.value.npm.push(relationsPackage)
+  }
+  function removeNpmPackage(name: string) {
+    const index = _packages.value.npm.findIndex(pkg => pkg.name === name)
+
+    if (index !== -1)
+      _packages.value.npm.splice(index, 1)
+  }
 
   /**
    * Used to know if we can mount the graph. While there's no query, we don't mount the graph (this is why we do not rely on the storage as a fallback of the query).
@@ -165,6 +192,8 @@ export const useRelationsStore = defineStore('relations', () => {
     unjsPackages,
     npmPackages,
     fetchUnJSPackages,
+    fetchNpmPackage,
+    removeNpmPackage,
 
     hasSettingsQuery,
     showDependencies,

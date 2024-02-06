@@ -18,14 +18,14 @@ function cancel() {
 }
 
 function validate() {
-  relationsStore.updateSelection([...selection.value])
+  relationsStore.updateSelection([...selection.value, ...relationsStore.npmSelection])
   open.value = false
 }
 </script>
 
 <template>
-  <UModal v-model="open" :ui="{ width: 'xl:max-w-5xl' }">
-    <UCard>
+  <UModal v-model="open" :ui="{ width: 'md:max-w-2xl xl:max-w-5xl' }">
+    <UCard class="w-full">
       <template #header>
         <div class="flex justify-between">
           <h2 class="font-semibold">
@@ -35,7 +35,11 @@ function validate() {
         </div>
       </template>
 
-      <RelationsModalPackagesCombobox v-model:selection="selection" :packages="relationsStore.unjsPackages" />
+      <RelationsPackagesCombobox v-model:selection="selection" :packages="relationsStore.unjsPackages">
+        <template #logo="{ item }">
+          <UAvatar :src="toPackageLogo(item.name)" :alt="`Logo of ${item.name}`" size="xs" :ui="{ rounded: '' }" />
+        </template>
+      </RelationsPackagesCombobox>
 
       <template #footer>
         <div class="flex flex-row justify-between items-center">

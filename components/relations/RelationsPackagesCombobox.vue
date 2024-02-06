@@ -6,12 +6,10 @@ import type { RelationPackage } from '~/types/package'
 
 const props = defineProps<{
   packages: RelationPackage[]
+  logo?: string
 }>()
 
-// TODO: update type
 const selection = defineModel<RelationPackage[]>('selection')
-
-const breakpoints = useBreakpoints(breakpointsTailwind)
 
 const query = ref('')
 const search = computed(() => {
@@ -19,6 +17,8 @@ const search = computed(() => {
     return item.name.toLowerCase().includes(query.value.toLowerCase())
   })
 })
+
+const breakpoints = useBreakpoints(breakpointsTailwind)
 const breakpoint = computed(() => {
   if (breakpoints.greaterOrEqual('xl').value)
     return 5
@@ -35,29 +35,33 @@ const rows = computed(() => {
 </script>
 
 <template>
-  <Combobox v-model="selection" multiple by="name" as="template">
+  <Combobox v-model="selection" multiple by="name" as="div">
     <ComboboxInput v-model="query" :as="UInput" color="primary" variant="outline" placeholder="Search a package..." class="mb-2" />
-    <ComboboxOptions id="options" static as="ol" class="grid grid-flow-col grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-2">
+    <ComboboxOptions id="options" static as="ol" class="grid grid-flow-col grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-2">
       <template v-if="search.length">
-        <ComboboxOption v-for="item in search" :key="item.name" v-slot="{ active, selected }" as="template" :value="item">
-          <li class="w-full">
-            <UButton :ui="{ base: 'w-full' }" :class="{ 'text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-800': active }" color="gray" variant="ghost" :active="active" tabindex="-1">
+        <li v-for="item in search" :key="item.name" class="w-full flex flex-row gap-1">
+          <ComboboxOption v-slot="{ active, selected }" as="template" :value="item">
+            <UButton :ui="{ base: 'grow' }" :icon="logo" :class="{ 'text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-800': active }" color="gray" variant="ghost" :active="active" tabindex="-1">
               <template #leading>
-                <UAvatar :src="toPackageLogo(item.name)" :alt="`Logo of ${item.name}`" size="xs" :ui="{ rounded: '' }" />
+                <slot name="logo" :item="item" />
               </template>
               <span class="grow text-start">
                 {{ item.name }}
               </span>
-              <template v-if="selected" #trailing>
-                <span class="i-heroicons-check" />
+              <template #trailing>
+                <span v-if="selected" class="i-heroicons-check w-4" />
               </template>
             </UButton>
-          </li>
-        </ComboboxOption>
+          </ComboboxOption>
+          <slot name="actions" :item="item" />
+        </li>
       </template>
-      <div v-else class="text-center col-span-1 md:col-span-3 xl:col-span-5">
-        <span>
+      <div v-else class="text-center col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-5">
+        <span v-if="packages.length">
           No results
+        </span>
+        <span v-else>
+          No packages
         </span>
       </div>
     </ComboboxOptions>

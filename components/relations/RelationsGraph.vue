@@ -16,9 +16,7 @@ const container = ref<HTMLElement | null>(null)
 const relationsStore = useRelationsStore()
 
 const selectionNames = computed<string[]>(() => {
-  return relationsStore.selection.map((select) => {
-    return select.name
-  })
+  return relationsStore.selection.map(select => select.name)
 })
 
 const data = computed<Data>(() => {

@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 const emits = defineEmits<{
-  openRepositories: [boolean]
+  openUnjs: [boolean]
+  openNpm: [boolean]
 }>()
 
 const openAbout = defineModel<boolean>('about', { required: true })
@@ -83,11 +84,14 @@ const settingsItems = computed(() => [[{
       </div>
 
       <div class="mt-2 flex flex-col gap-2">
-        <UButton variant="ghost" color="gray" @click="emits('openRepositories', true)">
+        <UButton variant="ghost" color="gray" @click="emits('openUnjs', true)">
           <template #leading>
             <UAvatar src="/favicon.svg" alt="UnJS Logo" size="2xs" :ui="{ rounded: 'rounded-sm' }" />
           </template>
           UnJS Packages
+        </UButton>
+        <UButton variant="ghost" color="gray" @click="emits('openNpm', true)" icon="i-simple-icons-npm">
+          npm Packages
         </UButton>
       </div>
     </UCard>

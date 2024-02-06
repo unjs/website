@@ -1,16 +1,5 @@
 import { useStorage } from '@vueuse/core'
 
-// More a utils than a composable
-// function toRelationPackage(packageJson: PackageJson, source: RelationPackageSource, unjsNames: string[]): RelationPackage {
-//   return {
-//     name: packageJson.name,
-//     description: packageJson.description,
-//     dependencies: Object.keys(packageJson.dependencies || {}).filter(dep => unjsNames.includes(dep)),
-//     devDependencies: Object.keys(packageJson.devDependencies || {}).filter(dep => unjsNames.includes(dep)),
-//     source,
-//   }
-// }
-
 /**
  * Manage the menu state.
  */

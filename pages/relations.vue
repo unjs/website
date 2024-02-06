@@ -26,7 +26,8 @@ useTrackPageview()
 
 const loading = ref(true)
 
-const openRepositories = ref(false)
+const openUnjs = ref(false)
+const openNpm = ref(false)
 const openAbout = ref(false)
 
 const openMenu = useRelationsMenu()
@@ -62,7 +63,13 @@ watch([() => relationsStore.showDependencies, () => relationsStore.showDevDepend
 })
 
 // Update query
-onBeforeMount(() => {
+onBeforeMount(async () => {
+  const npm = relationsStore.npm ?? selectionStorage.value.npm
+
+  await Promise.all([
+    ...npm.map(name => relationsStore.fetchNpmPackage(name)),
+  ])
+
   navigateTo({
     query: {
       'u[]': relationsStore.unjs ?? selectionStorage.value.unjs ?? relationsStore.unjsPackages.map(pkg => pkg.name),
@@ -95,10 +102,11 @@ defineShortcuts({
 
 <template>
   <div class="w-full h-screen relative overflow-hidden">
-    <RelationsMenu v-if="openMenu" v-model:about="openAbout" v-model:menu="openMenu" v-model:legend="openLegend" class="absolute left-4 top-20 z-10" @open-repositories="openRepositories = $event" />
+    <RelationsMenu v-if="openMenu" v-model:about="openAbout" v-model:menu="openMenu" v-model:legend="openLegend" class="absolute left-4 top-20 z-10" @open-unjs="openUnjs = $event" @open-npm="openNpm = $event" />
     <RelationsLegend v-if="openLegend" class="absolute z-30 bottom-4 left-4" />
 
-    <RelationsModalPackages v-model:open="openRepositories" />
+    <RelationsModalPackages v-model:open="openUnjs" />
+    <RelationsModalNpm v-model:open="openNpm" />
     <RelationsModalAbout v-model:open="openAbout" />
 
     <RelationsGraph v-if="relationsStore.hasQuery" class="w-full h-full" @loading="loading = $event" />
