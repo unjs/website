@@ -6,7 +6,7 @@ import type { RelationPackage } from '~/types/package'
 
 const emits = defineEmits<{
   loading: [boolean]
-  selectNode: [RelationPackage]
+  selectedNode: [RelationPackage]
 }>()
 
 const colorMode = useColorMode()
@@ -288,12 +288,18 @@ onMounted(() => {
   if (relationsStore.selection.length === 0)
     emits('loading', false)
 
-  // network.on('doubleClick', ({ nodes }) => {
-  // const package_ = [...props.packages, ...props.selection].find((pkg) => {
-  //   return pkg.name === nodes[0]
-  // }) as RelationPackage
-  // emits('selectNode', package_)
-  // })
+  network.on('doubleClick', ({ nodes }) => {
+    const clickedNode = nodes[0]
+
+    if (!clickedNode)
+      return
+
+    const _package = relationsStore.packages.find((pkg) => {
+      return pkg.name === nodes[0]
+    }) as RelationPackage
+
+    emits('selectedNode', _package)
+  })
 
   watch(data, () => {
     if (data.value.nodes?.length)

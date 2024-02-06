@@ -96,6 +96,18 @@ onBeforeMount(() => {
   })
 })
 
+const openSlideover = ref(false)
+const selectedNode = ref<RelationPackage | null>(null)
+function onSelectedNode(pkg: RelationPackage) {
+  selectedNode.value = pkg
+  openSlideover.value = true
+}
+function onViewRelations(name: string) {
+  const _package = relationsStore.unjsPackages.find(pkg => pkg.name === name)
+  relationsStore.updateSelection([_package])
+  openSlideover.value = false
+}
+
 defineShortcuts({
   meta_i: {
     handler: () => {
@@ -124,7 +136,9 @@ defineShortcuts({
     <RelationsModalNpm v-model:open="openNpm" />
     <RelationsModalAbout v-model:open="openAbout" />
 
-    <RelationsGraph v-if="relationsStore.hasQuery" class="w-full h-full" @loading="loading = $event" />
+    <RelationsSlideoverPackage v-model:open="openSlideover" :package="selectedNode" @view-relations="onViewRelations" />
+
+    <RelationsGraph v-if="relationsStore.hasQuery" class="w-full h-full" @loading="loading = $event" @selected-node="onSelectedNode" />
     <div v-if="loading || !relationsStore.selection.length" class="absolute z-0 inset-0 flex items-center justify-center font-medium bg-white/40 backdrop-blur-sm dark:bg-gray-900/60">
       <span class="flex flex-row items-center">
         <template v-if="loading">

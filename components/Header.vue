@@ -55,7 +55,7 @@ function toDesignKit() {
   <div class="h-16 border-b border-gray-100 dark:border-gray-800">
     <header class="h-full px-4 container mx-auto xl:max-w-7xl md:px-6 grid grid-cols-2 lg:grid-cols-3 items-center bg-white/40 backdrop-blur-sm dark:bg-gray-900/60">
       <div class="flex items-center">
-        <NuxtLink to="/?utm_source=unjs.io&utm_medium=header-icon" @click.right.prevent="toDesignKit()">
+        <NuxtLink to="/?utm_source=unjs.io&utm_medium=header-icon&utm_campaign=unjs.io" @click.right.prevent="toDesignKit()">
           <AppLogo />
         </NuxtLink>
       </div>
