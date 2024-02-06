@@ -147,10 +147,8 @@ export const useRelationsStore = defineStore('relations', () => {
 
     _packages.value.unjs = data.value
   }
-  async function fetchNpmPackage(name: string) {
-    const npmPackage = await $fetch<PackageJson>(`https://registry.npmjs.com/${name}/latest`)
-
-    const relationsPackage = toRelationsPackage(npmPackage, unjsPackages.value.map(pkg => pkg.name))
+  function addNpmPackage(pkg: PackageJson) {
+    const relationsPackage = toRelationsPackage(pkg, unjsPackages.value.map(pkg => pkg.name))
 
     if (_packages.value.npm.find(pkg => pkg.name === relationsPackage.name)) {
       throw createError({
@@ -174,13 +172,6 @@ export const useRelationsStore = defineStore('relations', () => {
   }
 
   /**
-   * Used to know if we can mount the graph. While there's no query, we don't mount the graph (this is why we do not rely on the storage as a fallback of the query).
-   */
-  const hasQuery = computed(() => {
-    return (route.query['u[]'] || route.query['n[]']) && route.query.showDependencies && route.query.showDevDependencies && route.query.showChildren
-  })
-
-  /**
    * Returns
    */
   return {
@@ -192,7 +183,7 @@ export const useRelationsStore = defineStore('relations', () => {
     unjsPackages,
     npmPackages,
     fetchUnJSPackages,
-    fetchNpmPackage,
+    addNpmPackage,
     removeNpmPackage,
 
     hasSettingsQuery,
@@ -208,8 +199,6 @@ export const useRelationsStore = defineStore('relations', () => {
     unjsSelection,
     npmSelection,
     updateSelection,
-
-    hasQuery,
   }
 })
 

@@ -39,13 +39,13 @@ const rows = computed(() => {
     <ComboboxInput v-model="query" :as="UInput" color="primary" variant="outline" placeholder="Search a package..." class="mb-2" />
     <ComboboxOptions id="options" static as="ol" class="grid grid-flow-col grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-2">
       <template v-if="search.length">
-        <li v-for="item in search" :key="item.name" class="w-full flex flex-row gap-1">
+        <li v-for="item in search" :key="item.name" class="flex flex-row gap-1">
           <ComboboxOption v-slot="{ active, selected }" as="template" :value="item">
-            <UButton :ui="{ base: 'grow' }" :icon="logo" :class="{ 'text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-800': active }" color="gray" variant="ghost" :active="active" tabindex="-1">
+            <UButton :ui="{ base: 'w-[calc(100%-2.25rem)]' }" :icon="logo" :class="{ 'text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-800': active }" color="gray" variant="ghost" :active="active" tabindex="-1" :title="item.name">
               <template #leading>
                 <slot name="logo" :item="item" />
               </template>
-              <span class="grow text-start">
+              <span class="text-start truncate grow">
                 {{ item.name }}
               </span>
               <template #trailing>

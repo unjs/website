@@ -17,15 +17,18 @@ watch(() => relationsStore.npmSelection, (value) => {
 const npmLoading = ref(false)
 const npmName = ref('')
 async function addNpm(name: string) {
+  name = name.trim().toLowerCase()
   try {
     npmLoading.value = true
-    await relationsStore.fetchNpmPackage(name)
+    const npmPackage = await fetchNpmPackage(name)
+    relationsStore.addNpmPackage(npmPackage)
     npmName.value = ''
     toast.add({
       title: 'Package added',
       description: `The package ${name} has been added.`,
       icon: 'i-heroicons-check-circle',
       color: 'green',
+      timeout: 3000,
     })
   }
   catch (error) {
@@ -35,6 +38,7 @@ async function addNpm(name: string) {
       description: error.message,
       icon: 'i-heroicons-x-circle',
       color: 'red',
+      timeout: 3000,
     })
   }
   finally {
@@ -42,6 +46,82 @@ async function addNpm(name: string) {
   }
 }
 
+/**
+ * GitHub
+ */
+const githubLoading = ref(false)
+const githubName = ref('')
+async function addGitHub(name: string) {
+  name = name.trim().toLowerCase()
+
+  const isSingleRepo = name.includes('/')
+
+  let count = 0
+  // TODO: refactor (add all packages in one time to avoid multiple loading)
+  try {
+    githubLoading.value = true
+
+    if (isSingleRepo) {
+      const { repo } = await fetchGitHubRepo(name)
+      const packages = await fetchPackagesFromGitHubRepo(name, repo.defaultBranch)
+
+      await Promise.all(packages.map(async (pkg) => {
+        try {
+          const npmPackage = await fetchNpmPackage(pkg.name)
+          relationsStore.addNpmPackage(npmPackage)
+          count++
+        }
+        catch (error) {
+          console.error(error.message)
+        }
+      }))
+    }
+    else {
+      const { repos } = await fetchGitHubRepos(name)
+      await Promise.all(repos.map(async (repo) => {
+        const packages = await fetchPackagesFromGitHubRepo(repo.repo, repo.defaultBranch)
+
+        await Promise.all(packages.map(async (pkg) => {
+          try {
+            const npmPackage = await fetchNpmPackage(pkg.name)
+            relationsStore.addNpmPackage(npmPackage)
+            count++
+          }
+          catch (error) {
+            console.error(error.message)
+          }
+        }))
+      }))
+      // TODO: allow fetching user repositories (in the first time, warn)
+    }
+
+    githubName.value = ''
+    toast.add({
+      title: 'Package added',
+      description: `${count} ${count > 1 ? 'packages' : 'package'} has been added.`,
+      icon: 'i-heroicons-check-circle',
+      color: 'green',
+      timeout: 3000,
+    })
+  }
+  catch (error) {
+    console.error(error.message)
+    toast.add({
+      title: 'Error',
+      description: error.message,
+      icon: 'i-heroicons-x-circle',
+      color: 'red',
+      timeout: 3000,
+    })
+  }
+  finally {
+    githubLoading.value = false
+  }
+}
+
+/**
+ * Packages
+ */
 const hasRemove = ref(false)
 function remove(item: RelationPackage) {
   hasRemove.value = true
@@ -53,6 +133,7 @@ function remove(item: RelationPackage) {
     description: `The package ${item.name} has been removed.`,
     icon: 'i-heroicons-trash',
     color: 'blue',
+    timeout: 3000,
   })
 }
 
@@ -77,7 +158,7 @@ function validate() {
 </script>
 
 <template>
-  <UModal v-model="open" :ui="{ width: 'md:max-w-2xl xl:max-5-xl' }">
+  <UModal v-model="open" :ui="{ width: 'md:max-w-2xl xl:max-w-5xl' }">
     <UCard class="w-full">
       <template #header>
         <div class="flex justify-between">
@@ -90,6 +171,7 @@ function validate() {
 
       <div class="flex flex-col lg:flex-row gap-4">
         <RelationsNpmForm v-model:loading="npmLoading" v-model:input="npmName" @add="addNpm" />
+        <RelationsGitHubForm v-model:loading="githubLoading" v-model:input="githubName" @add="addGitHub" />
       </div>
 
       <RelationsPackagesCombobox v-model:selection="selection" class="mt-4" :packages="relationsStore.npmPackages" logo="i-simple-icons-npm">

@@ -62,14 +62,25 @@ watch([() => relationsStore.showDependencies, () => relationsStore.showDevDepend
   }
 })
 
-// Update query
-onBeforeMount(async () => {
+if (import.meta.client) {
   const npm = relationsStore.npm ?? selectionStorage.value.npm
 
   await Promise.all([
-    ...npm.map(name => relationsStore.fetchNpmPackage(name)),
+    ...npm.map(async (name) => {
+      try {
+        const pkg = await fetchNpmPackage(name)
+        relationsStore.addNpmPackage(pkg)
+      }
+      catch (error) {
+        console.error(error)
+      }
+    }),
   ])
+}
 
+const canLoadGraph = ref(false)
+// Update query
+onBeforeMount(() => {
   navigateTo({
     query: {
       'u[]': relationsStore.unjs ?? selectionStorage.value.unjs ?? relationsStore.unjsPackages.map(pkg => pkg.name),
@@ -79,6 +90,10 @@ onBeforeMount(async () => {
       'showChildren': String(relationsStore.showChildren ?? settingsStorage.value.showChildren),
     },
   })
+})
+
+onMounted(() => {
+  canLoadGraph.value = true
 })
 
 defineShortcuts({
@@ -109,7 +124,7 @@ defineShortcuts({
     <RelationsModalNpm v-model:open="openNpm" />
     <RelationsModalAbout v-model:open="openAbout" />
 
-    <RelationsGraph v-if="relationsStore.hasQuery" class="w-full h-full" @loading="loading = $event" />
+    <RelationsGraph v-if="canLoadGraph" class="w-full h-full" @loading="loading = $event" />
     <div v-if="loading || !relationsStore.selection.length" class="absolute z-0 inset-0 flex items-center justify-center font-medium bg-white/40 backdrop-blur-sm dark:bg-gray-900/60">
       <span class="flex flex-row items-center">
         <template v-if="loading">
