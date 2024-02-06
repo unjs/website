@@ -90,7 +90,7 @@ const settingsItems = computed(() => [[{
           </template>
           UnJS Packages
         </UButton>
-        <UButton variant="ghost" color="gray" @click="emits('openNpm', true)" icon="i-simple-icons-npm">
+        <UButton variant="ghost" color="gray" icon="i-simple-icons-npm" @click="emits('openNpm', true)">
           npm Packages
         </UButton>
       </div>

@@ -207,7 +207,7 @@ export const useRelationsStore = defineStore('relations', () => {
     npmSelection,
     updateSelection,
 
-    hasQuery
+    hasQuery,
   }
 })
 
