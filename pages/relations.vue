@@ -68,17 +68,19 @@ watch([() => relationsStore.showDependencies, () => relationsStore.showDevDepend
 if (import.meta.client) {
   const npm = relationsStore.npm ?? selectionStorage.value.npm
 
-  await Promise.all([
-    ...npm.map(async (name) => {
-      try {
-        const pkg = await fetchNpmPackage(name)
-        relationsStore.addNpmPackage(pkg)
-      }
-      catch (error) {
-        console.error(error)
-      }
-    }),
-  ])
+  if (npm) {
+    await Promise.all([
+      ...npm.map(async (name) => {
+        try {
+          const pkg = await fetchNpmPackage(name)
+          relationsStore.addNpmPackage(pkg)
+        }
+        catch (error) {
+          console.error(error)
+        }
+      }),
+    ])
+  }
 }
 
 // Update query

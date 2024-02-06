@@ -147,6 +147,19 @@ export const useRelationsStore = defineStore('relations', () => {
 
     _packages.value.unjs = data.value
   }
+  /**
+   * Add multiple npm packages to the list of packages.
+   *
+   * This is different from `addNpmPackage` because every packages will be added at once to avoid multiple reactivity updates. This function does not throw an error if a package already exists in the list since it's a batch operation.
+   */
+  function addNpmPackages(packages: PackageJson[]) {
+    const unjsPackageNames = unjsPackages.value.map(pkg => pkg.name)
+    const relationsPackages = packages.map(pkg => toRelationsPackage(pkg, unjsPackageNames))
+
+    const newPackages = relationsPackages.filter(pkg => !_packages.value.npm.find(p => p.name === pkg.name) && !_packages.value.unjs.find(p => p.name === pkg.name))
+
+    _packages.value.npm.push(...newPackages)
+  }
   function addNpmPackage(pkg: PackageJson) {
     const relationsPackage = toRelationsPackage(pkg, unjsPackages.value.map(pkg => pkg.name))
 
@@ -170,6 +183,9 @@ export const useRelationsStore = defineStore('relations', () => {
     if (index !== -1)
       _packages.value.npm.splice(index, 1)
   }
+  function removeAllNpmPackages() {
+    _packages.value.npm = []
+  }
 
   /**
    * Used to know if we can mount the graph. While there's no query, we don't mount the graph (this is why we do not rely on the storage as a fallback of the query).
@@ -190,8 +206,10 @@ export const useRelationsStore = defineStore('relations', () => {
     unjsPackages,
     npmPackages,
     fetchUnJSPackages,
+    addNpmPackages,
     addNpmPackage,
     removeNpmPackage,
+    removeAllNpmPackages,
 
     hasSettingsQuery,
     showDependencies,

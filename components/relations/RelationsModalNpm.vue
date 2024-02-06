@@ -56,49 +56,42 @@ async function addGitHub(name: string) {
 
   const isSingleRepo = name.includes('/')
 
-  let count = 0
-  // TODO: refactor (add all packages in one time to avoid multiple loading)
+  const packages: PackageJson[] = []
   try {
     githubLoading.value = true
 
     if (isSingleRepo) {
       const { repo } = await fetchGitHubRepo(name)
-      const packages = await fetchPackagesFromGitHubRepo(name, repo.defaultBranch)
-
-      await Promise.all(packages.map(async (pkg) => {
-        try {
-          const npmPackage = await fetchNpmPackage(pkg.name)
-          relationsStore.addNpmPackage(npmPackage)
-          count++
-        }
-        catch (error) {
-          console.error(error.message)
-        }
-      }))
+      const githubPackages = await fetchPackagesFromGitHubRepo(repo.repo, repo.defaultBranch)
+      packages.push(...githubPackages)
     }
     else {
       const { repos } = await fetchGitHubRepos(name)
-      await Promise.all(repos.map(async (repo) => {
-        const packages = await fetchPackagesFromGitHubRepo(repo.repo, repo.defaultBranch)
-
-        await Promise.all(packages.map(async (pkg) => {
-          try {
-            const npmPackage = await fetchNpmPackage(pkg.name)
-            relationsStore.addNpmPackage(npmPackage)
-            count++
-          }
-          catch (error) {
-            console.error(error.message)
-          }
-        }))
+      const githubPackages = await Promise.all(repos.map(async (repo) => {
+        return await fetchPackagesFromGitHubRepo(repo.repo, repo.defaultBranch)
       }))
-      // TODO: allow fetching user repositories (in the first time, warn)
+      packages.push(...githubPackages.flat())
     }
+
+    /**
+     * Fetch npm packages from GitHub packages to verify if they exist
+     */
+    const npmPackages = await Promise.all(packages.map(async (pkg) => {
+      try {
+        return await fetchNpmPackage(pkg.name)
+      }
+      catch (e) {
+        // Do nothing on error
+        return null
+      }
+    })).then(packages => packages.filter(pkg => pkg !== null) as PackageJson[])
+
+    relationsStore.addNpmPackages(npmPackages)
 
     githubName.value = ''
     toast.add({
       title: 'Package added',
-      description: `${count} ${count > 1 ? 'packages' : 'package'} has been added.`,
+      description: `${npmPackages.length} ${npmPackages.length > 1 ? 'packages' : 'package'} has been added.`,
       icon: 'i-heroicons-check-circle',
       color: 'green',
       timeout: 3000,
@@ -143,6 +136,10 @@ function remove(item: RelationPackage) {
 function clear() {
   selection.value = []
 }
+function removeAll() {
+  relationsStore.removeAllNpmPackages()
+  selection.value = []
+}
 function cancel() {
   if (hasRemove.value)
     relationsStore.updateSelection([...relationsStore.unjsSelection, ...selection.value])
@@ -182,9 +179,14 @@ function validate() {
 
       <template #footer>
         <div class="flex flex-row justify-between items-center">
-          <UButton type="button" variant="ghost" color="red" @click="clear">
+          <div class="flex gap-2">
+            <UButton type="button" variant="ghost" color="red" @click="clear">
             Clear selection
           </UButton>
+          <UButton type="button" variant="ghost" color="red" @click="removeAll">
+            Remove all
+          </UButton>
+        </div>
           <div class="flex justify-end gap-2">
             <UButton type="button" variant="ghost" color="gray" @click="cancel">
               Cancel

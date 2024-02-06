@@ -56,7 +56,7 @@ const rows = computed(() => {
           <slot name="actions" :item="item" />
         </li>
       </template>
-      <div v-else class="text-center col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-5">
+      <div v-else class="text-center text-sm text-gray-500 dark:text-gray-400 col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-5">
         <span v-if="packages.length">
           No results
         </span>
