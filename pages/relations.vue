@@ -63,7 +63,7 @@ watch([() => relationsStore.showDependencies, () => relationsStore.showDevDepend
 })
 
 /**
- * Populate the store with the packages needed.
+ * Populate the store with the packages needed. Lifecycle can't be async so we need to do it before.
  */
 if (import.meta.client) {
   const npm = relationsStore.npm ?? selectionStorage.value.npm
