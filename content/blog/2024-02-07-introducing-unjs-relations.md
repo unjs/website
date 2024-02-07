@@ -49,7 +49,7 @@ Back to [Nitro](/packages/nitro) and [H3](/packages/h3) example. You may have no
 
 How to understand this graph?
 
-First, let's take a look at [H3](/packages/h3) dependencies. We can see [radix3](/pacakges/radix3) which is a router, [unenv](/packages/unenv) which is a tool to make environment agnostic JavaScript and [listhen](/packages/listhen) which is an HTTP listener. With this information, we can say that [H3](/packages/h3) is a tool to build web servers that runtime agnostic.
+First, let's take a look at [H3](/packages/h3) dependencies. We can see [radix3](/packages/radix3) which is a router, [unenv](/packages/unenv) which is a tool to make environment agnostic JavaScript and [listhen](/packages/listhen) which is an HTTP listener. With this information, we can say that [H3](/packages/h3) is a tool to build web servers that runtime agnostic.
 
 Now, let's take a look at [Nitro](/packages/nitro) dependencies. There is a lot of common dependencies with [H3](/packages/h3). Nitro has [H3](/packages/h3) as a dependency. This is a first important information that tells us that [Nitro](/packages/nitro) is build on top of it. Some other dependencies are [citty](/packages/citty), a CLI builder, [c12](/packages/c12), a configuration reader, [unstorage](/packages/unstorage), a key-value storage API, [hookable](/packages/hookable), a hooks tool, and [ofetch](/packages/ofetch), a better fetch API.
 
