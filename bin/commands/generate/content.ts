@@ -58,10 +58,8 @@ function generateImageFolder(path: string) {
     currentPath += `${folder}/`
 
     if (!folder.includes('.')) {
-      if (!existsSync(currentPath)) {
-        consola.log(`Creating folder: ${currentPath}`)
+      if (!existsSync(currentPath))
         mkdirSync(currentPath)
-      }
     }
   })
 }
