@@ -1,6 +1,6 @@
 ---
 title: A New Home to Drive a Vision
-description: Deep dive into the new theme for the UnJS website and discover what's coming in 2024
+description: Deep dive into the new theme for the UnJS website and discover what's coming in 2024.
 authors:
   - name: Estéban S
     picture: https://github.com/barbapapazes.png
