@@ -2,7 +2,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { defineCommand } from 'citty'
 import { consola } from 'consola'
-import { getBlogPath, getBlogTemplatePath } from '../../utils/content'
+import { getBlogPath, getBlogTemplatePath, getPackages, loadBlogContent, loadPackageContent } from '../../utils/content'
 import { slugify } from '../../utils/slugify'
 import { getBlogImagesPath } from '../../utils/public'
 
@@ -36,7 +36,33 @@ export const content = defineCommand({
       const blogTemplatePath = getBlogTemplatePath()
       const template = readFileSync(blogTemplatePath, 'utf-8')
 
-      const content = template.replace('blog_title', title).replaceAll('blog_date', date)
+      const addCategories = await consola.prompt('Do you want to add categories to the article?', {
+        type: 'confirm',
+      })
+      const categoriesToAdd: string[] = []
+      if (addCategories)
+        consola.log(loadBlogContent('super'))
+
+      // categoriesToAdd.push(...selecT)
+
+      // Ask for packages to include
+      const addPackages = await consola.prompt('Do you want to include packages in the article?', {
+        type: 'confirm',
+      })
+      const packagesToAdd: string[] = []
+      if (addPackages) {
+        const packages = getPackages()
+        const packagesContent = packages.map(p => loadPackageContent(p))
+
+        const selectedPackages = await consola.prompt('Select packages to include in the article', {
+          type: 'multiselect',
+          options: packagesContent.map(p => p.title),
+        })
+
+        packagesToAdd.push(...selectedPackages)
+      }
+
+      const content = template.replace('blog_title', title).replaceAll('blog_date', date).replace('blog_packages', packagesToAdd.join('\n  - ')).replace('blog_categories', categoriesToAdd.join('\n  - '))
       const path = join(blogPath, filename)
       writeContent(content, path)
 

@@ -3,6 +3,7 @@ import { join } from 'node:path'
 import { cwd } from 'node:process'
 import yaml from 'js-yaml'
 import { ofetch } from 'ofetch'
+import { parseMarkdown } from '@nuxtjs/mdc/runtime'
 import type { ContentPackage, GitHubFile } from '../types'
 
 export function getContentPath() {
@@ -70,3 +71,19 @@ export async function getExamplesLink(name: string) {
 
   return hasExamples ? `https://github.com/unjs/${name}/blob/main/examples` : null
 }
+
+export function loadBlogContent(name: string) {
+  return parseMarkdown(readFileSync(join(getBlogPath(), name), 'utf-8'))
+}
+
+/**
+ * Create a function that load every blog file
+ * Create a function that load a md file, parse front-matter
+ * Create a function that get, from every articles, categories
+ * Repeat for authors
+ *
+ * Add a command to view all authors
+ * Add a command to view all categories
+ *
+ * (split in many files)
+ */
