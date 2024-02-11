@@ -80,6 +80,12 @@ export default defineAppConfig({
               rel: 'noopener',
               target: '_blank',
             },
+            {
+              title: 'Discussions',
+              url: 'https://github.com/unjs/community/discussions',
+              rel: 'noopener',
+              target: '_blank',
+            },
             // {
             //   title: 'FAQ',
             //   url: '/faq',
