@@ -138,4 +138,9 @@ export default defineNuxtConfig({
   devtools: {
     enabled: true,
   },
+  typescript: {
+    tsConfig: {
+      exclude: ['../bin/**/*'],
+    },
+  },
 })
