@@ -1,4 +1,5 @@
 import { serverQueryContent } from '#content/server'
+import { toPackageLogo } from '~/utils/package'
 
 export default defineEventHandler(async (event) => {
   const packages = await serverQueryContent(event).where({ _path: /^\/packages\// }).find()
@@ -11,13 +12,16 @@ export default defineEventHandler(async (event) => {
         fetchContributors(pkg.github.owner, pkg.github.repo),
       ])
       return {
+        id: pkg.title?.toLowerCase(),
         title: pkg.title,
         description: pkg.description,
-        path: pkg._path,
         stars,
         monthlyDownloads,
         contributors: contributors.length,
+        path: pkg._path,
         url: `https://unjs.io${pkg._path}`,
+        logoPath: toPackageLogo(pkg.title ?? ''),
+        logoUrl: `https://unjs.io${toPackageLogo(pkg.title ?? '')}`,
         npm: pkg.npm,
       }
     },
