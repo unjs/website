@@ -1,0 +1,11 @@
+title: h3
+description: A minimal h(ttp) framework built for high performance and portability.
+github:
+  owner: unjs
+  repo: h3
+npm:
+  name: h3
+documentation: https://h3.unjs.io
+examples:
+  link: https://github.com/unjs/h3/blob/main/examples
+  page: false

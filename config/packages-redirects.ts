@@ -1,4 +1,4 @@
-/** Generated using a ./scripts/generate-packages-redirects. */
+/** Do not edit manually. Use `jiti bin generate packages-redirects`. */
 export default {
   '/bundle-runner': {
     redirect: {
@@ -56,6 +56,13 @@ export default {
     },
   },
 
+  '/fontaine': {
+    redirect: {
+      to: '/packages/fontaine',
+      statusCode: 302,
+    },
+  },
+
   '/fs-memo': {
     redirect: {
       to: '/packages/fs-memo',
@@ -98,6 +105,13 @@ export default {
     },
   },
 
+  '/image-meta': {
+    redirect: {
+      to: '/packages/image-meta',
+      statusCode: 302,
+    },
+  },
+
   '/ipx': {
     redirect: {
       to: '/packages/ipx',
@@ -133,6 +147,13 @@ export default {
     },
   },
 
+  '/magic-regexp': {
+    redirect: {
+      to: '/packages/magic-regexp',
+      statusCode: 302,
+    },
+  },
+
   '/magicast': {
     redirect: {
       to: '/packages/magicast',
@@ -157,6 +178,13 @@ export default {
   '/mongoz': {
     redirect: {
       to: '/packages/mongoz',
+      statusCode: 302,
+    },
+  },
+
+  '/nanotar': {
+    redirect: {
+      to: '/packages/nanotar',
       statusCode: 302,
     },
   },

@@ -10,9 +10,7 @@ export function useRssConfig() {
 }
 
 /**
- * Used to retrive the markdown content.
- *
- * @param query The query to filter the content.
+ * Used to retrieve the markdown content.
  */
 export async function getMarkdownContent<T extends ParsedContent>(event: H3Event, query: QueryBuilderWhere): Promise<T[]> {
   const files = await serverQueryContent<T>(event).where(query).sort({ publishedAt: -1 }).find()
@@ -21,15 +19,15 @@ export async function getMarkdownContent<T extends ParsedContent>(event: H3Event
     files
       .filter(file =>
         file._extension === 'md'
-          && !file?._draft
-          && !file?.empty
-          && !file?._partial),
+        && !file?._draft
+        && !file?.empty
+        && !file?._partial),
   )
 
   return filteredFiles
 }
 
-export function contentToRssItem<T extends RssContent>(content: T, options: { site: string; default: { email: string } }): RssItem {
+export function contentToRssItem<T extends RssContent>(content: T, options: { site: string, default: { email: string } }): RssItem {
   return {
     title: content.title ?? '',
     link: `${options.site}${content._path}`,
@@ -153,6 +151,6 @@ function createRssChannelItem(item: RssItem): string {
  *
  * @see https://www.rssboard.org/rss-profile#data-types-email
  */
-function buildRssEmail(email: { name: string; email: string }): string {
+function buildRssEmail(email: { name: string, email: string }): string {
   return `${email.email} (${email.name})`
 }

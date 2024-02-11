@@ -1,0 +1,11 @@
+title: ufo
+description: URL utils for humans.
+github:
+  owner: unjs
+  repo: ufo
+npm:
+  name: ufo
+documentation: https://github.com/unjs/ufo#-ufo
+examples:
+  link: null
+  page: false

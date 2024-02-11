@@ -1,14 +1,63 @@
 export default defineAppConfig({
+  ui: {
+    primary: 'yellow',
+    gray: 'cool',
+    button: {
+      base: 'transition ease-in',
+      color: {
+        gray: {
+          solid: 'shadow-none bg-gray-300/20 hover:bg-gray-300/40 dark:bg-gray-700/40 dark:hover:bg-gray-700/50',
+        },
+      },
+      variant: {
+        solid: 'shadow-none',
+      },
+    },
+    select: {
+      base: 'transition ease-in',
+      color: {
+        gray: { outline: 'shadow-none bg-gray-300/20 hover:bg-gray-300/40 dark:bg-gray-700/40 dark:hover:bg-gray-700/50' },
+      },
+    },
+    buttonGroup: {
+      shadow: 'shadow-none',
+    },
+    card: {
+      base: 'transition ease-in duration-150',
+
+    },
+    input: {
+      base: 'transition ease-in',
+      color: {
+        gray: {
+          outline: 'shadow-none bg-gray-300/20 hover:bg-gray-300/40 dark:bg-gray-700/40 dark:hover:bg-gray-700/50',
+        },
+      },
+    },
+    selectMenu: {
+      option: {
+        base: 'cursor-pointer',
+      },
+    },
+  },
   website: {
     search: {
       groups: [
+        /**
+         * End / is very important since we use startsWith
+         * Without, page /blog will be in the wrong group
+         */
+        {
+          name: 'Articles',
+          path: '/resources/',
+        },
         {
           name: 'Blog',
-          path: '/blog',
+          path: '/blog/',
         },
         {
           name: 'Packages',
-          path: '/packages',
+          path: '/packages/',
         },
       ],
     },
@@ -28,6 +77,12 @@ export default defineAppConfig({
             {
               title: 'Contribute',
               url: 'https://github.com/unjs/governance',
+              rel: 'noopener',
+              target: '_blank',
+            },
+            {
+              title: 'Discussions',
+              url: 'https://github.com/unjs/community/discussions',
               rel: 'noopener',
               target: '_blank',
             },
@@ -84,6 +139,10 @@ export default defineAppConfig({
               target: '_blank',
             },
             {
+              title: 'Design Kit',
+              url: '/design-kit?utm_source=unjs&utm_medium=footer',
+            },
+            {
               title: 'GitHub',
               url: 'https://github.com/unjs',
               rel: 'noopener',
@@ -91,7 +150,6 @@ export default defineAppConfig({
             },
           ],
         },
-        {},
       ],
     },
     socials: {
@@ -99,19 +157,19 @@ export default defineAppConfig({
         url: 'https://github.com/unjs',
         rel: 'noopener',
         target: '_blank',
-        icon: 'i-logos-github-icon?mask',
+        icon: 'i-simple-icons-github',
         name: 'GitHub',
       },
-      twitter: {
+      x: {
         url: 'https://x.com/unjsio',
-        icon: 'i-logos-twitter?mask',
+        icon: 'i-simple-icons-x',
         rel: 'noopener',
         target: '_blank',
-        name: 'Twitter',
+        name: 'X',
       },
       rss: {
         url: '/rss',
-        icon: 'i-heroicons-rss?mask',
+        icon: 'i-heroicons-rss',
         name: 'RSS',
         target: null,
         rel: null,

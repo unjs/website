@@ -1,8 +1,30 @@
-import MiniSearch, { type Options as MiniSearchOptions } from 'minisearch'
-import type { SearchDisplay, SearchDisplayItem, SearchResult } from 'types/search'
+import type { ParsedContent } from '@nuxt/content/dist/runtime/types'
+import MiniSearch, { type Options as MiniSearchOptions, type SearchOptions } from 'minisearch'
+import type { SearchDisplay, SearchDisplayItem, SearchResult } from '~/types/search'
+
+export function useSimpleSearch<T extends Record<string, unknown>>(search: Ref<string>, data: MaybeRefOrGetter<Partial<ParsedContent>[]>, options: { idField: string, fields: string[], storeFields: string[], searchOptions?: SearchOptions }) {
+  const searchDebounced = useDebounce(search, 150)
+
+  const miniSearchResults = useMiniSearch(searchDebounced, data, {
+    idField: options.idField,
+    fields: options.fields,
+    storeFields: options.storeFields,
+    searchOptions: {
+      prefix: true,
+      fuzzy: 0.4,
+      ...options.searchOptions,
+    },
+  })
+
+  const searchResults = computed(() => {
+    return searchDebounced.value ? miniSearchResults.value : toValue(data)
+  }) as ComputedRef<(T & SearchResult)[]>
+
+  return searchResults
+}
 
 export async function useSearchDefaultResults(): Promise<ComputedRef<SearchDisplay>> {
-  const { data: packages } = await useAsyncData('packages', () => queryContent('/packages/').find())
+  const { data: packages } = await useAsyncData('content:search:packages', () => queryContent('/packages/').only(['title', '_path']).find())
 
   return computed(() => {
     if (!packages.value)
@@ -27,25 +49,24 @@ export async function useSearchDefaultResults(): Promise<ComputedRef<SearchDispl
   })
 }
 
-export async function useSearchResults(search: MaybeRefOrGetter<string>): Promise<ComputedRef<SearchDisplay>> {
+export async function useSearchResults(search: MaybeRefOrGetter<string>, options: { lazy?: boolean, server?: boolean } = {}): Promise<ComputedRef<SearchDisplay>> {
   const website = useWebsite()
-  const searchResults = await useSearch(search)
+  const searchResults = await useSearch(search, options)
 
   return computed(() => {
-    if (!searchResults.value)
-      return {}
+    return searchResults.value.reduce((acc, item) => {
+      const pathname = item.id.split('#')[0]
 
-    const grouped = searchResults.value.reduce((acc, item) => {
-      const group = website.value.search.groups.find(group => item.id.startsWith(group.path))
-
-      // Remove the top level page from the search results like `/packages` or `/blog`
-      if (!group || group.path === item.id)
-        return acc
+      const group = website.value.search.groups.find(group => pathname.startsWith(group.path)) ?? {
+        name: 'Pages',
+        path: '',
+      }
 
       if (!acc[group.name])
         acc[group.name] = []
 
       const groupItems = acc[group.name]
+
       const topLevelItem = groupItems.find(groupItem => item.id.startsWith(groupItem.id) && groupItem.level === 0)
 
       if (topLevelItem && topLevelItem.children) {
@@ -69,32 +90,32 @@ export async function useSearchResults(search: MaybeRefOrGetter<string>): Promis
 
       return acc
     }, {} as SearchDisplay)
-
-    return grouped
   })
 }
 
-export async function useSearch(search: MaybeRefOrGetter<string>): Promise<ComputedRef<SearchResult[]>> {
-  const { data } = await useFetch<string>('/api/search.txt')
+export async function useSearch(search: MaybeRefOrGetter<string>, options: { lazy?: boolean, server?: boolean } = {}): Promise<ComputedRef<SearchResult[]>> {
+  const { data } = await useFetch<string>('/api/search.txt', options)
 
-  if (!data.value)
-    return computed(() => [])
+  return computed(() => {
+    if (!data.value)
+      return [] as SearchResult[]
 
-  const { results } = useIndexedMiniSearch(search, data as Ref<string>, {
-    fields: ['title', 'titles', 'text'],
-    storeFields: ['title', 'titles', 'text', 'level'],
-    searchOptions: {
-      prefix: true,
-      fuzzy: 0.2,
-      boost: {
-        title: 4,
-        text: 2,
-        titles: 1,
+    const { results } = useIndexedMiniSearch(search, data as Ref<string>, {
+      fields: ['title', 'titles', 'text'],
+      storeFields: ['title', 'titles', 'text', 'level'],
+      searchOptions: {
+        prefix: true,
+        fuzzy: 0.2,
+        boost: {
+          title: 4,
+          text: 2,
+          titles: 1,
+        },
       },
-    },
-  })
+    })
 
-  return results
+    return results.value
+  })
 }
 
 function useIndexedMiniSearch(search: MaybeRefOrGetter<string>, indexedData: MaybeRefOrGetter<string>, options: MiniSearchOptions) {
@@ -155,4 +176,35 @@ function useIndexedMiniSearch(search: MaybeRefOrGetter<string>, indexedData: May
     results,
     indexedMiniSearch,
   }
+}
+
+export function useMiniSearch<DataItem>(search: MaybeRefOrGetter<string>, data: MaybeRefOrGetter<DataItem[]>, options: MiniSearchOptions) {
+  const createMiniSearch = () => {
+    const miniSearch = new MiniSearch(toValue(options))
+    miniSearch.addAll(toValue(data))
+    return miniSearch
+  }
+
+  const miniSearch = shallowRef(createMiniSearch())
+
+  watch(
+    () => toValue(options),
+    () => { miniSearch.value = createMiniSearch() },
+    { deep: true },
+  )
+
+  watch(
+    () => toValue(data),
+    () => {
+      miniSearch.value.removeAll()
+      miniSearch.value.addAll(toValue(data))
+    },
+    { deep: true },
+  )
+
+  const results = computed(() => {
+    return miniSearch.value.search(toValue(search))
+  })
+
+  return results
 }

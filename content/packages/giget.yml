@@ -1,0 +1,11 @@
+title: giget
+description: Download templates and git repositories with pleasure!
+github:
+  owner: unjs
+  repo: giget
+npm:
+  name: giget
+documentation: https://github.com/unjs/giget
+examples:
+  link: null
+  page: false

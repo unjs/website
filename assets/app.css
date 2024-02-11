@@ -1,49 +1,38 @@
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  --at-apply: font-sans
-}
-
 ::-webkit-scrollbar {
   width: 0.6em;
   height: 0.6em;
-  background: transparent;
+  @apply bg-transparent;
 }
 
 ::-webkit-scrollbar-track {
-  background-color: transparent
-}
-
-:is(.gray-scrollbar, pre)::-webkit-scrollbar-track {
-  --at-apply: bg-gray-100 rounded-full
+  @apply bg-gray-100;
 }
 
 ::-webkit-scrollbar-thumb {
-  --at-apply: rounded-md bg-white
+  border-radius: 0.6em;
+  @apply bg-gray-300 hover:bg-gray-400;
 }
 
-:is(.gray-scrollbar, pre)::-webkit-scrollbar-thumb {
-  --at-apply: bg-gray-400 bg-op-20
-}
+.dark {
+  & ::-webkit-scrollbar-track {
+    @apply bg-gray-800;
+  }
 
-::-webkit-scrollbar-thumb:hover {
-  --at-apply: bg-gray-100
-}
-
-:is(.gray-scrollbar, pre)::-webkit-scrollbar-thumb:hover {
-  --at-apply: bg-gray-500 bg-op-20
-}
-
-::-webkit-scrollbar-thumb:active {
-  --at-apply: bg-gray-200
-}
-
-:is(.gray-scrollbar, pre)::-webkit-scrollbar-thumb:active {
-  --at-apply: bg-gray-600 bg-op-20
+  & ::-webkit-scrollbar-thumb {
+    @apply bg-gray-700 hover:bg-gray-600;
+  }
 }
 
 :is(h1, h2, h3, h4, h5, h6) {
---at-apply: scroll-mt-16 xl:scroll-mt-8
+@apply scroll-mt-16 xl:scroll-mt-8
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease-in-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }

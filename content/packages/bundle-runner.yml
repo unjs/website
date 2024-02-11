@@ -1,0 +1,11 @@
+title: bundle-runner
+description: Run webpack bundles in Node.js with optional VM sandboxing
+github:
+  owner: unjs
+  repo: bundle-runner
+npm:
+  name: bundle-runner
+documentation: https://github.com/unjs/bundle-runner
+examples:
+  link: null
+  page: false

@@ -1,0 +1,12 @@
+title: fontaine
+description: Automatic font fallback based on font metrics
+github:
+  owner: unjs
+  repo: fontaine
+npm:
+  name: fontaine
+playgrounds: null
+documentation: https://github.com/unjs/fontaine
+examples:
+  link: null
+  page: false

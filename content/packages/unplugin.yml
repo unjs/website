@@ -1,0 +1,11 @@
+title: unplugin
+description: Unified plugin system for Vite, Rollup, webpack, esbuild, and more
+github:
+  owner: unjs
+  repo: unplugin
+npm:
+  name: unplugin
+documentation: https://github.com/unjs/unplugin
+examples:
+  link: null
+  page: false

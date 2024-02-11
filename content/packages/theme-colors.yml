@@ -1,0 +1,11 @@
+title: theme-colors
+description: Easily generate color shades for themes
+github:
+  owner: unjs
+  repo: theme-colors
+npm:
+  name: theme-colors
+documentation: https://github.com/unjs/theme-colors
+examples:
+  link: null
+  page: false

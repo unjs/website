@@ -1,0 +1,12 @@
+title: package_title
+description: package_description
+github:
+  owner: unjs
+  repo: repo_name
+npm:
+  name: npm_name
+playgrounds:
+examples:
+  link: examples_link
+  page: false # Used to create a page using the examples
+documentation: docs_link

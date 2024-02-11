@@ -1,0 +1,67 @@
+name: Generate Monthly Updates
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 28 * *' # Run on the 28th of every month at midnight UTC
+
+permissions:
+  pull-requests: write
+  contents: write
+
+jobs:
+  generate-monthly-updates:
+    if: github.repository_owner == 'unjs'
+    name: Generate Monthly Updates
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+        with:
+          fetch-depth: 0
+      - run: corepack enable
+      - uses: actions/setup-node@b39b52d1213e96004bfcb1c61a8a6fa8ab84f3e8 # v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - run: pnpm run cli generate releases-article
+
+      - name: Commit
+        run: |
+          git config --local user.email $EMAIL
+          git config --local user.name $USERNAME
+          git checkout -b monthly-updates
+          git add .
+          git commit -m "content: create monthly updates"
+          git push -f origin monthly-updates
+        env:
+          EMAIL: ${{ secrets.EMAIL }}
+          USERNAME: ${{ secrets.USERNAME }}
+
+      - name: Create Pull Request
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { data: pullRequests } = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              head: `${context.repo.owner}:monthly-updates`,
+            })
+
+            if (pullRequests.length === 0) {
+              await github.rest.pulls.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: 'content: create monthly updates',
+                head: 'monthly-updates',
+                base: 'main',
+                body: `- [ ] format the article by creating paragraphs`,
+                labels: ['content'],
+              })
+            }

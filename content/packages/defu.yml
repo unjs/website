@@ -1,0 +1,11 @@
+title: defu
+description: Assign default properties, recursively. Lightweight and Fast.
+github:
+  owner: unjs
+  repo: defu
+npm:
+  name: defu
+documentation: https://github.com/unjs/defu#-defu
+examples:
+  link: null
+  page: false

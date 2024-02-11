@@ -1,0 +1,9 @@
+title: ungh
+description: Unlimited access to github API
+github:
+  owner: unjs
+  repo: ungh
+documentation: https://github.com/unjs/ungh
+examples:
+  link: null
+  page: false
