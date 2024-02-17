@@ -24,10 +24,10 @@ modifiedAt: 2024-02-11
 
 H3 is a minimal http framework for high performance and portability.
 
-During this tutorial, we will create a very simple app to get a wide overview of H3 capabilities. This app will serve an HTML file populated with data. There will be some forms to add and remove data. At the end, we will see how to add an API endpoint to get the data in JSON format.
-
 > [!NOTE]
 > Deep dive into H3 through [the dedicated documentation](https://h3.unjs.io).
+
+During this tutorial, we will create a very simple app to get a wide overview of H3 capabilities. This app will serve an HTML file populated with data. There will be some forms to add and remove data. At the end, we will see how to add an API endpoint to get the data in JSON format.
 
 > [!TIP]
 > For more complexe apps, take a look at [Nitro](https://nitro.unjs.io).
