@@ -1,25 +1,43 @@
 ---
 title: Build your first H3 app
 description: Get started with H3 by building a simple app.
+authors:
+  - name: Estéban S
+    picture: https://github.com/barbapapazes.png
+    twitter: soubiran_
+category: getting-started
+packages:
+  - h3
 resources:
-  - # add a link to the examples repo
-  - # add a link to the documentation
+  - label: Source Code
+    to: https://github.com/unjs/examples/tree/main/h3/build-your-first-app
+    icon: i-simple-icons-github
+  - label: H3 Documentation
+    to: https://h3.unjs.io
+    icon: i-heroicons-book-open
+  - label: H3 Examples
+    to: https://github.com/unjs/h3/tree/main/examples
+    icon: i-simple-icons-github
+publishedAt: 2024-02-11
+modifiedAt: 2024-02-11
 ---
-
 
 H3 is a minimal http framework for high performance and portability.
 
-During this tutorial, we will create a simple app to get a wide overview of H3 capabilities. This app will serve an HTML file populated with data. There will be some forms to add and remove data. At the end, we will see how to add an API endpoint to get the data in JSON format.
+During this tutorial, we will create a very simple app to get a wide overview of H3 capabilities. This app will serve an HTML file populated with data. There will be some forms to add and remove data. At the end, we will see how to add an API endpoint to get the data in JSON format.
 
 > [!NOTE]
 > Deep dive into H3 through [the dedicated documentation](https://h3.unjs.io).
+
+> [!TIP]
+> For more complexe apps, take a look at [Nitro](https://nitro.unjs.io).
 
 ## Prerequisites
 
 To follow this tutorial, we need to have [Node.js](https://nodejs.org/en/) installed on our machine with [npm](https://www.npmjs.com/). We also need to have a basic knowledge of JavaScript.
 
 > [!NOTE]
-> Despite H3 is written in TypeScript, you don't need to know TypeScript to use it.
+> Despite H3 is written in TypeScript, we don't need to know TypeScript to use it.
 
 ## Create a New Project
 
@@ -41,12 +59,12 @@ And that's it! We are ready to start coding.
 
 ## Create the App
 
-To create our first H3 app, we need to create an `app.ts` file at the root of our project. Inside, we will create a new app by importing the `createApp` function from H3 and calling it:
+To create our first H3 app, we need to create an `app.mjs` file at the root of our project. Inside, we will create a new app by importing the `createApp` function from H3 and calling it:
 
-```ts [app.ts]
-import { createApp } from 'h3';
+```js [app.mjs]
+import { createApp } from 'h3'
 
-export const app = createApp();
+export const app = createApp()
 ```
 
 :read-more{to="https://h3.unjs.io/concepts/app" title="App"}
@@ -64,7 +82,7 @@ In the `package.json` file, add a script named `start`:
 ```json [package.json]
 {
   "scripts": {
-    "start": "npx --yes listhen -w ./app.ts"
+    "start": "npx --yes listhen -w ./app.mjs"
   }
 }
 ```
@@ -79,17 +97,17 @@ Now that our app is ready to accept HTTP requests, we need to create a router to
 
 With H3, we've just to use the function `createRouter` and add it to our app:
 
-```ts [app.ts]
-import { createApp, createRouter } from 'h3';
+```js [app.mjs]
+import { createApp, createRouter } from 'h3'
 
-export const app = createApp();
+export const app = createApp()
 
-const router = createRouter();
+const router = createRouter()
 
-app.use(router);
+app.use(router)
 ```
 
-The `app.use(router)`{lang="ts"} is necessary to add the router to our app.
+The `app.use(router)`{lang="js"} is necessary to add the router to our app.
 
 :read-more{to="https://h3.unjs.io/concepts/router" title="Router"}
 
@@ -102,114 +120,51 @@ We have an app and a router. The only thing missing is the handlers. A handler i
 
 To add a handler, we can use any of the HTTP methods available on the router. For our tutorial, we will use the `get` method to handle the `GET` requests.
 
-```ts [app.ts]
-// ...
-
-const router = createRouter();
-
-router.get('/', () => {
-  return 'Hello World!';
-});
-```
-
-In the code above, we added a handler for the `/` route. This handler will send the string `Hello World!` to the client with a simple `return`{lang="ts"}.
-
-:read-more{to="https://h3.unjs.io/concepts/event-handlers" title="Event Handlers"}
-
-## Create a Fake Database
-
-For our app, we will return an HTML page populated with some data. This part will not be explained in details since it's not the purpose of this tutorial.
-
-To create our fake database (a JavaScript array) with some getters and setters, we need a file named `database.ts`:
-
-```ts [database.ts]
-import { Book } from "./types";
-
-/**
- * This is a fake database since it's just an array of objects.
- *
- * For this example, it's sufficient but do not use this in production.
- */
-const database: Book[] = [{
-  title: "Anna Karenina",
-  price: 42,
-}, {
-  title: "Madame Bovary",
-  price: 15,
-}, {
-  title: "War and Peace",
-  price: 36,
-}, {
-  title: "The Great Gatsby",
-  price: 87,
-}, {
-  title: "Lolita",
-  price: 23,
-}
-];
-
-export function getBooks(): Book[] {
-  return database;
-}
-
-export function addBook(book: Book) {
-  database.push(book);
-}
-
-export function removeBook(title: string) {
-  const item = database.find((item) => item.title === title);
-
-  if (!item) {
-    return
-  }
-
-  const index = database.indexOf(item);
-
-  if (index > -1) {
-    database.splice(index, 1);
-  }
-}
-```
-
-Add some types on a file named `types.ts`:
-
-```ts [types.ts]
-export interface Book {
-  title: string
-  price: number
-}
-```
-
-> [!IMPORTANT]
-> This is a fake database since it's just an array of objects. For this example, it's sufficient but **do not use this in production**.
-
-## Our First HTML Page
-
-For this first route, we will get the books from the database and render them in an HTML page. For each book, we will add a for to remove it from the database. Under the list, we will add a form to add a new book.
-
-For the style, we will use [Pico CSS](https://picocss.com/).
-
-
-```ts [app.ts]
+```js [app.mjs]
 // ...
 
 const router = createRouter()
 
-router.get('/', defineEventHandler(() => {
-  const books = getBooks()
+router.get('/', () => {
+  return 'Hello World!'
+})
 
+// ...
+```
+
+In the code above, we added a handler for the `/` route. This handler will send the string `Hello World!` to the client with a simple `return`{lang="js"}.
+
+:read-more{to="https://h3.unjs.io/concepts/event-handlers" title="Event Handlers"}
+
+## Our First HTML Page
+
+For this first route, we will get the books from a static array and render them in an HTML page. For each book, we will add a for to remove it from the database. Under the list, we will add a form to add a new book.
+
+For the style, we will use [Pico CSS](https://picocss.com/).
+
+```js [app.mjs]
+// ...
+
+const router = createRouter()
+
+const books = [
+  { title: 'The Hobbit', price: 10 },
+  { title: 'The Lord of the Rings', price: 20 },
+]
+
+router.get('/', defineEventHandler(() => {
   return /* html */`
     <html>
       <head>
         <title>Books</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
       </head>
       <body>
         <main class="container">
           <section>
         <h1>Books</h1>
         <ul>
-          ${books.map((book) => /* html */`
+          ${books.map(book => /* html */`
           <li>
           ${book.title} - ${book.price}
           <form action="/remove" method="post">
@@ -244,9 +199,9 @@ Open a browser and go to `http://localhost:3000` to see the result.
 
 :read-more{to="https://h3.unjs.io/concepts/event-handlers#responses-types" title="Responses Types"}
 
-## Interact with the Database
+## Use POST Requests
 
-In our HTML page, we have two forms. One to add a book and one to remove a book. We need to add two new routes to handle them.
+In our HTML page, we have two forms. One to add a book and one to remove a book. We need to add two new routes to handle them. This is interesting because we will need to handle the body of the request.
 
 ### Add a Book
 
@@ -257,22 +212,26 @@ npm install zod
 ```
 
 > [!NOTE]
-> Zod is a TypeScript-first schema declaration and validation library. It's not mandatory to use it with H3 but it's a good practice to validate the data since it's runtime agnostic.
+> Zod is a schema validation with TypeScript type inference. It's not mandatory to use it with H3 but it's a recommended practice to validate the user data.
 
 Then, we can add the route:
 
-```ts [app.ts]
-import { z } from 'zod'
+```js [app.mjs]
+import zod from 'zod'
 // ...
 const router = createRouter()
 
+const books = [
+  // ...
+]
+
 router.post('/add', defineEventHandler(async (event) => {
-  const body = await readValidatedBody(event, z.object({
-    title: z.string(),
-    price: z.number({ coerce: true }).int().nonnegative(),
+  const body = await readValidatedBody(event, zod.object({
+    title: zod.string(),
+    price: zod.number({ coerce: true }).int().nonnegative(),
   }).parse)
 
-  addBook(body)
+  books.push(body)
 
   const referer = getHeader(event, 'referer') ?? '/'
   return sendRedirect(event, referer)
@@ -283,6 +242,9 @@ There is two important things to notice in this code.
 
 First, we use the `readValidatedBody` function to read the body of the request and validate it. It's important to validate the data sent by the client to avoid any security issue.
 
+> [!NOTE]
+> We can use the `readBody` function to read the body of the request without validation.
+
 Second, we use the `sendRedirect` function to redirect the client to the previous page. We use the `referer` header to get the previous page. If the header is not present, we redirect to the root page.
 
 > [!NOTE]
@@ -290,20 +252,28 @@ Second, we use the `sendRedirect` function to redirect the client to the previou
 
 :read-more{to="https://h3.unjs.io/guides/validate-data" title="Validate Data"}
 
+> [!IMPORTANT]
+> For more advanced apps, we should use a database to store the data. Take a look at [Nitro](https://nitro.unjs.io) to achieve this with ease.
+
 ### Remove a Book
 
-Nothing new here, we will handle a `POST` request on the `/remove` route:
+Nothing new here, we will handle a `POST` request on the `/remove` route, validate the data and remove the book from the array:
 
-```ts [app.ts]
+```js [app.mjs]
+import zod from 'zod'
 // ...
 const router = createRouter()
 
+const books = [
+  // ...
+]
+
 router.post('/remove', defineEventHandler(async (event) => {
-  const body = await readValidatedBody(event, z.object({
-    title: z.string(),
+  const body = await readValidatedBody(event, zod.object({
+    title: zod.string(),
   }).parse)
 
-  removeBook(body.title)
+  books.splice(books.findIndex(book => book.title === body.title), 1)
 
   const referer = getHeader(event, 'referer') ?? '/'
   return sendRedirect(event, referer)
@@ -314,29 +284,30 @@ Same as before, we use the `readValidatedBody` function to read the body of the 
 
 :read-more{to="https://h3.unjs.io/guides/validate-data" title="Validate Data"}
 
+> [!IMPORTANT]
+> For more advanced apps, we should use a database to store the data. Take a look at [Nitro](https://nitro.unjs.io) to achieve this with ease.
+
 ## Add an API Endpoint
 
 We would need to add an API endpoint for external services. For this example, we will create another router dedicated to the API.
 
-```ts [app.ts]
+```js [app.mjs]
 // ...
 const apiRouter = createRouter()
 ```
 
 Like any router, we will add an handler for the `/books` route:
 
-```ts [app.ts]
+```js [app.mjs]
 // ...
 apiRouter.get('/books', defineEventHandler(() => {
-  const books = getBooks()
-
   return books
 }))
 ```
 
 Then, we will bind this second router to the first one using a base path:
 
-```ts [app.ts]
+```js [app.mjs]
 // ...
 router.use('/api/**', useBase('/api', apiRouter.handler))
 ```
@@ -351,4 +322,4 @@ And voilà! We now have our first H3 app!
 
 During this course, we saw how to create a H3 app, use a listener with it, create a router, add handlers, validate data. But there is a lot more to discover about H3 on [the dedicated documentation](https://h3.unjs.io).
 
-Then, do not hesitate to take a look at [Nitro](https://nitro.unjs.io) to create more advanced web servers that run everywhere.
+However, H3 is very low level and has very specific use cases. In general, we recommend [Nitro](https://nitro.unjs.io) to create more advanced web servers with database that run everywhere.
