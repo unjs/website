@@ -165,6 +165,8 @@ Perfect! You can play with the inference by editing the `package.json` file. Try
 
 ## Finally
 
-During this article, we first learn about the actual problems when we want to create a npm package. We then see how to create a npm package with the help of a powerful tool called unbuild. This was quite simple and manual. We only scratched the surface of what unbuild can do and how UnJS can help to create a package.
+During this article, we first learn about the actual problems when we want to create a npm package. This gives us a first answer to why we need to use a bundler like unbuild to create a package for the npm registry.
 
-In future articles, we will see how to add a playground to play with the package locally, how to create a package with TypeScript and how to automate the process with [unjs/changelogen](https://changelogen.unjs.io/).
+We then see how to create a npm package with the help of a powerful tool called unbuild. This was quite simple and manual. We only scratched the surface of what unbuild can do and how UnJS can help to create a package.
+
+In future articles, we will see how to **add a playground** to play with the package locally, how to **publish the package** on npm, how to **create a package with TypeScript** and how to **automate the process** with [unjs/changelogen](https://changelogen.unjs.io/).
