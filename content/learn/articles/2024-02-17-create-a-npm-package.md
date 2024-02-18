@@ -69,7 +69,7 @@ This is made possible by the `package.json` file and the `exports` field that al
 > [!NOTE]
 > It's possible to publish a package in ESM only but developers that still use CJS will not be able to use it.
 
-You can read more about this in [an article from Anthony Fu](https://antfu.me/posts/publish-esm-and-cjs).
+:read-more{to="https://antfu.me/posts/publish-esm-and-cjs" title="Publish ESM and CJS by Anthony Fu"}
 
 ### Types
 
