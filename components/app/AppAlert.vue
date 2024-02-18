@@ -78,7 +78,7 @@ const hoverBorderColor = computed(() => {
 </script>
 
 <template>
-  <component :is="to ? NuxtLink : 'div'" :to="to" class="not-prose block my-4 px-4 py-3 focus:outline-none border rounded-md text-sm text-gray-950 dark:text-white" :class="[{ 'border-dashed hover:border-solid': to }, borderColor, to ? hoverBorderColor : '']">
+  <component :is="to ? NuxtLink : 'div'" :to="to" class="block my-4 px-4 py-3 focus:outline-none border rounded-md text-sm text-gray-950 dark:text-white" :class="[{ 'border-dashed hover:border-solid': to }, borderColor, to ? hoverBorderColor : '']">
     <span :class="[icon, iconColor]" class="w-4 h-4 inline-flex items-center align-sub mr-2" aria-hidden="true" />
     <slot />
   </component>
