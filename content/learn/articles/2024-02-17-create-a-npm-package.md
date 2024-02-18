@@ -1,5 +1,5 @@
 ---
-title: Create a npm package
+title: Create a npm Package
 description: Simplify the process of creating a npm package with unbuild.
 authors:
   - name: Estéban S
