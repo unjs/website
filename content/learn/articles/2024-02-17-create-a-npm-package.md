@@ -18,6 +18,9 @@ modifiedAt: 2024-02-17
 
 Creating a npm package is not just about publishing source code to the [npm registry](https://www.npmjs.com/). It's way more than that and can become very tricky but this article will explain the basics of the process.
 
+> [!NOTE]
+> This article is part of a series of articles about creating and publishing a npm package.
+
 ## The npm Registry
 
 When we start learning development with JavaScript, we rapidly learn about using external libraries, also called dependencies. We install them using [`npm install`](https://docs.npmjs.com/cli/commands/npm-install) command.
