@@ -224,6 +224,13 @@ export default {
     },
   },
 
+  '/omark': {
+    redirect: {
+      to: '/packages/omark',
+      statusCode: 302,
+    },
+  },
+
   '/pathe': {
     redirect: {
       to: '/packages/pathe',
