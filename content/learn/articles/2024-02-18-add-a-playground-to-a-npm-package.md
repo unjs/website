@@ -95,10 +95,10 @@ console.log(app())
 
 **This is not recommended** and your linter could complain about it but it's good to know that it's possible.
 
-Instead, use a minimal [Vite](https://vitejs.dev/) project inside our playground to easily support TypeScript without building the package. This can be achieved using the [direct reference](#direct-reference) or a [pnpm workspace](#monorepo-with-pnpm).
+Instead, use a minimal [Vite](https://vitejs.dev/) project inside our playground to easily support TypeScript without building the package. This can be achieved using the [direct reference](#source-reference) or a [pnpm workspace](#monorepo-with-pnpm).
 
 > [!TIP]
-> Please read [direct reference](#direct-reference) or [pnpm workspace](#monorepo-with-pnpm) section for a better playground setup. This section is for educational purposes only.
+> Please read [direct reference](#source-reference) or [pnpm workspace](#monorepo-with-pnpm) section for a better playground setup. This section is for educational purposes only.
 
 ### Monorepo with pnpm
 
