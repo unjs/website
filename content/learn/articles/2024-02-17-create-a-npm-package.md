@@ -12,6 +12,9 @@ resources:
   - label: Unbuild Examples
     to: https://github.com/unjs/unbuild/tree/main/examples
     icon: i-simple-icons-github
+  - label: UnJS Template
+    to: https://github.com/unjs/template
+    icon: i-simple-icons-github
 publishedAt: 2024-02-17
 modifiedAt: 2024-02-17
 ---
