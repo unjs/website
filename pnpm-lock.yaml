@@ -54,10 +54,10 @@ devDependencies:
     specifier: ^20.11.16
     version: 20.11.20
   '@vueuse/core':
-    specifier: ^10.7.2
+    specifier: ^10.8.0
     version: 10.8.0(vue@3.4.19)
   '@vueuse/nuxt':
-    specifier: ^10.7.2
+    specifier: ^10.8.0
     version: 10.8.0(nuxt@3.10.3)(vue@3.4.19)
   case-police:
     specifier: ^0.6.1
