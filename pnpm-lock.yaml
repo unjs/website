@@ -30,10 +30,10 @@ devDependencies:
     specifier: ^1.1.33
     version: 1.1.33
   '@nuxt/content':
-    specifier: ^2.10.0
+    specifier: ^2.12.0
     version: 2.12.0(nuxt@3.10.3)(vue@3.4.19)
   '@nuxt/ui':
-    specifier: ^2.12.0
+    specifier: ^2.14.1
     version: 2.14.1(nuxt@3.10.3)(vite@5.1.4)(vue@3.4.19)
   '@nuxtjs/fontaine':
     specifier: ^0.4.1
