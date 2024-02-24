@@ -70,7 +70,7 @@ We actually use an in-house tool called [undocs](https://github.com/unjs/undocs)
 
 This will allow us to build better documentation in the future and to have a consistent experience across all our documentation websites.
 
-[Nitro](https://nitro.unjs.io) and [Unstorage](https://unstorage.unjs.io) have already been migrated to this new theme!
+[Nitro](https://nitro.unjs.io) and [unstorage](https://unstorage.unjs.io) have already been migrated to this new theme!
 
 ## Finally
 
