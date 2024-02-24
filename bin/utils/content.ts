@@ -1,7 +1,7 @@
 import { readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { cwd } from 'node:process'
-import yaml from 'js-yaml'
+import { dump, load } from 'js-yaml'
 import { ofetch } from 'ofetch'
 import type { ContentPackage, GitHubFile } from '../types'
 
@@ -14,13 +14,13 @@ export function getContentPath() {
 export function getPackagesPath() {
   const contentPath = getContentPath()
 
-  return join(contentPath, '4.packages')
+  return join(contentPath, 'packages')
 }
 
 export function getBlogPath() {
   const contentPath = getContentPath()
 
-  return join(contentPath, '5.blog')
+  return join(contentPath, 'blog')
 }
 
 export function getBlogTemplatePath() {
@@ -30,11 +30,11 @@ export function getBlogTemplatePath() {
 }
 
 export function loadPackageContent(name: string) {
-  return yaml.load(readFileSync(join(getPackagesPath(), `${name}.yml`), 'utf-8')) as ContentPackage
+  return load(readFileSync(join(getPackagesPath(), `${name}.yml`), 'utf-8')) as ContentPackage
 }
 
 export function writePackageContent(package_: ContentPackage) {
-  writeFileSync(join(getPackagesPath(), `${package_.title}.yml`), yaml.dump(package_))
+  writeFileSync(join(getPackagesPath(), `${package_.title}.yml`), dump(package_))
 }
 
 export function getPackages() {
@@ -69,4 +69,16 @@ export async function getExamplesLink(name: string) {
   const hasExamples = files.files.some(f => f.path.startsWith('examples/'))
 
   return hasExamples ? `https://github.com/unjs/${name}/blob/main/examples` : null
+}
+
+export function getLearnPath() {
+  const contentPath = getContentPath()
+
+  return join(contentPath, 'learn', 'articles')
+}
+
+export function getLearnTemplatePath() {
+  const learnPath = getLearnPath()
+
+  return join(learnPath, '.template.md')
 }

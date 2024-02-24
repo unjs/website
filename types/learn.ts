@@ -1,20 +1,19 @@
 import type { ParsedContent } from '@nuxt/content/dist/runtime/types'
+import type { Author } from './author'
 
-export interface LearnPost extends ParsedContent {
+export interface LearnArticle extends ParsedContent {
   title: string
   description: string
-  cover: {
-    src: string
-    alt: string
-  }
-  authors: {
-    name: string
-    picture: string
-    twitter: string
-    email?: string
-  }[]
+  authors: Author[]
+  category: 'getting-started' | 'building-blocks'
   packages: string[]
+  resources: {
+    label: string
+    to: string
+    icon: string
+  }[]
   publishedAt: Date
   modifiedAt: Date
-  layout: 'learn-post'
 }
+
+export type LearnArticleCard = Pick<LearnArticle, '_path' | 'title' | 'description' | 'publishedAt' | 'authors' | 'packages' | 'category'>

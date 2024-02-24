@@ -10,16 +10,6 @@ export default defineEventHandler(async (event) => {
         {
           $icontains: '/blog/',
         },
-        // TODO: upadate for new navigation to /resources in the future
-        {
-          $icontains: '/learn/',
-        },
-        {
-          $icontains: '/build/',
-        },
-        {
-          $icontains: '/explore/',
-        },
       ],
     },
   })

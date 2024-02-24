@@ -18,6 +18,7 @@ useSeoMeta({
 defineOgImageComponent('OgImagePage', {
   illustration: '/assets/header/dark/design-kit.png',
 })
+useTrackPageview()
 </script>
 
 <template>

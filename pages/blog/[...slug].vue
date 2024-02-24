@@ -35,6 +35,7 @@ useSchemaOrg([
   }),
 ])
 defineOgImageComponent('OgImageBlog')
+useTrackPageview()
 
 const packages = ref<{ _path: string, title: string }[] | null>()
 if (page.value?.packages) {
@@ -63,10 +64,10 @@ if (page.value?.packages) {
       <template #nav>
         <template v-if="packages">
           <UDivider />
-          <ArticleProseNavGroupPackages :packages="packages" />
+          <ProseNavPackages :packages="packages" />
         </template>
         <UDivider />
-        <ArticleProseNavGroupCommunity :filename="page._file" />
+        <ProseNavCommunity :filename="page._file" />
       </template>
     </Prose>
   </Main>

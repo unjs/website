@@ -2,6 +2,12 @@ import type { NitroConfig } from 'nitropack'
 import packagesRedirects from './config/packages-redirects'
 
 export default defineNuxtConfig({
+  runtimeConfig: {
+    public: {
+      // Use a flag to merge the PRs quickly without pushing it to the production
+      learn: false,
+    },
+  },
   app: {
     head: {
       htmlAttrs: {
@@ -21,7 +27,6 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@nuxt/ui',
     '@vueuse/nuxt',
-    '@nuxthq/studio',
     '@nuxtjs/plausible',
     'nuxt-payload-analyzer',
     '@nuxtjs/fontaine',
@@ -31,14 +36,19 @@ export default defineNuxtConfig({
     '~/assets/app.css',
   ],
   ui: {
-    icons: ['heroicons', 'simple-icons', 'vscode-icons'],
+    icons: ['heroicons', 'simple-icons', 'vscode-icons', 'ph'],
   },
   nitro: {
     static: true,
     prerender: {
-      failOnError: false,
+      failOnError: true,
       crawlLinks: true,
-      routes: ['/', '/blog', '/packages', '/categories', '/api/search.txt', '/api/content/packages.json', '/rss.xml', '/rss.xml', '/blog/rss.xml', '/learn/rss.xml', '/explore/rss.xml', '/build/rss.xml', '/robots.txt', '/sitemap.xml'],
+      routes: ['/', '/blog', '/packages', '/blog/categories', '/api/search.txt', '/api/content/packages.json', '/rss.xml', '/blog/rss.xml'],
+      ignore: [
+        '/packages/</span',
+        '/packages/template',
+        '/packages/src/runtime',
+      ],
     },
     routeRules: {
       '/api/content/**': {
@@ -56,19 +66,14 @@ export default defineNuxtConfig({
           maxAge: 60 * 60 * 24 * 7, // 7 days
         },
       },
-      // Temporary to have time to create the resources page
-      '/resources': {
-        redirect: {
-          to: '/resources/learn',
-          statusCode: 302,
-        },
-      },
       '/blog/2023-08-25-nitro-2.6': {
         redirect: {
           statusCode: 301,
           to: '/blog/2023-08-25-nitro-2-6',
         },
       },
+      // TODO: Related to public.learn flag
+      '/learn/**': { robots: false },
     },
   },
   content: {
@@ -78,6 +83,9 @@ export default defineNuxtConfig({
         default: 'github-light',
         dark: 'github-dark',
       },
+    },
+    experimental: {
+      cacheContents: false,
     },
   },
   colorMode: {
@@ -103,7 +111,10 @@ export default defineNuxtConfig({
     url: 'https://unjs.io',
     name: 'UnJS',
     description: 'Agnostic Excellence: JavaScript Libraries, Tools, and Utilities, Crafted to Elevate Your Coding Journey.',
+  },
+  schemaOrg: {
     identity: {
+      name: 'UnJS',
       type: 'Organization',
       logo: 'https://unjs.io/favicon.svg',
       sameAs: [
@@ -112,13 +123,24 @@ export default defineNuxtConfig({
       ],
     },
   },
+  seo: {
+    splash: false,
+  },
   linkChecker: {
     enabled: false,
+  },
+  plausible: {
+    autoPageviews: false,
   },
   routeRules: {
     ...packagesRedirects as NitroConfig['routeRules'],
   },
   devtools: {
     enabled: true,
+  },
+  typescript: {
+    tsConfig: {
+      exclude: ['../bin/**/*'],
+    },
   },
 })

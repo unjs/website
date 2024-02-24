@@ -28,6 +28,7 @@ useSchemaOrg([
     '@type': 'ItemPage',
   }),
 ])
+useTrackPageview()
 
 const { data: readme } = await useFetch<ParsedContent>(`/api/github/${page.value?.github.owner}/${page.value?.github.repo}/readme`, { default: () => {
   return { _id: '', body: null }
@@ -71,7 +72,7 @@ defineOgImageComponent('OgImagePackage', {
   <Main v-if="page">
     <Prose>
       <template #header>
-        <PackageHeader v-if="page.title" :name="page.title" :description="page.description" />
+        <PackagesHeader v-if="page.title" :name="page.title" :description="page.description" />
       </template>
 
       <ContentRendererMarkdown v-if="readme" :value="readme" />
