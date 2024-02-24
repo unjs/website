@@ -8,4 +8,7 @@
 .prose :deep(:first-child) {
   margin-top: 0;
 }
+.prose :deep(:last-child) {
+  margin-bottom: 0;
+}
 </style>
