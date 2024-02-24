@@ -1,15 +1,15 @@
 // https://github.com/unjs/ungh/tree/main#reposownername
 export interface GitHubRepo {
-  'id': number
-  'name': string
-  'repo': string
-  'description': string
-  'createdAt': string
-  'updatedAt': string
-  'pushedAt': string
-  'stars': number
-  'watchers': number
-  'forks': number
+  id: number
+  name: string
+  repo: string
+  description: string
+  createdAt: string
+  updatedAt: string
+  pushedAt: string
+  stars: number
+  watchers: number
+  forks: number
 }
 
 // https://github.com/unjs/ungh?tab=readme-ov-file#reposownernamereleases
