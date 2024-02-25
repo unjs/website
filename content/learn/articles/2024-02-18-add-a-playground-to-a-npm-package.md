@@ -1,6 +1,6 @@
 ---
 title: Add a Playground to an npm Package
-description: Try our npm package locally with a playground.
+description: Try an npm package locally with a playground.
 authors:
   - name: Estéban S
     picture: https://github.com/barbapapazes.png
