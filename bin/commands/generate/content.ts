@@ -59,14 +59,14 @@ export const content = defineCommand({
       const learnTemplatePath = getLearnTemplatePath()
       const template = readFileSync(learnTemplatePath, 'utf-8')
 
-      const content = template.replace('learn_title', title).replaceAll('learn_date', date).replace('learn_category', category)
-
-      const path = join(learnPath, filename)
-      writeContent(content, path)
-
       const learnImages = getLearnImagesPath()
       const imagesPath = join(learnImages, filename.replace('.md', ''))
       generateImageFolder(imagesPath)
+
+      const content = template.replace('learn_title', title).replaceAll('learn_date', date).replace('learn_category', category).replace('images_path', imagesPath.split('/public').pop() || '')
+
+      const path = join(learnPath, filename)
+      writeContent(content, path)
 
       consola.success(`Successfully generated at:\nContent: ${path}\nImages: ${imagesPath}`)
     }
