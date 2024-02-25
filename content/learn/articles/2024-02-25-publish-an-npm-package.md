@@ -68,7 +68,7 @@ And that's it! Our package is now available on the npm registry to be installed 
 A changelog is a file that contains a curated, chronologically ordered list of notable changes for each version of a project. It's a way to keep track of the changes made to our package. It helps users to understand what's new and what's changed between versions.
 
 > [!TIP]
-> Read [keepchangelog.com](https://keepachangelog.com/en/1.1.0/) to learn more about the changelog format.
+> Read [keepachangelog.com](https://keepachangelog.com/en/1.1.0/) to learn more about the changelog format.
 
 To do so, let's create a `CHANGELOG.md` file at the root of our package.
 
@@ -125,9 +125,9 @@ npm publish # Do not run this command yet
 git push --follow-tags
 ```
 
-It's start to be a lot of commands to run. And we need to remember every step, in the correct order to avoid errors.
+It's starting to be a lot of commands to run. And we need to remember every step, in the correct order to avoid errors.
 
-Even worse, imagine if we have to do this process for multiple packages. It would be a nightmare to manage and time consuming. If we work with a team, it's even more complicated because we need to make sure everyone follows the same process.
+Even worse, imagine if we have to do this process for multiple packages. It would be a nightmare to manage and time-consuming. If we work with a team, it's even more complicated because we need to make sure everyone follows the same process.
 
 It's impossible so we need to automate the process as much as possible.
 
@@ -181,10 +181,10 @@ Now, we can run `npm run release` to publish a new version of our package. It's 
 
 ## Final Thoughts
 
-We learned how to publish a package to the npm registry and every step need to be done before publishing. All of these are manual, error-prone and time-consuming. So we automated the process using the `prepack` hook and [unjs/changelogen](https://github.com/unjs/changelogen). We are now able to publish a new version of our package with a single command without forgetting anything. We are ready to publish thousands of packages per day!
+We learned how to publish a package to the npm registry and every step needs to be done before publishing. All of these are manual, error-prone, and time-consuming. So we automated the process using the `prepack` hook and [unjs/changelogen](https://github.com/unjs/changelogen). We are now able to publish a new version of our package with a single command without forgetting anything. We are ready to publish thousands of packages per day!
 
 In this article we show one of the many ways to automate the process of publishing a package to the npm registry.
 
-The advantage is that **we are not sticking to a specific platform**. Everything run on our machine and directly publish to the npm registry. The more we automate, the more the process is linked to a platform.
+The advantage is that **we are not sticking to a specific platform**. Everything runs on our machine and directly publishes to the npm registry. The more we automate, the more the process is linked to a platform.
 
-Because every project are different and have different needs, it's possible to use [changelogen](https://github.com/unjs/changelogen) programmatically to create custom scripts or a CI **to adapt the process to our needs**.
+Because every project is different and has different needs, it's possible to use [changelogen](https://github.com/unjs/changelogen) programmatically to create custom scripts or a CI **to adapt the process to our needs**.
