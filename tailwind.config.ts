@@ -1,6 +1,5 @@
 import type { Config } from 'tailwindcss'
 import flattenColorPalette from 'tailwindcss/lib/util/flattenColorPalette'
-import { fontFamily } from 'tailwindcss/defaultTheme'
 
 export default <Partial<Config>> {
   theme: {
@@ -21,7 +20,7 @@ export default <Partial<Config>> {
         },
       },
       fontFamily: {
-        sans: ['Nunito', 'Nunito fallback', ...fontFamily.sans],
+        sans: ['Nunito'],
       },
       typography: theme => ({
         DEFAULT: {
