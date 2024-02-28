@@ -29,7 +29,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxtjs/plausible',
     'nuxt-payload-analyzer',
-    "@nuxt/fonts"
+    '@nuxt/fonts',
   ],
   css: [
     '~/assets/app.css',
@@ -75,16 +75,6 @@ export default defineNuxtConfig({
   colorMode: {
     preference: 'dark',
   },
-  // fontMetrics: {
-  //   fonts: ['Nunito'],
-  // },
-  // googleFonts: {
-  //   display: 'swap',
-  //   download: true,
-  //   families: {
-  //     Nunito: [300, 400, 500, 600, 700, 800],
-  //   },
-  // },
   ogImage: {
     fonts: [
       'Nunito:400',
