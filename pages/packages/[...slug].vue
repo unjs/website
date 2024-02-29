@@ -163,7 +163,6 @@ defineOgImageComponent('OgImagePackage', {
       </ProseNavGroup> -->
       </template>
     </Prose>
+    <PackagesLatestNews v-if="page.title" class="mt-12" :name="page.title" />
   </Main>
-
-  <!-- <PackageLatestNews class="xl:row-start-2 col-start-2" :name="page.title" /> -->
 </template>

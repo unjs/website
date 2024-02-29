@@ -24,8 +24,8 @@ export default defineEventHandler(async (event) => {
 
 async function fetchLatestRelease(owner: string, repo: string): Promise<string | null> {
   try {
-    const releases = await $fetch<{ release: { tag: string } }>(`https://ungh.cc/repos/${owner}/${repo}/releases/latest`)
-    return releases.release.tag
+    const release = await cachedLatestRelease(owner, repo)
+    return release.tag
   }
   catch (error: unknown) {
     if (error instanceof FetchError && error.status === 404)

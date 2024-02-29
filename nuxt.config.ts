@@ -29,9 +29,8 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxtjs/plausible',
     'nuxt-payload-analyzer',
-    '@nuxtjs/fontaine',
-    '@nuxtjs/google-fonts',
     '@pinia/nuxt',
+    '@nuxt/fonts',
   ],
   css: [
     '~/assets/app.css',
@@ -52,21 +51,6 @@ export default defineNuxtConfig({
       ],
     },
     routeRules: {
-      '/api/content/**': {
-        cache: {
-          maxAge: 60 * 60 * 24 * 7, // 7 days
-        },
-      },
-      '/api/github/**': {
-        cache: {
-          maxAge: 60 * 60 * 24 * 7, // 7 days
-        },
-      },
-      '/api/npm/**': {
-        cache: {
-          maxAge: 60 * 60 * 24 * 7, // 7 days
-        },
-      },
       '/blog/2023-08-25-nitro-2.6': {
         redirect: {
           statusCode: 301,
@@ -91,16 +75,6 @@ export default defineNuxtConfig({
   },
   colorMode: {
     preference: 'dark',
-  },
-  fontMetrics: {
-    fonts: ['Nunito'],
-  },
-  googleFonts: {
-    display: 'swap',
-    download: true,
-    families: {
-      Nunito: [300, 400, 500, 600, 700, 800],
-    },
   },
   ogImage: {
     fonts: [
@@ -138,5 +112,10 @@ export default defineNuxtConfig({
   },
   devtools: {
     enabled: true,
+  },
+  typescript: {
+    tsConfig: {
+      exclude: ['../bin/**/*'],
+    },
   },
 })

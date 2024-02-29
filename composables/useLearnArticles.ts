@@ -105,7 +105,7 @@ export function useLearnArticles() {
     return route.query.orderBy as LocationQueryValue || defaultOrderBy
   })
 
-  const updateQuery = (query?: { q?: string, 'categories[]'?: string[], 'packages[]'?: string[], 'authors[]'?: string[], order?: Order, orderBy?: string }) => {
+  const updateQuery = (query?: { 'q'?: string, 'categories[]'?: string[], 'packages[]'?: string[], 'authors[]'?: string[], 'order'?: Order, 'orderBy'?: string }) => {
     navigateTo({
       query: {
         ...route.query,

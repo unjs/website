@@ -21,7 +21,7 @@ export default <Partial<Config>> {
         },
       },
       fontFamily: {
-        sans: ['Nunito', 'Nunito fallback', ...fontFamily.sans],
+        sans: ['Nunito', ...fontFamily.sans],
       },
       typography: theme => ({
         DEFAULT: {

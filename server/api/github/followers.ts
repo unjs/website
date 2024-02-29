@@ -1,5 +1,5 @@
 export default defineEventHandler(async () => {
-  const org = await $fetch<{ followers: number }>('https://api.github.com/orgs/unjs')
+  const org = await cachedUnJSGitHubOrg()
 
   return org.followers
 })

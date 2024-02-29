@@ -2,9 +2,9 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { defineCommand } from 'citty'
 import { consola } from 'consola'
-import { getBlogPath, getBlogTemplatePath } from '../../utils/content'
+import { getBlogPath, getBlogTemplatePath, getLearnPath, getLearnTemplatePath } from '../../utils/content'
 import { slugify } from '../../utils/slugify'
-import { getBlogImagesPath } from '../../utils/public'
+import { getBlogImagesPath, getLearnImagesPath } from '../../utils/public'
 
 export const content = defineCommand({
   args: {
@@ -15,7 +15,7 @@ export const content = defineCommand({
     },
   },
   async run({ args }) {
-    const acceptedTypes = ['blog']
+    const acceptedTypes = ['blog', 'learn']
 
     const type = args.type || (await consola.prompt('Type of content to generate', {
       type: 'select',
@@ -46,6 +46,30 @@ export const content = defineCommand({
 
       consola.success(`Successfully generated at:\nContent: ${path}\nImages: ${imagesPath}`)
     }
+
+    if (type === 'learn') {
+      const categories = ['getting-started', 'building-blocks']
+
+      const category = await consola.prompt('Category of the learn article', {
+        type: 'select',
+        options: categories,
+      })
+
+      const learnPath = getLearnPath()
+      const learnTemplatePath = getLearnTemplatePath()
+      const template = readFileSync(learnTemplatePath, 'utf-8')
+
+      const learnImages = getLearnImagesPath()
+      const imagesPath = join(learnImages, filename.replace('.md', ''))
+      generateImageFolder(imagesPath)
+
+      const content = template.replace('learn_title', title).replaceAll('learn_date', date).replace('learn_category', category).replace('images_path', imagesPath.split('/public').pop() || '')
+
+      const path = join(learnPath, filename)
+      writeContent(content, path)
+
+      consola.success(`Successfully generated at:\nContent: ${path}\nImages: ${imagesPath}`)
+    }
   },
 })
 
@@ -58,10 +82,8 @@ function generateImageFolder(path: string) {
     currentPath += `${folder}/`
 
     if (!folder.includes('.')) {
-      if (!existsSync(currentPath)) {
-        consola.log(`Creating folder: ${currentPath}`)
+      if (!existsSync(currentPath))
         mkdirSync(currentPath)
-      }
     }
   })
 }

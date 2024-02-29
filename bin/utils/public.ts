@@ -32,6 +32,12 @@ export function getBlogImagesPath() {
   return join(imagesPath, 'blog')
 }
 
+export function getLearnImagesPath() {
+  const imagesPath = getImagesPath()
+
+  return join(imagesPath, 'learn')
+}
+
 /**
  * Get list of puzzle parts, without directory or the extension
  */

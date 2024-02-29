@@ -1,5 +1,6 @@
 import type { PackageJson } from 'pkg-types'
 import { serverQueryContent } from '#content/server'
+import { toPackageLogo } from '~/utils/package'
 
 export default defineEventHandler(async (event) => {
   const packages = await serverQueryContent(event).where({ _path: /^\/packages\// }).find()
@@ -14,12 +15,13 @@ export default defineEventHandler(async (event) => {
       ])
       // Be careful. Never break compatibility since 3rd party apps might rely on this data.
       return {
+        id: pkg.title?.toLowerCase(),
         title: pkg.title,
         description: pkg.description,
-        path: pkg._path,
         stars,
         monthlyDownloads,
         contributors: contributors.length,
+        path: pkg._path,
         url: `https://unjs.io${pkg._path}`,
         npm: pkg.npm?.name
           ? {
@@ -28,6 +30,8 @@ export default defineEventHandler(async (event) => {
               devDependencies: Object.keys(packageJson?.package.devDependencies || {}),
             }
           : undefined,
+        logoPath: toPackageLogo(pkg.title ?? ''),
+        logoUrl: `https://unjs.io${toPackageLogo(pkg.title ?? '')}`,
       }
       // TODO: make a type to satisfies
     },

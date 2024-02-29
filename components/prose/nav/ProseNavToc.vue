@@ -21,6 +21,13 @@ function activeClass(id: string): string {
           <ProseNavGroupLink :to="`#${link.id}`" :class="activeClass(link.id)">
             {{ link.text }}
           </ProseNavGroupLink>
+          <ol v-if="link.children" class="ml-4 text-gray-500 dark:text-gray-400">
+            <li v-for="child in link.children" :key="child.id">
+              <ProseNavGroupLink :to="`#${child.id}`" :class="activeClass(child.id)">
+                {{ child.text }}
+              </ProseNavGroupLink>
+            </li>
+          </ol>
         </li>
       </ol>
     </template>
