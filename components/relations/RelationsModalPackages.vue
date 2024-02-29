@@ -5,6 +5,7 @@ const relationsStore = useRelationsStore()
 
 const selection = ref([...relationsStore.unjsSelection])
 // Update selection when store change
+// Try a toRefs with a computed
 watch(() => relationsStore.unjsSelection, (value) => {
   selection.value = [...value]
 })

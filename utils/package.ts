@@ -21,6 +21,7 @@ export function toRelationsPackage(packageJson: PackageJson, unjsNames: string[]
 
   return {
     name: packageJson.name,
+    npmName: packageJson.name,
     description: packageJson.description,
     dependencies: Object.keys(packageJson.dependencies || {}).filter(dep => unjsNames.includes(dep)),
     devDependencies: Object.keys(packageJson.devDependencies || {}).filter(dep => unjsNames.includes(dep)),

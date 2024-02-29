@@ -87,12 +87,12 @@ export const useRelationsStore = defineStore('relations', () => {
   })
   const unjsSelection = computed(() => {
     return [
-      ...(unjs.value || []).map(name => unjsPackages.value.find(pkg => pkg.name === name)).filter(Boolean) as RelationPackage[],
+      ...(unjs.value || []).map(name => unjsPackages.value.find(pkg => pkg.npmName === name)).filter(Boolean) as RelationPackage[],
     ]
   })
   const npmSelection = computed(() => {
     return [
-      ...(npm.value || []).map(name => npmPackages.value.find(pkg => pkg.name === name)).filter(Boolean) as RelationPackage[],
+      ...(npm.value || []).map(name => npmPackages.value.find(pkg => pkg.npmName === name)).filter(Boolean) as RelationPackage[],
     ]
   })
   const selection = computed(() => {
@@ -102,8 +102,8 @@ export const useRelationsStore = defineStore('relations', () => {
     ]
   })
   function updateSelection(packages: RelationPackage[]) {
-    const _unjs = packages.filter(pkg => pkg.source === 'unjs').map(pkg => pkg.name)
-    const _npm = packages.filter(pkg => pkg.source === 'npm').map(pkg => pkg.name)
+    const _unjs = packages.filter(pkg => pkg.source === 'unjs').map(pkg => pkg.npmName)
+    const _npm = packages.filter(pkg => pkg.source === 'npm').map(pkg => pkg.npmName)
 
     navigateTo({
       query: {
@@ -121,11 +121,12 @@ export const useRelationsStore = defineStore('relations', () => {
     const { data, error } = await useAsyncData('content:relations:packages', () => $fetch('/api/content/packages.json'), {
       transform: (data: any[]) => {
         const packages = data.filter(pkg => pkg.npm)
-        const names = packages.map(pkg => pkg.title)
+        const names = packages.map(pkg => pkg.npm.name)
 
         return packages.map((pkg) => {
           return {
             name: pkg.title,
+            npmName: pkg.npm.name,
             description: pkg.description,
             dependencies: pkg.npm.dependencies.filter((dep: string) => names.includes(dep)) ?? [],
             devDependencies: pkg.npm.devDependencies.filter((dep: string) => names.includes(dep)) ?? [],
@@ -153,7 +154,7 @@ export const useRelationsStore = defineStore('relations', () => {
    * This is different from `addNpmPackage` because every packages will be added at once to avoid multiple reactivity updates. This function does not throw an error if a package already exists in the list since it's a batch operation.
    */
   function addNpmPackages(packages: PackageJson[]) {
-    const unjsPackageNames = unjsPackages.value.map(pkg => pkg.name)
+    const unjsPackageNames = unjsPackages.value.map(pkg => pkg.npmName)
     const relationsPackages = packages.map(pkg => toRelationsPackage(pkg, unjsPackageNames))
 
     const newPackages = relationsPackages.filter(pkg => !_packages.value.npm.find(p => p.name === pkg.name) && !_packages.value.unjs.find(p => p.name === pkg.name))
@@ -161,7 +162,7 @@ export const useRelationsStore = defineStore('relations', () => {
     _packages.value.npm.push(...newPackages)
   }
   function addNpmPackage(pkg: PackageJson) {
-    const relationsPackage = toRelationsPackage(pkg, unjsPackages.value.map(pkg => pkg.name))
+    const relationsPackage = toRelationsPackage(pkg, unjsPackages.value.map(pkg => pkg.npmName))
 
     if (_packages.value.npm.find(pkg => pkg.name === relationsPackage.name)) {
       throw createError({

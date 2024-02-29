@@ -16,14 +16,14 @@ const container = ref<HTMLElement | null>(null)
 const relationsStore = useRelationsStore()
 
 const selectionNames = computed<string[]>(() => {
-  return relationsStore.selection.map(select => select.name)
+  return relationsStore.selection.map(select => select.npmName)
 })
 
 const data = computed<Data>(() => {
   /** Selection */
   const selectionNodes: Data['nodes'] = relationsStore.selection.map((select) => {
     return {
-      id: select.name,
+      id: select.npmName,
       label: select.name,
       image: select.source === 'unjs' ? toPackageLogo(select.name) : `https://api.iconify.design/simple-icons/npm.svg`,
       group: 'selection',
@@ -74,7 +74,7 @@ const data = computed<Data>(() => {
       }))
 
     selectionChildrenPackagesName.push(...selectionChildrenPackages.map((pkg) => {
-      return pkg.name
+      return pkg.npmName
     }))
   }
 
@@ -83,7 +83,7 @@ const data = computed<Data>(() => {
     const deps = []
 
     // Add current package for selection children packages
-    deps.push(pkg.name)
+    deps.push(pkg.npmName)
 
     if (relationsStore.showDependencies)
       deps.push(...pkg.dependencies)
@@ -103,14 +103,14 @@ const data = computed<Data>(() => {
   })
 
   const allDependenciesNodes: Data['nodes'] = dedupedWithoutSelectionAllDependencies.flatMap((dep) => {
-    const logo = relationsStore.packages.find((pkg) => {
-      return pkg.name === dep
-    })?.name
+    const package_ = relationsStore.packages.find((pkg) => {
+      return pkg.npmName === dep
+    }) as RelationPackage
 
     return {
-      id: dep,
-      label: dep,
-      image: toPackageLogo(logo!),
+      id: package_.npmName,
+      label: package_.name,
+      image: toPackageLogo(package_.name),
       group: 'dependencies',
     }
   })
@@ -123,7 +123,7 @@ const data = computed<Data>(() => {
   // Order matters since we want to show the dependencies and devDependencies of the selected packages first (otherwise, some packages will not have all their dependencies shown)
   const dedupePackages = [...relationsStore.selection, ...selectionChildrenPackages].reduce((acc, pkg) => {
     const index = acc.findIndex((p) => {
-      return p.name === pkg.name
+      return p.npmName === pkg.npmName
     })
 
     if (index === -1)
@@ -141,7 +141,7 @@ const data = computed<Data>(() => {
         const highlight = colorMode.preference === 'light' ? _pink[500] : _pink[800]
         data.push(...pkg.dependencies.map((dep) => {
           return {
-            from: pkg.name,
+            from: pkg.npmName,
             to: dep,
             color: {
               color,
@@ -158,7 +158,7 @@ const data = computed<Data>(() => {
         const highlight = colorMode.preference === 'light' ? _violet[500] : _violet[800]
         data.push(...pkg.devDependencies.map((dep) => {
           return {
-            from: pkg.name,
+            from: pkg.npmName,
             to: dep,
             color: {
               color,
@@ -295,7 +295,7 @@ onMounted(() => {
       return
 
     const _package = relationsStore.packages.find((pkg) => {
-      return pkg.name === nodes[0]
+      return pkg.npmName === nodes[0]
     }) as RelationPackage
 
     emits('selectedNode', _package)
