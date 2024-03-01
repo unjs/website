@@ -22,7 +22,9 @@ const imageHeight = ref('auto')
     <div class="slide-track animation py-4">
       <template v-for="item in [...parts, ...parts]" :key="item.part">
         <div class="slide shrink-0" :style="`align-items:${item.align};`">
-          <NuxtLink :to="`/packages/${item.name}?utm_source=unjs.io&utm_medium=home-carousel`">
+          <!-- TODO: wait for https://github.com/nuxt/nuxt/pull/25658 -->
+          <!-- <NuxtLink :to="`/packages/${item.name}?utm_source=unjs.io&utm_medium=home-carousel`"> -->
+          <NuxtLink :to="`/packages/${item.name}`">
             <AppColorModeImage
               :light="toPackagePuzzlePart(item.name)"
               :dark="toPackagePuzzlePart(item.name, true)"
