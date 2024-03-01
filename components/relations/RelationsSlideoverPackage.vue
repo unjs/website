@@ -22,7 +22,9 @@ const open = defineModel<boolean>('open', { required: true })
           </h2>
 
           <UTooltip v-if="package.source === 'unjs'" text="View on UnJS">
-            <UButton aria-label="View on UnJS" :to="`/packages/${package.name}?utm_source=unjs&utm_medium=graph-slideover&utm_campaign=unjs.io`" variant="ghost" color="gray">
+            <!-- TODO: wait for https://github.com/nuxt/nuxt/pull/25658 -->
+            <!-- <UButton aria-label="View on UnJS" :to="`/packages/${package.name}?utm_source=unjs&utm_medium=graph-slideover&utm_campaign=unjs.io`" variant="ghost" color="gray"> -->
+            <UButton aria-label="View on UnJS" :to="`/packages/${package.name}`" variant="ghost" color="gray">
               <template #leading>
                 <UAvatar :src="toPackageLogo(package.name)" alt="UnJS Logo" size="xs" :ui="{ rounded: 'rounded-sm' }" />
               </template>
@@ -53,7 +55,9 @@ const open = defineModel<boolean>('open', { required: true })
                   <UButton icon="i-heroicons-play" variant="ghost" color="gray" @click="emits('viewRelations', dep)" />
                 </UTooltip>
                 <UTooltip text="View Package">
-                  <UButton :to="`/packages/${dep}?utm_source=unjs&utm_medium=graph-slideover&utm_campaign=unjs.io`" variant="ghost" color="gray">
+                  <!-- TODO: wait for https://github.com/nuxt/nuxt/pull/25658 -->
+                  <!-- <UButton :to="`/packages/${dep}?utm_source=unjs&utm_medium=graph-slideover&utm_campaign=unjs.io`" variant="ghost" color="gray"> -->
+                  <UButton :to="`/packages/${dep}`" variant="ghost" color="gray">
                     <template #leading>
                       <UAvatar :src="toPackageLogo(dep)" alt="UnJS Logo" size="xs" :ui="{ rounded: 'rounded-sm' }" />
                     </template>
@@ -83,7 +87,9 @@ const open = defineModel<boolean>('open', { required: true })
                   <UButton icon="i-heroicons-play" variant="ghost" color="gray" @click="emits('viewRelations', dep)" />
                 </UTooltip>
                 <UTooltip text="View Package">
-                  <UButton :to="`/packages/${dep}?utm_source=unjs&utm_medium=graph-slideover&utm_campaign=unjs.io`" variant="ghost" color="gray">
+                  <!-- TODO: wait for https://github.com/nuxt/nuxt/pull/25658 -->
+                  <!-- <UButton :to="`/packages/${dep}?utm_source=unjs&utm_medium=graph-slideover&utm_campaign=unjs.io`" variant="ghost" color="gray"> -->
+                  <UButton :to="`/packages/${dep}`" variant="ghost" color="gray">
                     <template #leading>
                       <UAvatar :src="toPackageLogo(dep)" alt="UnJS Logo" size="xs" :ui="{ rounded: 'rounded-sm' }" />
                     </template>
