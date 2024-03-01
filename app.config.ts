@@ -140,7 +140,9 @@ export default defineAppConfig({
             },
             {
               title: 'Design Kit',
-              url: '/design-kit?utm_source=unjs&utm_medium=footer',
+              // TODO: wait for https://github.com/nuxt/nuxt/pull/25658
+              // url: '/design-kit?utm_source=unjs&utm_medium=footer',
+              url: '/design-kit',
             },
             {
               title: 'GitHub',

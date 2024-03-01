@@ -30,7 +30,9 @@ const { data } = await useAsyncData(' blog:latest', () => queryContent('/blog').
         </p>
       </div>
       <div class="mt-8">
-        <UButton to="/packages?utm_source=unjs.io&utm_medium=home-hero" size="lg" color="white" variant="solid" icon="i-heroicons-chevron-right-20-solid" trailing :ui="{ font: 'font-semibold' }">
+        <!-- TODO: wait for https://github.com/nuxt/nuxt/pull/25658 -->
+        <!-- <UButton to="/packages?utm_source=unjs.io&utm_medium=home-hero" size="lg" color="white" variant="solid" icon="i-heroicons-chevron-right-20-solid" trailing :ui="{ font: 'font-semibold' }"> -->
+        <UButton to="/packages" size="lg" color="white" variant="solid" icon="i-heroicons-chevron-right-20-solid" trailing :ui="{ font: 'font-semibold' }">
           Explore the Universe
         </UButton>
       </div>

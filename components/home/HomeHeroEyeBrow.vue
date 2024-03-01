@@ -7,7 +7,9 @@ defineProps<{
 </script>
 
 <template>
-  <NuxtLink :to="`${path}?utm_source=unjs.io&utm_medium=home-hero`" class="group flex flex-wrap items-center justify-center gap-4">
+  <!-- TODO: wait for https://github.com/nuxt/nuxt/pull/25658 -->
+  <!-- <NuxtLink :to="`${path}?utm_source=unjs.io&utm_medium=home-hero`" class="group flex flex-wrap items-center justify-center gap-4"> -->
+  <NuxtLink :to="`${path}`" class="group flex flex-wrap items-center justify-center gap-4">
     <span class="px-3 py-1 bg-primary/20 group-hover:bg-primary/25 dark:bg-primary/20 dark:group-hover:bg-primary/25 ring-1 ring-primary/90 dark:ring-primary/70 rounded-full text-sm text-gray-950 dark:text-gray-50 nowrap font-medium transition ease-in">
       {{ prefix }}
     </span>

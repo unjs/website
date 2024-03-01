@@ -43,7 +43,9 @@ const uiButton = { font: 'font-semibold', color: { gray: { ghost: 'text-gray-950
 const activeClassButton = 'bg-primary bg-opacity-40 dark:bg-opacity-30'
 
 function toDesignKit() {
-  navigateTo('/design-kit?utm_source=unjs.io&utm_medium=header-icon')
+  // TODO: wait for https://github.com/nuxt/nuxt/pull/25658
+  // navigateTo('/design-kit?tm_source=unjs.io&utm_medium=header-icon')
+  navigateTo('/design-kit')
 }
 </script>
 
@@ -51,7 +53,9 @@ function toDesignKit() {
   <div class="h-16 border-b border-gray-100 dark:border-gray-800">
     <header class="h-full px-4 container mx-auto xl:max-w-7xl md:px-6 grid grid-cols-2 lg:grid-cols-3 items-center">
       <div class="flex items-center">
-        <NuxtLink to="/?utm_source=unjs.io&utm_medium=header-icon" @click.right.prevent="toDesignKit()">
+        <!-- TODO: wait for https://github.com/nuxt/nuxt/pull/25658 -->
+        <!-- <NuxtLink to="/?utm_source=unjs.io&utm_medium=header-icon&utm_campaign=unjs.io" @click.right.prevent="toDesignKit()"> -->
+        <NuxtLink to="/" @click.right.prevent="toDesignKit()">
           <AppLogo />
         </NuxtLink>
       </div>
