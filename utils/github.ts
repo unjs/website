@@ -1,4 +1,4 @@
-import myzod from "myzod"
+import myzod from 'myzod'
 
 /**
  * Get a link to the GitHub repository.
