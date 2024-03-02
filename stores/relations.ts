@@ -2,12 +2,6 @@ import type { PackageJson } from 'pkg-types'
 import type { RelationPackage } from '~/types/package'
 
 export const useRelationsStore = defineStore('relations', () => {
-  /**
-   * Do not use `useStorage` from VueUse inside a store since it will trigger the storage and set the default instead of the value from the storage.
-   */
-
-  const route = useRoute()
-
   const _packages = ref({
     unjs: [] as RelationPackage[],
     npm: [] as RelationPackage[],
@@ -16,138 +10,86 @@ export const useRelationsStore = defineStore('relations', () => {
   const unjsPackages = computed(() => _packages.value.unjs)
   const npmPackages = computed(() => _packages.value.npm)
 
+  // create a function retrieve to filter string[] using installed packages
   /**
    * Settings
    */
-  const hasSettingsQuery = computed(() => {
-    return route.query.showDependencies || route.query.showDevDependencies || route.query.showChildren
-  })
-  const showDependencies = computed(() => {
-    if (hasSettingsQuery.value && route.query.showDependencies)
-      return route.query.showDependencies === 'true'
+  // function updateSettings(query: { showDependencies?: boolean, showDevDependencies?: boolean, showChildren?: boolean }) {
+  //   navigateTo({
+  //     query: {
+  //       ...route.query,
+  //       showDependencies: String(query.showDependencies ?? showDependencies.value),
+  //       showDevDependencies: String(query.showDevDependencies ?? showDevDependencies.value),
+  //       showChildren: String(query.showChildren ?? showChildren.value),
+  //     },
+  //   })
+  // }
 
-    if (hasSettingsQuery.value && !route.query.showDependencies)
-      return false
+  // const unjs = useUnJSQuery()
+  // const npm = useNpmQuery()
+  // const unjsSelection = computed(() => {
+  //   return [
+  //     ...(unjs.value || []).map(name => unjsPackages.value.find(pkg => pkg.npmName === name)).filter(Boolean) as RelationPackage[],
+  //   ]
+  // })
+  // const npmSelection = computed(() => {
+  //   return [
+  //     ...(npm.value || []).map(name => npmPackages.value.find(pkg => pkg.npmName === name)).filter(Boolean) as RelationPackage[],
+  //   ]
+  // })
+  // const selection = computed(() => {
+  //   return [
+  //     ...unjsSelection.value,
+  //     ...npmSelection.value,
+  //   ]
+  // })
+  // function updateSelection(packages: RelationPackage[]) {
+  //   const _unjs = packages.filter(pkg => pkg.source === 'unjs').map(pkg => pkg.npmName)
+  //   const _npm = packages.filter(pkg => pkg.source === 'npm').map(pkg => pkg.npmName)
 
-    return null
-  })
-  const showDevDependencies = computed(() => {
-    if (hasSettingsQuery.value && route.query.showDevDependencies)
-      return route.query.showDevDependencies === 'true'
-
-    if (hasSettingsQuery.value && !route.query.showDevDependencies)
-      return false
-
-    return null
-  })
-  const showChildren = computed(() => {
-    if (hasSettingsQuery.value && route.query.showChildren)
-      return route.query.showChildren === 'true'
-
-    if (hasSettingsQuery.value && !route.query.showChildren)
-      return false
-
-    return null
-  })
-  function updateSettings(query: { showDependencies?: boolean, showDevDependencies?: boolean, showChildren?: boolean }) {
-    navigateTo({
-      query: {
-        ...route.query,
-        showDependencies: String(query.showDependencies ?? showDependencies.value),
-        showDevDependencies: String(query.showDevDependencies ?? showDevDependencies.value),
-        showChildren: String(query.showChildren ?? showChildren.value),
-      },
-    })
-  }
-
-  /**
-   * Selection
-   */
-  const hasSelectionQuery = computed(() => {
-    return route.query['u[]'] || route.query['n[]']
-  })
-  // Query value must not be directly linked to the storage.
-  const unjs = computed(() => {
-    if (hasSelectionQuery.value && route.query['u[]'])
-      return toArray(route.query['u[]']) as string[]
-
-    if (hasSelectionQuery.value && !route.query['u[]'])
-      return [] as string[]
-
-    return null
-  })
-  const npm = computed(() => {
-    if (hasSelectionQuery.value && route.query['n[]'])
-      return toArray(route.query['n[]']) as string[]
-
-    if (hasSelectionQuery.value && !route.query['n[]'])
-      return [] as string[]
-
-    return null
-  })
-  const unjsSelection = computed(() => {
-    return [
-      ...(unjs.value || []).map(name => unjsPackages.value.find(pkg => pkg.npmName === name)).filter(Boolean) as RelationPackage[],
-    ]
-  })
-  const npmSelection = computed(() => {
-    return [
-      ...(npm.value || []).map(name => npmPackages.value.find(pkg => pkg.npmName === name)).filter(Boolean) as RelationPackage[],
-    ]
-  })
-  const selection = computed(() => {
-    return [
-      ...unjsSelection.value,
-      ...npmSelection.value,
-    ]
-  })
-  function updateSelection(packages: RelationPackage[]) {
-    const _unjs = packages.filter(pkg => pkg.source === 'unjs').map(pkg => pkg.npmName)
-    const _npm = packages.filter(pkg => pkg.source === 'npm').map(pkg => pkg.npmName)
-
-    navigateTo({
-      query: {
-        ...route.query,
-        'u[]': _unjs ?? unjs.value,
-        'n[]': _npm ?? npm.value,
-      },
-    })
-  }
+  //   navigateTo({
+  //     query: {
+  //       ...route.query,
+  //       'u[]': _unjs ?? unjs.value,
+  //       'n[]': _npm ?? npm.value,
+  //     },
+  //   })
+  // }
 
   /**
    * Packages
    */
-  async function fetchUnJSPackages() {
-    const { data, error } = await useAsyncData('content:relations:packages', () => $fetch('/api/content/packages.json'), {
-      transform: (data: any[]) => {
-        const packages = data.filter(pkg => pkg.npm)
-        const names = packages.map(pkg => pkg.npm.name)
+  // async function fetchUnJSPackages() {
+  //   const { data, error } = await useAsyncData('content:relations:packages', () => $fetch('/api/content/packages.json'), {
+  //     transform: (data: any[]) => {
+  //       const packages = data.filter(pkg => pkg.npm)
+  //       const names = packages.map(pkg => pkg.npm.name)
 
-        return packages.map((pkg) => {
-          return {
-            name: pkg.title,
-            npmName: pkg.npm.name,
-            description: pkg.description,
-            dependencies: pkg.npm.dependencies.filter((dep: string) => names.includes(dep)) ?? [],
-            devDependencies: pkg.npm.devDependencies.filter((dep: string) => names.includes(dep)) ?? [],
-            source: 'unjs',
-          } satisfies RelationPackage
-        },
-        )
-      },
-      default: () => [],
-    })
+  //       return packages.map((pkg) => {
+  //         return {
+  //           name: pkg.title,
+  //           npmName: pkg.npm.name,
+  //           description: pkg.description,
+  //           dependencies: pkg.npm.dependencies.filter((dep: string) => names.includes(dep)) ?? [],
+  //           devDependencies: pkg.npm.devDependencies.filter((dep: string) => names.includes(dep)) ?? [],
+  //           source: 'unjs',
+  //         } satisfies RelationPackage
+  //       },
+  //       )
+  //     },
+  //     default: () => [],
+  //   })
 
-    if (error.value) {
-      throw createError({
-        statusCode: error.value.statusCode,
-        message: error.value.message,
-        fatal: true,
-      })
-    }
+  //   if (error.value) {
+  //     throw createError({
+  //       statusCode: error.value.statusCode,
+  //       message: error.value.message,
+  //       fatal: true,
+  //     })
+  //   }
 
-    _packages.value.unjs = data.value
-  }
+  //   _packages.value.unjs = data.value
+  // }
   /**
    * Add multiple npm packages to the list of packages.
    *
@@ -189,13 +131,6 @@ export const useRelationsStore = defineStore('relations', () => {
   }
 
   /**
-   * Used to know if we can mount the graph. While there's no query, we don't mount the graph (this is why we do not rely on the storage as a fallback of the query).
-   */
-  const hasQuery = computed(() => {
-    return (route.query['u[]'] || route.query['n[]']) && route.query.showDependencies && route.query.showDevDependencies && route.query.showChildren
-  })
-
-  /**
    * Returns
    */
   return {
@@ -206,27 +141,10 @@ export const useRelationsStore = defineStore('relations', () => {
     packages,
     unjsPackages,
     npmPackages,
-    fetchUnJSPackages,
     addNpmPackages,
     addNpmPackage,
     removeNpmPackage,
     removeAllNpmPackages,
-
-    hasSettingsQuery,
-    showDependencies,
-    showDevDependencies,
-    showChildren,
-    updateSettings,
-
-    hasSelectionQuery,
-    unjs,
-    npm,
-    selection,
-    unjsSelection,
-    npmSelection,
-    updateSelection,
-
-    hasQuery,
   }
 })
 

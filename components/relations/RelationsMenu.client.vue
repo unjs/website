@@ -10,28 +10,29 @@ const openLegend = defineModel<boolean>('legend', { required: true })
 
 const { metaSymbol } = useShortcuts()
 
-const relationsStore = useRelationsStore()
+const { updateQuery } = useRelationsQuery()
+const { settings } = useRelationsSettings()
 
 const settingsItems = computed(() => [[{
-  label: relationsStore.showDependencies ? 'Hide Dependencies' : 'Show Dependencies',
+  label: settings.value.showDependencies ? 'Hide Dependencies' : 'Show Dependencies',
   icon: 'i-ph-graph',
   click: () => {
-    relationsStore.updateSettings({ showDependencies: !relationsStore.showDependencies })
+    updateQuery({ showDependencies: !settings.value.showDependencies })
   },
 
 }, {
-  label: relationsStore.showDevDependencies ? 'Hide Dev Dependencies' : 'Show Dev Dependencies',
+  label: settings.value.showDevDependencies ? 'Hide Dev Dependencies' : 'Show Dev Dependencies',
   icon: 'i-ph-line-segments',
   click: () => {
-    relationsStore.updateSettings({ showDevDependencies: !relationsStore.showDevDependencies })
+    updateQuery({ showDevDependencies: !settings.value.showDevDependencies })
   },
 
 }], [{
   // Children can be dependencies or devDependencies. It's not standalone but related to the previous
-  label: relationsStore.showChildren ? 'Hide Children' : 'Show Children',
+  label: settings.value.showChildren ? 'Hide Children' : 'Show Children',
   icon: 'i-ph-tree-structure',
   click: () => {
-    relationsStore.updateSettings({ showChildren: !relationsStore.showChildren })
+    updateQuery({ showChildren: !settings.value.showChildren })
   },
 }], [
   {
@@ -60,9 +61,15 @@ const settingsItems = computed(() => [[{
     },
   },
   {
-    label: 'Help & Feedback',
+    label: 'Help',
     icon: 'i-simple-icons-github',
     shortcuts: [metaSymbol.value, 'h'],
+    to: 'https://github.com/unjs/website/issues',
+    target: '_blank',
+  },
+  {
+    label: 'Discussions',
+    icon: 'i-simple-icons-github',
     to: 'https://github.com/unjs/community/discussions',
     target: '_blank',
   },

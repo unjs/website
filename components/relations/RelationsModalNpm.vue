@@ -1,15 +1,14 @@
 <script lang="ts" setup>
+import type { PackageJson } from 'pkg-types';
+import type { RelationPackage } from '~/types/package';
+
 const toast = useToast()
 
 const open = defineModel<boolean>('open', { required: true })
 
 const relationsStore = useRelationsStore()
 
-const selection = ref([...relationsStore.npmSelection])
-// Update selection when store change
-watch(() => relationsStore.npmSelection, (value) => {
-  selection.value = [...value]
-})
+const selection = ref<RelationPackage[]>([...props.selection])
 
 /**
  * npm
@@ -77,6 +76,9 @@ async function addGitHub(name: string) {
      * Fetch npm packages from GitHub packages to verify if they exist
      */
     const npmPackages = await Promise.all(packages.map(async (pkg) => {
+      if (!pkg.name)
+        return null
+
       try {
         return await fetchNpmPackage(pkg.name)
       }
@@ -133,6 +135,7 @@ function remove(item: RelationPackage) {
 /**
  * Footer functions
  */
+const { update, unjs } = useRelationsSelection()
 function clear() {
   selection.value = []
 }
@@ -142,13 +145,13 @@ function removeAll() {
 }
 function cancel() {
   if (hasRemove.value)
-    relationsStore.updateSelection([...relationsStore.unjsSelection, ...selection.value])
+    update({ npm: selection.value.map((s) => s.npmName), unjs: unjs.value })
 
   hasRemove.value = false
   open.value = false
 }
 function validate() {
-  relationsStore.updateSelection([...relationsStore.unjsSelection, ...selection.value])
+  update({ npm: selection.value.map((s) => s.npmName), unjs: unjs.value })
   hasRemove.value = false
   open.value = false
 }
@@ -171,7 +174,7 @@ function validate() {
         <RelationsGitHubForm v-model:loading="githubLoading" v-model:input="githubName" @add="addGitHub" />
       </div>
 
-      <RelationsPackagesCombobox v-model:selection="selection" class="mt-4" :packages="relationsStore.npmPackages" logo="i-simple-icons-npm">
+      <RelationsPackagesCombobox v-model:selection="selection" class="mt-4" :packages="packages" logo="i-simple-icons-npm">
         <template #actions="{ item }">
           <UButton color="red" variant="ghost" icon="i-heroicons-trash" tabindex="-1" @click="remove(item)" />
         </template>

@@ -1,12 +1,13 @@
 <script lang="ts" setup>
 const open = defineModel<boolean>('open', { required: true })
 
-const relationsStore = useRelationsStore()
+const { packages } = useRelationsPackages()
+const { unjsSelection } = useRelationsSelection()
+const { updateQuery } = useRelationsQuery()
 
-const selection = ref([...relationsStore.unjsSelection])
-// Update selection when store change
-// Try a toRefs with a computed
-watch(() => relationsStore.unjsSelection, (value) => {
+const selection = ref([...unjsSelection.value])
+
+watch(() => unjsSelection.value, (value) => {
   selection.value = [...value]
 })
 
@@ -19,7 +20,7 @@ function cancel() {
 }
 
 function validate() {
-  relationsStore.updateSelection([...selection.value, ...relationsStore.npmSelection])
+  updateQuery({ unjs: selection.value.map(s => s.npmName) })
   open.value = false
 }
 </script>
@@ -36,7 +37,7 @@ function validate() {
         </div>
       </template>
 
-      <RelationsPackagesCombobox v-model:selection="selection" :packages="relationsStore.unjsPackages">
+      <RelationsPackagesCombobox v-model:selection="selection" :packages="packages">
         <template #logo="{ item }">
           <UAvatar :src="toPackageLogo(item.name)" :alt="`Logo of ${item.name}`" size="xs" :ui="{ rounded: '' }" />
         </template>

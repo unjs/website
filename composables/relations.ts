@@ -1,6 +1,5 @@
-import myzod from 'myzod'
 import { useStorage } from '@vueuse/core'
-import type { PackageJson } from 'pkg-types'
+import type { RelationPackage } from '~/types/package'
 
 /**
  * Manage the menu state.
@@ -57,130 +56,195 @@ export function useRelationsLegend() {
 }
 
 /**
- * Fetch a package from npm.
+ * Packages
  */
-export async function fetchNpmPackage(name: string) {
-  const data = await $fetch(`https://registry.npmjs.com/${name}/latest`)
+export const useUnjsPackages = () => useState<RelationPackage[]>('relations:packages:unjs', () => [])
+export const useNpmPackages = () => useState<RelationPackage[]>('relations:packages:npm', () => [])
+export function useRelationsPackages() {
+  const unjsPackages = useUnjsPackages()
+  const npmPackages = useNpmPackages()
 
-  const validatedData = myzod.object({
-    name: myzod.string().or(myzod.undefined()),
-    description: myzod.string().or(myzod.undefined()),
-    dependencies: myzod.record(myzod.string()).or(myzod.undefined()),
-    devDependencies: myzod.record(myzod.string()).or(myzod.undefined()),
-  }, { allowUnknown: true }).parse(data)
+  const packages = computed(() => [...unjsPackages.value, ...npmPackages.value])
 
-  return validatedData satisfies PackageJson
+  return {
+    unjsPackages,
+    npmPackages,
+    packages,
+  }
 }
 
 /**
- * Fetch every repo from an organization from GitHub.
+ * Selection
  */
-export async function fetchGitHubRepos(organization: string) {
-  const data = await $fetch(`https://ungh.cc/orgs/${organization}/repos`)
+export function useRelationsSelection() {
+  const { unjsQuery, npmQuery } = useRelationsQuery()
 
-  const validatedData = myzod.object({
-    repos: myzod.array(myzod.object({
-      id: myzod.number(),
-      name: myzod.string(),
-      repo: myzod.string(),
-      description: myzod.string().or(myzod.null()),
-      createdAt: myzod.string(),
-      updatedAt: myzod.string(),
-      pushedAt: myzod.string(),
-      stars: myzod.number(),
-      watchers: myzod.number(),
-      forks: myzod.number(),
-      defaultBranch: myzod.string(),
-    })),
-  }).parse(data)
+  const unjsPackages = useUnjsPackages()
+  const unjsSelection = computed(() => {
+    return unjsQuery.value?.map((name) => {
+      return unjsPackages.value.find(pkg => pkg.npmName === name)
+    }).filter(Boolean) as RelationPackage[] ?? []
+  })
 
-  return validatedData
+  const npmPackages = useNpmPackages()
+  const npmSelection = computed(() => {
+    return npmQuery.value?.map((name) => {
+      return npmPackages.value.find(pkg => pkg.name === name)
+    }).filter(Boolean) as RelationPackage[] ?? []
+  })
+  const selection = computed(() => {
+    return unjsSelection.value.concat(npmSelection.value)
+  })
+
+  return {
+    unjsSelection,
+    npmSelection,
+    selection,
+  }
 }
 
 /**
- * Fetch a single repo from GitHub.
+ * Query
  */
-export async function fetchGitHubRepo(name: string) {
-  const data = await $fetch(`https://ungh.cc/repos/${name}`)
+export function useRelationsQuery() {
+  const route = useRoute()
+  const { unjsPackages } = useRelationsPackages()
 
-  const validatedData = myzod.object({
-    repo: myzod.object({
-      id: myzod.number(),
-      name: myzod.string(),
-      repo: myzod.string(),
-      description: myzod.string(),
-      createdAt: myzod.string(),
-      updatedAt: myzod.string(),
-      pushedAt: myzod.string(),
-      stars: myzod.number(),
-      watchers: myzod.number(),
-      forks: myzod.number(),
-      defaultBranch: myzod.string(),
-    }),
-  }).parse(data)
+  /**
+   * Packages
+   */
+  const hasPackagesQuery = computed(() => {
+    return route.query['u[]'] || route.query['n[]']
+  })
 
-  return validatedData
+  const unjsQuery = computed(() => {
+    if (hasPackagesQuery.value && route.query['u[]'])
+      return toArray(route.query['u[]']) as string[]
+
+    if (hasPackagesQuery.value && !route.query['u[]'])
+      return [] as string[]
+
+    return null
+  })
+  const npmQuery = computed(() => {
+    if (hasPackagesQuery.value && route.query['n[]'])
+      return toArray(route.query['n[]']) as string[]
+
+    if (hasPackagesQuery.value && !route.query['n[]'])
+      return [] as string[]
+
+    return null
+  })
+
+  /**
+   * Settings
+   */
+  const hasSettingsQuery = computed(() => {
+    return route.query.showDependencies || route.query.showDevDependencies || route.query.showChildren
+  })
+
+  const showDependenciesQuery = computed(() => {
+    if (hasSettingsQuery.value && route.query.showDependencies)
+      return route.query.showDependencies === 'true'
+
+    if (hasSettingsQuery.value && !route.query.showDependencies)
+      return false
+
+    return null
+  })
+  const showDevDependenciesQuery = computed(() => {
+    if (hasSettingsQuery.value && route.query.showDevDependencies)
+      return route.query.showDevDependencies === 'true'
+
+    if (hasSettingsQuery.value && !route.query.showDevDependencies)
+      return false
+
+    return null
+  })
+  const showChildrenQuery = computed(() => {
+    if (hasSettingsQuery.value && route.query.showChildren)
+      return route.query.showChildren === 'true'
+
+    if (hasSettingsQuery.value && !route.query.showChildren)
+      return false
+
+    return null
+  })
+
+  /**
+   * Setter
+   */
+  function updateQuery(query: { unjs?: string[] | null, npm?: string[] | null, showDependencies?: boolean, showDevDependencies?: boolean, showChildren?: boolean }, replace: boolean = false) {
+    /**
+     * Get the query as default value to keep the current value if not provided.
+     */
+    navigateTo({
+      query: {
+        'u[]': query.unjs ?? unjsQuery.value,
+        'n[]': query.npm ?? npmQuery.value,
+        'showDependencies': String(query.showDependencies ?? showDependenciesQuery.value ?? true),
+        'showDevDependencies': String(query.showDevDependencies ?? showDevDependenciesQuery.value ?? false),
+        'showChildren': String(query.showChildren ?? showChildrenQuery.value ?? false),
+      },
+    }, { replace })
+  }
+
+  const hasSelectionAndSettings = computed(() => {
+    return (route.query['u[]'] || route.query['n[]']) && route.query.showDependencies && route.query.showDevDependencies && route.query.showChildren
+  })
+
+  return {
+    hasPackagesQuery,
+    unjsQuery,
+    npmQuery,
+
+    hasSettingsQuery,
+    showDependenciesQuery,
+    showDevDependenciesQuery,
+    showChildrenQuery,
+
+    updateQuery,
+
+    hasSelectionAndSettings,
+  }
 }
 
 /**
- * Fetch every files path from a repo from GitHub.
+ * Settings
  */
-export async function fetchGitHubFiles(name: string, branch: string) {
-  const data = await $fetch(`https://ungh.cc/repos/${name}/files/${branch}`)
+export function useRelationsSettings() {
+  const { showDependenciesQuery, showDevDependenciesQuery, showChildrenQuery } = useRelationsQuery()
 
-  const validatedData = myzod.object({
-    meta: myzod.object({
-      sha: myzod.string(),
-    }),
-    files: myzod.array(myzod.object({
-      path: myzod.string(),
-      mode: myzod.string(),
-      sha: myzod.string(),
-      size: myzod.number(),
-    })),
-  }).parse(data)
+  const settings = computed(() => {
+    return {
+      showDependencies: showDependenciesQuery.value ?? true,
+      showDevDependencies: showDevDependenciesQuery.value ?? false,
+      showChildren: showChildrenQuery.value ?? false,
+    }
+  })
 
-  return validatedData
+  return {
+    settings,
+  }
 }
 
 /**
- * Fetch content from a file from a repo from GitHub.
+ * Storage
  */
-export async function fetchGitHubFile(name: string, branch: string, path: string) {
-  const data = await $fetch(`https://ungh.cc/repos/${name}/files/${branch}/${path}`)
+export function useRelationsStorage() {
+  const selectionStorage = useLocalStorage('unjs-relations-selection', {
+    unjs: [] as string[],
+    npm: [] as string[],
+  })
 
-  const validatedData = myzod.object({
-    meta: myzod.object({
-      url: myzod.string(),
-    }),
-    file: myzod.object({
-      contents: myzod.string(),
-    }),
-  }).parse(data)
+  const settingsStorage = useLocalStorage('unjs-relations-settings', {
+    showDependencies: true,
+    showDevDependencies: false,
+    showChildren: false,
+  })
 
-  return validatedData
-}
-
-/**
- * Search for content for every `package.json` in a GitHub repo
- */
-export async function fetchPackagesFromGitHubRepo(repo: string, defaultBranch: string) {
-  const { files } = await fetchGitHubFiles(repo, defaultBranch)
-
-  const unwantedPaths = [
-    'playground',
-    'examples',
-    'tests',
-    'test',
-  ]
-  const packageJsonPaths = files.filter(file => file.path.includes('package.json') && !unwantedPaths.some(path => file.path.includes(path)))
-
-  const packageJsonContents = await Promise.all(
-    packageJsonPaths.map(async (path) => {
-      const { file: { contents } } = await fetchGitHubFile(repo, defaultBranch, path.path)
-      return JSON.parse(contents) as PackageJson
-    }),
-  ).then(contents => contents.filter(content => !content.private && content.name))
-
-  return packageJsonContents
+  return {
+    selectionStorage,
+    settingsStorage,
+  }
 }

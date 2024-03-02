@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useStorage } from '@vueuse/core'
+import type { RelationPackage } from '~/types/package'
 
 definePageMeta({
   layout: 'full',
@@ -33,67 +33,143 @@ const openAbout = ref(false)
 const openMenu = useRelationsMenu()
 const openLegend = useRelationsLegend()
 
-const relationsStore = useRelationsStore()
-await relationsStore.fetchUnJSPackages()
+const { packages, unjsPackages, npmPackages } = useRelationsPackages()
+
+const { data, error: errorPackages } = await useAsyncData('relations:unjs:packages', () => $fetch('/api/content/packages.json'), {
+  transform: (data) => {
+    const packages = data.filter(pkg => pkg.npm)
+    const names = packages.map(pkg => pkg.npm.name)
+
+    return packages.map((pkg) => {
+      return {
+        name: pkg.title,
+        npmName: pkg.npm.name,
+        description: pkg.description,
+        dependencies: pkg.npm.dependencies.filter((dep: string) => names.includes(dep)) ?? [],
+        devDependencies: pkg.npm.devDependencies.filter((dep: string) => names.includes(dep)) ?? [],
+        source: 'unjs',
+      } satisfies RelationPackage
+    },
+    )
+  },
+})
+
+if (errorPackages.value) {
+  throw createError({
+    statusCode: errorPackages.value.statusCode,
+    message: errorPackages.value.statusMessage,
+    fatal: true,
+  })
+}
+
+unjsPackages.value = data.value
+
+const { unjsQuery, npmQuery, updateQuery, hasSelectionAndSettings, showDependenciesQuery, showDevDependenciesQuery, showChildrenQuery } = useRelationsQuery()
+const { selection, unjsSelection, npmSelection } = useRelationsSelection()
+const { settings } = useRelationsSettings()
+const { selectionStorage, settingsStorage } = useRelationsStorage()
+
+/**
+ * Keep storage up to date.
+ */
+watch(() => route.query, (value) => {
+  /**
+   * Settings
+   */
+  if (value.showDependencies)
+    settingsStorage.value.showDependencies = value.showDependencies === 'true'
+  if (value.showDevDependencies)
+    settingsStorage.value.showDevDependencies = value.showDevDependencies === 'true'
+  if (value.showChildren)
+    settingsStorage.value.showChildren = value.showChildren === 'true'
+
+  /**
+   * Selection
+   */
+  if (value['u[]'])
+    selectionStorage.value.unjs = toArray(value['u[]'] as string[])
+  if (value['n[]'])
+    selectionStorage.value.npm = toArray(value['n[]'] as string[])
+})
 
 /**
  * Storage can't be used inside a store
  */
-const selectionStorage = useStorage('unjs-relations-selection', {
-  unjs: null as null | string[],
-  npm: null as null | string[],
-})
-watch(() => relationsStore.unjsSelection, (value) => {
-  selectionStorage.value.unjs = value.map(pkg => pkg.name)
-})
-watch(() => relationsStore.npmSelection, (value) => {
-  selectionStorage.value.npm = value.map(pkg => pkg.name)
-})
-const settingsStorage = useStorage('unjs-relations-settings', {
-  showDependencies: true,
-  showDevDependencies: false,
-  showChildren: false,
-})
-watch([() => relationsStore.showDependencies, () => relationsStore.showDevDependencies, () => relationsStore.showChildren], ([dep, devDep, children]) => {
-  settingsStorage.value = {
-    showDependencies: dep ?? false,
-    showDevDependencies: devDep ?? false,
-    showChildren: children ?? false,
-  }
-})
 
+// watch(() => relationsStore.unjsSelection, (value) => {
+//   selectionStorage.value.unjs = value.map(pkg => pkg.name)
+// })
+// watch(() => relationsStore.npmSelection, (value) => {
+//   selectionStorage.value.npm = value.map(pkg => pkg.name)
+// })
+// const settingsStorage = useStorage('unjs-relations-settings', {
+//   showDependencies: true,
+//   showDevDependencies: false,
+//   showChildren: false,
+// })
+// watch([() => relationsStore.showDependencies, () => relationsStore.showDevDependencies, () => relationsStore.showChildren], ([dep, devDep, children]) => {
+//   console.log(route)
+//   if (route.name !== 'relations')
+//     return
+
+//   settingsStorage.value = {
+//     showDependencies: dep ?? false,
+//     showDevDependencies: devDep ?? false,
+//     showChildren: children ?? false,
+//   }
+// })
+
+// const unjs = useUnJSQuery()
+// const npm = useNpmQuery()
 /**
  * Populate the store with the packages needed. Lifecycle can't be async so we need to do it before.
  */
-if (import.meta.client) {
-  const npm = relationsStore.npm ?? selectionStorage.value.npm
+// if (import.meta.client) {
+//   const package_ = npm.value ?? selectionStorage.value.npm
 
-  if (npm) {
-    await Promise.all([
-      ...npm.map(async (name) => {
-        try {
-          const pkg = await fetchNpmPackage(name)
-          relationsStore.addNpmPackage(pkg)
-        }
-        catch (error) {
-          console.error(error)
-        }
-      }),
-    ])
-  }
-}
+//   if (package_) {
+//     await Promise.all([
+//       ...package_.map(async (name) => {
+//         try {
+//           const pkg = await fetchNpmPackage(name)
+//           relationsStore.addNpmPackage(pkg)
+//         }
+//         catch (error) {
+//           console.error(error)
+//         }
+//       }),
+//     ])
+//   }
+// }
 
-// Update query
+// onBeforeMount(() => {
+//   navigateTo({
+//     query: {
+//       // First `toArray` is used when navigation is done from another page.
+//       'u[]': unjs.value ?? selectionStorage.value.unjs ?? relationsStore.unjsPackages.map(pkg => pkg.name),
+//       'n[]': npm.value ?? selectionStorage.value.npm,
+//       'showDependencies': String(relationsStore.showDependencies ?? settingsStorage.value.showDependencies),
+//       'showDevDependencies': String(relationsStore.showDevDependencies ?? settingsStorage.value.showDevDependencies),
+//       'showChildren': String(relationsStore.showChildren ?? settingsStorage.value.showChildren),
+//     },
+//   }, { replace: true })
+// })
 onBeforeMount(() => {
-  navigateTo({
-    query: {
-      'u[]': relationsStore.unjs ?? selectionStorage.value.unjs ?? relationsStore.unjsPackages.map(pkg => pkg.name),
-      'n[]': relationsStore.npm ?? selectionStorage.value.npm,
-      'showDependencies': String(relationsStore.showDependencies ?? settingsStorage.value.showDependencies),
-      'showDevDependencies': String(relationsStore.showDevDependencies ?? settingsStorage.value.showDevDependencies),
-      'showChildren': String(relationsStore.showChildren ?? settingsStorage.value.showChildren),
-    },
-  })
+  const isSelectionEmpty = !unjsQuery.value?.length && !npmQuery.value?.length && !selectionStorage.value.unjs.length && !selectionStorage.value.npm.length
+
+  /**
+   * Update the query when the application load.
+   * 1. If there is nothing in the query and in the storage, we use the default packages (all UnJS and none npm).
+   * 2. If there is something in the query, we use it.
+   * 3. If there is something in the storage (restore previous state), we use it.
+   */
+  updateQuery({
+    unjs: isSelectionEmpty ? unjsPackages.value.map(p => p.npmName) : unjsQuery.value ?? selectionStorage.value.unjs,
+    npm: isSelectionEmpty ? [] : npmQuery.value ?? selectionStorage.value.npm,
+    showDependencies: showDependenciesQuery.value ?? settingsStorage.value.showDependencies,
+    showDevDependencies: showDevDependenciesQuery.value ?? settingsStorage.value.showDevDependencies,
+    showChildren: showChildrenQuery.value ?? settingsStorage.value.showChildren,
+  }, true)
 })
 
 const openSlideover = ref(false)
@@ -103,8 +179,9 @@ function onSelectedNode(pkg: RelationPackage) {
   openSlideover.value = true
 }
 function onViewRelations(name: string) {
-  const _package = relationsStore.unjsPackages.find(pkg => pkg.name === name)
-  relationsStore.updateSelection([_package])
+  updateQuery({
+    unjs: [name],
+  })
   openSlideover.value = false
 }
 
@@ -117,7 +194,7 @@ defineShortcuts({
   meta_h: {
     handler: () => {
       navigateTo({
-        path: 'https://github.com/unjs/community/discussions',
+        path: 'https://github.com/unjs/website/issues',
       }, { external: true, open: { target: '_blank' } })
     },
   },
@@ -132,14 +209,24 @@ defineShortcuts({
     <RelationsMenu v-if="openMenu" v-model:about="openAbout" v-model:menu="openMenu" v-model:legend="openLegend" class="absolute left-4 top-20 z-10" @open-unjs="openUnjs = $event" @open-npm="openNpm = $event" />
     <RelationsLegend v-if="openLegend" class="absolute z-30 bottom-4 left-4" />
 
-    <RelationsModalPackages v-model:open="openUnjs" />
-    <RelationsModalNpm v-model:open="openNpm" />
+    <RelationsModalUnjs
+      v-model:open="openUnjs"
+    />
+    <!-- <RelationsModalNpm
+      v-model:open="openNpm"
+    /> -->
     <RelationsModalAbout v-model:open="openAbout" />
 
     <RelationsSlideoverPackage v-model:open="openSlideover" :package="selectedNode" @view-relations="onViewRelations" />
 
-    <RelationsGraph v-if="relationsStore.hasQuery" class="w-full h-full" @loading="loading = $event" @selected-node="onSelectedNode" />
-    <div v-if="loading || !relationsStore.selection.length" class="absolute z-0 inset-0 flex items-center justify-center font-medium bg-white/40 backdrop-blur-sm dark:bg-gray-900/60">
+    <RelationsGraph
+      v-if="hasSelectionAndSettings" class="w-full h-full"
+      :packages="packages"
+      :selection="selection"
+      :settings="settings"
+      @loading="loading = $event" @selected-node="onSelectedNode"
+    />
+    <div v-if="loading || !selection.length" class="absolute z-0 inset-0 flex items-center justify-center font-medium bg-white/40 backdrop-blur-sm dark:bg-gray-900/60">
       <span class="flex flex-row items-center">
         <template v-if="loading">
           <span class="i-heroicons-arrow-path animate-spin" />

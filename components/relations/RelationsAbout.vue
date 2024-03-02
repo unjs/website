@@ -24,7 +24,10 @@ const { metaSymbol } = useShortcuts()
       Happy discovering! 🚀
     </p>
     <p>
-      If you have any questions or feedback, feel free to <a href="https://github.com/unjs/community/discussions" target="_blank" rel="noopener">open a discussion on GitHub</a>.
+      If you encounter bugs, feel free to <a href="https://github.com/unjs/websites/issues" target="_blank" rel="noopener">open an issue on GitHub</a>.
+    </p>
+    <p>
+      For more informations or just to chat, you can <a href="https://github.com/unjs/community/discussions" target="_blank" rel="noopener">open a discussion on GitHub</a>.
     </p>
     <p>
       You can use multiple shortcuts to manipulate the interface:
