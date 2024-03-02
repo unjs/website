@@ -50,7 +50,7 @@ const { data, error: errorPackages } = await useAsyncData('relations:unjs:packag
         source: 'unjs',
       } satisfies RelationPackage
     },
-    )
+    ) as RelationPackage[]
   },
 })
 
@@ -62,7 +62,8 @@ if (errorPackages.value) {
   })
 }
 
-unjsPackages.value = data.value
+if (data.value)
+  unjsPackages.value = data.value
 
 const { unjsQuery, npmQuery, updateQuery, hasSelectionAndSettings, showDependenciesQuery, showDevDependenciesQuery, showChildrenQuery } = useRelationsQuery()
 const { selection } = useRelationsSelection()
@@ -92,36 +93,8 @@ watch(() => route.query, (value) => {
 })
 
 /**
- * Storage can't be used inside a store
- */
-
-// watch(() => relationsStore.unjsSelection, (value) => {
-//   selectionStorage.value.unjs = value.map(pkg => pkg.name)
-// })
-// watch(() => relationsStore.npmSelection, (value) => {
-//   selectionStorage.value.npm = value.map(pkg => pkg.name)
-// })
-// const settingsStorage = useStorage('unjs-relations-settings', {
-//   showDependencies: true,
-//   showDevDependencies: false,
-//   showChildren: false,
-// })
-// watch([() => relationsStore.showDependencies, () => relationsStore.showDevDependencies, () => relationsStore.showChildren], ([dep, devDep, children]) => {
-//   console.log(route)
-//   if (route.name !== 'relations')
-//     return
-
-//   settingsStorage.value = {
-//     showDependencies: dep ?? false,
-//     showDevDependencies: devDep ?? false,
-//     showChildren: children ?? false,
-//   }
-// })
-
-// const unjs = useUnJSQuery()
-// const npm = useNpmQuery()
-/**
- * Populate the store with the packages needed. Lifecycle can't be async so we need to do it before.
+ * Preload npm packages before rendering the graph.
+ * Lifecycle can't be async so we need to do it before.
  */
 if (import.meta.client) {
   const package_ = npmQuery.value ?? selectionStorage.value.npm
@@ -146,18 +119,6 @@ if (import.meta.client) {
   }
 }
 
-// onBeforeMount(() => {
-//   navigateTo({
-//     query: {
-//       // First `toArray` is used when navigation is done from another page.
-//       'u[]': unjs.value ?? selectionStorage.value.unjs ?? relationsStore.unjsPackages.map(pkg => pkg.name),
-//       'n[]': npm.value ?? selectionStorage.value.npm,
-//       'showDependencies': String(relationsStore.showDependencies ?? settingsStorage.value.showDependencies),
-//       'showDevDependencies': String(relationsStore.showDevDependencies ?? settingsStorage.value.showDevDependencies),
-//       'showChildren': String(relationsStore.showChildren ?? settingsStorage.value.showChildren),
-//     },
-//   }, { replace: true })
-// })
 onBeforeMount(() => {
   const isSelectionEmpty = !unjsQuery.value?.length && !npmQuery.value?.length && !selectionStorage.value.unjs.length && !selectionStorage.value.npm.length
 

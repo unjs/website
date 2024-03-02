@@ -1,8 +1,9 @@
 import { serverQueryContent } from '#content/server'
+import type { Package, PackageContent } from '~/types/package'
 import { toPackageLogo } from '~/utils/package'
 
 export default defineEventHandler(async (event) => {
-  const packages = await serverQueryContent(event).where({ _path: /^\/packages\// }).find()
+  const packages = await serverQueryContent<PackageContent>(event).where({ _path: /^\/packages\// }).find()
 
   const populatedPackages = await Promise.all(
     packages.map(async (pkg) => {
@@ -14,7 +15,7 @@ export default defineEventHandler(async (event) => {
       ])
       // Be careful. Never break compatibility since 3rd party apps might rely on this data.
       return {
-        id: pkg.title?.toLowerCase(),
+        id: pkg.title.toLowerCase(),
         title: pkg.title,
         description: pkg.description,
         stars,
@@ -29,10 +30,9 @@ export default defineEventHandler(async (event) => {
               devDependencies: Object.keys(packageJson?.devDependencies || {}),
             }
           : undefined,
-        logoPath: toPackageLogo(pkg.title ?? ''),
-        logoUrl: `https://unjs.io${toPackageLogo(pkg.title ?? '')}`,
-      }
-      // TODO: make a type to satisfies
+        logoPath: toPackageLogo(pkg.title),
+        logoUrl: `https://unjs.io${toPackageLogo(pkg.title)}`,
+      } satisfies Package
     },
     ),
   )

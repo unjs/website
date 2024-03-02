@@ -1,4 +1,5 @@
 import myzod from 'myzod'
+import type { PackageJson } from 'pkg-types'
 
 /**
  * Get a link to the GitHub repository.

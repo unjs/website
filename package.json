@@ -7,6 +7,7 @@
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
+    "typecheck": "nuxt typecheck",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "lint:md": "markdownlint ./content && case-police content/**/*",
