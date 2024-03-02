@@ -1,4 +1,3 @@
-import type { PackageJson } from 'pkg-types'
 import { serverQueryContent } from '#content/server'
 import { toPackageLogo } from '~/utils/package'
 
@@ -11,7 +10,7 @@ export default defineEventHandler(async (event) => {
         fetchStars(pkg.github.owner, pkg.github.repo),
         pkg.npm?.name ? fetchMonthlyDownloads(pkg.npm.name) : null,
         fetchContributors(pkg.github.owner, pkg.github.repo),
-        pkg.npm?.name ? $fetch<{ package: PackageJson }>(`https://unnpm.pages.dev/packages/${pkg.npm?.name}`) : null,
+        pkg.npm?.name ? fetchPackageJson(pkg.npm.name) : null,
       ])
       // Be careful. Never break compatibility since 3rd party apps might rely on this data.
       return {
@@ -26,8 +25,8 @@ export default defineEventHandler(async (event) => {
         npm: pkg.npm?.name
           ? {
               ...pkg.npm,
-              dependencies: Object.keys(packageJson?.package.dependencies || {}),
-              devDependencies: Object.keys(packageJson?.package.devDependencies || {}),
+              dependencies: Object.keys(packageJson?.dependencies || {}),
+              devDependencies: Object.keys(packageJson?.devDependencies || {}),
             }
           : undefined,
         logoPath: toPackageLogo(pkg.title ?? ''),

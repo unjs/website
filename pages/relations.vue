@@ -33,7 +33,7 @@ const openAbout = ref(false)
 const openMenu = useRelationsMenu()
 const openLegend = useRelationsLegend()
 
-const { packages, unjsPackages, npmPackages } = useRelationsPackages()
+const { packages, unjsPackages, npmPackages, addNpmPackage } = useRelationsPackages()
 
 const { data, error: errorPackages } = await useAsyncData('relations:unjs:packages', () => $fetch('/api/content/packages.json'), {
   transform: (data) => {
@@ -65,7 +65,7 @@ if (errorPackages.value) {
 unjsPackages.value = data.value
 
 const { unjsQuery, npmQuery, updateQuery, hasSelectionAndSettings, showDependenciesQuery, showDevDependenciesQuery, showChildrenQuery } = useRelationsQuery()
-const { selection, unjsSelection, npmSelection } = useRelationsSelection()
+const { selection } = useRelationsSelection()
 const { settings } = useRelationsSettings()
 const { selectionStorage, settingsStorage } = useRelationsStorage()
 
@@ -124,23 +124,28 @@ watch(() => route.query, (value) => {
 /**
  * Populate the store with the packages needed. Lifecycle can't be async so we need to do it before.
  */
-// if (import.meta.client) {
-//   const package_ = npm.value ?? selectionStorage.value.npm
+if (import.meta.client) {
+  const package_ = npmQuery.value ?? selectionStorage.value.npm
 
-//   if (package_) {
-//     await Promise.all([
-//       ...package_.map(async (name) => {
-//         try {
-//           const pkg = await fetchNpmPackage(name)
-//           relationsStore.addNpmPackage(pkg)
-//         }
-//         catch (error) {
-//           console.error(error)
-//         }
-//       }),
-//     ])
-//   }
-// }
+  if (package_) {
+    await Promise.all([
+      ...package_.filter((p) => {
+        return !unjsPackages.value.find(pkg => pkg.npmName === p) && !npmPackages.value.find(pkg => pkg.name === p)
+      }).map(async (name) => {
+        try {
+          const pkg = await fetchNpmPackage(name)
+          addNpmPackage(pkg)
+        }
+        catch (error) {
+          /**
+           * Silent error
+           */
+          console.error(error)
+        }
+      }),
+    ])
+  }
+}
 
 // onBeforeMount(() => {
 //   navigateTo({
@@ -212,9 +217,9 @@ defineShortcuts({
     <RelationsModalUnjs
       v-model:open="openUnjs"
     />
-    <!-- <RelationsModalNpm
+    <RelationsModalNpm
       v-model:open="openNpm"
-    /> -->
+    />
     <RelationsModalAbout v-model:open="openAbout" />
 
     <RelationsSlideoverPackage v-model:open="openSlideover" :package="selectedNode" @view-relations="onViewRelations" />

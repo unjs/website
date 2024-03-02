@@ -1,4 +1,5 @@
 import { useStorage } from '@vueuse/core'
+import type { PackageJson } from 'pkg-types'
 import type { RelationPackage } from '~/types/package'
 
 /**
@@ -66,10 +67,50 @@ export function useRelationsPackages() {
 
   const packages = computed(() => [...unjsPackages.value, ...npmPackages.value])
 
+  function addNpmPackages(packages: PackageJson[]) {
+    const unjsPackageNames = unjsPackages.value.map(pkg => pkg.npmName)
+    const relationsPackages = packages.map(pkg => toRelationsPackage(pkg, unjsPackageNames))
+
+    const newPackages = relationsPackages.filter(pkg => !npmPackages.value.find(p => p.name === pkg.name) && !unjsPackages.value.find(p => p.name === pkg.name))
+
+    npmPackages.value.push(...newPackages)
+  }
+  function addNpmPackage(pkg: PackageJson) {
+    const relationsPackage = toRelationsPackage(pkg, unjsPackages.value.map(pkg => pkg.npmName))
+
+    if (npmPackages.value.find(pkg => pkg.name === relationsPackage.name)) {
+      throw createError({
+        message: `Package ${relationsPackage.name} already exists in the list of npm packages`,
+      })
+    }
+
+    if (unjsPackages.value.find(pkg => pkg.name === relationsPackage.name)) {
+      throw createError({
+        message: `Package ${relationsPackage.name} already exists in the list of UnJS packages`,
+      })
+    }
+
+    npmPackages.value.push(relationsPackage)
+  }
+  function removeNpmPackage(name: string) {
+    const index = npmPackages.value.findIndex(pkg => pkg.name === name)
+
+    if (index !== -1)
+      npmPackages.value.splice(index, 1)
+  }
+  function removeAllNpmPackages() {
+    npmPackages.value = []
+  }
+
   return {
     unjsPackages,
     npmPackages,
     packages,
+
+    addNpmPackages,
+    addNpmPackage,
+    removeNpmPackage,
+    removeAllNpmPackages,
   }
 }
 
@@ -108,7 +149,6 @@ export function useRelationsSelection() {
  */
 export function useRelationsQuery() {
   const route = useRoute()
-  const { unjsPackages } = useRelationsPackages()
 
   /**
    * Packages

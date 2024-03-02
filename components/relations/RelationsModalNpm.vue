@@ -1,14 +1,20 @@
 <script lang="ts" setup>
-import type { PackageJson } from 'pkg-types';
-import type { RelationPackage } from '~/types/package';
+import type { PackageJson } from 'pkg-types'
+import type { RelationPackage } from '~/types/package'
 
 const toast = useToast()
 
 const open = defineModel<boolean>('open', { required: true })
 
-const relationsStore = useRelationsStore()
+const { npmPackages: packages, addNpmPackages, addNpmPackage, removeNpmPackage, removeAllNpmPackages } = useRelationsPackages()
+const { npmSelection } = useRelationsSelection()
+const { updateQuery } = useRelationsQuery()
 
-const selection = ref<RelationPackage[]>([...props.selection])
+const selection = ref([...npmSelection.value])
+
+watch(() => npmSelection.value, (value) => {
+  selection.value = [...value]
+})
 
 /**
  * npm
@@ -20,7 +26,7 @@ async function addNpm(name: string) {
   try {
     npmLoading.value = true
     const npmPackage = await fetchNpmPackage(name)
-    relationsStore.addNpmPackage(npmPackage)
+    addNpmPackage(npmPackage)
     npmName.value = ''
     toast.add({
       title: 'Package added',
@@ -30,15 +36,17 @@ async function addNpm(name: string) {
       timeout: 3000,
     })
   }
-  catch (error) {
-    console.error(error.message)
-    toast.add({
-      title: 'Error',
-      description: error.message,
-      icon: 'i-heroicons-x-circle',
-      color: 'red',
-      timeout: 3000,
-    })
+  catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error(error.message)
+      toast.add({
+        title: 'Error',
+        description: error.message,
+        icon: 'i-heroicons-x-circle',
+        color: 'red',
+        timeout: 3000,
+      })
+    }
   }
   finally {
     npmLoading.value = false
@@ -88,7 +96,7 @@ async function addGitHub(name: string) {
       }
     })).then(packages => packages.filter(pkg => pkg !== null) as PackageJson[])
 
-    relationsStore.addNpmPackages(npmPackages)
+    addNpmPackages(npmPackages)
 
     githubName.value = ''
     toast.add({
@@ -99,15 +107,17 @@ async function addGitHub(name: string) {
       timeout: 3000,
     })
   }
-  catch (error) {
-    console.error(error.message)
-    toast.add({
-      title: 'Error',
-      description: error.message,
-      icon: 'i-heroicons-x-circle',
-      color: 'red',
-      timeout: 3000,
-    })
+  catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error(error.message)
+      toast.add({
+        title: 'Error',
+        description: error.message,
+        icon: 'i-heroicons-x-circle',
+        color: 'red',
+        timeout: 3000,
+      })
+    }
   }
   finally {
     githubLoading.value = false
@@ -120,7 +130,7 @@ async function addGitHub(name: string) {
 const hasRemove = ref(false)
 function remove(item: RelationPackage) {
   hasRemove.value = true
-  relationsStore.removeNpmPackage(item.name)
+  removeNpmPackage(item.name)
   selection.value = selection.value.filter(pkg => pkg.name !== item.name)
 
   toast.add({
@@ -135,23 +145,22 @@ function remove(item: RelationPackage) {
 /**
  * Footer functions
  */
-const { update, unjs } = useRelationsSelection()
 function clear() {
   selection.value = []
 }
 function removeAll() {
-  relationsStore.removeAllNpmPackages()
+  removeAllNpmPackages()
   selection.value = []
 }
 function cancel() {
   if (hasRemove.value)
-    update({ npm: selection.value.map((s) => s.npmName), unjs: unjs.value })
+    updateQuery({ npm: selection.value.map(s => s.npmName) })
 
   hasRemove.value = false
   open.value = false
 }
 function validate() {
-  update({ npm: selection.value.map((s) => s.npmName), unjs: unjs.value })
+  updateQuery({ npm: selection.value.map(s => s.npmName) })
   hasRemove.value = false
   open.value = false
 }

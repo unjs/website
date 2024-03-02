@@ -29,7 +29,6 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxtjs/plausible',
     'nuxt-payload-analyzer',
-    '@pinia/nuxt',
     '@nuxt/fonts',
   ],
   css: [

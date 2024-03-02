@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 const open = defineModel<boolean>('open', { required: true })
 
-const { packages } = useRelationsPackages()
+const { unjsPackages: packages } = useRelationsPackages()
 const { unjsSelection } = useRelationsSelection()
 const { updateQuery } = useRelationsQuery()
 
