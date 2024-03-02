@@ -226,9 +226,6 @@ defineShortcuts({
 
     <RelationsGraph
       v-if="hasSelectionAndSettings" class="w-full h-full"
-      :packages="packages"
-      :selection="selection"
-      :settings="settings"
       @loading="loading = $event" @selected-node="onSelectedNode"
     />
     <div v-if="loading || !selection.length" class="absolute z-0 inset-0 flex items-center justify-center font-medium bg-white/40 backdrop-blur-sm dark:bg-gray-900/60">
