@@ -28,6 +28,13 @@ export default {
     },
   },
 
+  '/compat-flags': {
+    redirect: {
+      to: '/packages/compat-flags',
+      statusCode: 302,
+    },
+  },
+
   '/consola': {
     redirect: {
       to: '/packages/consola',

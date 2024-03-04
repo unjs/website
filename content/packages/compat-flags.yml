@@ -1,0 +1,12 @@
+title: compat-flags
+description: 🌴 Gradual feature flags.
+github:
+  owner: unjs
+  repo: compat-flags
+npm:
+  name: compat-flags
+playgrounds:
+examples:
+  link: null
+  page: false # Used to create a page using the examples
+documentation: https://github.com/unjs/compat-flags
