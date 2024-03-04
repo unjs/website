@@ -189,6 +189,13 @@ export default {
     },
   },
 
+  '/nitro-starter': {
+    redirect: {
+      to: '/packages/nitro-starter',
+      statusCode: 302,
+    },
+  },
+
   '/nitro': {
     redirect: {
       to: '/packages/nitro',

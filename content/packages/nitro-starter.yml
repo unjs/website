@@ -1,0 +1,12 @@
+title: nitro-starter
+description: Nitro starter template
+github:
+  owner: unjs
+  repo: nitro-starter
+npm:
+  name: nitro-starter
+playgrounds:
+examples:
+  link: null
+  page: false # Used to create a page using the examples
+documentation: https://github.com/unjs/nitro-starter
