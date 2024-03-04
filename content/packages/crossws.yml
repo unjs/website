@@ -1,0 +1,12 @@
+title: crossws
+description: 🔌   Cross-platform WebSocket Servers for Node.js, Deno, Bun and Cloudflare Workers.
+github:
+  owner: unjs
+  repo: crossws
+npm:
+  name: crossws
+playgrounds:
+examples:
+  link: https://github.com/unjs/crossws/blob/main/examples
+  page: false # Used to create a page using the examples
+documentation: https://github.com/unjs/crossws
