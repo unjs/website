@@ -1,0 +1,12 @@
+title: undocs
+description: Minimal Documentation theme and CLI for shared usage across UnJS projects.
+github:
+  owner: unjs
+  repo: undocs
+npm:
+  name: undocs
+playgrounds:
+examples:
+  link: null
+  page: false # Used to create a page using the examples
+documentation: https://github.com/unjs/undocs

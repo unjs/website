@@ -315,6 +315,13 @@ export default {
     },
   },
 
+  '/undocs': {
+    redirect: {
+      to: '/packages/undocs',
+      statusCode: 302,
+    },
+  },
+
   '/unenv': {
     redirect: {
       to: '/packages/unenv',
