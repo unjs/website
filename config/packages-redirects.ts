@@ -42,6 +42,13 @@ export default {
     },
   },
 
+  '/db0': {
+    redirect: {
+      to: '/packages/db0',
+      statusCode: 302,
+    },
+  },
+
   '/defu': {
     redirect: {
       to: '/packages/defu',

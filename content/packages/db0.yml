@@ -1,0 +1,12 @@
+title: db0
+description: 📚  Lightweight SQL Connector
+github:
+  owner: unjs
+  repo: db0
+npm:
+  name: db0
+playgrounds:
+examples:
+  link: https://github.com/unjs/db0/blob/main/examples
+  page: false # Used to create a page using the examples
+documentation: https://github.com/unjs/db0
