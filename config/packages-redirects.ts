@@ -161,6 +161,13 @@ export default {
     },
   },
 
+  '/mdbox': {
+    redirect: {
+      to: '/packages/mdbox',
+      statusCode: 302,
+    },
+  },
+
   '/mkdist': {
     redirect: {
       to: '/packages/mkdist',
