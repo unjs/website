@@ -11,7 +11,6 @@ export function useRelationsMenu() {
   const storage = useStorage('unjs-relations-menu', true)
 
   watch(open, (value) => {
-    console.log('useRelationsMenu', value)
     storage.value = value
   })
 
@@ -39,7 +38,6 @@ export function useRelationsLegend() {
   const storage = useStorage('unjs-relations-legend', true)
 
   watch(open, (value) => {
-    console.log('useRelationsLegend', value)
     storage.value = value
   })
 
