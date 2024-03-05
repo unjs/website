@@ -73,6 +73,7 @@ const { selectionStorage, settingsStorage } = useRelationsStorage()
  * Keep storage up to date.
  */
 watch(() => route.query, (value) => {
+  console.log(route)
   /**
    * Settings
    */
