@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import type { RelationPackage } from '~/types/package'
 
-// definePageMeta({
-//   layout: 'full',
-// })
+definePageMeta({
+  layout: 'full',
+})
 
 // const route = useRoute()
 
