@@ -97,16 +97,16 @@ function toDesignKit() {
 
         <UTooltip class="ml-1 lg:hidden" text="Open Navigation" :popper="{ adaptative: false, placement: 'bottom', strategy: 'absolute' }">
           <UButton square size="md" variant="ghost" color="gray" icon="i-heroicons-bars-3-bottom-right" :ui="uiButton" aria-label="Open Navigation" @click="openNavigation = true" />
-        </UTooltip> -->
+        </UTooltip>
 
         <UTooltip class="ml-1 hidden lg:flex" text="GitHub Stars" :popper="{ adaptative: false, placement: 'bottom', strategy: 'absolute' }">
           <UButton size="md" variant="ghost" color="gray" :icon="github.icon" :to="github.url" :target="github.target" :aria-label="`Follow us on ${github.name}`" :ui="{ size: { md: 'text-base' }, ...uiButton }">
             {{ stars ? formatNumber(stars) : '' }}
           </UButton>
-        </UTooltip>
+        </UTooltip> -->
       </div>
     </header>
-    <NavigationModal v-if="navigation" v-model:open="openNavigation" :navigation="navigation" />
+    <NavigationModal v-model:open="openNavigation" :navigation="navigation" />
     <SearchModal v-model:open="openSearch" />
   </div>
 </template>
