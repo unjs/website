@@ -1,10 +1,6 @@
 <script lang="ts" setup>
 import type { RelationPackage } from '~/types/package'
 
-definePageMeta({
-  layout: 'full',
-})
-
 const route = useRoute()
 
 const { data: page, error } = await useAsyncData(route.path, () => queryContent(route.path).findOne())

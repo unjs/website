@@ -18,7 +18,6 @@ const queryDebounced = ref('')
 watchDebounced(
   query,
   () => {
-    console.log('query', query.value)
     queryDebounced.value = query.value
     selectFirstOption()
   },
@@ -48,21 +47,21 @@ function getLength(data: SearchDisplayItem): number {
 }
 
 // Debounce the event to avoid to send too many events
-// watchDebounced(options, (value) => {
-//   if (!query.value)
-//     return
+watchDebounced(options, (value) => {
+  if (!query.value)
+    return
 
-//   let length = 0
+  let length = 0
 
-//   if (value) {
-//     for (const key in value) {
-//       for (const item of value[key])
-//         length += getLength(item)
-//     }
-//   }
+  if (value) {
+    for (const key in value) {
+      for (const item of value[key])
+        length += getLength(item)
+    }
+  }
 
-//   useTrackEvent('Search', { props: { query: `${query.value} - ${length} results` } })
-// }, { debounce: 500 })
+  useTrackEvent('Search', { props: { query: `${query.value} - ${length} results` } })
+}, { debounce: 500 })
 
 function isLastChildren(children: SearchDisplayItem[] | null, index: number) {
   if (!children)
@@ -102,7 +101,6 @@ function resetQuery() {
 
 function selectFirstOption() {
   setTimeout(() => {
-    console.log('comboboxInput', comboboxInput.value)
     // https://github.com/tailwindlabs/headlessui/blob/6fa6074cd5d3a96f78a2d965392aa44101f5eede/packages/%40headlessui-vue/src/components/combobox/combobox.ts#L804
     comboboxInput.value?.$el.dispatchEvent(new KeyboardEvent('keydown', { key: 'PageUp' }))
   }, 0)

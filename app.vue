@@ -10,6 +10,11 @@ useSchemaOrg([
     ],
   }),
 ])
+
+const route = useRoute()
+const isRelation = computed(() => {
+  return route.name === 'relations'
+})
 </script>
 
 <template>
@@ -17,9 +22,13 @@ useSchemaOrg([
     <Body class="font-sans dark:bg-gray-900">
       <NuxtLoadingIndicator color="#ECDC5A" />
 
-      <NuxtLayout>
+      <TheHeader :class="{ 'z-10 absolute top-0 left-0 right-0': isRelation }" />
+
+      <div :class="{ 'px-4 container mx-auto xl:max-w-7xl': !isRelation }">
         <NuxtPage />
-      </NuxtLayout>
+      </div>
+
+      <TheFooter v-if="!isRelation" />
 
       <UNotifications />
     </Body>

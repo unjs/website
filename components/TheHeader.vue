@@ -91,7 +91,7 @@ function toDesignKit() {
       </nav>
 
       <div class="flex justify-end items-center">
-        <!-- <UTooltip text="Open Search" :shortcuts="[metaSymbol, 'K']" :popper="{ adaptative: false, placement: 'bottom', strategy: 'absolute' }">
+        <UTooltip text="Open Search" :shortcuts="[metaSymbol, 'K']" :popper="{ adaptative: false, placement: 'bottom', strategy: 'absolute' }">
           <UButton size="md" icon="i-heroicons-magnifying-glass" color="gray" variant="ghost" :ui="{ size: { md: 'text-base' }, ...uiButton }" aria-label="Open Search" square @click="openSearch = true" />
         </UTooltip>
 
@@ -103,7 +103,7 @@ function toDesignKit() {
           <UButton size="md" variant="ghost" color="gray" :icon="github.icon" :to="github.url" :target="github.target" :aria-label="`Follow us on ${github.name}`" :ui="{ size: { md: 'text-base' }, ...uiButton }">
             {{ stars ? formatNumber(stars) : '' }}
           </UButton>
-        </UTooltip> -->
+        </UTooltip>
       </div>
     </header>
     <NavigationModal v-model:open="openNavigation" :navigation="navigation" />
