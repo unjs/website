@@ -5,24 +5,24 @@ definePageMeta({
   layout: 'full',
 })
 
-const route = useRoute()
+// const route = useRoute()
 
-const { data: page, error } = await useAsyncData(route.path, () => queryContent(route.path).findOne())
+// const { data: page, error } = await useAsyncData(route.path, () => queryContent(route.path).findOne())
 
-if (error.value) {
-  throw createError({
-    statusCode: 404,
-    message: 'Page not found',
-    fatal: true,
-  })
-}
+// if (error.value) {
+//   throw createError({
+//     statusCode: 404,
+//     message: 'Page not found',
+//     fatal: true,
+//   })
+// }
 
-useSeoMeta({
-  title: page.value?.title,
-  description: page.value?.description,
-})
-defineOgImageComponent('OgImagePage')
-useTrackPageview()
+// useSeoMeta({
+//   title: page.value?.title,
+//   description: page.value?.description,
+// })
+// defineOgImageComponent('OgImagePage')
+// useTrackPageview()
 
 const loading = ref(true)
 
