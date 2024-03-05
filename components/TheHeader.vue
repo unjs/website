@@ -106,7 +106,7 @@ function toDesignKit() {
         </UTooltip> -->
       </div>
     </header>
-    <NavigationModal v-model:open="openNavigation" :navigation="navigation" />
+    <!-- <NavigationModal v-model:open="openNavigation" :navigation="navigation" /> -->
     <SearchModal v-model:open="openSearch" />
   </div>
 </template>
