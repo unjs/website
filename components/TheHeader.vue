@@ -107,6 +107,6 @@ function toDesignKit() {
       </div>
     </header>
     <NavigationModal v-model:open="openNavigation" :navigation="navigation" />
-    <!-- <SearchModal v-model:open="openSearch" /> -->
+    <SearchModal v-model:open="openSearch" />
   </div>
 </template>
