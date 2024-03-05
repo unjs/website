@@ -171,7 +171,7 @@ defineShortcuts({
 
 <template>
   <div class="w-full h-screen relative overflow-hidden">
-    <RelationsMenu v-if="openMenu" v-model:about="openAbout" v-model:menu="openMenu" v-model:legend="openLegend" class="absolute left-4 top-20 z-10" @open-unjs="openUnjs = $event" @open-npm="openNpm = $event" />
+    <!-- <RelationsMenu v-if="openMenu" v-model:about="openAbout" v-model:menu="openMenu" v-model:legend="openLegend" class="absolute left-4 top-20 z-10" @open-unjs="openUnjs = $event" @open-npm="openNpm = $event" />
     <RelationsLegend v-if="openLegend" class="absolute z-30 bottom-4 left-4" />
 
     <RelationsModalUnjs
@@ -205,6 +205,6 @@ defineShortcuts({
       </span>
     </div>
 
-    <UButton square aria-label="Open About" icon="i-heroicons-information-circle" color="gray" variant="ghost" size="xl" :ui="{ base: 'absolute z-20 bottom-4 right-4', rounded: 'rounded-full', color: { gray: { ghost: 'bg-white/40 backdrop-blur-sm dark:bg-gray-900/60 ring-1 ring-gray-200 dark:ring-gray-800' } } }" @click="openAbout = true" />
+    <UButton square aria-label="Open About" icon="i-heroicons-information-circle" color="gray" variant="ghost" size="xl" :ui="{ base: 'absolute z-20 bottom-4 right-4', rounded: 'rounded-full', color: { gray: { ghost: 'bg-white/40 backdrop-blur-sm dark:bg-gray-900/60 ring-1 ring-gray-200 dark:ring-gray-800' } } }" @click="openAbout = true" /> -->
   </div>
 </template>
