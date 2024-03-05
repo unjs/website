@@ -62,8 +62,8 @@ if (errorPackages.value) {
   })
 }
 
-if (data.value)
-  unjsPackages.value = data.value
+// if (data.value)
+//   unjsPackages.value = data.value
 
 // const { unjsQuery, npmQuery, updateQuery, hasSelectionAndSettings, showDependenciesQuery, showDevDependenciesQuery, showChildrenQuery } = useRelationsQuery()
 // const { selection } = useRelationsSelection()
