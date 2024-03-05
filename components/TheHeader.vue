@@ -53,7 +53,7 @@ function toDesignKit() {
 
 <template>
   <div class="h-16 border-b border-gray-100 dark:border-gray-800">
-    <!-- <header class="h-full px-4 container mx-auto xl:max-w-7xl md:px-6 grid grid-cols-2 lg:grid-cols-3 items-center bg-white/40 backdrop-blur-sm dark:bg-gray-900/60">
+    <header class="h-full px-4 container mx-auto xl:max-w-7xl md:px-6 grid grid-cols-2 lg:grid-cols-3 items-center bg-white/40 backdrop-blur-sm dark:bg-gray-900/60">
       <div class="flex items-center">
         <NuxtLink to="/?utm_source=unjs.io&utm_medium=header-icon&utm_campaign=unjs.io" @click.right.prevent="toDesignKit()">
           <AppLogo />
@@ -63,7 +63,7 @@ function toDesignKit() {
       <nav v-if="navigation" class="hidden lg:flex justify-center">
         <ol class="text-[1.125rem] flex gap-4 leading-5">
           <li v-for="item in navigation" :key="item.path">
-            <UPopover v-if="item.children" mode="hover" :ui="{ width: 'max-w-[18rem]' }">
+            <!-- <UPopover v-if="item.children" mode="hover" :ui="{ width: 'max-w-[18rem]' }">
               <UButton size="md" variant="ghost" color="gray" :to="item._path" :icon="item.icon" :ui="{ size: { md: 'text-base' }, ...uiButton }" :active-class="activeClassButton">
                 {{ item.title }}
               </UButton>
@@ -82,7 +82,7 @@ function toDesignKit() {
                   </li>
                 </ol>
               </template>
-            </UPopover>
+            </UPopover> -->
             <UButton size="md" variant="ghost" color="gray" :to="item.path" :ui="{ size: { md: 'text-base' }, ...uiButton }" :active-class="activeClassButton">
               {{ item.title }}
             </UButton>
@@ -91,7 +91,7 @@ function toDesignKit() {
       </nav>
 
       <div class="flex justify-end items-center">
-        <UTooltip text="Open Search" :shortcuts="[metaSymbol, 'K']" :popper="{ adaptative: false, placement: 'bottom', strategy: 'absolute' }">
+        <!-- <UTooltip text="Open Search" :shortcuts="[metaSymbol, 'K']" :popper="{ adaptative: false, placement: 'bottom', strategy: 'absolute' }">
           <UButton size="md" icon="i-heroicons-magnifying-glass" color="gray" variant="ghost" :ui="{ size: { md: 'text-base' }, ...uiButton }" aria-label="Open Search" square @click="openSearch = true" />
         </UTooltip>
 
@@ -103,9 +103,9 @@ function toDesignKit() {
           <UButton size="md" variant="ghost" color="gray" :icon="github.icon" :to="github.url" :target="github.target" :aria-label="`Follow us on ${github.name}`" :ui="{ size: { md: 'text-base' }, ...uiButton }">
             {{ stars ? formatNumber(stars) : '' }}
           </UButton>
-        </UTooltip>
+        </UTooltip> -->
       </div>
-    </header> -->
+    </header>
     <!-- <NavigationModal v-if="navigation" v-model:open="openNavigation" :navigation="navigation" />
     <SearchModal v-model:open="openSearch" /> -->
   </div>
