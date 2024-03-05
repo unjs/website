@@ -30,10 +30,10 @@ const openUnjs = ref(false)
 const openNpm = ref(false)
 const openAbout = ref(false)
 
-const openMenu = useRelationsMenu()
-const openLegend = useRelationsLegend()
+// const openMenu = useRelationsMenu()
+// const openLegend = useRelationsLegend()
 
-const { unjsPackages, npmPackages, addNpmPackage } = useRelationsPackages()
+// const { unjsPackages, npmPackages, addNpmPackage } = useRelationsPackages()
 
 const { data, error: errorPackages } = await useAsyncData('relations:unjs:packages', () => $fetch('/api/content/packages.json'), {
   transform: (data) => {
