@@ -72,25 +72,25 @@ const openAbout = ref(false)
 /**
  * Keep storage up to date.
  */
-watch(() => route.query, (value) => {
-  /**
-   * Settings
-   */
-  // if (value.showDependencies)
-  //   settingsStorage.value.showDependencies = value.showDependencies === 'true'
-  // if (value.showDevDependencies)
-  //   settingsStorage.value.showDevDependencies = value.showDevDependencies === 'true'
-  // if (value.showChildren)
-  //   settingsStorage.value.showChildren = value.showChildren === 'true'
+// watch(() => route.query, (value) => {
+/**
+ * Settings
+ */
+// if (value.showDependencies)
+//   settingsStorage.value.showDependencies = value.showDependencies === 'true'
+// if (value.showDevDependencies)
+//   settingsStorage.value.showDevDependencies = value.showDevDependencies === 'true'
+// if (value.showChildren)
+//   settingsStorage.value.showChildren = value.showChildren === 'true'
 
-  // /**
-  //  * Selection
-  //  */
-  // if (value['u[]'])
-  //   selectionStorage.value.unjs = toArray(value['u[]'] as string[])
-  // if (value['n[]'])
-  //   selectionStorage.value.npm = toArray(value['n[]'] as string[])
-})
+// /**
+//  * Selection
+//  */
+// if (value['u[]'])
+//   selectionStorage.value.unjs = toArray(value['u[]'] as string[])
+// if (value['n[]'])
+//   selectionStorage.value.npm = toArray(value['n[]'] as string[])
+// })
 
 /**
  * Preload npm packages before rendering the graph.
