@@ -35,32 +35,32 @@ const openAbout = ref(false)
 
 // const { unjsPackages, npmPackages, addNpmPackage } = useRelationsPackages()
 
-const { data, error: errorPackages } = await useAsyncData('relations:unjs:packages', () => $fetch('/api/content/packages.json'), {
-  transform: (data) => {
-    const packages = data.filter(pkg => pkg.npm)
-    const names = packages.map(pkg => pkg.npm.name)
+// const { data, error: errorPackages } = await useAsyncData('relations:unjs:packages', () => $fetch('/api/content/packages.json'), {
+//   transform: (data) => {
+//     const packages = data.filter(pkg => pkg.npm)
+//     const names = packages.map(pkg => pkg.npm.name)
 
-    return packages.map((pkg) => {
-      return {
-        name: pkg.title,
-        npmName: pkg.npm.name,
-        description: pkg.description,
-        dependencies: pkg.npm.dependencies.filter((dep: string) => names.includes(dep)) ?? [],
-        devDependencies: pkg.npm.devDependencies.filter((dep: string) => names.includes(dep)) ?? [],
-        source: 'unjs',
-      } satisfies RelationPackage
-    },
-    ) as RelationPackage[]
-  },
-})
+//     return packages.map((pkg) => {
+//       return {
+//         name: pkg.title,
+//         npmName: pkg.npm.name,
+//         description: pkg.description,
+//         dependencies: pkg.npm.dependencies.filter((dep: string) => names.includes(dep)) ?? [],
+//         devDependencies: pkg.npm.devDependencies.filter((dep: string) => names.includes(dep)) ?? [],
+//         source: 'unjs',
+//       } satisfies RelationPackage
+//     },
+//     ) as RelationPackage[]
+//   },
+// })
 
-if (errorPackages.value) {
-  throw createError({
-    statusCode: errorPackages.value.statusCode,
-    message: errorPackages.value.statusMessage,
-    fatal: true,
-  })
-}
+// if (errorPackages.value) {
+//   throw createError({
+//     statusCode: errorPackages.value.statusCode,
+//     message: errorPackages.value.statusMessage,
+//     fatal: true,
+//   })
+// }
 
 // if (data.value)
 //   unjsPackages.value = data.value
