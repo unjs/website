@@ -8,6 +8,7 @@ const { updateQuery } = useRelationsQuery()
 const selection = ref([...unjsSelection.value])
 
 watch(() => unjsSelection.value, (value) => {
+  console.log('watch:relations-modal-unjs', value)
   selection.value = [...value]
 })
 

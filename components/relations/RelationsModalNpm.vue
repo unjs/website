@@ -13,6 +13,7 @@ const { updateQuery } = useRelationsQuery()
 const selection = ref([...npmSelection.value])
 
 watch(() => npmSelection.value, (value) => {
+  console.log('watch:relations-modal-npm', value)
   selection.value = [...value]
 })
 
