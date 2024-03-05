@@ -76,20 +76,20 @@ watch(() => route.query, (value) => {
   /**
    * Settings
    */
-  if (value.showDependencies)
-    settingsStorage.value.showDependencies = value.showDependencies === 'true'
-  if (value.showDevDependencies)
-    settingsStorage.value.showDevDependencies = value.showDevDependencies === 'true'
-  if (value.showChildren)
-    settingsStorage.value.showChildren = value.showChildren === 'true'
+  // if (value.showDependencies)
+  //   settingsStorage.value.showDependencies = value.showDependencies === 'true'
+  // if (value.showDevDependencies)
+  //   settingsStorage.value.showDevDependencies = value.showDevDependencies === 'true'
+  // if (value.showChildren)
+  //   settingsStorage.value.showChildren = value.showChildren === 'true'
 
-  /**
-   * Selection
-   */
-  if (value['u[]'])
-    selectionStorage.value.unjs = toArray(value['u[]'] as string[])
-  if (value['n[]'])
-    selectionStorage.value.npm = toArray(value['n[]'] as string[])
+  // /**
+  //  * Selection
+  //  */
+  // if (value['u[]'])
+  //   selectionStorage.value.unjs = toArray(value['u[]'] as string[])
+  // if (value['n[]'])
+  //   selectionStorage.value.npm = toArray(value['n[]'] as string[])
 })
 
 /**
@@ -97,44 +97,44 @@ watch(() => route.query, (value) => {
  * Lifecycle can't be async so we need to do it before.
  */
 if (import.meta.client) {
-  const package_ = npmQuery.value ?? selectionStorage.value.npm
+  // const package_ = npmQuery.value ?? selectionStorage.value.npm
 
-  if (package_) {
-    await Promise.all([
-      ...package_.filter((p) => {
-        return !unjsPackages.value.find(pkg => pkg.npmName === p) && !npmPackages.value.find(pkg => pkg.name === p)
-      }).map(async (name) => {
-        try {
-          const pkg = await fetchNpmPackage(name)
-          addNpmPackage(pkg)
-        }
-        catch (error) {
-          /**
-           * Silent error
-           */
-          console.error(error)
-        }
-      }),
-    ])
-  }
+  // if (package_) {
+  //   await Promise.all([
+  //     ...package_.filter((p) => {
+  //       return !unjsPackages.value.find(pkg => pkg.npmName === p) && !npmPackages.value.find(pkg => pkg.name === p)
+  //     }).map(async (name) => {
+  //       try {
+  //         const pkg = await fetchNpmPackage(name)
+  //         addNpmPackage(pkg)
+  //       }
+  //       catch (error) {
+  //         /**
+  //          * Silent error
+  //          */
+  //         console.error(error)
+  //       }
+  //     }),
+  //   ])
+  // }
 }
 
 onBeforeMount(() => {
-  const isSelectionEmpty = !unjsQuery.value?.length && !npmQuery.value?.length && !selectionStorage.value.unjs.length && !selectionStorage.value.npm.length
+  // const isSelectionEmpty = !unjsQuery.value?.length && !npmQuery.value?.length && !selectionStorage.value.unjs.length && !selectionStorage.value.npm.length
 
-  /**
-   * Update the query when the application load.
-   * 1. If there is nothing in the query and in the storage, we use the default packages (all UnJS and none npm).
-   * 2. If there is something in the query, we use it.
-   * 3. If there is something in the storage (restore previous state), we use it.
-   */
-  updateQuery({
-    unjs: isSelectionEmpty ? unjsPackages.value.map(p => p.npmName) : unjsQuery.value ?? selectionStorage.value.unjs,
-    npm: isSelectionEmpty ? [] : npmQuery.value ?? selectionStorage.value.npm,
-    showDependencies: showDependenciesQuery.value ?? settingsStorage.value.showDependencies,
-    showDevDependencies: showDevDependenciesQuery.value ?? settingsStorage.value.showDevDependencies,
-    showChildren: showChildrenQuery.value ?? settingsStorage.value.showChildren,
-  }, true)
+  // /**
+  //  * Update the query when the application load.
+  //  * 1. If there is nothing in the query and in the storage, we use the default packages (all UnJS and none npm).
+  //  * 2. If there is something in the query, we use it.
+  //  * 3. If there is something in the storage (restore previous state), we use it.
+  //  */
+  // updateQuery({
+  //   unjs: isSelectionEmpty ? unjsPackages.value.map(p => p.npmName) : unjsQuery.value ?? selectionStorage.value.unjs,
+  //   npm: isSelectionEmpty ? [] : npmQuery.value ?? selectionStorage.value.npm,
+  //   showDependencies: showDependenciesQuery.value ?? settingsStorage.value.showDependencies,
+  //   showDevDependencies: showDevDependenciesQuery.value ?? settingsStorage.value.showDevDependencies,
+  //   showChildren: showChildrenQuery.value ?? settingsStorage.value.showChildren,
+  // }, true)
 })
 
 const openSlideover = ref(false)
@@ -144,9 +144,9 @@ function onSelectedNode(pkg: RelationPackage) {
   openSlideover.value = true
 }
 function onViewRelations(name: string) {
-  updateQuery({
-    unjs: [name],
-  })
+  // updateQuery({
+  //   unjs: [name],
+  // })
   openSlideover.value = false
 }
 
