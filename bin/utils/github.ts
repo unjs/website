@@ -2,6 +2,8 @@ import { ofetch } from 'ofetch'
 import type { GitHubRepo, GithubRelease } from '../types'
 
 export const internalRepos = new Set([
+  'compat-flags',
+  'nitro-starter',
   'eslint-config',
   'nitro-preset-starter',
   'unjs.github.io',
