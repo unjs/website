@@ -49,6 +49,13 @@ export default {
     },
   },
 
+  '/crossws': {
+    redirect: {
+      to: '/packages/crossws',
+      statusCode: 302,
+    },
+  },
+
   '/defu': {
     redirect: {
       to: '/packages/defu',
