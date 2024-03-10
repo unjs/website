@@ -1,6 +1,6 @@
 ---
 title: Introducing UnJS Relations
-description: A visual way to understand the UnJS ecosystem and its relations
+description: A visual way to understand the UnJS ecosystem and its relations.
 authors:
   - name: Estéban S
     picture: https://github.com/barbapapazes.png
