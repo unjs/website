@@ -385,6 +385,13 @@ export default {
     },
   },
 
+  '/unwasm': {
+    redirect: {
+      to: '/packages/unwasm',
+      statusCode: 302,
+    },
+  },
+
   '/uqr': {
     redirect: {
       to: '/packages/uqr',
