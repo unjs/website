@@ -1,9 +1,7 @@
 import type { BlogPost } from './blog'
-import type { BuildPost } from './build'
-import type { ExplorePost } from './explore'
-import type { LearnPost } from './learn'
+import type { LearnArticle } from './learn'
 
-export type RssContent = BlogPost | LearnPost | ExplorePost | BuildPost
+export type RssContent = BlogPost | LearnArticle
 
 export interface RssChannel {
   language: string

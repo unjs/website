@@ -4,8 +4,8 @@ defineProps<{
   description: string
   path: string
   stars: number
-  monthlyDownloads?: number
-  contributors?: number
+  monthlyDownloads: number | null
+  contributors: number | null
 }>()
 </script>
 
