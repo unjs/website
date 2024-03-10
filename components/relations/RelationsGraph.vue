@@ -303,7 +303,6 @@ onMounted(() => {
   })
 
   watch(data, () => {
-    console.log('data changed')
     if (data.value.nodes?.length)
       emits('loading', true)
     network.setData(data.value)
