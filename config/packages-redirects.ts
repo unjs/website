@@ -1,5 +1,12 @@
 /** Do not edit manually. Use `jiti bin generate packages-redirects`. */
 export default {
+  '/automd': {
+    redirect: {
+      to: '/packages/automd',
+      statusCode: 302,
+    },
+  },
+
   '/bundle-runner': {
     redirect: {
       to: '/packages/bundle-runner',
