@@ -35,6 +35,13 @@ export default {
     },
   },
 
+  '/confbox': {
+    redirect: {
+      to: '/packages/confbox',
+      statusCode: 302,
+    },
+  },
+
   '/consola': {
     redirect: {
       to: '/packages/consola',
