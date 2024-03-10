@@ -1,27 +1,43 @@
 import type { ParsedContent } from '@nuxt/content/dist/runtime/types'
 
-export interface Package extends Record<string, string | number | undefined> {
+export interface Package extends Record<string, unknown> {
+  id: string
   title: string
   description: string
   path: string
   url: string
   stars: number
-  monthlyDownloads: number
-  contributors: number
-  npm?: string
+  monthlyDownloads: number | null
+  contributors: number | null
+  npm?: {
+    name: string
+    dependencies: string[]
+    devDependencies: string[]
+  }
+  logoPath: string
+  logoUrl: string
 }
 
 export interface PackageContent extends ParsedContent {
   title: string
   description: string
-  icon?: string
-  logo?: string
+  _path: string
   github: {
     owner: string
     repo: string
   }
-  npm: {
+  npm?: {
     name: string
   }
   documentation: string
+}
+
+export type RelationPackageSource = 'npm' | 'unjs'
+export interface RelationPackage {
+  name: string
+  npmName: string
+  description?: string
+  dependencies: string[]
+  devDependencies: string[]
+  source: RelationPackageSource
 }

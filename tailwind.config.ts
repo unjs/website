@@ -1,6 +1,8 @@
 import type { Config } from 'tailwindcss'
-import flattenColorPalette from 'tailwindcss/lib/util/flattenColorPalette'
 import { fontFamily } from 'tailwindcss/defaultTheme'
+
+// @ts-expect-error This is how Tailwind CSS is imported
+import flattenColorPalette from 'tailwindcss/lib/util/flattenColorPalette'
 
 export default <Partial<Config>> {
   theme: {
@@ -23,6 +25,7 @@ export default <Partial<Config>> {
       fontFamily: {
         sans: ['Nunito', ...fontFamily.sans],
       },
+      // @ts-expect-error This is a Tailwind CSS plugin
       typography: theme => ({
         DEFAULT: {
           css: {
@@ -54,9 +57,11 @@ export default <Partial<Config>> {
       }),
     },
   },
+  // @ts-expect-error This is a Tailwind CSS plugin
   plugins: [function ({ matchUtilities, theme }) {
     matchUtilities(
       {
+        // @ts-expect-error This is a Tailwind CSS plugin
         highlight: value => ({ boxShadow: `inset 0 1px 0 0 ${value}` }),
       },
       { values: flattenColorPalette(theme('backgroundColor')), type: 'color' },

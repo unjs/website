@@ -12,7 +12,7 @@ export interface BlogPost extends ParsedContent {
   categories: string[]
   packages?: string[]
   publishedAt: string
-  modifiedAt: Date
+  modifiedAt: string
 }
 
 export type BlogPostCard = Pick<BlogPost, '_path' | 'cover' | 'title' | 'description' | 'publishedAt' | 'authors' | 'packages' | 'categories'>

@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import type { LearnArticle } from '~/types/learn'
+
 const route = useRoute()
 
-const { data: page, error } = await useAsyncData(route.path, () => queryContent(route.path).findOne())
+const { data: page, error } = await useAsyncData(route.path, () => queryContent<LearnArticle>(route.path).findOne())
 
 if (error.value) {
   throw createError({

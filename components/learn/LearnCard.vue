@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { Author } from '~/types/blog'
+import type { Author } from '~/types/author'
 
 const props = defineProps<{
   path: string

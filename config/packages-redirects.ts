@@ -1,5 +1,12 @@
 /** Do not edit manually. Use `jiti bin generate packages-redirects`. */
 export default {
+  '/automd': {
+    redirect: {
+      to: '/packages/automd',
+      statusCode: 302,
+    },
+  },
+
   '/bundle-runner': {
     redirect: {
       to: '/packages/bundle-runner',
@@ -45,6 +52,13 @@ export default {
   '/db0': {
     redirect: {
       to: '/packages/db0',
+      statusCode: 302,
+    },
+  },
+  
+  '/crossws': {
+    redirect: {
+      to: '/packages/crossws',
       statusCode: 302,
     },
   },
@@ -381,6 +395,13 @@ export default {
   '/untyped': {
     redirect: {
       to: '/packages/untyped',
+      statusCode: 302,
+    },
+  },
+
+  '/unwasm': {
+    redirect: {
+      to: '/packages/unwasm',
       statusCode: 302,
     },
   },

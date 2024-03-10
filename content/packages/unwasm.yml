@@ -1,0 +1,12 @@
+title: unwasm
+description: WebAssembly tools for JavaScript
+github:
+  owner: unjs
+  repo: unwasm
+npm:
+  name: unwasm
+playgrounds:
+examples:
+  link: https://github.com/unjs/unwasm/blob/main/examples
+  page: false # Used to create a page using the examples
+documentation: https://github.com/unjs/unwasm

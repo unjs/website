@@ -1,0 +1,12 @@
+title: automd
+description: Automated markdown maintainer
+github:
+  owner: unjs
+  repo: automd
+npm:
+  name: automd
+playgrounds:
+examples:
+  link: null
+  page: false # Used to create a page using the examples
+documentation: https://automd.unjs.io

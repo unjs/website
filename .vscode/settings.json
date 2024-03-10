@@ -81,5 +81,8 @@
     "json",
     "jsonc",
     "yaml"
+  ],
+  "cSpell.words": [
+    "unjs"
   ]
 }
