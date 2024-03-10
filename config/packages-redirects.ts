@@ -55,7 +55,7 @@ export default {
       statusCode: 302,
     },
   },
-  
+
   '/crossws': {
     redirect: {
       to: '/packages/crossws',
