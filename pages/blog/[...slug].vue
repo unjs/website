@@ -1,7 +1,9 @@
 <script lang="ts" setup>
+import type { BlogPost } from '~/types/blog'
+
 const route = useRoute()
 
-const { data: page, error } = await useAsyncData(route.path, () => queryContent(route.path).findOne())
+const { data: page, error } = await useAsyncData(route.path, () => queryContent<BlogPost>(route.path).findOne())
 
 if (error.value) {
   throw createError({
