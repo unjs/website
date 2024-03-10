@@ -1,0 +1,12 @@
+title: mdbox
+description: Just simple markdown utils
+github:
+  owner: unjs
+  repo: mdbox
+npm:
+  name: mdbox
+playgrounds:
+examples:
+  link: null
+  page: false # Used to create a page using the examples
+documentation: https://github.com/unjs/mdbox
