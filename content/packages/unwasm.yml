@@ -1,5 +1,5 @@
 title: unwasm
-description: 🇼 WebAssembly tools for JavaScript
+description: WebAssembly tools for JavaScript
 github:
   owner: unjs
   repo: unwasm
