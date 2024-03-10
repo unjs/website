@@ -9,4 +9,4 @@ playgrounds:
 examples:
   link: null
   page: false # Used to create a page using the examples
-documentation: https://github.com/unjs/undocs
+documentation: https://undocs.unjs.io
