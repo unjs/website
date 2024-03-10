@@ -1,5 +1,5 @@
 title: confbox
-description: Compact and high quality YAML, TOML, JSONC and JSON5 parsers
+description: Compact and high quality YAML, TOML, JSONC and JSON5 parsers.
 github:
   owner: unjs
   repo: confbox
