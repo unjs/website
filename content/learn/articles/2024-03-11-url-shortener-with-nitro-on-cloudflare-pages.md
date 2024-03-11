@@ -284,7 +284,7 @@ We can add a simple CSRF protection using a Nitro middleware.
 
 ```ts [server/middlewares/csrf.ts]
 export default defineEventHandler(async (event) => {
-  const method = getMethod(event)
+  const method = event.method
 
   if (method === 'GET')
     return
