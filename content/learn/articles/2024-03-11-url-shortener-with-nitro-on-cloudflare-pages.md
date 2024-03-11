@@ -310,6 +310,9 @@ export default defineEventHandler(async (event) => {
 
 This middleware will only run on `post` request. If header `origin` is different from the request origin, an error is thrown.
 
+> [!NOTE]
+> Please read [Cross-Site Request Forgery Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html) from OWASP to understand the CSRF protection.
+
 ## Finally
 
 Building with Nitro and Cloudflare Pages is pretty easy and provide a great developer experience thanks to the ability to use TSX and a development storage avoiding use the usage of the Cloudflare Wrangler CLI.
