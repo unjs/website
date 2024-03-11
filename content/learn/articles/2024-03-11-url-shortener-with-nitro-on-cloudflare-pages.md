@@ -284,6 +284,11 @@ We can add a simple CSRF protection using a Nitro middleware.
 
 ```ts [server/middlewares/csrf.ts]
 export default defineEventHandler(async (event) => {
+  const method = getMethod(event)
+
+  if (method === 'GET')
+    return
+
   const requestURL = getRequestURL(event).origin
   const origin = getRequestHeader(event, 'origin')
 
@@ -303,7 +308,7 @@ export default defineEventHandler(async (event) => {
 })
 ```
 
-This middleware will run on every request. If header `origin` is different from the request origin, an error is thrown.
+This middleware will only run on `post` request. If header `origin` is different from the request origin, an error is thrown.
 
 ## Finally
 
