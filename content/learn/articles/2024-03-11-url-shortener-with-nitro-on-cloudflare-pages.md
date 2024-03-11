@@ -311,7 +311,7 @@ export default defineEventHandler(async (event) => {
 This middleware will only run on `post` request. If header `origin` is different from the request origin, an error is thrown.
 
 > [!NOTE]
-> Please read [Cross-Site Request Forgery Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html) from OWASP to understand the CSRF protection.
+> Please read [Cross-Site Request Forgery Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html) from OWASP to understand the CSRF protection. Verifing the `origin` header is a simple way to protect against CSRF but considered as an in-depth defense. It is recommended to use a more advanced protection like a token.
 
 ## Finally
 
