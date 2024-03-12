@@ -18,14 +18,9 @@ publishedAt: 2024-03-11
 modifiedAt: 2024-03-11
 ---
 
-> [!NOTE]
-> This article is inspired by the [url-shortener built with Hono](https://github.com/yusukebe/url-shortener) from [Yusuke Wada](https://github.com/yusukebe).
-
 In this article, we will create our own URL shortener using [Nitro](https://nitro.unjs.io) deploy it on [Cloudflare Pages](https://pages.cloudflare.com/).
 
-Nitro is the next generation of server toolkit. It allows us to create web servers with everything we need and deploy them wherever we prefer. It powers Nuxt as the server layer. Everything we will do in this article can be done with Nuxt.
-
-:read-more{title="Nuxt Server Layer" to="https://nuxt.com/docs/getting-started/server"}
+Nitro is the next generation of server toolkit. It allows us to create web servers with everything we need and deploy them wherever we prefer.
 
 Cloudflare Pages is a platform to build and host websites on the edge. It's possible to use services like [KV](https://developers.cloudflare.com/kv/) to create a full-stack stateful applications.
 
@@ -75,18 +70,19 @@ First, we need to create a route called `index.get.tsx` in the `server/routes` f
 
 ```tsx [server/routes/index.get.tsx]
 import { Helmet, h, renderSSR } from 'nano-jsx' // the `h` is very important here
+import { withTemplate } from '../resources/template'
 
-export default defineEventHandler(() => {
+export default defineLazyEventHandler(() => {
   const App = () => {
     return (
       <div>
         <Helmet>
           <title>URL Shortener with Nitro</title>
         </Helmet>
-        <h2>Create shorten URL!</h2>
+        <h2>Shorten an URL</h2>
         <form action="/create" method="POST">
           <input type="url" name="url" placeholder="URL to shorten" autocomplete="off" />
-          <button type="submit">create</button>
+          <button type="submit">Create</button>
         </form>
       </div>
     )
@@ -94,20 +90,24 @@ export default defineEventHandler(() => {
   const app = renderSSR(<App />)
   const { body, head } = Helmet.SSR(app)
 
-  return withTemplate({
+  const page = withTemplate({
     body,
     head,
+  })
+
+  return defineEventHandler(() => {
+    return page
   })
 })
 ```
 
 This route will display a form where the user can enter a URL to shorten. When the form is submitted, it will send a POST request to the `/create` route.
 
-The function `withTemplate` is a util that we need to create but it is auto imported.
+We use a lazy event handler to create the view only once, when a request hit the server. Then, the response is cached in-memory and reused for subsequent requests. This is useful to avoid creating the view on every request since it's the same for everyone.
 
-:read-more{title="Nitro Auto Imports" to="https://nitro.unjs.io/guide/utils#auto-imports"}
+The function `withTemplate` is a util that we need to create.
 
-```ts [server/utils/template.tsx]
+```ts [server/resources/template.tsx]
 interface LayoutProps {
   body: string
   head: string[]
@@ -127,7 +127,7 @@ export function withTemplate(props: LayoutProps) {
       <body>
         <header class="container">
           <h1>
-            <a href="/">URL Shortener</a>
+            <a href="/">URL Shortener with Nitro</a>
           </h1>
         </header>
         <main class="container">
@@ -154,6 +154,7 @@ Now, we need to create the `/create` route to handle the POST request and store 
 import { z } from 'zod'
 import { hash } from 'ohash'
 import { Helmet, h, renderSSR } from 'nano-jsx' // the `h` is very important here
+import { withTemplate } from '../resources/template'
 
 export default defineEventHandler(async (event) => {
   const body = await readValidatedBody(event, z.object({
@@ -164,7 +165,7 @@ export default defineEventHandler(async (event) => {
   const id = hash(body.url)
   const shortenURL = new URL(`/${id}`, requestURL).href
 
-  await useStorage('db').setItem(id, body.url)
+  await useStorage('data').setItem(id, body.url)
 
   const App = () => {
     return (
@@ -172,7 +173,7 @@ export default defineEventHandler(async (event) => {
         <Helmet>
           <title>Created</title>
         </Helmet>
-        <h2>Created!</h2>
+        <h2>Created and Ready</h2>
         <input
           type="text"
           value={shortenURL}
@@ -198,19 +199,21 @@ Then, we get the request URL using the `getRequestURL` function from `h3`.
 
 We create a hash from the body URL using the `hash` function from `ohash`. This is useful to ensure that a URL will always have the same hash and to avoid collisions.
 
-We store the URL in the KV using the `useStorage` function from `unstorage`. We use the `db` namespace to store the URLs but we neeed to configure this namespace in the Nitro configuration.
+We store the URL in the KV using the `useStorage` function from `unstorage`. We use the `data` namespace to store the URLs  that is pre-configured for us.
 
-:read-more{title="Nitro Configuration" to="https://nitro.unjs.io/guide/configuration"}
+:read-more{title="KV Storage" to="https://nitro.unjs.io/guide/storage#usage"}
+
+In development, everything is ok but we need to update this configuration for the production environment.
 
 ```ts [nitro.config.ts]
 export default defineNitroConfig({
   srcDir: 'server',
-  storage: { db: { driver: 'cloudflare-kv-binding', binding: 'url-shortener' } },
-  devStorage: { db: { driver: 'fs', base: '.nitro/data/db' } },
+  storage: { data: { driver: 'cloudflare-kv-binding', binding: 'url-shortener' } },
+  devStorage: { data: { driver: 'fs', base: './data/kv' } },
 })
 ```
 
-In this configuration, we define the `db` namespace to use the `cloudflare-kv-binding` driver and the `url-shortener` binding. We also define a `devStorage` to use the `fs` driver for local development. This is useful to avoid using the Cloudflare Wrangler CLI and to simplify the development. After creating an URL, take a look at the `db` folder in the `.nitro/data` folder to see the created file where the name is the ID and the content the original URL.
+In this configuration, we define the `data` namespace to use the `cloudflare-kv-binding` driver and the `url-shortener` binding. We also define a `devStorage` to use the `fs` driver for local development. This is useful to avoid using the Cloudflare Wrangler CLI and to simplify the development. After creating an URL, take a look at the `data` folder in the `.data/kv` folder to see the created file where the name is the ID and the content the original URL.
 
 At the end of this event handler, we return a route with the shorten URL that the user can copy and use.
 
@@ -222,7 +225,7 @@ Finally, we need to create a route to handle the shorten URLs and redirect the u
 export default defineEventHandler(async (event) => {
   const id = getRouterParam(event, 'short')
 
-  const value = await useStorage<string>('db').getItem(id)
+  const value = await useStorage<string>('data').getItem(id)
 
   if (!value) {
     throw createError({
@@ -269,7 +272,7 @@ In a CI environment, Nitro is able to automatically detect the preset to use.
 
 :read-more{title="Zero Config Providers" to="https://nitro.unjs.io/deploy#zero-config-providers"}
 
-Once it's done, we could se `✨ Deployment complete! Take a peek over at https://908ff113.url-shortener-<...>.pages.dev` in our terminal.
+Once it's done, we could se `✨ Deployment complete! Take a peek over at https://url-shortener-<...>.pages.dev` in our terminal.
 
 If we open the URL, we will see an internal error because we need to bind a KV namespace to the project. To do it, we need to open the Cloudflare Pages dashboard and create a new KV namespace named `url-shortener`. Then, we can go to the project settings and in the sub-menu functions. We need to add a KV namespace and bind it to the `url-shortener` binding (same name as in the Nitro configuration) using the namespace we just created called `url-shortener`.
 
@@ -280,35 +283,72 @@ Redeploy the project using the `deploy` script and open the URL again. Now, we c
 
 ## Going Further
 
-We can add a simple CSRF protection using a Nitro middleware.
+We can add a simple CSRF protection using the handler object syntax.
 
-```ts [server/middlewares/csrf.ts]
-export default defineEventHandler(async (event) => {
-  const method = event.method
+```tsx [server/routes/create.post.tsx]
+import { z } from 'zod'
+import { hash } from 'ohash'
+import { Helmet, h, renderSSR } from 'nano-jsx'
+import { withTemplate } from '../resources/template'
 
-  if (method === 'GET')
-    return
+export default defineEventHandler({
+  onBeforeResponse: async (event) => {
+    const requestURL = getRequestURL(event).origin
+    const origin = getRequestHeader(event, 'origin')
 
-  const requestURL = getRequestURL(event).origin
-  const origin = getRequestHeader(event, 'origin')
+    if (!origin) {
+      throw createError({
+        statusCode: 400,
+        statusMessage: 'Bad Request',
+      })
+    }
 
-  if (!origin) {
-    throw createError({
-      statusCode: 400,
-      statusMessage: 'Bad Request',
+    if (origin !== requestURL) {
+      throw createError({
+        statusCode: 403,
+        statusMessage: 'Forbidden',
+      })
+    }
+  },
+  handler: async (event) => {
+    const body = await readValidatedBody(event, z.object({
+      url: z.string().url(),
+    }).parse)
+
+    const requestURL = getRequestURL(event)
+    const id = hash(body.url)
+    const shortenURL = new URL(`/${id}`, requestURL).href
+
+    await useStorage('data').setItem(id, body.url)
+
+    const App = () => {
+      return (
+        <div>
+          <Helmet>
+            <title>Created</title>
+          </Helmet>
+          <h2>Created and Ready</h2>
+          <input
+            type="text"
+            value={shortenURL}
+            autofocus
+          />
+        </div>
+      )
+    }
+
+    const app = renderSSR(<App />)
+    const { body: nanoBody, head } = Helmet.SSR(app)
+
+    return withTemplate({
+      body: nanoBody,
+      head,
     })
-  }
-
-  if (origin !== requestURL) {
-    throw createError({
-      statusCode: 403,
-      statusMessage: 'Forbidden',
-    })
-  }
+  },
 })
 ```
 
-This middleware will only run on `post` request. If header `origin` is different from the request origin, an error is thrown.
+We define a pre-request handler to verify the `origin` header. If there is a mismatch, we throw an error. Otherwise, we continue to the main handler.
 
 > [!NOTE]
 > Please read [Cross-Site Request Forgery Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html) from OWASP to understand the CSRF protection. Verifing the `origin` header is a simple way to protect against CSRF but considered as an in-depth defense. It is recommended to use a more advanced protection like a token.
@@ -317,6 +357,7 @@ This middleware will only run on `post` request. If header `origin` is different
 
 Building with Nitro and Cloudflare Pages is pretty easy and provide a great developer experience thanks to the ability to use TSX and a development storage avoiding use the usage of the Cloudflare Wrangler CLI.
 
-Imagine what you can do with a full framework like Nuxt. You can use the same server layer and have Vue on the client. You can use [Nuxt Security](https://nuxt.com/modules/security) for many security features like the CSRF and [Nuxt Hub](https://hub.nuxt.com/) for a better storage DX.
-
 Enjoy building with Nitro and Cloudflare Pages! :rocket:
+
+> [!NOTE]
+> The URL shortener is inspired by the [url-shortener of Yusuke Wada](https://github.com/yusukebe/url-shortener).
