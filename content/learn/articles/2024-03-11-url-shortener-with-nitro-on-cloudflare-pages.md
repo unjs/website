@@ -27,7 +27,7 @@ Nitro is the next generation of server toolkit. It allows us to create web serve
 
 :read-more{title="Nuxt Server Layer" to="https://nuxt.com/docs/getting-started/server"}
 
-Cloudflare Pages is a platform to build and host websites on the edge. It's possible to use services like KV, D1, and Durable Objects to create a full-stack application.
+Cloudflare Pages is a platform to build and host websites on the edge. It's possible to use services like [KV](https://developers.cloudflare.com/kv/) to create a full-stack stateful applications.
 
 Our project is a simple URL shortener that will allow us to create a short URL from a long one. We will use the Cloudflare KV to store the URLs and the Nitro server to handle the requests.
 
