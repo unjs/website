@@ -254,7 +254,7 @@ That's it! We have created a simple URL shortener using Nitro. Now, we need to d
 
 First, log in to the Cloudflare dashboard and select an account. Then, click on Account Home, select Workers & Pages. Create a new application using the top right button then the tab Pages and follow the process by using a Git connection.
 
-Select the repo, add the build command `npm run build`, the output directory `dist`, and save and deploy.
+Select the repo, add the build command `npm run build`, the output directory `dist`, add an environment variable `NODE_ENV` with the value `production` and save and deploy.
 
 Now, we've just to wait for the deployment to be completed. Once it's done, we can access the URL shortener using the URL provided by Cloudflare Pages.
 
