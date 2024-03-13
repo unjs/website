@@ -18,11 +18,11 @@ publishedAt: 2024-03-11
 modifiedAt: 2024-03-11
 ---
 
-In this article, we will create our own URL shortener using [Nitro](https://nitro.unjs.io) deploy it on [Cloudflare Pages](https://pages.cloudflare.com/).
+In this article, we will create our own URL shortener using [Nitro](https://nitro.unjs.io) and deploy it on [Cloudflare Pages](https://pages.cloudflare.com/).
 
 Nitro is the next generation of server toolkit. It allows us to create web servers with everything we need and deploy them wherever we prefer.
 
-Cloudflare Pages is a platform to build and host websites on the edge. It's possible to use services like [KV](https://developers.cloudflare.com/kv/) to create a full-stack stateful applications.
+Cloudflare Pages is a platform to build and host websites on the edge. It's possible to use services like [KV](https://developers.cloudflare.com/kv/) to create full-stack stateful applications.
 
 Our project is a simple URL shortener that will allow us to create a short URL from a long one. We will use the Cloudflare KV to store the URLs and the Nitro server to handle the requests.
 
