@@ -193,17 +193,17 @@ export default defineEventHandler(async (event) => {
 })
 ```
 
-In this route, we use the `readValidatedBody` function to validate the request body. This ensure us that the `url` field is a valid URL. Otherwise, it will throw an error.
+In this route, we use the `readValidatedBody` function to validate the request body. This ensures us that the `url` field is a valid URL. Otherwise, it will throw an error.
 
 Then, we get the request URL using the `getRequestURL` function from `h3`.
 
 We create a hash from the body URL using the `hash` function from `ohash`. This is useful to ensure that a URL will always have the same hash and to avoid collisions.
 
-We store the URL in the KV using the `useStorage` function from `unstorage`. We use the `data` namespace to store the URLs  that is pre-configured for us.
+We store the URL in the KV using the `useStorage` function from `unstorage`. We use the `data` namespace to store the URLs that is pre-configured for us.
 
 :read-more{title="KV Storage" to="https://nitro.unjs.io/guide/storage#usage"}
 
-At the end of this event handler, we return a route with the shorten URL that the user can copy and use.
+At the end of this event handler, we return a route with the shortened URL that the user can copy and use.
 
 In development, everything is ok but we need to update this configuration for the production environment.
 
@@ -222,7 +222,7 @@ In this configuration, we define the `data` namespace, same as in development, t
 
 ### Redirect to the URL
 
-Finally, we need to create a route to handle the shorten URLs and redirect the user to the original URL.
+Finally, we need to create a route to handle the shortened URLs and redirect the user to the original URL.
 
 ```ts [server/routes/[id].get.ts]
 export default defineEventHandler(async (event) => {
@@ -258,8 +258,7 @@ Select the repo, add the build command `npm run build`, the output directory `di
 
 Now, we've just to wait for the deployment to be completed. Once it's done, we can access the URL shortener using the URL provided by Cloudflare Pages.
 
-**But**, it will not really works since we do not have bind a KV namespace. We need to do it manually. Go to the project, settings, functions and scroll until
-you see KV namespace bindings. Then, add a binding with the name `url-shortener` and the namespace you want to use.
+**But**, it will not really work since we do not have bind a KV namespace. We need to do it manually. Go to the project, settings, functions and scroll until you see KV namespace bindings. Then, add a binding with the name `url-shortener` and the namespace you want to use.
 
 > [!NOTE]
 > It is possible to create a KV namespace in the Workers & Pages section.
