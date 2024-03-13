@@ -203,19 +203,22 @@ We store the URL in the KV using the `useStorage` function from `unstorage`. We 
 
 :read-more{title="KV Storage" to="https://nitro.unjs.io/guide/storage#usage"}
 
+At the end of this event handler, we return a route with the shorten URL that the user can copy and use.
+
 In development, everything is ok but we need to update this configuration for the production environment.
 
 ```ts [nitro.config.ts]
 export default defineNitroConfig({
   srcDir: 'server',
-  storage: { data: { driver: 'cloudflare-kv-binding', binding: 'url-shortener' } },
-  devStorage: { data: { driver: 'fs', base: './data/kv' } },
+  $production: {
+    storage: { data: { driver: 'cloudflare-kv-binding', binding: 'url-shortener' } },
+  },
 })
 ```
 
-In this configuration, we define the `data` namespace to use the `cloudflare-kv-binding` driver and the `url-shortener` binding. We also define a `devStorage` to use the `fs` driver for local development. This is useful to avoid using the Cloudflare Wrangler CLI and to simplify the development. After creating an URL, take a look at the `data` folder in the `.data/kv` folder to see the created file where the name is the ID and the content the original URL.
+In this configuration, we define the `data` namespace, same as in development, to use the `cloudflare-kv-binding` driver and the `url-shortener` binding under the key `$production`. This means that this configuration will only be used in the production environment to access to the Cloudflare KV.
 
-At the end of this event handler, we return a route with the shorten URL that the user can copy and use.
+:read-more{title="Environment-specific configuration" to="https://github.com/unjs/c12#environment-specific-configuration"}
 
 ### Redirect to the URL
 
@@ -242,41 +245,26 @@ Nothing really special here. We get the `id` from the router params and we use t
 
 ## Deploy the URL Shortener
 
-That's it! We have created a simple URL shortener using Nitro. Now, we need to deploy it on Cloudflare Pages. Don't panic, it's easy!
-
-> [!WARNING]
-> We need to have a Cloudflare account to continue.
-
-First, install `wrangler`:
-
-```bash
-npm i -D wrangler
-```
-
-Then, add the script to deploy the project in the `package.json`:
-
-```json [package.json]
-{
-  "scripts": {
-    "deploy": "NITRO_PRESET=cloudflare-pages npm run build && wrangler pages deploy dist"
-  }
-}
-```
-
-This script will build our project using the Cloudflare Pages preset and deploy it using the `wrangler` CLI.
-
-> [!NOTE]
-> `wrangler` could ask us to login to your Cloudflare account before deploying the project.
-
-In a CI environment, Nitro is able to automatically detect the preset to use.
+That's it! We have created a simple URL shortener using Nitro. Now, we need to deploy it on Cloudflare Pages. Don't panic, it's easy thanks to the zero-config deployment providers.
 
 :read-more{title="Zero Config Providers" to="https://nitro.unjs.io/deploy#zero-config-providers"}
 
-Once it's done, we could se `✨ Deployment complete! Take a peek over at https://url-shortener-<...>.pages.dev` in our terminal.
+> [!WARNING]
+> We need to have a Cloudflare account and a GitHub repository to deploy the app to continue.
 
-If we open the URL, we will see an internal error because we need to bind a KV namespace to the project. To do it, we need to open the Cloudflare Pages dashboard and create a new KV namespace named `url-shortener`. Then, we can go to the project settings and in the sub-menu functions. We need to add a KV namespace and bind it to the `url-shortener` binding (same name as in the Nitro configuration) using the namespace we just created called `url-shortener`.
+First, log in to the Cloudflare dashboard and select an account. Then, click on Account Home, select Workers & Pages. Create a new application using the top right button then the tab Pages and follow the process by using a Git connection.
 
-Redeploy the project using the `deploy` script and open the URL again. Now, we can use the URL shortener to create short URLs from long ones. :sparkles:
+Select the repo, add the build command `npm run build`, the output directory `dist`, and save and deploy.
+
+Now, we've just to wait for the deployment to be completed. Once it's done, we can access the URL shortener using the URL provided by Cloudflare Pages.
+
+**But**, it will not really works since we do not have bind a KV namespace. We need to do it manually. Go to the project, settings, functions and scroll until
+you see KV namespace bindings. Then, add a binding with the name `url-shortener` and the namespace you want to use.
+
+> [!NOTE]
+> It is possible to create a KV namespace in the Workers & Pages section.
+
+Now, we must redeploy our application to take into account the new KV namespace binding. Once it's done, we can use the URL shortener. :sparkles:
 
 > [!NOTE]
 > If you do not plan to use the project, remember to delete it from the Cloudflare Pages dashboard to avoid unnecessary costs.
