@@ -103,7 +103,7 @@ export default defineLazyEventHandler(() => {
 
 This route will display a form where the user can enter a URL to shorten. When the form is submitted, it will send a POST request to the `/create` route.
 
-We use a lazy event handler to create the view only once, when a request hit the server. Then, the response is cached in-memory and reused for subsequent requests. This is useful to avoid creating the view on every request since it's the same for everyone.
+We use a lazy event handler to create the view only once, when a request hits the server. Then, the response is cached in-memory and reused for subsequent requests. This is useful to avoid creating the view on every request since it's the same for everyone.
 
 The function `withTemplate` is a util that we need to create.
 
