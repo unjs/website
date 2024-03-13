@@ -342,9 +342,9 @@ We define a pre-request handler to verify the `origin` header. If there is a mis
 
 ## Finally
 
-Building with Nitro and Cloudflare Pages is pretty easy and provide a great developer experience thanks to the ability to use TSX and a development storage avoiding use the usage of the Cloudflare Wrangler CLI.
+Building with Nitro and Cloudflare Pages is pretty easy and provides a great developer experience thanks to the ability to use TSX and a development storage avoiding the usage of the Cloudflare Wrangler CLI.
 
-Enjoy building with Nitro and Cloudflare Pages! :rocket:
+Enjoy building with Nitro and Cloudflare Pages! 🚀
 
 > [!NOTE]
 > The URL shortener is inspired by the [url-shortener of Yusuke Wada](https://github.com/yusukebe/url-shortener).
