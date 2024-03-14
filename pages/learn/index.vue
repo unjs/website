@@ -23,7 +23,9 @@ defineOgImageComponent('OgImagePage', {
 
 const { data: latestBlog } = await useAsyncData('blog:latest', () => queryContent('/blog/').only(['_path', 'title', 'description', 'publishedAt', 'authors', 'packages', 'categories']).sort({ publishedAt: -1 }).limit(3).find(), { default: () => [] }) as { data: Ref<BlogPostCard[]> }
 
-const latestArticles: LearnArticleCard[] = []
+const { data: latestArticles } = await useAsyncData('learn:latest', () => queryContent('/learn/articles/').only(['_path', 'title', 'description', 'publishedAt', 'authors', 'category']).sort({ publishedAt: -1 }).limit(3).find(), { default: () => [] }) as { data: Ref<LearnArticleCard[]> }
+
+const { data: randomArticle } = await useAsyncData('learn:random', () => queryContent('/learn/articles/').only(['_path']).find(), { transform: data => data[Math.floor(Math.random() * data.length)]._path }) as { data: Ref<LearnArticleCard> }
 
 const categories = [{
   id: 'getting-started',
@@ -88,11 +90,12 @@ const categories = [{
 
       <AppListGrid class="mt-3">
         <AppListGridItem v-for="item in latestArticles" :key="item._path">
-          <ArticlesCard
-            :path="item._path!"
+          <LearnCard
+            :path="item._path"
             :title="item.title"
             :description="item.description"
             :published-at="item.publishedAt"
+            :category="item.category"
             :authors="item.authors"
           />
         </AppListGridItem>
@@ -134,8 +137,7 @@ const categories = [{
       </p>
 
       <div class="mt-12">
-        <!-- TODO: randomize to get one 101 (or just the latest one) -->
-        <UButton to="/?utm_source=unjs.io&utm_medium=learn-start-now" color="primary" variant="solid" size="lg" :ui="{ variant: { solid: 'text-gray-950 dark:text-gray-50 bg-primary bg-opacity-40 dark:bg-opacity-30  hover:bg-primary/60 dark:hover:bg-primary/40' } }" trailing-icon="i-heroicons-chevron-right-20-solid">
+        <UButton :to="`${randomArticle}/?utm_source=unjs.io&utm_medium=learn-start-now`" color="primary" variant="solid" size="lg" :ui="{ variant: { solid: 'text-gray-950 dark:text-gray-50 bg-primary bg-opacity-40 dark:bg-opacity-30  hover:bg-primary/60 dark:hover:bg-primary/40' } }" trailing-icon="i-heroicons-chevron-right-20-solid">
           Read an article
         </UButton>
       </div>

@@ -10,10 +10,10 @@ packages:
   - nitro
   - unstorage
   - ohash
- resources:
-   - label: Source Code
-     to: https://github.com/barbapapazes/url-shortener
-     icon: i-simple-icons-github
+resources:
+  - label: Source Code
+    to: https://github.com/barbapapazes/url-shortener
+    icon: i-simple-icons-github
 publishedAt: 2024-03-11
 modifiedAt: 2024-03-11
 ---
