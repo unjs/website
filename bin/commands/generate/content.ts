@@ -29,9 +29,10 @@ export const content = defineCommand({
 
     const title = await consola.prompt(`Title of the '${type}' article`, { type: 'text' })
     const date = generateDate()
-    const filename = createFilename(title, date)
 
     if (type === 'blog') {
+      const filename = createFilename(title, date)
+
       const blogPath = getBlogPath()
       const blogTemplatePath = getBlogTemplatePath()
       const template = readFileSync(blogTemplatePath, 'utf-8')
@@ -48,6 +49,8 @@ export const content = defineCommand({
     }
 
     if (type === 'learn') {
+      const filename = createFilename(title)
+
       const categories = ['getting-started', 'building-blocks']
 
       const category = await consola.prompt('Category of the learn article', {
@@ -92,7 +95,10 @@ function writeContent(content: string, path: string) {
   writeFileSync(path, content)
 }
 
-function createFilename(name: string, date: string) {
+function createFilename(name: string, date?: string) {
+  if (!date)
+    return `${slugify(name)}.md`
+
   return `${date}-${slugify(name)}.md`
 }
 
