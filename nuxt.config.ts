@@ -2,12 +2,6 @@ import type { NitroConfig } from 'nitropack'
 import packagesRedirects from './config/packages-redirects'
 
 export default defineNuxtConfig({
-  runtimeConfig: {
-    public: {
-      // Use a flag to merge the PRs quickly without pushing it to the production
-      learn: false,
-    },
-  },
   app: {
     head: {
       htmlAttrs: {
@@ -56,8 +50,6 @@ export default defineNuxtConfig({
           to: '/blog/2023-08-25-nitro-2-6',
         },
       },
-      // TODO: Related to public.learn flag
-      '/learn/**': { robots: false },
     },
   },
   content: {

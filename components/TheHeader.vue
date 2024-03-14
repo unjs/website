@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-const runtimeConfig = useRuntimeConfig()
 const website = useWebsite()
 const github = website.value.socials.github
 
@@ -8,7 +7,7 @@ const navigation = [
     path: '/packages',
     title: 'Packages',
   },
-  runtimeConfig.public.learn && {
+  {
     path: '/learn',
     title: 'Learn',
   },

@@ -48,8 +48,8 @@ export default defineAppConfig({
          * Without, page /blog will be in the wrong group
          */
         {
-          name: 'Articles',
-          path: '/resources/',
+          name: 'Learn',
+          path: '/learn/',
         },
         {
           name: 'Blog',
@@ -103,24 +103,12 @@ export default defineAppConfig({
         {
           title: 'Content',
           items: [
-          //   {
-          //     title: 'Learn',
-          //     url: '/learn',
-          //     rel: null,
-          //     target: null,
-          //   },
-          //   {
-          //     title: 'Build',
-          //     url: '/build',
-          //     rel: null,
-          //     target: null,
-          //   },
-          //   {
-          //     title: 'Explore',
-          //     url: '/explore',
-          //     rel: null,
-          //     target: null,
-          //   },
+            {
+              title: 'Learn',
+              url: '/learn',
+              rel: null,
+              target: null,
+            },
             {
               title: 'Search',
               url: '/search',
