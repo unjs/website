@@ -1,449 +1,449 @@
-/** Do not edit manually. Use `jiti bin generate packages-redirects`. */
+/** Do not edit manually. Use `jiti bin sync packages-redirects`. */
 export default {
-  "/automd": {
+  '/automd': {
     redirect: {
-      to: "/packages/automd",
+      to: '/packages/automd',
       statusCode: 302
     }
   },
 
-  "/bundle-runner": {
+  '/bundle-runner': {
     redirect: {
-      to: "/packages/bundle-runner",
+      to: '/packages/bundle-runner',
       statusCode: 302
     }
   },
 
-  "/c12": {
+  '/c12': {
     redirect: {
-      to: "/packages/c12",
+      to: '/packages/c12',
       statusCode: 302
     }
   },
 
-  "/changelogen": {
+  '/changelogen': {
     redirect: {
-      to: "/packages/changelogen",
+      to: '/packages/changelogen',
       statusCode: 302
     }
   },
 
-  "/citty": {
+  '/citty': {
     redirect: {
-      to: "/packages/citty",
+      to: '/packages/citty',
       statusCode: 302
     }
   },
 
-  "/confbox": {
+  '/confbox': {
     redirect: {
-      to: "/packages/confbox",
+      to: '/packages/confbox',
       statusCode: 302
     }
   },
 
-  "/consola": {
+  '/consola': {
     redirect: {
-      to: "/packages/consola",
+      to: '/packages/consola',
       statusCode: 302
     }
   },
 
-  "/cookie-es": {
+  '/cookie-es': {
     redirect: {
-      to: "/packages/cookie-es",
+      to: '/packages/cookie-es',
       statusCode: 302
     }
   },
 
-  "/crossws": {
+  '/crossws': {
     redirect: {
-      to: "/packages/crossws",
+      to: '/packages/crossws',
       statusCode: 302
     }
   },
 
-  "/db0": {
+  '/db0': {
     redirect: {
-      to: "/packages/db0",
+      to: '/packages/db0',
       statusCode: 302
     }
   },
 
-  "/defu": {
+  '/defu': {
     redirect: {
-      to: "/packages/defu",
+      to: '/packages/defu',
       statusCode: 302
     }
   },
 
-  "/destr": {
+  '/destr': {
     redirect: {
-      to: "/packages/destr",
+      to: '/packages/destr',
       statusCode: 302
     }
   },
 
-  "/fontaine": {
+  '/fontaine': {
     redirect: {
-      to: "/packages/fontaine",
+      to: '/packages/fontaine',
       statusCode: 302
     }
   },
 
-  "/fs-memo": {
+  '/fs-memo': {
     redirect: {
-      to: "/packages/fs-memo",
+      to: '/packages/fs-memo',
       statusCode: 302
     }
   },
 
-  "/get-port-please": {
+  '/get-port-please': {
     redirect: {
-      to: "/packages/get-port-please",
+      to: '/packages/get-port-please',
       statusCode: 302
     }
   },
 
-  "/giget": {
+  '/giget': {
     redirect: {
-      to: "/packages/giget",
+      to: '/packages/giget',
       statusCode: 302
     }
   },
 
-  "/h3": {
+  '/h3': {
     redirect: {
-      to: "/packages/h3",
+      to: '/packages/h3',
       statusCode: 302
     }
   },
 
-  "/hookable": {
+  '/hookable': {
     redirect: {
-      to: "/packages/hookable",
+      to: '/packages/hookable',
       statusCode: 302
     }
   },
 
-  "/httpxy": {
+  '/httpxy': {
     redirect: {
-      to: "/packages/httpxy",
+      to: '/packages/httpxy',
       statusCode: 302
     }
   },
 
-  "/image-meta": {
+  '/image-meta': {
     redirect: {
-      to: "/packages/image-meta",
+      to: '/packages/image-meta',
       statusCode: 302
     }
   },
 
-  "/ipx": {
+  '/ipx': {
     redirect: {
-      to: "/packages/ipx",
+      to: '/packages/ipx',
       statusCode: 302
     }
   },
 
-  "/jimp-compact": {
+  '/jimp-compact': {
     redirect: {
-      to: "/packages/jimp-compact",
+      to: '/packages/jimp-compact',
       statusCode: 302
     }
   },
 
-  "/jiti": {
+  '/jiti': {
     redirect: {
-      to: "/packages/jiti",
+      to: '/packages/jiti',
       statusCode: 302
     }
   },
 
-  "/knitwork": {
+  '/knitwork': {
     redirect: {
-      to: "/packages/knitwork",
+      to: '/packages/knitwork',
       statusCode: 302
     }
   },
 
-  "/listhen": {
+  '/listhen': {
     redirect: {
-      to: "/packages/listhen",
+      to: '/packages/listhen',
       statusCode: 302
     }
   },
 
-  "/magic-regexp": {
+  '/magic-regexp': {
     redirect: {
-      to: "/packages/magic-regexp",
+      to: '/packages/magic-regexp',
       statusCode: 302
     }
   },
 
-  "/magicast": {
+  '/magicast': {
     redirect: {
-      to: "/packages/magicast",
+      to: '/packages/magicast',
       statusCode: 302
     }
   },
 
-  "/mdbox": {
+  '/mdbox': {
     redirect: {
-      to: "/packages/mdbox",
+      to: '/packages/mdbox',
       statusCode: 302
     }
   },
 
-  "/mkdist": {
+  '/mkdist': {
     redirect: {
-      to: "/packages/mkdist",
+      to: '/packages/mkdist',
       statusCode: 302
     }
   },
 
-  "/mlly": {
+  '/mlly': {
     redirect: {
-      to: "/packages/mlly",
+      to: '/packages/mlly',
       statusCode: 302
     }
   },
 
-  "/mongoz": {
+  '/mongoz': {
     redirect: {
-      to: "/packages/mongoz",
+      to: '/packages/mongoz',
       statusCode: 302
     }
   },
 
-  "/nanotar": {
+  '/nanotar': {
     redirect: {
-      to: "/packages/nanotar",
+      to: '/packages/nanotar',
       statusCode: 302
     }
   },
 
-  "/nitro": {
+  '/nitro': {
     redirect: {
-      to: "/packages/nitro",
+      to: '/packages/nitro',
       statusCode: 302
     }
   },
 
-  "/node-fetch-native": {
+  '/node-fetch-native': {
     redirect: {
-      to: "/packages/node-fetch-native",
+      to: '/packages/node-fetch-native',
       statusCode: 302
     }
   },
 
-  "/nypm": {
+  '/nypm': {
     redirect: {
-      to: "/packages/nypm",
+      to: '/packages/nypm',
       statusCode: 302
     }
   },
 
-  "/ofetch": {
+  '/ofetch': {
     redirect: {
-      to: "/packages/ofetch",
+      to: '/packages/ofetch',
       statusCode: 302
     }
   },
 
-  "/ohash": {
+  '/ohash': {
     redirect: {
-      to: "/packages/ohash",
+      to: '/packages/ohash',
       statusCode: 302
     }
   },
 
-  "/pathe": {
+  '/pathe': {
     redirect: {
-      to: "/packages/pathe",
+      to: '/packages/pathe',
       statusCode: 302
     }
   },
 
-  "/perfect-debounce": {
+  '/perfect-debounce': {
     redirect: {
-      to: "/packages/perfect-debounce",
+      to: '/packages/perfect-debounce',
       statusCode: 302
     }
   },
 
-  "/pkg-types": {
+  '/pkg-types': {
     redirect: {
-      to: "/packages/pkg-types",
+      to: '/packages/pkg-types',
       statusCode: 302
     }
   },
 
-  "/radix3": {
+  '/radix3': {
     redirect: {
-      to: "/packages/radix3",
+      to: '/packages/radix3',
       statusCode: 302
     }
   },
 
-  "/rc9": {
+  '/rc9': {
     redirect: {
-      to: "/packages/rc9",
+      to: '/packages/rc9',
       statusCode: 302
     }
   },
 
-  "/scule": {
+  '/scule': {
     redirect: {
-      to: "/packages/scule",
+      to: '/packages/scule',
       statusCode: 302
     }
   },
 
-  "/serve-placeholder": {
+  '/serve-placeholder': {
     redirect: {
-      to: "/packages/serve-placeholder",
+      to: '/packages/serve-placeholder',
       statusCode: 302
     }
   },
 
-  "/std-env": {
+  '/std-env': {
     redirect: {
-      to: "/packages/std-env",
+      to: '/packages/std-env',
       statusCode: 302
     }
   },
 
-  "/theme-colors": {
+  '/theme-colors': {
     redirect: {
-      to: "/packages/theme-colors",
+      to: '/packages/theme-colors',
       statusCode: 302
     }
   },
 
-  "/ufo": {
+  '/ufo': {
     redirect: {
-      to: "/packages/ufo",
+      to: '/packages/ufo',
       statusCode: 302
     }
   },
 
-  "/unbuild": {
+  '/unbuild': {
     redirect: {
-      to: "/packages/unbuild",
+      to: '/packages/unbuild',
       statusCode: 302
     }
   },
 
-  "/uncrypto": {
+  '/uncrypto': {
     redirect: {
-      to: "/packages/uncrypto",
+      to: '/packages/uncrypto',
       statusCode: 302
     }
   },
 
-  "/unctx": {
+  '/unctx': {
     redirect: {
-      to: "/packages/unctx",
+      to: '/packages/unctx',
       statusCode: 302
     }
   },
 
-  "/undio": {
+  '/undio': {
     redirect: {
-      to: "/packages/undio",
+      to: '/packages/undio',
       statusCode: 302
     }
   },
 
-  "/undocs": {
+  '/undocs': {
     redirect: {
-      to: "/packages/undocs",
+      to: '/packages/undocs',
       statusCode: 302
     }
   },
 
-  "/unenv": {
+  '/unenv': {
     redirect: {
-      to: "/packages/unenv",
+      to: '/packages/unenv',
       statusCode: 302
     }
   },
 
-  "/ungh": {
+  '/ungh': {
     redirect: {
-      to: "/packages/ungh",
+      to: '/packages/ungh',
       statusCode: 302
     }
   },
 
-  "/unhead": {
+  '/unhead': {
     redirect: {
-      to: "/packages/unhead",
+      to: '/packages/unhead',
       statusCode: 302
     }
   },
 
-  "/unimport": {
+  '/unimport': {
     redirect: {
-      to: "/packages/unimport",
+      to: '/packages/unimport',
       statusCode: 302
     }
   },
 
-  "/unpdf": {
+  '/unpdf': {
     redirect: {
-      to: "/packages/unpdf",
+      to: '/packages/unpdf',
       statusCode: 302
     }
   },
 
-  "/unplugin": {
+  '/unplugin': {
     redirect: {
-      to: "/packages/unplugin",
+      to: '/packages/unplugin',
       statusCode: 302
     }
   },
 
-  "/unstorage": {
+  '/unstorage': {
     redirect: {
-      to: "/packages/unstorage",
+      to: '/packages/unstorage',
       statusCode: 302
     }
   },
 
-  "/untun": {
+  '/untun': {
     redirect: {
-      to: "/packages/untun",
+      to: '/packages/untun',
       statusCode: 302
     }
   },
 
-  "/untyped": {
+  '/untyped': {
     redirect: {
-      to: "/packages/untyped",
+      to: '/packages/untyped',
       statusCode: 302
     }
   },
 
-  "/unwasm": {
+  '/unwasm': {
     redirect: {
-      to: "/packages/unwasm",
+      to: '/packages/unwasm',
       statusCode: 302
     }
   },
 
-  "/uqr": {
+  '/uqr': {
     redirect: {
-      to: "/packages/uqr",
+      to: '/packages/uqr',
       statusCode: 302
     }
   },
 
-  "/webpackbar": {
+  '/webpackbar': {
     redirect: {
-      to: "/packages/webpackbar",
+      to: '/packages/webpackbar',
       statusCode: 302
     }
   }
