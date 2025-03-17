@@ -8,8 +8,6 @@ const openAbout = defineModel<boolean>('about', { required: true })
 const openMenu = defineModel<boolean>('menu', { required: true })
 const openLegend = defineModel<boolean>('legend', { required: true })
 
-const { metaSymbol } = useShortcuts()
-
 const { updateQuery } = useRelationsQuery()
 const { settings } = useRelationsSettings()
 
@@ -38,7 +36,7 @@ const settingsItems = computed(() => [[{
   {
     label: openMenu.value ? 'Hide Menu' : 'Show Menu',
     icon: 'i-ph-house',
-    shortcuts: [metaSymbol.value, 'm'],
+    // shortcuts: [metaSymbol.value, 'm'],
     click: () => {
       openMenu.value = !openMenu.value
     },
@@ -46,7 +44,7 @@ const settingsItems = computed(() => [[{
   {
     label: openLegend.value ? 'Hide Legend' : 'Show Legend',
     icon: 'i-heroicons-tag',
-    shortcuts: [metaSymbol.value, 'l'],
+    // shortcuts: [metaSymbol.value, 'l'],
     click: () => {
       openLegend.value = !openLegend.value
     },
@@ -55,7 +53,7 @@ const settingsItems = computed(() => [[{
   {
     label: 'About',
     icon: 'i-heroicons-information-circle',
-    shortcuts: [metaSymbol.value, 'i'],
+    // shortcuts: [metaSymbol.value, 'i'],
     click: () => {
       openAbout.value = !openAbout.value
     },
@@ -63,7 +61,7 @@ const settingsItems = computed(() => [[{
   {
     label: 'Help',
     icon: 'i-simple-icons-github',
-    shortcuts: [metaSymbol.value, 'h'],
+    // shortcuts: [metaSymbol.value, 'h'],
     to: 'https://github.com/unjs/website/issues',
     target: '_blank',
   },
@@ -85,19 +83,19 @@ const settingsItems = computed(() => [[{
             UnJS Relations
           </h1>
         </div>
-        <UDropdown :items="settingsItems" :popper="{ adaptative: false, placement: 'bottom', strategy: 'absolute' }">
-          <UButton color="gray" variant="ghost" icon="i-ph-faders-horizontal" aria-label="Settings" />
-        </UDropdown>
+        <UDropdownMenu :items="settingsItems">
+          <UButton color="neutral" variant="ghost" icon="i-ph-faders-horizontal" aria-label="Settings" />
+        </UDropdownMenu>
       </div>
 
       <div class="mt-2 flex flex-col gap-2">
-        <UButton variant="ghost" color="gray" @click="emits('openUnjs', true)">
+        <UButton variant="ghost" color="neutral" @click="emits('openUnjs', true)">
           <template #leading>
             <UAvatar src="/favicon.svg" alt="UnJS Logo" size="2xs" :ui="{ rounded: 'rounded-sm' }" />
           </template>
           UnJS Packages
         </UButton>
-        <UButton variant="ghost" color="gray" icon="i-simple-icons-npm" @click="emits('openNpm', true)">
+        <UButton variant="ghost" color="neutral" icon="i-simple-icons-npm" @click="emits('openNpm', true)">
           npm Packages
         </UButton>
       </div>

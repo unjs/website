@@ -23,15 +23,15 @@ const open = defineModel<boolean>('open', { required: true })
 
           <UTooltip v-if="package.source === 'unjs'" text="View on UnJS">
             <!-- TODO: wait for https://github.com/nuxt/nuxt/pull/25658 -->
-            <!-- <UButton aria-label="View on UnJS" :to="`/packages/${package.name}?utm_source=unjs&utm_medium=graph-slideover&utm_campaign=unjs.io`" variant="ghost" color="gray"> -->
-            <UButton aria-label="View on UnJS" :to="`/packages/${package.name}`" variant="ghost" color="gray">
+            <!-- <UButton aria-label="View on UnJS" :to="`/packages/${package.name}?utm_source=unjs&utm_medium=graph-slideover&utm_campaign=unjs.io`" variant="ghost" color="neutral"> -->
+            <UButton aria-label="View on UnJS" :to="`/packages/${package.name}`" variant="ghost" color="neutral">
               <template #leading>
                 <UAvatar :src="toPackageLogo(package.name)" alt="UnJS Logo" size="xs" :ui="{ rounded: 'rounded-sm' }" />
               </template>
             </UButton>
           </UTooltip>
           <UTooltip v-if="package.source === 'npm'" text="View on npm">
-            <UButton icon="i-simple-icons-npm" aria-label="View on npm" :to="`https://npmjs.com/package/${package.name}`" target="_blank" variant="ghost" color="gray" />
+            <UButton icon="i-simple-icons-npm" aria-label="View on npm" :to="`https://npmjs.com/package/${package.name}`" target="_blank" variant="ghost" color="neutral" />
           </UTooltip>
         </div>
 
@@ -52,12 +52,12 @@ const open = defineModel<boolean>('open', { required: true })
               </span>
               <span class="not-prose flex gap-2">
                 <UTooltip text="View relations">
-                  <UButton icon="i-heroicons-play" variant="ghost" color="gray" @click="emits('viewRelations', dep)" />
+                  <UButton icon="i-heroicons-play" variant="ghost" color="neutral" @click="emits('viewRelations', dep)" />
                 </UTooltip>
                 <UTooltip text="View Package">
                   <!-- TODO: wait for https://github.com/nuxt/nuxt/pull/25658 -->
-                  <!-- <UButton :to="`/packages/${dep}?utm_source=unjs&utm_medium=graph-slideover&utm_campaign=unjs.io`" variant="ghost" color="gray"> -->
-                  <UButton :to="`/packages/${dep}`" variant="ghost" color="gray">
+                  <!-- <UButton :to="`/packages/${dep}?utm_source=unjs&utm_medium=graph-slideover&utm_campaign=unjs.io`" variant="ghost" color="neutral"> -->
+                  <UButton :to="`/packages/${dep}`" variant="ghost" color="neutral">
                     <template #leading>
                       <UAvatar :src="toPackageLogo(dep)" alt="UnJS Logo" size="xs" :ui="{ rounded: 'rounded-sm' }" />
                     </template>
@@ -84,12 +84,12 @@ const open = defineModel<boolean>('open', { required: true })
               </span>
               <span class="not-prose flex gap-2">
                 <UTooltip text="View relations">
-                  <UButton icon="i-heroicons-play" variant="ghost" color="gray" @click="emits('viewRelations', dep)" />
+                  <UButton icon="i-heroicons-play" variant="ghost" color="neutral" @click="emits('viewRelations', dep)" />
                 </UTooltip>
                 <UTooltip text="View Package">
                   <!-- TODO: wait for https://github.com/nuxt/nuxt/pull/25658 -->
-                  <!-- <UButton :to="`/packages/${dep}?utm_source=unjs&utm_medium=graph-slideover&utm_campaign=unjs.io`" variant="ghost" color="gray"> -->
-                  <UButton :to="`/packages/${dep}`" variant="ghost" color="gray">
+                  <!-- <UButton :to="`/packages/${dep}?utm_source=unjs&utm_medium=graph-slideover&utm_campaign=unjs.io`" variant="ghost" color="neutral"> -->
+                  <UButton :to="`/packages/${dep}`" variant="ghost" color="neutral">
                     <template #leading>
                       <UAvatar :src="toPackageLogo(dep)" alt="UnJS Logo" size="xs" :ui="{ rounded: 'rounded-sm' }" />
                     </template>

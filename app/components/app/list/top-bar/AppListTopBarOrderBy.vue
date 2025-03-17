@@ -17,7 +17,7 @@ const currentOrderBy = computed(() => props.options.find(item => item.id === pro
   <USelectMenu
     :model-value="modelValue"
     :options="options"
-    color="gray"
+    color="neutral"
     variant="outline"
     placeholder="Order By"
     select-class="cursor-pointer"

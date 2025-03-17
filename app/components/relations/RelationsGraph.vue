@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { Data, Edge, Options } from 'vis-network'
 import { Network } from 'vis-network'
-import { _black, _cyan, _pink, _violet, _white, _yellow } from '#tailwind-config/theme/colors'
+import { black, cyan, pink, violet, white, yellow } from 'tailwindcss/colors'
 import type { RelationPackage } from '~/types/package'
 
 const emits = defineEmits<{
@@ -138,8 +138,8 @@ const data = computed<Data>(() => {
       const data: Edge[] = []
 
       if (settings.value.showDependencies) {
-        const color = colorMode.preference === 'light' ? _pink[300] : _pink[900]
-        const highlight = colorMode.preference === 'light' ? _pink[500] : _pink[800]
+        const color = colorMode.preference === 'light' ? pink[300] : pink[900]
+        const highlight = colorMode.preference === 'light' ? pink[500] : pink[800]
         data.push(...pkg.dependencies.map((dep) => {
           return {
             from: pkg.npmName,
@@ -155,8 +155,8 @@ const data = computed<Data>(() => {
       }
 
       if (settings.value.showDevDependencies) {
-        const color = colorMode.preference === 'light' ? _violet[300] : _violet[900]
-        const highlight = colorMode.preference === 'light' ? _violet[500] : _violet[800]
+        const color = colorMode.preference === 'light' ? violet[300] : violet[900]
+        const highlight = colorMode.preference === 'light' ? violet[500] : violet[800]
         data.push(...pkg.devDependencies.map((dep) => {
           return {
             from: pkg.npmName,
@@ -214,29 +214,29 @@ onMounted(() => {
     groups: {
       selection: {
         font: {
-          color: _black,
+          color: black,
           face: 'Nunito',
         },
         color: {
-          background: _yellow[300],
-          border: _yellow[500],
+          background: yellow[300],
+          border: yellow[500],
           highlight: {
-            background: _yellow[400],
-            border: _yellow[600],
+            background: yellow[400],
+            border: yellow[600],
           },
         },
       },
       dependencies: {
         font: {
-          color: _black,
+          color: black,
           face: 'Nunito',
         },
         color: {
-          background: _cyan[50],
-          border: _cyan[300],
+          background: cyan[50],
+          border: cyan[300],
           highlight: {
-            background: _cyan[100],
-            border: _cyan[500],
+            background: cyan[100],
+            border: cyan[500],
           },
         },
       },
@@ -246,29 +246,29 @@ onMounted(() => {
     groups: {
       selection: {
         font: {
-          color: _white,
+          color: white,
           face: 'Nunito',
         },
         color: {
-          background: _yellow[900],
-          border: _yellow[600],
+          background: yellow[900],
+          border: yellow[600],
           highlight: {
-            background: _yellow[700],
-            border: _yellow[500],
+            background: yellow[700],
+            border: yellow[500],
           },
         },
       },
       dependencies: {
         font: {
-          color: _white,
+          color: white,
           face: 'Nunito',
         },
         color: {
-          background: _cyan[900],
-          border: _cyan[600],
+          background: cyan[900],
+          border: cyan[600],
           highlight: {
-            background: _cyan[700],
-            border: _cyan[500],
+            background: cyan[700],
+            border: cyan[500],
           },
         },
       },

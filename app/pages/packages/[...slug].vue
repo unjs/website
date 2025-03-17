@@ -78,7 +78,7 @@ defineOgImageComponent('OgImagePackage', {
       <ContentRendererMarkdown v-if="readme" :value="readme" />
 
       <template #nav>
-        <UButton :to="page.documentation" rel="noopener" size="lg" color="gray" :ui="{ base: 'w-full justify-center' }">
+        <UButton :to="page.documentation" rel="noopener" size="lg" color="neutral" :ui="{ base: 'w-full justify-center' }">
           Documentation
         </UButton>
         <ProseNavGroup no-disclosure>
@@ -146,7 +146,7 @@ defineOgImageComponent('OgImagePackage', {
             <span>
               Contributors
             </span>
-            <UBadge color="gray" variant="solid" size="xs">
+            <UBadge color="neutral" variant="solid" size="xs">
               {{ metadata!.contributors.length }}
             </UBadge>
           </div>

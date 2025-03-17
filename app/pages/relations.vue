@@ -193,7 +193,7 @@ defineShortcuts({
           </span>
         </template>
         <template v-else>
-          <UButton square aria-label="Open About Panel" icon="i-heroicons-information-circle" color="gray" variant="ghost" @click="openAbout = true" />
+          <UButton square aria-label="Open About Panel" icon="i-heroicons-information-circle" color="neutral" variant="ghost" @click="openAbout = true" />
           <span class="ml-2">
             Select a package to start
           </span>
@@ -201,6 +201,6 @@ defineShortcuts({
       </span>
     </div>
 
-    <UButton square aria-label="Open About" icon="i-heroicons-information-circle" color="gray" variant="ghost" size="xl" :ui="{ base: 'absolute z-20 bottom-4 right-4', rounded: 'rounded-full', color: { gray: { ghost: 'bg-white/40 backdrop-blur-sm dark:bg-gray-900/60 ring-1 ring-gray-200 dark:ring-gray-800' } } }" @click="openAbout = true" />
+    <UButton square aria-label="Open About" icon="i-heroicons-information-circle" color="neutral" variant="ghost" size="xl" :ui="{ base: 'absolute z-20 bottom-4 right-4', rounded: 'rounded-full', color: { gray: { ghost: 'bg-white/40 backdrop-blur-sm dark:bg-gray-900/60 ring-1 ring-gray-200 dark:ring-gray-800' } } }" @click="openAbout = true" />
   </div>
 </template>

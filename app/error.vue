@@ -15,23 +15,25 @@ useSeoMeta({
 </script>
 
 <template>
-  <Body class="font-sans dark:bg-gray-900">
-    <Header />
+  <Body>
+    <UApp>
+      <TheHeader />
 
-    <div class="px-4 container mx-auto xl:max-w-7xl">
-      <Main class="flex flex-col items-center justify-center">
-        <h1 class="text-4xl font-bold">
-          {{ error.statusCode }}
-        </h1>
-        <p class="mt-4 text-lg text-gray-500 dark:text-gray-400">
-          {{ error.message }}
-        </p>
-        <UButton class="mt-12" to="/" color="primary" variant="solid" size="sm" :ui="{ variant: { solid: 'shadow-none text-gray-950' } }">
-          Go back home
-        </UButton>
-      </Main>
-    </div>
+      <div class="px-4 container mx-auto xl:max-w-7xl">
+        <Main class="flex flex-col items-center justify-center">
+          <h1 class="text-4xl font-bold">
+            {{ error.statusCode }}
+          </h1>
+          <p class="mt-4 text-lg text-gray-500 dark:text-gray-400">
+            {{ error.message }}
+          </p>
+          <UButton class="mt-12" to="/" color="primary" variant="solid" size="sm" :ui="{ variant: { solid: 'shadow-none text-gray-950' } }">
+            Go back home
+          </UButton>
+        </Main>
+      </div>
 
-    <Footer />
+      <TheFooter />
+    </UApp>
   </Body>
 </template>

@@ -128,7 +128,7 @@ const isXs = breakpoints.smaller('mobile')
         <ComboboxButton
           :as="UButton"
           icon="i-heroicons-x-mark"
-          color="gray"
+          color="neutral"
           variant="ghost"
           square
           size="xs"
@@ -177,7 +177,7 @@ const isXs = breakpoints.smaller('mobile')
             No results found
           </span>
 
-          <UButton color="gray" variant="ghost" icon="i-heroicons-arrow-path" @click="resetQuery">
+          <UButton color="neutral" variant="ghost" icon="i-heroicons-arrow-path" @click="resetQuery">
             Reset search
           </UButton>
         </div>

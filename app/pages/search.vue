@@ -182,7 +182,7 @@ function selectFirstOption() {
             No results found
           </span>
 
-          <UButton color="gray" variant="ghost" icon="i-heroicons-arrow-path" @click="resetQuery">
+          <UButton color="neutral" variant="ghost" icon="i-heroicons-arrow-path" @click="resetQuery">
             Reset search
           </UButton>
         </div>

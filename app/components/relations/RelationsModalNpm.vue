@@ -174,7 +174,7 @@ function validate() {
           <h2 class="font-semibold">
             Manage npm Repositories
           </h2>
-          <UButton type="button" aria-label="close" color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid" class="-my-1" @click="open = false" />
+          <UButton type="button" aria-label="close" color="neutral" variant="ghost" icon="i-heroicons-x-mark-20-solid" class="-my-1" @click="open = false" />
         </div>
       </template>
 
@@ -200,7 +200,7 @@ function validate() {
             </UButton>
           </div>
           <div class="flex justify-end gap-2">
-            <UButton type="button" variant="ghost" color="gray" @click="cancel">
+            <UButton type="button" variant="ghost" color="neutral" @click="cancel">
               Cancel
             </UButton>
             <UButton type="button" @click="validate">

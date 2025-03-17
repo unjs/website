@@ -25,7 +25,7 @@ const uiButton = { color: { gray: { ghost: 'text-gray-500 hover:text-gray-800 da
         </div>
         <ul class="flex gap-2">
           <li v-for="social in website.socials" :key="social.name">
-            <UButton :rel="social.rel" :target="social.target" :to="social.url" :icon="social.icon" :aria-label="`Follow us on ${social.name}`" size="xl" variant="ghost" color="gray" :ui="{ icon: { xl: 'md:w-7 md:h-7' }, ...uiButton }" />
+            <UButton :rel="social.rel" :target="social.target" :to="social.url" :icon="social.icon" :aria-label="`Follow us on ${social.name}`" size="xl" variant="ghost" color="neutral" :ui="{ icon: { xl: 'md:w-7 md:h-7' }, ...uiButton }" />
           </li>
         </ul>
         <nav class="mt-6 md:mt-0 md:justify-self-end md:col-start-2 md:row-start-1 grid grid-cols-2 md:grid-cols-3 gap-x-2 gap-y-6 md:gap-10 text-[1.125rem]">
@@ -46,7 +46,7 @@ const uiButton = { color: { gray: { ghost: 'text-gray-500 hover:text-gray-800 da
         <div class="place-self-center md:place-self-end">
           <ClientOnly>
             <UTooltip :text="$colorMode.value === 'dark' ? 'Light Mode' : 'Dark Mode'">
-              <UButton size="xl" variant="ghost" color="gray" square :trailing-icon="$colorMode.value === 'dark' ? 'i-heroicons-sun' : 'i-heroicons-moon'" :ui="uiButton" aria-label="Toggle Theme" @click="toggleTheme">
+              <UButton size="xl" variant="ghost" color="neutral" square :trailing-icon="$colorMode.value === 'dark' ? 'i-heroicons-sun' : 'i-heroicons-moon'" :ui="uiButton" aria-label="Toggle Theme" @click="toggleTheme">
                 {{ $colorMode.value === 'dark' ? 'Light' : 'Dark' }}
               </UButton>
             </UTooltip>

@@ -76,7 +76,7 @@ watchDebounced(q, () => {
           <USelectMenu
             :model-value="authors"
             :options="authorsOptions"
-            color="gray"
+            color="neutral"
             variant="outline"
             size="lg"
             placeholder="Authors"
@@ -96,7 +96,7 @@ watchDebounced(q, () => {
           <USelectMenu
             :model-value="packages"
             :options="packagesOptions"
-            color="gray"
+            color="neutral"
             variant="outline"
             size="lg"
             placeholder="Packages"
@@ -114,7 +114,7 @@ watchDebounced(q, () => {
           <USelectMenu
             :model-value="categories"
             :options="categoriesOptions"
-            color="gray"
+            color="neutral"
             variant="outline"
             size="lg"
             placeholder="Categories"

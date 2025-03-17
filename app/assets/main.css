@@ -1,3 +1,22 @@
+@import "tailwindcss" theme(static);
+@import "@nuxt/ui";
+
+@theme static {
+  --font-sans: 'Nunito', sans-serif;
+
+  --color-yellow-50: #FEFDF7;
+  --color-yellow-100: #FDFCEF;
+  --color-yellow-200: #FAF6D6;
+  --color-yellow-300: #F7F1BD;
+  --color-yellow-400: #F2E78C;
+  --color-yellow-500: #ECDC5A;
+  --color-yellow-600: #D4C651;
+  --color-yellow-700: #8E8436;
+  --color-yellow-800: #6A6329;
+  --color-yellow-900: #47421B;
+  --color-yellow-950: #2F2C12;
+}
+
 ::-webkit-scrollbar {
   width: 0.6em;
   height: 0.6em;
@@ -21,10 +40,6 @@
   & ::-webkit-scrollbar-thumb {
     @apply bg-gray-700 hover:bg-gray-600;
   }
-}
-
-:is(h1, h2, h3, h4, h5, h6) {
-@apply scroll-mt-16 xl:scroll-mt-8
 }
 
 .fade-enter-active,

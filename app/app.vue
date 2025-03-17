@@ -18,19 +18,19 @@ const isRelation = computed(() => {
 </script>
 
 <template>
-  <Html>
-    <Body class="font-sans dark:bg-gray-900">
-      <NuxtLoadingIndicator color="#ECDC5A" />
+  <Html lang="en">
+    <Body>
+      <UApp>
+        <NuxtLoadingIndicator color="#ECDC5A" />
 
-      <TheHeader :class="{ 'z-10 absolute top-0 left-0 right-0': isRelation }" />
+        <TheHeader :class="{ 'z-10 absolute top-0 left-0 right-0': isRelation }" />
 
-      <div :class="{ 'px-4 container mx-auto xl:max-w-7xl': !isRelation }">
-        <NuxtPage />
-      </div>
+        <div :class="{ 'px-4 container mx-auto xl:max-w-7xl': !isRelation }">
+          <NuxtPage />
+        </div>
 
-      <TheFooter v-if="!isRelation" />
-
-      <UNotifications />
+        <TheFooter v-if="!isRelation" />
+      </UApp>
     </Body>
   </Html>
 </template>

@@ -1,7 +1,3 @@
-<script setup lang="ts">
-const { metaSymbol } = useShortcuts()
-</script>
-
 <template>
   <section class="prose dark:prose-invert">
     <p>
@@ -34,16 +30,16 @@ const { metaSymbol } = useShortcuts()
     </p>
     <ul>
       <li>
-        <kbd>{{ metaSymbol }}</kbd> + <kbd>m</kbd> toggle the menu
+        <UKbd value="meta" /> + <kbd>m</kbd> toggle the menu
       </li>
       <li>
-        <kbd>{{ metaSymbol }}</kbd> + <kbd>l</kbd> toggle the legend
+        <UKbd value="meta" /> + <kbd>l</kbd> toggle the legend
       </li>
       <li>
-        <kbd>{{ metaSymbol }}</kbd> + <kbd>i</kbd> toggle the info
+        <UKbd value="meta" /> + <kbd>i</kbd> toggle the info
       </li>
       <li>
-        <kbd>{{ metaSymbol }}</kbd> + <kbd>h</kbd> open the GitHub discussions
+        <UKbd value="meta" /> + <kbd>h</kbd> open the GitHub discussions
       </li>
     </ul>
   </section>

@@ -16,7 +16,7 @@ function toggleOrder() {
 <template>
   <UButton
     :icon="modelValue === 1 ? 'i-heroicons-bars-arrow-up-20-solid' : 'i-heroicons-bars-arrow-down-20-solid'"
-    color="gray"
+    color="neutral"
     variant="solid"
     :title="modelValue === 1 ? 'Ascending order' : 'Descending order'"
     @click="toggleOrder()"

@@ -41,7 +41,7 @@ const rows = computed(() => {
       <template v-if="search.length">
         <li v-for="item in search" :key="item.name" class="flex flex-row gap-1">
           <ComboboxOption v-slot="{ active, selected }" as="template" :value="item">
-            <UButton :ui="{ base: 'w-[calc(100%-2.25rem)]' }" :icon="logo" :class="{ 'text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-800': active }" color="gray" variant="ghost" :active="active" tabindex="-1" :title="item.name">
+            <UButton :ui="{ base: 'w-[calc(100%-2.25rem)]' }" :icon="logo" :class="{ 'text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-800': active }" color="neutral" variant="ghost" :active="active" tabindex="-1" :title="item.name">
               <template #leading>
                 <slot name="logo" :item="item" />
               </template>

@@ -15,7 +15,7 @@ defineEmits<{
   <UInput
     :model-value="modelValue"
     size="lg"
-    color="gray"
+    color="neutral"
     variant="outline"
     name="search"
     :placeholder="placeholder"

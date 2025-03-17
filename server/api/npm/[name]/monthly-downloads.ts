@@ -8,7 +8,5 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  const monthlyDownloads = await fetchMonthlyDownloads(name)
-
-  return monthlyDownloads
+  return await fetchMonthlyDownloads(name)
 })

@@ -35,7 +35,7 @@ function openFilter() {
         :ui="{ base: 'ml-4 lg:hidden' }"
         size="lg"
         icon="i-heroicons-adjustments-horizontal-solid"
-        color="gray"
+        color="neutral"
         variant="solid"
         :title="isFilterOpen ? 'Close filters' : 'Open filters'"
         @click="openFilter()"
@@ -50,7 +50,7 @@ function openFilter() {
       <UTooltip text="Reset filter">
         <UButton
           size="lg"
-          color="gray"
+          color="neutral"
           variant="solid"
           title="Reset filter"
           icon="i-heroicons-arrow-path-20-solid"
@@ -74,7 +74,7 @@ function openFilter() {
       <div class="mt-6 flex flex-row justify-end gap-4">
         <UButton
           size="lg"
-          color="gray"
+          color="neutral"
           variant="ghost"
           @click="$emit('reset')"
         >
@@ -83,7 +83,7 @@ function openFilter() {
         <UButton
           v-model="isFilterOpen"
           size="lg"
-          color="gray"
+          color="neutral"
           variant="ghost"
           :title="isFilterOpen ? 'Close filters' : 'Open filters'"
           @click="openFilter()"

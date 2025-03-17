@@ -1,11 +1,9 @@
-import { serverQueryContent } from '#content/server'
-import type { Package, PackageContent } from '~/types/package'
 import { toPackageLogo } from '~/utils/package'
 
 export default defineEventHandler(async (event) => {
-  const packages = await serverQueryContent<PackageContent>(event).where({ _path: /^\/packages\// }).find()
+  const packages = await queryCollection(event, 'packages').all()
 
-  const populatedPackages = await Promise.all(
+  return await Promise.all(
     packages.map(async (pkg) => {
       const [stars, monthlyDownloads, contributors, packageJson] = await Promise.all([
         fetchStars(pkg.github.owner, pkg.github.repo),
@@ -21,7 +19,7 @@ export default defineEventHandler(async (event) => {
         stars,
         monthlyDownloads,
         contributors: contributors.length,
-        path: pkg._path,
+        path: pkg.path,
         url: `https://unjs.io${pkg._path}`,
         npm: pkg.npm?.name
           ? {
@@ -36,6 +34,4 @@ export default defineEventHandler(async (event) => {
     },
     ),
   )
-
-  return populatedPackages
 })

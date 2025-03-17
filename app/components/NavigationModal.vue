@@ -42,7 +42,7 @@ const uiSocialButton = { color: { gray: { ghost: 'dark:text-gray-400 dark:hover:
               <DialogTitle>
                 <AppLogo />
               </DialogTitle>
-              <UButton :ui="{ ...uiButton }" square size="md" variant="ghost" color="gray" icon="i-heroicons-x-mark" aria-label="Close" @click="$emit('update:open', false)" />
+              <UButton :ui="{ ...uiButton }" square size="md" variant="ghost" color="neutral" icon="i-heroicons-x-mark" aria-label="Close" @click="$emit('update:open', false)" />
             </div>
             <nav class="mb-40">
               <ul
@@ -52,7 +52,7 @@ const uiSocialButton = { color: { gray: { ghost: 'dark:text-gray-400 dark:hover:
                 <li v-for="item in navigation" :key="item.path">
                   <UButton
                     size="xl"
-                    color="gray"
+                    color="neutral"
                     variant="ghost"
                     :to="item.path" :ui="{ ...uiButton }" :active-class="activeClassButton"
                     @click="$emit('update:open', false)"
@@ -65,7 +65,7 @@ const uiSocialButton = { color: { gray: { ghost: 'dark:text-gray-400 dark:hover:
             <div class="flex justify-center">
               <ul class="flex gap-2">
                 <li v-for="social in website.socials" :key="social.name">
-                  <UButton :rel="social.rel" :target="social.target" :to="social.url" :icon="social.icon" :aria-label="`Follow us on ${social.name}`" size="xl" variant="ghost" color="gray" :ui="{ icon: { xl: 'md:w-7 md:h-7' }, ...uiSocialButton }" />
+                  <UButton :rel="social.rel" :target="social.target" :to="social.url" :icon="social.icon" :aria-label="`Follow us on ${social.name}`" size="xl" variant="ghost" color="neutral" :ui="{ icon: { xl: 'md:w-7 md:h-7' }, ...uiSocialButton }" />
                 </li>
               </ul>
             </div>

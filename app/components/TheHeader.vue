@@ -41,8 +41,6 @@ defineShortcuts({
   },
 })
 
-const { metaSymbol } = useShortcuts()
-
 const uiButton = { font: 'font-semibold', color: { gray: { ghost: 'text-gray-950 hover:bg-primary/60 dark:text-gray-50 dark:hover:bg-primary/40' } } }
 const activeClassButton = 'bg-primary bg-opacity-40 dark:bg-opacity-30'
 
@@ -64,7 +62,7 @@ function toDesignKit() {
         <ol class="text-[1.125rem] flex gap-4 leading-5">
           <li v-for="item in navigation" :key="item.path">
             <!-- <UPopover v-if="item.children" mode="hover" :ui="{ width: 'max-w-[18rem]' }">
-              <UButton size="md" variant="ghost" color="gray" :to="item._path" :icon="item.icon" :ui="{ size: { md: 'text-base' }, ...uiButton }" :active-class="activeClassButton">
+              <UButton size="md" variant="ghost" color="neutral" :to="item._path" :icon="item.icon" :ui="{ size: { md: 'text-base' }, ...uiButton }" :active-class="activeClassButton">
                 {{ item.title }}
               </UButton>
 
@@ -83,7 +81,7 @@ function toDesignKit() {
                 </ol>
               </template>
             </UPopover> -->
-            <UButton size="md" variant="ghost" color="gray" :to="item.path" :ui="{ size: { md: 'text-base' }, ...uiButton }" :active-class="activeClassButton">
+            <UButton size="md" variant="ghost" color="neutral" :to="item.path" :ui="{ size: { md: 'text-base' }, ...uiButton }" :active-class="activeClassButton">
               {{ item.title }}
             </UButton>
           </li>
@@ -91,22 +89,22 @@ function toDesignKit() {
       </nav>
 
       <div class="flex justify-end items-center">
-        <UTooltip text="Open Search" :shortcuts="[metaSymbol, 'K']" :popper="{ adaptative: false, placement: 'bottom', strategy: 'absolute' }">
-          <UButton size="md" icon="i-heroicons-magnifying-glass" color="gray" variant="ghost" :ui="{ size: { md: 'text-base' }, ...uiButton }" aria-label="Open Search" square @click="openSearch = true" />
+        <UTooltip text="Open Search">
+          <UButton size="md" icon="i-heroicons-magnifying-glass" color="neutral" variant="ghost" :ui="{ size: { md: 'text-base' }, ...uiButton }" aria-label="Open Search" square @click="openSearch = true" />
         </UTooltip>
 
         <UTooltip class="ml-1 lg:hidden" text="Open Navigation" :popper="{ adaptative: false, placement: 'bottom', strategy: 'absolute' }">
-          <UButton square size="md" variant="ghost" color="gray" icon="i-heroicons-bars-3-bottom-right" :ui="uiButton" aria-label="Open Navigation" @click="openNavigation = true" />
+          <UButton square size="md" variant="ghost" color="neutral" icon="i-heroicons-bars-3-bottom-right" :ui="uiButton" aria-label="Open Navigation" @click="openNavigation = true" />
         </UTooltip>
 
         <UTooltip class="ml-1 hidden lg:flex" text="GitHub Stars" :popper="{ adaptative: false, placement: 'bottom', strategy: 'absolute' }">
-          <UButton size="md" variant="ghost" color="gray" :icon="github.icon" :to="github.url" :target="github.target" :aria-label="`Follow us on ${github.name}`" :ui="{ size: { md: 'text-base' }, ...uiButton }">
+          <UButton size="md" variant="ghost" color="neutral" :icon="github.icon" :to="github.url" :target="github.target" :aria-label="`Follow us on ${github.name}`" :ui="{ size: { md: 'text-base' }, ...uiButton }">
             {{ stars ? formatNumber(stars) : '' }}
           </UButton>
         </UTooltip>
       </div>
     </header>
-    <NavigationModal v-model:open="openNavigation" :navigation="navigation" />
-    <SearchModal v-model:open="openSearch" />
+    <!--    <NavigationModal v-model:open="openNavigation" :navigation="navigation" />
+    <SearchModal v-model:open="openSearch" /> -->
   </div>
 </template>

@@ -30,18 +30,17 @@ export default defineNuxtConfig({
 
   modules: [
     '@nuxtjs/seo',
-    '@nuxt/content',
     '@nuxt/ui',
+    '@nuxt/content',
     '@vueuse/nuxt',
     '@nuxtjs/plausible',
     'nuxt-payload-analyzer',
-    '@nuxt/fonts',
   ],
 
   css: ['~/assets/main.css'],
 
-  ui: {
-    icons: ['heroicons', 'simple-icons', 'vscode-icons', 'ph'],
+  colorMode: {
+    preference: 'dark',
   },
 
   nitro: {
@@ -66,23 +65,6 @@ export default defineNuxtConfig({
       // TODO: Related to public.learn flag
       '/learn/**': { robots: false },
     },
-  },
-
-  content: {
-    documentDriven: false,
-    highlight: {
-      theme: {
-        default: 'github-light',
-        dark: 'github-dark',
-      },
-    },
-    experimental: {
-      cacheContents: false,
-    },
-  },
-
-  colorMode: {
-    preference: 'dark',
   },
 
   ogImage: {
