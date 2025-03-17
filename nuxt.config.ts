@@ -8,6 +8,11 @@ export default defineNuxtConfig({
       learn: false,
     },
   },
+
+  future: {
+    compatibilityVersion: 4,
+  },
+
   app: {
     head: {
       htmlAttrs: {
@@ -22,6 +27,7 @@ export default defineNuxtConfig({
       },
     },
   },
+
   modules: [
     '@nuxtjs/seo',
     '@nuxt/content',
@@ -31,12 +37,13 @@ export default defineNuxtConfig({
     'nuxt-payload-analyzer',
     '@nuxt/fonts',
   ],
-  css: [
-    '~/assets/app.css',
-  ],
+
+  css: ['~/assets/main.css'],
+
   ui: {
     icons: ['heroicons', 'simple-icons', 'vscode-icons', 'ph'],
   },
+
   nitro: {
     static: true,
     prerender: {
@@ -60,6 +67,7 @@ export default defineNuxtConfig({
       '/learn/**': { robots: false },
     },
   },
+
   content: {
     documentDriven: false,
     highlight: {
@@ -72,20 +80,24 @@ export default defineNuxtConfig({
       cacheContents: false,
     },
   },
+
   colorMode: {
     preference: 'dark',
   },
+
   ogImage: {
     fonts: [
       'Nunito:400',
       'Nunito:700',
     ],
   },
+
   site: {
     url: 'https://unjs.io',
     name: 'UnJS',
     description: 'Agnostic Excellence: JavaScript Libraries, Tools, and Utilities, Crafted to Elevate Your Coding Journey.',
   },
+
   schemaOrg: {
     identity: {
       name: 'UnJS',
@@ -97,24 +109,28 @@ export default defineNuxtConfig({
       ],
     },
   },
-  seo: {
-    splash: false,
-  },
+
   linkChecker: {
     enabled: false,
   },
+
   plausible: {
     autoPageviews: false,
   },
+
   routeRules: {
     ...packagesRedirects as NitroConfig['routeRules'],
   },
+
   devtools: {
     enabled: true,
   },
+
   typescript: {
     tsConfig: {
       exclude: ['../bin/**/*'],
     },
   },
+
+  compatibilityDate: '2025-03-17',
 })
