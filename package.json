@@ -17,7 +17,7 @@
     "cli": "jiti bin"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "2.8.2",
+    "@antfu/eslint-config": "2.27.3",
     "@headlessui/vue": "1.7.19",
     "@iconify-json/heroicons": "^1.1.20",
     "@iconify-json/logos": "^1.1.42",
@@ -37,7 +37,7 @@
     "case-police": "^0.6.1",
     "citty": "^0.1.6",
     "consola": "^3.2.3",
-    "eslint": "^8.57.0",
+    "eslint": "^8.57.1",
     "jiti": "^1.21.0",
     "js-yaml": "^4.1.0",
     "magicast": "^0.3.3",
