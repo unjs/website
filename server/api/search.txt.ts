@@ -1,3 +1,4 @@
+/*
 import MiniSearch from 'minisearch'
 import { serverQueryContent } from '#content/server'
 
@@ -33,3 +34,4 @@ export default defineEventHandler(async (event) => {
   setResponseHeader(event, 'Content-Type', 'text/plain')
   return JSON.stringify(miniSearch)
 })
+*/
