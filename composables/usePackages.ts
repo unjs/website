@@ -10,7 +10,12 @@ export function usePackages() {
     idField: 'title',
     fields: ['title', 'description'],
     storeFields: fields,
+    processTerm: (term, fieldName) =>
+      fieldName === 'title'
+        ? suffixes(term, 1)
+        : MiniSearch.getDefault('processTerm')(term, fieldName),
     searchOptions: {
+      processTerm: MiniSearch.getDefault('processTerm'),
       prefix: true,
       fuzzy: 0.4,
       boost: {
@@ -168,4 +173,24 @@ export function usePackages() {
     numberOfPackages,
     monthlyDownloads,
   }
+}
+
+/**
+ * Split the given term into array of suffixes.
+ *
+ * @example
+ * suffixes('12345', 2)
+ * // => ['12345', '2345, '345', '45']
+ */
+function suffixes(term: string, minLength: number) {
+  if (term == null)
+    return
+
+  const tokens = []
+
+  for (let i = 0; i <= term.length - minLength; i++) {
+    tokens.push(term.slice(i).toLowerCase())
+  }
+
+  return tokens
 }
