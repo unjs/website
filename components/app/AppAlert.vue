@@ -22,6 +22,8 @@ const icon = computed(() => {
       return 'i-ph-warning'
     case 'Caution':
       return 'i-ph-warning-octagon'
+    default:
+      return undefined
   }
 })
 

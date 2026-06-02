@@ -16,6 +16,8 @@ const categoryName = computed(() => {
       return 'Getting Started'
     case 'building-blocks':
       return 'Building Blocks'
+    default:
+      return undefined
   }
 })
 </script>
