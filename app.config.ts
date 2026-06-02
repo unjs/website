@@ -160,6 +160,13 @@ export default defineAppConfig({
         icon: 'i-simple-icons-github',
         name: 'GitHub',
       },
+      bluesky: {
+        url: 'https://bsky.app/profile/unjs.io',
+        icon: 'i-simple-icons-bluesky',
+        rel: 'noopener',
+        target: '_blank',
+        name: 'Bluesky',
+      },
       x: {
         url: 'https://x.com/unjsio',
         icon: 'i-simple-icons-x',

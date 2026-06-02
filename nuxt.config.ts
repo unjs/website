@@ -93,6 +93,7 @@ export default defineNuxtConfig({
       logo: 'https://unjs.io/favicon.svg',
       sameAs: [
         'https://github.com/unjs',
+        'https://bsky.app/profile/unjs.io',
         'https://twitter.com/unjsio',
       ],
     },
