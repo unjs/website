@@ -19,7 +19,7 @@ export const packagesRedirects = defineCommand({
     const packages = getPackages()
     const packagesRedirectsPath = getPackagesRedirectsPath()
 
-    const redirectsContent = parseModule(`/** Do not edit manually. Use \`jiti bin generate packages-redirects\`. */
+    const redirectsContent = parseModule(`/** Do not edit manually. Use \`jiti bin sync packages-redirects\`. */
 export default { }`)
 
     const from = '/'

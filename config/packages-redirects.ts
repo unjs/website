@@ -1,4 +1,4 @@
-/** Do not edit manually. Use `jiti bin generate packages-redirects`. */
+/** Do not edit manually. Use `jiti bin sync packages-redirects`. */
 export default {
   '/automd': {
     redirect: {
@@ -56,16 +56,16 @@ export default {
     },
   },
 
-  '/db0': {
+  '/crossws': {
     redirect: {
-      to: '/packages/db0',
+      to: '/packages/crossws',
       statusCode: 302,
     },
   },
 
-  '/crossws': {
+  '/db0': {
     redirect: {
-      to: '/packages/crossws',
+      to: '/packages/db0',
       statusCode: 302,
     },
   },
@@ -346,6 +346,13 @@ export default {
   '/unctx': {
     redirect: {
       to: '/packages/unctx',
+      statusCode: 302,
+    },
+  },
+
+  '/undio': {
+    redirect: {
+      to: '/packages/undio',
       statusCode: 302,
     },
   },
